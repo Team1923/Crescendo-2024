@@ -4,12 +4,13 @@
 
 package frc.robot;
 
-import frc.robot.commands.TeleopSwerve;
-import frc.robot.subsystems.SwerveSubsystem;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Autos;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,46 +19,37 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-    /* SUBSYSTEM Initializations */
-    public final SwerveSubsystem s_Swerve = new SwerveSubsystem();
-    
+  // The robot's subsystems and commands are defined here...
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-    /* XBOX Controller Setup */
-    private final Joystick driver = new Joystick(0);
-    private final int translationAxis = XboxController.Axis.kLeftY.value;
-    private final int strafeAxis = XboxController.Axis.kLeftX.value;
-    private final int rotationAxis = XboxController.Axis.kRightX.value;
+  // Replace with CommandPS4Controller or CommandJoystick if needed
+  private final CommandXboxController m_driverController =
+      new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-    private final JoystickButton xBoxRightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-    private final JoystickButton xBoxLeftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    // private final JoystickButton xBoxAButton = new JoystickButton(driver, XboxController.Button.kA.value);
-    // private final JoystickButton xBoxBButton = new JoystickButton(driver, XboxController.Button.kB.value);
-    // private final JoystickButton xBoxXButton = new JoystickButton(driver, XboxController.Button.kX.value);
-    // private final JoystickButton xBoxYButton = new JoystickButton(driver, XboxController.Button.kY.value);  
-
-
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    setDefaultCommands();
   }
 
-
+  /**
+   * Use this method to define your trigger->command mappings. Triggers can be created via the
+   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
+   * predicate, or via the named factories in {@link
+   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
+   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
+   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
+   * joysticks}.
+   */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    
-  }
+    new Trigger(m_exampleSubsystem::exampleCondition)
+        .onTrue(new ExampleCommand(m_exampleSubsystem));
 
-  private void setDefaultCommands() {
-        s_Swerve.setDefaultCommand(
-          new TeleopSwerve(
-            s_Swerve,
-            () -> -driver.getRawAxis(translationAxis),
-            () -> -driver.getRawAxis(strafeAxis),
-            () -> -driver.getRawAxis(rotationAxis),
-            () -> xBoxLeftBumper.getAsBoolean(),
-            () -> xBoxRightBumper.getAsBoolean()));
-    }
+    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+    // cancelling on release.
+    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -66,6 +58,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null;
+    return Autos.exampleAuto(m_exampleSubsystem);
   }
 }
