@@ -3,9 +3,11 @@ package frc.robot.VisionUtil;
 import java.util.ArrayList;
 import java.util.Optional;
 
+
 import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Quaternion;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.networktables.NetworkTable;
@@ -26,7 +28,7 @@ public class LimelightInterface {
 
   public LimelightInterface() {
     fillAprilTagList();
-    aprilTagFieldLayout = new AprilTagFieldLayout(aprilTagList, 16.54175, 8.0137);
+    aprilTagFieldLayout = new AprilTagFieldLayout(aprilTagList, 16.451, 8.211);
   }
 
   /*
@@ -91,7 +93,7 @@ public class LimelightInterface {
     return aprilTagID;
   }
 
-  public boolean hasScoringTarget() {
+  public boolean hasScoringTarget() { // change for this seasons game
     return (((getID() == 1) || (getID() == 2) || (getID() == 3)
         || (getID() == 6) || (getID() == 7) || (getID() == 8)) && hasValidTargets());
   }
@@ -133,7 +135,39 @@ public class LimelightInterface {
 
   /* Change to be season-specifc */
   public void fillAprilTagList() {
-
-
+    aprilTagList
+      .add(new AprilTag(1, new Pose3d(15.079471999999997, 0.24587199999999998, 1.355852, new Rotation3d(new Quaternion(0.500000000000000, 0, 0, 0.8660254037844386)))));
+    aprilTagList
+      .add(new AprilTag(2, new Pose3d(16.185134, 0.883666,1.355852, new Rotation3d(new Quaternion(0.5000000000000001, 0, 0, 0.8660254037844386)))));
+    aprilTagList
+      .add(new AprilTag(3, new Pose3d(16.579342, 4.982717999999999,1.4511020000000001, new Rotation3d(new Quaternion(6.123233995736766e-17, 0, 0, 1)))));
+    aprilTagList
+      .add(new AprilTag(4, new Pose3d(16.579342, 5.547867999999999,1.4511020000000001, new Rotation3d(new Quaternion(6.123233995736766e-17, 0, 0, 1)))));
+    aprilTagList
+      .add(new AprilTag(5, new Pose3d(14.700757999999999, 8.2042,1.355852, new Rotation3d(new Quaternion(-0.7071067811865475, -0.0, 0, 0.7071067811865476)))));
+    aprilTagList
+      .add(new AprilTag(6, new Pose3d(1.8415, 8.2042,1.355852, new Rotation3d(new Quaternion(-0.7071067811865475, -0.0, 0, 0.7071067811865476)))));
+    aprilTagList
+      .add(new AprilTag(7, new Pose3d(-0.038099999999999995, 5.547867999999999,1.4511020000000001, new Rotation3d(new Quaternion(1.0, 0.0, 0, 0.0)))));
+    aprilTagList
+      .add(new AprilTag(8, new Pose3d(-0.038099999999999995, 4.982717999999999,1.4511020000000001, new Rotation3d(new Quaternion(1.0, 0.0, 0, 0.0)))));
+    aprilTagList
+      .add(new AprilTag(9, new Pose3d(0.356108, 0.883666,1.355852, new Rotation3d(new Quaternion(0.8660254037844387, 0.0, 0, 0.49999999999999994)))));
+    aprilTagList
+      .add(new AprilTag(10, new Pose3d(1.4615159999999998, 0.24587199999999998,1.355852, new Rotation3d(new Quaternion(0.8660254037844387, 0.0, 0, 0.49999999999999994))))); 
+    aprilTagList
+      .add(new AprilTag(10, new Pose3d(1.4615159999999998, 0.24587199999999998,1.355852, new Rotation3d(new Quaternion(0.8660254037844387, 0.0, 0, 0.49999999999999994)))));
+    aprilTagList
+      .add(new AprilTag(11, new Pose3d(11.904726, 3.7132259999999997,1.3208, new Rotation3d(new Quaternion(-0.8660254037844387, 0.0, 0, 0.49999999999999994)))));
+    aprilTagList
+      .add(new AprilTag(12, new Pose3d(11.904726, 4.49834,1.3208, new Rotation3d(new Quaternion(0.8660254037844387, 0.0, 0, 0.49999999999999994)))));
+    aprilTagList
+      .add(new AprilTag(13, new Pose3d(11.220196, 4.105148,1.3208, new Rotation3d(new Quaternion(6.123233995736766e-17, 0.0, 0, 1.0)))));
+    aprilTagList
+      .add(new AprilTag(14, new Pose3d(5.320792, 4.105148,1.3208, new Rotation3d(new Quaternion(1, 0.0, 0, 0)))));
+    aprilTagList
+      .add(new AprilTag(15, new Pose3d(4.641342, 4.49834,1.3208, new Rotation3d(new Quaternion(0.5000000000000001, 0.0, 0, 0.8660254037844386)))));
+    aprilTagList
+      .add(new AprilTag(16, new Pose3d(4.641342, 3.7132259999999997,1.3208, new Rotation3d(new Quaternion(-0.4999999999999998, 0.0, 0, 0.8660254037844387)))));
     }
 }
