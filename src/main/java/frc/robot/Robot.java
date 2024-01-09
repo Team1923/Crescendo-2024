@@ -6,10 +6,20 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.SlotConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
+import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.DutyCycle;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,7 +31,19 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private TalonSRX srx = new TalonSRX(0); //0 for now, need to change soon
+  private TalonFX rightmotor = new TalonFX(0);//find ids on phoenix tuner
+  private TalonFX leftmotor = new TalonFX(1);
+
+  //didn't end up using these
+  // private TalonSRX srx1 = new TalonSRX(0);//find id either with tuner x or phoenix tuner
+  // private TalonSRX srx2 = new TalonSRX(1);
+
+  //in RPM
+  // private final double velocity1 = 100;
+  // private final double velocity2 = 100;
+
+
+  private Joystick control = new Joystick(0);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -82,13 +104,55 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    srx.configFactoryDefault();
+
+    //for motor 1
+    rightmotor.getConfigurator().apply(new TalonFXConfiguration());
+    rightmotor.setInverted(true);
+
+    //var config = motor1.getConfigurator();
+     
+
+    // var slotConfigs = new Slot0Configs();
+    // slotConfigs.kP = 0.01;
+
+    // config.apply(slotConfigs);
+
+    //for motor 2
+     leftmotor.getConfigurator().apply(new TalonFXConfiguration());
+
+    // var config2 = motor2.getConfigurator();
+
+    // config2.apply(slotConfigs);
+
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    srx.set(ControlMode.PercentOutput, 0.2);//change rpm based on needs
+    if(control.getRawButton(1)){
+      rightmotor.setControl(new DutyCycleOut(0.75));
+      leftmotor.setControl(new DutyCycleOut(0.75));
+      
+      // motor1.setControl(new VelocityDutyCycle(velocity1/60));
+      // motor2.setControl(new VelocityDutyCycle(velocity1/60));
+
+      //didn't end up using
+      // srx1.set(ControlMode.PercentOutput, 0.1);
+      // srx2.set(ControlMode.PercentOutput, 0.2);
+
+
+    }
+    else{
+      rightmotor.stopMotor();
+      leftmotor.stopMotor();
+      // srx1.set(ControlMode.PercentOutput, 0);
+      // srx2.set(ControlMode.PercentOutput, 1);
+
+    }
+
+
+    SmartDashboard.putNumber("Velocity of Motor1", rightmotor.getVelocity().getValueAsDouble() * 60);
+    SmartDashboard.putNumber("Velocity of Motor2", leftmotor.getVelocity().getValueAsDouble() * 60);
   }
 
   @Override
