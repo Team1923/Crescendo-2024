@@ -19,6 +19,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -59,6 +60,10 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
+        /*
+         * IF BACKWARDS:
+         * replace lines 67-79 with the fix below
+         */
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
@@ -77,6 +82,20 @@ public class SwerveSubsystem extends SubsystemBase {
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
+
+        //IMPLEMENT THE FOLLOWING IF BACKWARDS (the fix is everything below that is commented out)
+
+        // ChassisSpeeds fieldRelSpeeds;
+        // if (DriverStation.getAlliance().get() == Alliance.Blue) {
+        //     fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
+        // } else {
+        //     fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(-translation.getX(), -translation.getY(), rotation, getHeading());
+        // }
+
+        // SwerveModuleState[] swerveModuleStates =
+        //     Constants.Swerve.swerveKinematics.toSwerveModuleStates(
+        //         fieldRelative ? fieldRelSpeeds : new ChassisSpeeds(translation.getX(), translation.getY(), rotation));
+
     }    
 
     private void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {
