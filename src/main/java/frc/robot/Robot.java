@@ -17,6 +17,8 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -37,10 +39,28 @@ public class Robot extends TimedRobot {
 
   private Joystick control = new Joystick(0);
 
+
+  //being run in RPM
   private final double velocityRight = 100;
   private final double velocityLeft = 100;
-  private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
-  private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
+
+
+  private Timer offsetWait = new Timer();
+
+
+  private final double RPMOFFSET = 50; //50 rpm every controller press to increase/decrease
+  private double v_lOffset = 0;
+  private double v_rOffset = 0;
+
+                      
+                  //max rpm/secs conversion to RPS
+  private final double kP = 1.0/(6000/60); //duty cycle per rps, if we are off by 6000 rps, use 100% speed
+
+  // private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
+  // private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
+
+  private final VelocityDutyCycle m_velocityRight = new VelocityDutyCycle(0);
+  private final VelocityDutyCycle m_velocityLeft = new VelocityDutyCycle(0);
 
 
   //didn't end up using these
@@ -113,6 +133,9 @@ public class Robot extends TimedRobot {
     }
 
 
+    offsetWait.reset();
+    offsetWait.start();
+
     //for motor 1
     rightmotor.getConfigurator().apply(new TalonFXConfiguration());
     rightmotor.setInverted(true);
@@ -122,7 +145,7 @@ public class Robot extends TimedRobot {
 
     var slot0Configs = new Slot0Configs();
     slot0Configs.kV = 0;
-    slot0Configs.kP = 0.01;
+    slot0Configs.kP = kP;
     slot0Configs.kI = 0;
     slot0Configs.kD = 0;
 
@@ -142,13 +165,42 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+
+
+    if (offsetWait.hasElapsed(0.2)){
+      if (control.getPOV(0)==0){
+        v_lOffset+=RPMOFFSET;
+      }
+      if (control.getPOV()==180){
+        v_lOffset-=RPMOFFSET;
+      }
+
+      //VERIFY FOR IN LAB CONTROLLER
+      if (control.getRawButton(4)){
+        v_rOffset+=RPMOFFSET;
+      }
+      if (control.getRawButton(2)){
+        v_rOffset-=RPMOFFSET;
+      }
+
+
+
+
+
+
+      offsetWait.reset();
+      offsetWait.start();
+      
+    }
+
+
     if(control.getRawButton(1)){
       // rightmotor.setControl(new DutyCycleOut(0.75));
       // leftmotor.setControl(new DutyCycleOut(0.75));
       m_velocityLeft.Slot = 0;
       m_velocityRight.Slot = 0;
-      rightmotor.setControl(m_velocityRight.withVelocity(velocityRight));
-      leftmotor.setControl(m_velocityLeft.withVelocity(velocityLeft));
+      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60));
+      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60));
       
       // rightmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
@@ -165,9 +217,13 @@ public class Robot extends TimedRobot {
       // srx2.set(ControlMode.PercentOutput, 1);
     }
 
+    //times 60 to go to RPM
+    SmartDashboard.putNumber("Velocity(RPM) of right motor", rightmotor.getVelocity().getValueAsDouble() * 60);
+    SmartDashboard.putNumber("Velocity(RPM) of left motor", leftmotor.getVelocity().getValueAsDouble() * 60);
 
-    SmartDashboard.putNumber("Velocity of Motor1", rightmotor.getVelocity().getValueAsDouble() * 60);
-    SmartDashboard.putNumber("Velocity of Motor2", leftmotor.getVelocity().getValueAsDouble() * 60);
+    SmartDashboard.putNumber("Set Velocity(RPM) for right motor", velocityRight+v_rOffset);
+    SmartDashboard.putNumber("Set Velocity(RPM) for left motor", velocityLeft+v_lOffset);
+
   }
 
   @Override
