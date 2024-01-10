@@ -11,6 +11,7 @@ import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.DutyCycle;
@@ -34,16 +35,23 @@ public class Robot extends TimedRobot {
   private TalonFX rightmotor = new TalonFX(0);//find ids on phoenix tuner
   private TalonFX leftmotor = new TalonFX(1);
 
+  private Joystick control = new Joystick(0);
+
+  private final double velocityRight = 100;
+  private final double velocityLeft = 100;
+  private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
+  private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
+
+
   //didn't end up using these
   // private TalonSRX srx1 = new TalonSRX(0);//find id either with tuner x or phoenix tuner
   // private TalonSRX srx2 = new TalonSRX(1);
 
   //in RPM
-  // private final double velocity1 = 100;
-  // private final double velocity2 = 100;
 
 
-  private Joystick control = new Joystick(0);
+
+  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -112,8 +120,11 @@ public class Robot extends TimedRobot {
     //var config = motor1.getConfigurator();
      
 
-    // var slotConfigs = new Slot0Configs();
-    // slotConfigs.kP = 0.01;
+    var slot0Configs = new Slot0Configs();
+    slot0Configs.kV = 0;
+    slot0Configs.kP = 0.01;
+    slot0Configs.kI = 0;
+    slot0Configs.kD = 0;
 
     // config.apply(slotConfigs);
 
@@ -122,6 +133,8 @@ public class Robot extends TimedRobot {
 
     // var config2 = motor2.getConfigurator();
 
+    rightmotor.getConfigurator().apply(slot0Configs, 0.05);
+    leftmotor.getConfigurator().apply(slot0Configs, 0.05);
     // config2.apply(slotConfigs);
 
   }
@@ -130,16 +143,19 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if(control.getRawButton(1)){
-      rightmotor.setControl(new DutyCycleOut(0.75));
-      leftmotor.setControl(new DutyCycleOut(0.75));
+      // rightmotor.setControl(new DutyCycleOut(0.75));
+      // leftmotor.setControl(new DutyCycleOut(0.75));
+      m_velocityLeft.Slot = 0;
+      m_velocityRight.Slot = 0;
+      rightmotor.setControl(m_velocityRight.withVelocity(velocityRight));
+      leftmotor.setControl(m_velocityLeft.withVelocity(velocityLeft));
       
-      // motor1.setControl(new VelocityDutyCycle(velocity1/60));
+      // rightmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
 
       //didn't end up using
       // srx1.set(ControlMode.PercentOutput, 0.1);
       // srx2.set(ControlMode.PercentOutput, 0.2);
-
 
     }
     else{
@@ -147,7 +163,6 @@ public class Robot extends TimedRobot {
       leftmotor.stopMotor();
       // srx1.set(ControlMode.PercentOutput, 0);
       // srx2.set(ControlMode.PercentOutput, 1);
-
     }
 
 
