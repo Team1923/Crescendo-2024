@@ -48,7 +48,7 @@ public class PositionRPMData {
       * @return a setpoint for the arm's position.
       */
      public double getDesiredArmPosition(double distance) {
-        //TODO: what are the bounds for distance? what to do when distance = 0?
+        //TODO: what are the bounds for distance? what to do when distance = 0? Handle edge cases.
         double lowerBound = 0;
         double upperBound = 0;
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
@@ -74,7 +74,7 @@ public class PositionRPMData {
       * @return an RPM setpoint for the shooter's velocity.
       */
      public double getDesiredShooterRPM(double distance) {
-        //TODO: what are the bounds for distance? what to do when distance = 0?
+        //TODO: what are the bounds for distance? what to do when distance = 0? Handle edge cases.
         double lowerBound = 0;
         double upperBound = 0;
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
@@ -97,6 +97,6 @@ public class PositionRPMData {
      public static void main(String[] args) {
         PositionRPMData test = PositionRPMData.getInstance();
         System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(1.25));
-        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.25));
+        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.25));    
      }
 }
