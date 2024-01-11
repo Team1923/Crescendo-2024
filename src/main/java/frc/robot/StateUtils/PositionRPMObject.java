@@ -4,6 +4,11 @@ public class PositionRPMObject {
     private double armPosition;
     private double shooterRPM;
 
+    /**
+     * Constructs a new PositionRPMObject.
+     * @param armPosition the desired arm position.
+     * @param shooterRPM the desired shooter RPM.
+     */
     public PositionRPMObject(double armPosition, double shooterRPM) {
         this.armPosition = armPosition;
         this.shooterRPM = shooterRPM;
