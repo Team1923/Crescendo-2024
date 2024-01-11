@@ -33,6 +33,14 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
+  public static final class IntakeConstants {
+
+  }
+
+  public static final class ShooterConstants {
+    
+  }
+
   public static final class FeederConstants {
     //TODO: update this ID
     public static final int feederMotorID = 0;

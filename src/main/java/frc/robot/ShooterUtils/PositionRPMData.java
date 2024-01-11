@@ -14,13 +14,32 @@ public class PositionRPMData {
         return positionRPMData;
      }
 
+     /**
+      * Creates an instance of PositionRPMData & fills up HashMap with data.
+      */
+     public PositionRPMData() {
+        fillMap();
+     }
+
      private void fillMap() {
         /*
          * IDEA:
          * - Use the limelight to get the distance away from the target.
          * - Store the angle the arm needs to be at and the RPM of the shooter.
          * - Perform a LERP (linear interpolation) to get the value of angle/RPM.
+         * 
+         * For now I'm trying test data to see if the linear interpolation works.
          */
+
+        positionRPMMap.put(1.0, new PositionRPMObject(5, 2000));
+        positionRPMMap.put(1.5, new PositionRPMObject(7, 2250));
+        positionRPMMap.put(2.0, new PositionRPMObject(9, 2500));
+        positionRPMMap.put(2.5, new PositionRPMObject(14, 2600));
+        positionRPMMap.put(3.0, new PositionRPMObject(17, 2800));
+        positionRPMMap.put(3.5, new PositionRPMObject(19, 3000));
+        positionRPMMap.put(4.0, new PositionRPMObject(23, 3100));
+        positionRPMMap.put(4.5, new PositionRPMObject(14, 3400));
+
      }
 
      /**
@@ -32,7 +51,7 @@ public class PositionRPMData {
         //TODO: what are the bounds for distance? what to do when distance = 0?
         double lowerBound = 0;
         double upperBound = 0;
-        Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray();
+        Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {
             if (distance >= distanceValues[i] && distance < distanceValues[i + 1]) {
@@ -58,7 +77,7 @@ public class PositionRPMData {
         //TODO: what are the bounds for distance? what to do when distance = 0?
         double lowerBound = 0;
         double upperBound = 0;
-        Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray();
+        Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {
             if (distance >= distanceValues[i] && distance < distanceValues[i + 1]) {
@@ -73,5 +92,11 @@ public class PositionRPMData {
         double deltaDistanceBounds = upperBound - lowerBound;
 
         return (positionRPMMap.get(lowerBound).getShooterRPM()) + ((deltaDistance * deltaPositionValues) / deltaDistanceBounds);
+     }
+
+     public static void main(String[] args) {
+        PositionRPMData test = PositionRPMData.getInstance();
+        System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(1.25));
+        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.25));
      }
 }

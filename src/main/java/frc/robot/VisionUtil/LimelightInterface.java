@@ -32,7 +32,7 @@ public class LimelightInterface {
   }
 
   /*
-   * A singleton that creates the sole instance of BetterLimelightInterface,
+   * A singleton that creates the sole instance of LimelightInterface,
    * this is also used in other classes as well, so we don't have to pass in
    * new instances all the time
    */
@@ -55,13 +55,6 @@ public class LimelightInterface {
     return limelight.getEntry(entry).getDoubleArray(new double[6]);
   }
 
-  /*
-   * the only setting we really need to do on the limelight
-   * is the pipeline (if we decide to vision track)
-   */
-  public void setPipeline(int pipeline) {
-    limelight.getEntry("pipeline").setNumber(pipeline);
-  }
 
   public boolean hasValidTargets() {
     hasValidTarget = getDoubleEntry("tv") == 1.0;
