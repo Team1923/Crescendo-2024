@@ -54,7 +54,7 @@ public class PositionRPMData {
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {
-            if (distance >= distanceValues[i] && distance < distanceValues[i + 1]) {
+            if (distance >= distanceValues[i] && distance <= distanceValues[i + 1]) {
                 lowerBound = distanceValues[i];
                 upperBound = distanceValues[i + 1];
             }
@@ -80,7 +80,7 @@ public class PositionRPMData {
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {
-            if (distance >= distanceValues[i] && distance < distanceValues[i + 1]) {
+            if (distance >= distanceValues[i] && distance <= distanceValues[i + 1]) {
                 lowerBound = distanceValues[i];
                 upperBound = distanceValues[i + 1];
             }
@@ -96,7 +96,7 @@ public class PositionRPMData {
 
      public static void main(String[] args) {
         PositionRPMData test = PositionRPMData.getInstance();
-        System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(4.4));
-        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(4.4));    
+        System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(1.0));
+        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.0));    
      }
 }
