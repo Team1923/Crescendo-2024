@@ -4,8 +4,7 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -41,20 +40,20 @@ public class Robot extends TimedRobot {
 
 
   //being run in RPM
-  private final double velocityRight = 100;
-  private final double velocityLeft = 100;
+  private final double velocityRight = 3000;
+  private final double velocityLeft = 3000;
 
 
   private Timer offsetWait = new Timer();
 
 
-  private final double RPMOFFSET = 50; //50 rpm every controller press to increase/decrease
+  private final double RPMOFFSET = 200; //50 rpm every controller press to increase/decrease
   private double v_lOffset = 0;
   private double v_rOffset = 0;
 
                       
                   //max rpm/secs conversion to RPS
-  private final double kP = 1.0/(6000/60); //duty cycle per rps, if we are off by 6000 rps, use 100% speed
+  private final double kP = 2.0/(6000/60); //duty cycle per rps, if we are off by 6000 rps, use 100% speed
 
   // private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
   // private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
@@ -138,7 +137,7 @@ public class Robot extends TimedRobot {
 
     //for motor 1
     rightmotor.getConfigurator().apply(new TalonFXConfiguration());
-    rightmotor.setInverted(true);
+    
 
     //var config = motor1.getConfigurator();
      
@@ -153,6 +152,7 @@ public class Robot extends TimedRobot {
 
     //for motor 2
      leftmotor.getConfigurator().apply(new TalonFXConfiguration());
+     leftmotor.setInverted(true);
 
     // var config2 = motor2.getConfigurator();
 
@@ -179,7 +179,7 @@ public class Robot extends TimedRobot {
       if (control.getRawButton(4)){
         v_rOffset+=RPMOFFSET;
       }
-      if (control.getRawButton(2)){
+      if (control.getRawButton(1)){
         v_rOffset-=RPMOFFSET;
       }
 
@@ -194,13 +194,13 @@ public class Robot extends TimedRobot {
     }
 
 
-    if(control.getRawButton(1)){
-      // rightmotor.setControl(new DutyCycleOut(0.75));
-      // leftmotor.setControl(new DutyCycleOut(0.75));
-      m_velocityLeft.Slot = 0;
-      m_velocityRight.Slot = 0;
-      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60));
-      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60));
+    if(control.getRawButton(3)){
+      rightmotor.setControl(new DutyCycleOut(1));
+      leftmotor.setControl(new DutyCycleOut(0.85));
+      // m_velocityLeft.Slot = 0;
+      // m_velocityRight.Slot = 0;
+      // rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60));
+      // leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60));
       
       // rightmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
