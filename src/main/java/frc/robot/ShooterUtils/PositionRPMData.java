@@ -96,7 +96,7 @@ public class PositionRPMData {
 
      public static void main(String[] args) {
         PositionRPMData test = PositionRPMData.getInstance();
-        System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(1.25));
-        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.25));    
+        System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(4.4));
+        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(4.4));    
      }
 }

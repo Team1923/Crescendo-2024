@@ -33,17 +33,26 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
-  public static final class IntakeConstants {
+  /* TODO: UPDATE ALL OF THE MOTOR IDs! */
 
+  public static final class IntakeConstants {
+    public static final int intakeRollerMotorID = 0;
+    public static final int intakePrimaryID = 0;
+    public static final int intakeFollowerID = 0;
   }
 
   public static final class ShooterConstants {
-    
+    public static final int shooterMotorPrimaryID = 0;
+    public static final int shooterMotorFollowerID = 0;
   }
 
   public static final class FeederConstants {
-    //TODO: update this ID
     public static final int feederMotorID = 0;
+  }
+
+  public static final class ArmConstants {
+    public static final int armMotorPrimaryID = 0;
+    public static final int armMotorFollowerID = 0;
   }
 
   public static final class Swerve {
