@@ -1,4 +1,4 @@
-package frc.robot.StateUtils;
+package frc.robot.ShooterUtils;
 
 public class PositionRPMObject {
     private double armPosition;

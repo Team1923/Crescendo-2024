@@ -1,7 +1,6 @@
-package frc.robot.StateUtils;
+package frc.robot.ShooterUtils;
 
 import java.util.HashMap;
-import java.util.Set;
 
 public class PositionRPMData {
     private static PositionRPMData positionRPMData;
