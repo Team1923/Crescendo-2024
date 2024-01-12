@@ -109,13 +109,12 @@ public final class Constants {
     public static final double wheelBase = Units.inchesToMeters(18.75); //TODO: This must be tuned to specific robot
     public static final double wheelCircumference = chosenModule.wheelCircumference;
 
-    /* Swerve Kinematics 
-      * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
-      public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
-        new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
-        new Translation2d(wheelBase / 2.0, -trackWidth / 2.0),
-        new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
-        new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
+    /* Swerve Drive Kinematics - Needed for Calculations */
+    public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
+      new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
+      new Translation2d(wheelBase / 2.0, -trackWidth / 2.0),
+      new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
+      new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
 
     /* Module Gear Ratios */
     public static final double driveGearRatio = chosenModule.driveGearRatio; 
@@ -215,7 +214,7 @@ public final class Constants {
         new HolonomicPathFollowerConfig(
             new PIDConstants(5.0, 0, 0), 
             new PIDConstants(5.0, 0, 0), maxSpeed, 
-            Math.hypot(trackWidth / 2, wheelBase / 2), //TODO: FIND THE DISTANCE BETWEEN CENTER OF ROBOT TO FURTHEST SWERVE MODULE
+            Math.hypot(trackWidth / 2, wheelBase / 2),
             new ReplanningConfig());
     }
 
