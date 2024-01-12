@@ -1,4 +1,4 @@
-package frc.robot.ShooterUtils;
+package frc.robot.ShooterArmDataUtils;
 
 import java.util.HashMap;
 
