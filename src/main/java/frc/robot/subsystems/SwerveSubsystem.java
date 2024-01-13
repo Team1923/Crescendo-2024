@@ -18,6 +18,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -39,6 +40,8 @@ public class SwerveSubsystem extends SubsystemBase {
             new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
 
+        Timer.delay(1.0);
+        resetModulesToAbsolute();
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
 
@@ -63,19 +66,20 @@ public class SwerveSubsystem extends SubsystemBase {
          * IF BACKWARDS:
          * replace lines 66-78 with the fix below
          */
+
+
+        ChassisSpeeds fieldRelSpeeds;
+        if (DriverStation.getAlliance().get() == Alliance.Blue) {
+            fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
+        } else {
+            fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(-translation.getX(), -translation.getY(), rotation, getHeading());
+        }
+
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation, 
-                                    getHeading()
-                                )
-                                : new ChassisSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation)
-                                );
+                fieldRelative ? fieldRelSpeeds : new ChassisSpeeds(translation.getX(), translation.getY(), rotation));
+
+                
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
         for(SwerveModule mod : mSwerveMods){
@@ -84,16 +88,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
         //IMPLEMENT THE FOLLOWING IF BACKWARDS (the fix is everything below that is commented out)
 
-        // ChassisSpeeds fieldRelSpeeds;
-        // if (DriverStation.getAlliance().get() == Alliance.Blue) {
-        //     fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
-        // } else {
-        //     fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(-translation.getX(), -translation.getY(), rotation, getHeading());
-        // }
-
-        // SwerveModuleState[] swerveModuleStates =
-        //     Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-        //         fieldRelative ? fieldRelSpeeds : new ChassisSpeeds(translation.getX(), translation.getY(), rotation));
 
     }    
 
@@ -180,7 +174,7 @@ public class SwerveSubsystem extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
 
-        SmartDashboard.putNumber("CURRENT ROBOT HEADING", getGyroYaw().getDegrees());
+       SmartDashboard.putNumber("CURRENT ROBOT HEADING", getGyroYaw().getDegrees());
 
     }
 }
