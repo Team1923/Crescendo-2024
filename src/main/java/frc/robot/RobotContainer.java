@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.AutoUtils.AutoChooser;
+import frc.robot.commands.AutoCommands.AlignToAmpTagCommand;
 import frc.robot.commands.TeleOpCommands.TeleopSwerve;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -36,7 +38,7 @@ public class RobotContainer {
 
     private final JoystickButton xBoxRightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
     private final JoystickButton xBoxLeftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    // private final JoystickButton xBoxAButton = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton xBoxAButton = new JoystickButton(driver, XboxController.Button.kA.value);
     // private final JoystickButton xBoxBButton = new JoystickButton(driver, XboxController.Button.kB.value);
     // private final JoystickButton xBoxXButton = new JoystickButton(driver, XboxController.Button.kX.value);
     // private final JoystickButton xBoxYButton = new JoystickButton(driver, XboxController.Button.kY.value);  
@@ -51,6 +53,9 @@ public class RobotContainer {
 
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+
+    xBoxAButton.whileTrue(new AlignToAmpTagCommand(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
+
     
   }
 

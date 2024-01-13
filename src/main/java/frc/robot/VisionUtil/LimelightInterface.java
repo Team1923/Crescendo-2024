@@ -67,7 +67,7 @@ public class LimelightInterface {
    * @return The Angle offset from the tag. 
    */
   public double getXAngleOffset() {
-    return getDoubleEntry("tx");
+    return hasValidTag() ? getDoubleEntry("tx") : 0;
   }
 
   /**
@@ -75,7 +75,7 @@ public class LimelightInterface {
    * @return The Angle offset from the tag.
    */
   public double getYAngleOffset() {
-    return getDoubleEntry("ty");
+    return hasValidTag() ? getDoubleEntry("ty") : 0;
   }
 
   /*
