@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import frc.robot.AutoUtils.AutoChooser;
 import frc.robot.commands.TeleOpCommands.TeleopSwerve;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -23,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
     /* SUBSYSTEM Initializations */
     public final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     
 
     /* XBOX Controller Setup */
@@ -71,4 +74,8 @@ public class RobotContainer {
     // An example command will be run in autonomous
     return new PathPlannerAuto("Test_Auto");
   }
+
+    public Command initializeAuto(AutoChooser selector){
+        return selector.startMode(s_Swerve, intakeSubsystem);
+    }
 }
