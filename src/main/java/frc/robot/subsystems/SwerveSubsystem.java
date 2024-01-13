@@ -61,7 +61,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         /*
          * IF BACKWARDS:
-         * replace lines 67-79 with the fix below
+         * replace lines 66-78 with the fix below
          */
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
