@@ -13,11 +13,11 @@ import frc.robot.RobotStateUtils.StateHandler;
 import frc.robot.RobotStateUtils.StateVariables.FeederSpeeds;
 
 public class FeederSubsystem extends SubsystemBase {
-  private TalonFX feederMotor = new TalonFX(FeederConstants.feederMotorID, "rio");
+  // private TalonFX feederMotor = new TalonFX(FeederConstants.feederMotorID, "rio");
 
   /** Creates a new FeederSubsystem. */
   public FeederSubsystem() {
-    feederMotor.getConfigurator().apply(new TalonFXConfiguration());
+    // feederMotor.getConfigurator().apply(new TalonFXConfiguration());
   }
 
   /**
@@ -25,14 +25,14 @@ public class FeederSubsystem extends SubsystemBase {
    * @param s The desired output speed.
    */
   public void setFeederMotorSpeed(double s) {
-    feederMotor.set(s);
+    // feederMotor.set(s);
   }
 
   /**
    * This method stops the motor.
    */
   public void stopFeederMotor() {
-    feederMotor.stopMotor();
+    // feederMotor.stopMotor();
   }
 
   @Override

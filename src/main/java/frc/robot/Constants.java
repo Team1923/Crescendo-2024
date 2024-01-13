@@ -106,6 +106,8 @@ public final class Constants {
   public static final class Swerve {
     public static final int pigeonID = 13;
 
+    public static final boolean invertGyro = false;
+
     public static final double stickDeadband = 0.1;
 
     public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot

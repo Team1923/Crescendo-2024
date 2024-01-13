@@ -28,7 +28,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public Pigeon2 gyro;
 
     public SwerveSubsystem() {
-        gyro = new Pigeon2(Constants.Swerve.pigeonID);
+        gyro = new Pigeon2(Constants.Swerve.pigeonID, "rio");
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.setYaw(0);
 
@@ -155,7 +155,11 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public Rotation2d getGyroYaw() {
-        return Rotation2d.fromDegrees(gyro.getYaw().getValue());
+        return Constants.Swerve.invertGyro ? Rotation2d.fromDegrees(-getYawIEEE()) : Rotation2d.fromDegrees(getYawIEEE());
+    }
+
+    public double getYawIEEE(){
+        return Math.IEEEremainder(gyro.getYaw().getValueAsDouble(), 360);
     }
 
     public void resetModulesToAbsolute(){

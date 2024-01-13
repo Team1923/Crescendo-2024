@@ -17,16 +17,16 @@ import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  private TalonFX intakePrimaryMotor = new TalonFX(IntakeConstants.intakePrimaryID, "rio");
-  private TalonFX intakeFollowerMotor = new TalonFX(IntakeConstants.intakeFollowerID, "rio");
-  private TalonFX intakeRollerMotor = new TalonFX(IntakeConstants.intakeRollerMotorID, "rio");
+  // private TalonFX intakePrimaryMotor = new TalonFX(IntakeConstants.intakePrimaryID, "rio");
+  // private TalonFX intakeFollowerMotor = new TalonFX(IntakeConstants.intakeFollowerID, "rio");
+  // private TalonFX intakeRollerMotor = new TalonFX(IntakeConstants.intakeRollerMotorID, "rio");
 
   
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
-    intakePrimaryMotor.getConfigurator().apply(new TalonFXConfiguration());
-    intakeFollowerMotor.getConfigurator().apply(new TalonFXConfiguration());
-    intakeRollerMotor.getConfigurator().apply(new TalonFXConfiguration());
+    // intakePrimaryMotor.getConfigurator().apply(new TalonFXConfiguration());
+    // intakeFollowerMotor.getConfigurator().apply(new TalonFXConfiguration());
+    // intakeRollerMotor.getConfigurator().apply(new TalonFXConfiguration());
 
   
 
