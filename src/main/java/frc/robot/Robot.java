@@ -55,16 +55,12 @@ public class Robot extends TimedRobot {
                   //max rpm/secs conversion to RPS
   private final double kP = 2.0/(6000/60); //duty cycle per rps, if we are off by 6000 rps, use 100% speed
 
-  // private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
-  // private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
+  private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
+  private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
 
-  private final VelocityDutyCycle m_velocityRight = new VelocityDutyCycle(0);
-  private final VelocityDutyCycle m_velocityLeft = new VelocityDutyCycle(0);
+  // private final VelocityDutyCycle m_velocityRight = new VelocityDutyCycle(0);
+  // private final VelocityDutyCycle m_velocityLeft = new VelocityDutyCycle(0);
 
-
-  //didn't end up using these
-  // private TalonSRX srx1 = new TalonSRX(0);//find id either with tuner x or phoenix tuner
-  // private TalonSRX srx2 = new TalonSRX(1);
 
   //in RPM
 
@@ -143,10 +139,11 @@ public class Robot extends TimedRobot {
      
 
     var slot0Configs = new Slot0Configs();
+    slot0Configs.kS = 0; //0.05
     slot0Configs.kV = 0;
-    slot0Configs.kP = kP;
-    slot0Configs.kI = 0;
-    slot0Configs.kD = 0;
+    slot0Configs.kP = kP; // old: 0.2, new: 0.40039100684261975
+    slot0Configs.kI = 0; // 0
+    slot0Configs.kD = 0; // old : 0.4, new: 0.0008007820136852395
 
     // config.apply(slotConfigs);
 
@@ -182,12 +179,6 @@ public class Robot extends TimedRobot {
       if (control.getRawButton(1)){
         v_rOffset-=RPMOFFSET;
       }
-
-
-
-
-
-
       offsetWait.reset();
       offsetWait.start();
       
@@ -195,26 +186,20 @@ public class Robot extends TimedRobot {
 
 
     if(control.getRawButton(3)){
-      rightmotor.setControl(new DutyCycleOut(1));
-      leftmotor.setControl(new DutyCycleOut(0.85));
-      // m_velocityLeft.Slot = 0;
-      // m_velocityRight.Slot = 0;
-      // rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60));
-      // leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60));
+      // rightmotor.setControl(new DutyCycleOut(1));
+      // leftmotor.setControl(new DutyCycleOut(0.85));
+      m_velocityLeft.Slot = 0;
+      m_velocityRight.Slot = 0;
+      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60).withFeedForward(0));//change
+      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60).withFeedForward(0));//change 
       
       // rightmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
-
-      //didn't end up using
-      // srx1.set(ControlMode.PercentOutput, 0.1);
-      // srx2.set(ControlMode.PercentOutput, 0.2);
-
     }
     else{
       rightmotor.stopMotor();
       leftmotor.stopMotor();
-      // srx1.set(ControlMode.PercentOutput, 0);
-      // srx2.set(ControlMode.PercentOutput, 1);
+
     }
 
     //times 60 to go to RPM
