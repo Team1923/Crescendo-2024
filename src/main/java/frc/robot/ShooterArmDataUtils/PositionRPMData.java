@@ -87,11 +87,11 @@ public class PositionRPMData {
         }
 
         double deltaDistance = distance - lowerBound;
-        double deltaPositionValues = (positionRPMMap.get(upperBound).getShooterRPM()) - 
+        double deltaRPMValues = (positionRPMMap.get(upperBound).getShooterRPM()) - 
             (positionRPMMap.get(lowerBound).getShooterRPM());
         double deltaDistanceBounds = upperBound - lowerBound;
 
-        return (positionRPMMap.get(lowerBound).getShooterRPM()) + ((deltaDistance * deltaPositionValues) / deltaDistanceBounds);
+        return (positionRPMMap.get(lowerBound).getShooterRPM()) + ((deltaDistance * deltaRPMValues) / deltaDistanceBounds);
      }
 
      public static void main(String[] args) {
