@@ -70,12 +70,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return new PathPlannerAuto("Test_Auto");
+  public Command initializeAuto(AutoChooser selector){
+      return selector.startMode(s_Swerve, intakeSubsystem);
   }
-
-    public Command initializeAuto(AutoChooser selector){
-        return selector.startMode(s_Swerve, intakeSubsystem);
-    }
 }
