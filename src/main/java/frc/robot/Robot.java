@@ -40,8 +40,8 @@ public class Robot extends TimedRobot {
 
 
   //being run in RPM
-  private final double velocityRight = 3000;
-  private final double velocityLeft = 3000;
+  private final double velocityRight = 6000;
+  private final double velocityLeft = 6000;
 
 
   private Timer offsetWait = new Timer();
@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 
                       
                   //max rpm/secs conversion to RPS
-  private final double kP = 1; //duty cycle per rps, if we are off by 6000 rps, use 100% speed
+  //private final double kP = 0.4; //duty cycle per rps, if we are off by 6000 rps, use 100% speed
 
   private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
   private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
@@ -141,15 +141,16 @@ public class Robot extends TimedRobot {
     var slot0Configs = new Slot0Configs();
     slot0Configs.kS = 0; //0.05
     slot0Configs.kV = 0;
-    slot0Configs.kP = kP; // old: 0.2, new: 0.40039100684261975
+    slot0Configs.kP = 0.1; // old: 0.2, new: 0.40039100684261975
     slot0Configs.kI = 0; // 0
-    slot0Configs.kD = 0; // old : 0.4, new: 0.0008007820136852395
+    slot0Configs.kD = 0.0008007820136852395; // old : 0.4, new: 0.0008007820136852395
 
     // config.apply(slotConfigs);
 
     //for motor 2
      leftmotor.getConfigurator().apply(new TalonFXConfiguration());
-     leftmotor.setInverted(true);
+     leftmotor.setInverted(false);
+     rightmotor.setInverted(true);
 
     // var config2 = motor2.getConfigurator();
 
@@ -186,12 +187,10 @@ public class Robot extends TimedRobot {
 
 
     if(control.getRawButton(3)){
-      // rightmotor.setControl(new DutyCycleOut(1));
-      // leftmotor.setControl(new DutyCycleOut(0.85));
       m_velocityLeft.Slot = 0;
       m_velocityRight.Slot = 0;
-      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60).withFeedForward(0.001));//change
-      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60).withFeedForward(0.001));//change 
+      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60).withFeedForward(10));//change
+      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60).withFeedForward(10));//change 
       
       // rightmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
