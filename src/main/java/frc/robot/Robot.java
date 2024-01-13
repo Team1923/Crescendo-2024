@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 
                       
                   //max rpm/secs conversion to RPS
-  private final double kP = 2.0/(6000/60); //duty cycle per rps, if we are off by 6000 rps, use 100% speed
+  private final double kP = 1; //duty cycle per rps, if we are off by 6000 rps, use 100% speed
 
   private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
   private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
@@ -190,8 +190,8 @@ public class Robot extends TimedRobot {
       // leftmotor.setControl(new DutyCycleOut(0.85));
       m_velocityLeft.Slot = 0;
       m_velocityRight.Slot = 0;
-      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60).withFeedForward(0));//change
-      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60).withFeedForward(0));//change 
+      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60).withFeedForward(0.001));//change
+      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60).withFeedForward(0.001));//change 
       
       // rightmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
