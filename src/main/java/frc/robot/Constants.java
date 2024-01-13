@@ -35,6 +35,13 @@ public final class Constants {
 
   /* TODO: UPDATE ALL OF THE CONSTANTS */
 
+  public static final class LimeLightConstants{
+    //measure constants in inches
+    public static final double limelightMountAngle = 0; // CHANGE IN LAB
+    public static final double limelightHeight = 0;
+    public static final double speakerHeightFromFloor = Units.metersToInches(1.4511020000000001);
+  }
+
   public static final class IntakeConstants {
     /* Motor IDs */
     public static final int intakeRollerMotorID = 0;

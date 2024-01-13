@@ -20,8 +20,6 @@ public class LimelightInterface {
   // network table declarations
   private static NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
-  private double aprilTagID = 0;
-  private boolean hasValidTarget = false;
 
   ArrayList<AprilTag> aprilTagList = new ArrayList<AprilTag>();
   public AprilTagFieldLayout aprilTagFieldLayout;
@@ -56,17 +54,28 @@ public class LimelightInterface {
   }
 
 
-  public boolean hasValidTargets() {
-    hasValidTarget = getDoubleEntry("tv") == 1.0;
-    return hasValidTarget;
+  public boolean hasValidTag() {
+    return getDoubleEntry("tv") == 1.0;
   }
 
-  public double getTargetArea() {
+  public double getTagArea() {
     return getDoubleEntry("ta");
   }
 
-  public double getXOffset() {
+  /**
+   * The X Offset from the camera to the tag in DEGREES.
+   * @return The Angle offset from the tag. 
+   */
+  public double getXAngleOffset() {
     return getDoubleEntry("tx");
+  }
+
+  /**
+   * The Y Offset from the camera to the tag in DEGREES.
+   * @return The Angle offset from the tag.
+   */
+  public double getYAngleOffset() {
+    return getDoubleEntry("ty");
   }
 
   /*
@@ -81,14 +90,16 @@ public class LimelightInterface {
     return getArrayEntry("botpose_targetspace");
   }
 
-  public double getID() {
-    aprilTagID = getDoubleEntry("tid");
-    return aprilTagID;
+  public double getID(){
+    return hasValidTag() ? getDoubleEntry("tid") : -1;
   }
 
-  public boolean hasScoringTarget() { // change for this seasons game
-    return (((getID() == 1) || (getID() == 2) || (getID() == 3)
-        || (getID() == 6) || (getID() == 7) || (getID() == 8)) && hasValidTargets());
+  public boolean hasSpeakerTag() { 
+    return (((getID() == 3) || (getID() == 4) || (getID() == 7) || (getID() == 8)) && hasValidTag());
+  }
+
+  public boolean hasAmpTag(){
+    return(((getID() == 6)|| (getID() == 5)) && hasValidTag());
   }
 
   public double getTL() {
@@ -112,7 +123,7 @@ public class LimelightInterface {
   }
 
   public Pose3d getAprilTagPose() {
-    if (hasValidTargets()) {
+    if (hasValidTag()) {
       Optional<Pose3d> aprilTagPose = aprilTagFieldLayout.getTagPose((int) getID());
       if (aprilTagPose.isEmpty()) {
         return new Pose3d();
