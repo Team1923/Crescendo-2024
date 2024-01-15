@@ -62,12 +62,6 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
-        /*
-         * IF BACKWARDS:
-         * replace lines 66-78 with the fix below
-         */
-
-
         ChassisSpeeds fieldRelSpeeds;
         if (DriverStation.getAlliance().get() == Alliance.Blue) {
             fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
@@ -85,10 +79,6 @@ public class SwerveSubsystem extends SubsystemBase {
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
-
-        //IMPLEMENT THE FOLLOWING IF BACKWARDS (the fix is everything below that is commented out)
-
-
     }    
 
     private void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {

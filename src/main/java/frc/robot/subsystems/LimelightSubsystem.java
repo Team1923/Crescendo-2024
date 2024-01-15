@@ -18,7 +18,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public double calculateDistanceToTag(){
     double tagOffsetAngleVertical = limelight.getYAngleOffset();
-    double angleToGoal = (LimeLightConstants.limelightMountAngle + tagOffsetAngleVertical) * (Math.PI/ 180);
+    double angleToGoal = (LimeLightConstants.limelightMountAngle + tagOffsetAngleVertical) * (Math.PI / 180);
     return (LimeLightConstants.speakerHeightFromFloor - LimeLightConstants.limelightHeight) / Math.tan(angleToGoal);
   }
 
