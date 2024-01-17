@@ -45,11 +45,11 @@ public class ShooterSubsystem extends SubsystemBase {
    * Method to set speed of shooter motors, using velocity closed loop control.
    * @param velocity The speed, in RPM, passed into the motors.
    */
-  public void set(double velocity){
+  public void set(double velocityP, double velocityF){
     velocityPrimary.Slot = 0;
     velocityFollower.Slot = 0;
-    shooterPrimary.setControl(velocityPrimary.withVelocity(velocity));//change
-    shooterFollower.setControl(velocityFollower.withVelocity(velocity));//change
+    shooterPrimary.setControl(velocityPrimary.withVelocity(velocityP));//change
+    shooterFollower.setControl(velocityFollower.withVelocity(velocityF));//change
   }
 
   @Override
