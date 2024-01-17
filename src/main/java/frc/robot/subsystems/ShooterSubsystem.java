@@ -32,11 +32,10 @@ public class ShooterSubsystem extends SubsystemBase {
     /**
      * Rough values, need to tune them to final robot.
      */
-    slot0Configs.kS = 0;
-    slot0Configs.kV = 0;
-    slot0Configs.kP = 0.1; 
-    slot0Configs.kI = 0; 
-    slot0Configs.kD = 0.0008007820136852395; 
+    slot0Configs.kV = 0.12;
+    slot0Configs.kP = 0.11; 
+    slot0Configs.kI = 0.48; 
+    slot0Configs.kD = 0.01; 
 
     shooterPrimary.getConfigurator().apply(slot0Configs, 0.05);
     shooterFollower.getConfigurator().apply(slot0Configs, 0.05);
@@ -49,8 +48,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void set(double velocity){
     velocityPrimary.Slot = 0;
     velocityFollower.Slot = 0;
-    shooterPrimary.setControl(velocityPrimary.withVelocity(velocity).withFeedForward(10));//change
-    shooterFollower.setControl(velocityFollower.withVelocity(velocity).withFeedForward(10));//change
+    shooterPrimary.setControl(velocityPrimary.withVelocity(velocity));//change
+    shooterFollower.setControl(velocityFollower.withVelocity(velocity));//change
   }
 
   @Override
