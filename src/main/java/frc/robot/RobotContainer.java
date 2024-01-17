@@ -8,6 +8,7 @@ import frc.robot.AutoUtils.AutoChooser;
 import frc.robot.commands.AutoCommands.AlignToAmpTagCommand;
 import frc.robot.commands.TeleOpCommands.TeleopSwerve;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -28,6 +29,7 @@ public class RobotContainer {
     /* SUBSYSTEM Initializations */
     public final SwerveSubsystem s_Swerve = new SwerveSubsystem();
     public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    public final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
     
 
     /* XBOX Controller Setup */
