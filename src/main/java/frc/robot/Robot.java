@@ -140,10 +140,10 @@ public class Robot extends TimedRobot {
 
     var slot0Configs = new Slot0Configs();
     slot0Configs.kS = 0; //0.05
-    slot0Configs.kV = 0;
-    slot0Configs.kP = 0.1; // old: 0.2, new: 0.40039100684261975
+    slot0Configs.kV = 0.45;
+    slot0Configs.kP = 0.11; // old: 0.2, new: 0.40039100684261975
     slot0Configs.kI = 0; // 0
-    slot0Configs.kD = 0.0008007820136852395; // old : 0.4, new: 0.0008007820136852395
+    slot0Configs.kD = 0; // old : 0.4, new: 0.0008007820136852395
 
     // config.apply(slotConfigs);
 
@@ -189,8 +189,8 @@ public class Robot extends TimedRobot {
     if(control.getRawButton(3)){
       m_velocityLeft.Slot = 0;
       m_velocityRight.Slot = 0;
-      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60).withFeedForward(10));//change
-      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60).withFeedForward(10));//change 
+      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60));//change
+      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60));//change 
       
       // rightmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
