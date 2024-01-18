@@ -9,6 +9,8 @@ public class AutoInstantiator {
 
 	public static AutoInstantiator autoInstantiator;
 	private PathPlannerAuto testAuto;
+	private PathPlannerAuto testStraight;
+
 	
     //Auto from pathplanner, not new sequential command
 	public static synchronized AutoInstantiator getInstance() {
@@ -20,10 +22,16 @@ public class AutoInstantiator {
 
 	public AutoInstantiator() {
 		testAuto = new PathPlannerAuto("Test_Auto");
+		testStraight = new PathPlannerAuto("Test_Straight");
 	}
 
 	public PathPlannerAuto getTestAuto() {
 		return testAuto;
 	}
+
+	public PathPlannerAuto getTestStraight(){
+		return testStraight;
+	}
+
 
 }

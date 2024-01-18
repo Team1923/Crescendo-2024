@@ -14,7 +14,8 @@ import frc.robot.AutoUtils.AutoInstantiator;
 
 public class AutoChooser {
     public enum AutoMode {
-		TEST_AUTO
+		TEST_AUTO,
+		TEST_STRAIGHT
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -27,8 +28,9 @@ public class AutoChooser {
 
 	public AutoChooser(){
 		chooser = new SendableChooser<>();
-		auto.add(chooser);
 		chooser.addOption("Test Auto S-Curve", AutoMode.TEST_AUTO);
+		chooser.addOption("Test Straight Path", AutoMode.TEST_STRAIGHT);
+		auto.add(chooser);
 	}
 
 	public Command startMode(SwerveSubsystem swerve, IntakeSubsystem intake){
@@ -36,6 +38,8 @@ public class AutoChooser {
 		switch(mode){
 			case TEST_AUTO:
 				return autoInstantiator.getTestAuto();
+			case TEST_STRAIGHT:
+				return autoInstantiator.getTestStraight();
 			default:
 				return null;//change
 		}

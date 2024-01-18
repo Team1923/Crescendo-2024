@@ -15,18 +15,18 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  private TalonFX shooterPrimary = new TalonFX(Constants.ShooterConstants.shooterMotorPrimaryID);
-  private TalonFX shooterFollower = new TalonFX(Constants.ShooterConstants.shooterMotorFollowerID);
+  // private TalonFX shooterPrimary = new TalonFX(Constants.ShooterConstants.shooterMotorPrimaryID);
+  // private TalonFX shooterFollower = new TalonFX(Constants.ShooterConstants.shooterMotorFollowerID);
 
   private VelocityVoltage velocityPrimary = new VelocityVoltage(0);
   private VelocityVoltage velocityFollower = new VelocityVoltage(0);
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-    shooterPrimary.getConfigurator().apply(new TalonFXConfiguration());
-    shooterFollower.getConfigurator().apply(new TalonFXConfiguration());
+    // shooterPrimary.getConfigurator().apply(new TalonFXConfiguration());
+    // shooterFollower.getConfigurator().apply(new TalonFXConfiguration());
 
-    shooterPrimary.setInverted(true);
+    // shooterPrimary.setInverted(true);
 
     var slot0Configs = new Slot0Configs();
     /**
@@ -37,8 +37,8 @@ public class ShooterSubsystem extends SubsystemBase {
     slot0Configs.kI = 0.48; 
     slot0Configs.kD = 0.01; 
 
-    shooterPrimary.getConfigurator().apply(slot0Configs, 0.05);
-    shooterFollower.getConfigurator().apply(slot0Configs, 0.05);
+    // shooterPrimary.getConfigurator().apply(slot0Configs, 0.05);
+    // shooterFollower.getConfigurator().apply(slot0Configs, 0.05);
   }
 
   /**
@@ -48,14 +48,14 @@ public class ShooterSubsystem extends SubsystemBase {
   public void set(double velocityP, double velocityF){
     velocityPrimary.Slot = 0;
     velocityFollower.Slot = 0;
-    shooterPrimary.setControl(velocityPrimary.withVelocity(velocityP));//change
-    shooterFollower.setControl(velocityFollower.withVelocity(velocityF));//change
+    // shooterPrimary.setControl(velocityPrimary.withVelocity(velocityP));//change
+    // shooterFollower.setControl(velocityFollower.withVelocity(velocityF));//change
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Velocity of Primary Motor", shooterPrimary.getVelocity().getValueAsDouble());
-    SmartDashboard.putNumber("Velocity of Follower Motor", shooterFollower.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Velocity of Primary Motor", shooterPrimary.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Velocity of Follower Motor", shooterFollower.getVelocity().getValueAsDouble());
   }
 }
