@@ -40,7 +40,7 @@ public class AlignToAmpTagCommand extends Command {
   @Override
   public void execute() {
     double translationValue = MathUtil.applyDeadband(horizontalTranslationSupplier.getAsDouble(), Swerve.stickDeadband);
-    double rotationGoal = DriverStation.getAlliance().get() == Alliance.Blue ? -90 : 90;
+    double rotationGoal = DriverStation.getAlliance().get() == Alliance.Blue ? -Math.PI / 2 : Math.PI / 2;
               //CHECK NEGATIVE
     swerve.drive(new Translation2d(-strafeController.calculate(limelight.getXAngleOffset(), 0), translationValue).times(Swerve.maxSpeed), 
                                   rotationController.calculate(swerve.getGyroYaw().getDegrees(), rotationGoal) * Swerve.maxAngularVelocity, true, true);
