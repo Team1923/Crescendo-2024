@@ -5,6 +5,7 @@ import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -42,6 +43,18 @@ public class AutoChooser {
 				return autoInstantiator.getTestStraight();
 			default:
 				return null;//change
+		}
+	}
+
+	public Pose2d getSelectedAutoStartPose() {
+		AutoMode mode = (AutoMode)(chooser.getSelected());
+		switch(mode){
+			case TEST_AUTO:
+				return PathPlannerAuto.getStaringPoseFromAutoFile("Test_Auto");
+			case TEST_STRAIGHT:
+				return PathPlannerAuto.getStaringPoseFromAutoFile("Test_Straight");
+			default:
+				return new Pose2d();
 		}
 	}
 }
