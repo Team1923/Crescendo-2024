@@ -8,6 +8,8 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class TeleopSwerve extends Command {
@@ -35,7 +37,7 @@ public class TeleopSwerve extends Command {
         /* Get Values, Deadband */
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.Swerve.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.Swerve.stickDeadband);
-        double rotationVal = 0.3* MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.Swerve.stickDeadband);
+        double rotationVal = 0.3 * MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.Swerve.stickDeadband);
 
         if (robotCentricSup.getAsBoolean()) {
             translationVal *= 0.6;
@@ -48,9 +50,14 @@ public class TeleopSwerve extends Command {
             rotationVal *= 0.3;
         }
 
-        /* Drive */
-        s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
-                rotationVal * Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
+        if (DriverStation.getAlliance().get() == Alliance.Blue) {
+            s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
+                    rotationVal * Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
+        } else {
+            s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(-Constants.Swerve.maxSpeed),
+                    rotationVal * Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
+        }
+
     }
 
     @Override

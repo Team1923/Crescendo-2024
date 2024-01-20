@@ -62,18 +62,19 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
-        ChassisSpeeds fieldRelSpeeds;
-        if (DriverStation.getAlliance().get() == Alliance.Blue) {
-            fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
-        } else {
-            fieldRelSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(-translation.getX(), -translation.getY(), rotation, getHeading());
-        }
-
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? fieldRelSpeeds : new ChassisSpeeds(translation.getX(), translation.getY(), rotation));
-
-                
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
+                                    translation.getX(), 
+                                    translation.getY(), 
+                                    rotation, 
+                                    getHeading()
+                                )
+                                : new ChassisSpeeds(
+                                    translation.getX(), 
+                                    translation.getY(), 
+                                    rotation)
+                                );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
         for(SwerveModule mod : mSwerveMods){
