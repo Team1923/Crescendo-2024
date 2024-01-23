@@ -16,7 +16,8 @@ import frc.robot.AutoUtils.AutoInstantiator;
 public class AutoChooser {
     public enum AutoMode {
 		TEST_AUTO,
-		TEST_STRAIGHT
+		TEST_STRAIGHT,
+		TEST_ROTATE
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -31,6 +32,7 @@ public class AutoChooser {
 		chooser = new SendableChooser<>();
 		chooser.addOption("Test Auto S-Curve", AutoMode.TEST_AUTO);
 		chooser.addOption("Test Straight Path", AutoMode.TEST_STRAIGHT);
+		chooser.addOption("Test Rotate Path", AutoMode.TEST_ROTATE);
 		auto.add(chooser);
 	}
 
@@ -41,6 +43,8 @@ public class AutoChooser {
 				return autoInstantiator.getTestAuto();
 			case TEST_STRAIGHT:
 				return autoInstantiator.getTestStraight();
+			case TEST_ROTATE:
+				return autoInstantiator.getTestRotate();
 			default:
 				return null;//change
 		}
@@ -53,6 +57,8 @@ public class AutoChooser {
 				return PathPlannerAuto.getStaringPoseFromAutoFile("Test_Auto");
 			case TEST_STRAIGHT:
 				return PathPlannerAuto.getStaringPoseFromAutoFile("Test_Straight");
+			case TEST_ROTATE:
+				return PathPlannerAuto.getStaringPoseFromAutoFile("Test_Rotate");
 			default:
 				return new Pose2d();
 		}
