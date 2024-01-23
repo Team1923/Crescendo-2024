@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import frc.robot.SwerveUtil.SwerveModule;
+import frc.robot.SwerveModule;
 import frc.robot.Constants;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -11,25 +11,22 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.util.PathPlannerLogging;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SwerveSubsystem extends SubsystemBase {
+public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
 
-    public SwerveSubsystem() {
-        gyro = new Pigeon2(Constants.Swerve.pigeonID, "rio");
+    public Swerve() {
+        gyro = new Pigeon2(Constants.Swerve.pigeonID);
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.setYaw(0);
 
@@ -48,16 +45,10 @@ public class SwerveSubsystem extends SubsystemBase {
         AutoBuilder.configureHolonomic(
             this::getPose, 
             this::setPose, 
-            this::getChassisSpeeds, 
+            this::getRobotRelativeSpeeds, 
             this::driveRobotRelativeForPP, 
             Constants.Swerve.pathFollowerConfig, 
-            () -> {
-                var alliance = DriverStation.getAlliance();
-                if (alliance.isPresent()) {
-                    return alliance.get() == DriverStation.Alliance.Red;
-                }
-                return false;
-            },
+            () -> false, 
             this);
     }
 
@@ -80,17 +71,14 @@ public class SwerveSubsystem extends SubsystemBase {
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
-    }    
-
-    private void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {
+    }  
+    
+    public void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {
         SwerveModuleState[] swerveModuleStates = Constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
-        for(SwerveModule mod : mSwerveMods){
-            mod.setDesiredState(swerveModuleStates[mod.moduleNumber], false);
-        }    
+        setModuleStates(swerveModuleStates);
     }
 
-    public ChassisSpeeds getChassisSpeeds() {
+    public ChassisSpeeds getRobotRelativeSpeeds(){
         return Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
     }
 
@@ -140,11 +128,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public Rotation2d getGyroYaw() {
-        return Constants.Swerve.invertGyro ? Rotation2d.fromDegrees(-getYawIEEE()) : Rotation2d.fromDegrees(getYawIEEE());
-    }
-
-    public double getYawIEEE(){
-        return Math.IEEEremainder(gyro.getYaw().getValueAsDouble(), 360);
+        return Rotation2d.fromDegrees(Math.IEEEremainder(gyro.getYaw().getValue(), 360));
     }
 
     public void resetModulesToAbsolute(){
@@ -157,15 +141,10 @@ public class SwerveSubsystem extends SubsystemBase {
     public void periodic(){
         swerveOdometry.update(getGyroYaw(), getModulePositions());
 
-        PathPlannerLogging.logCurrentPose(getPose());
-
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
-
-       SmartDashboard.putNumber("CURRENT ROBOT HEADING", getGyroYaw().getDegrees());
-
     }
 }

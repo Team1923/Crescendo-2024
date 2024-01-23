@@ -1,4 +1,4 @@
-package frc.robot.SwerveUtil;
+package frc.lib.util;
 
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
@@ -17,8 +17,6 @@ public class COTSTalonFXSwerveConstants {
     public final InvertedValue driveMotorInvert;
     public final InvertedValue angleMotorInvert;
     public final SensorDirectionValue cancoderInvert;
-
-    /* TODO: Change for Colsons */
 
     public COTSTalonFXSwerveConstants(double wheelDiameter, double angleGearRatio, double driveGearRatio, double angleKP, double angleKI, double angleKD, InvertedValue driveMotorInvert, InvertedValue angleMotorInvert, SensorDirectionValue cancoderInvert){
         this.wheelDiameter = wheelDiameter;
@@ -309,3 +307,5 @@ public class COTSTalonFXSwerveConstants {
         }
     }
 }
+
+  
