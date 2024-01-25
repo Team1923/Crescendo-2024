@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private TalonFX rightmotor = new TalonFX(0);//find ids on phoenix tuner
   private TalonFX leftmotor = new TalonFX(1);
+  private TalonFX feederMotor = new TalonFX(2);
 
   private Joystick control = new Joystick(0);
 
@@ -140,7 +141,7 @@ public class Robot extends TimedRobot {
 
     var slot0Configs = new Slot0Configs();
     slot0Configs.kS = 0; //0.05
-    slot0Configs.kV = 0.45;
+    slot0Configs.kV = 0.11;
     slot0Configs.kP = 0.11; // old: 0.2, new: 0.40039100684261975
     slot0Configs.kI = 0; // 0
     slot0Configs.kD = 0; // old : 0.4, new: 0.0008007820136852395
@@ -150,13 +151,15 @@ public class Robot extends TimedRobot {
     //for motor 2
      leftmotor.getConfigurator().apply(new TalonFXConfiguration());
      leftmotor.setInverted(false);
-     rightmotor.setInverted(true);
+     rightmotor.setInverted(false);
 
     // var config2 = motor2.getConfigurator();
 
     rightmotor.getConfigurator().apply(slot0Configs, 0.05);
     leftmotor.getConfigurator().apply(slot0Configs, 0.05);
     // config2.apply(slotConfigs);
+
+    feederMotor.getConfigurator().apply(new TalonFXConfiguration());
 
   }
 
@@ -186,7 +189,7 @@ public class Robot extends TimedRobot {
     }
 
 
-    if(control.getRawButton(3)){
+    if(control.getRawButton(5)){
       m_velocityLeft.Slot = 0;
       m_velocityRight.Slot = 0;
       rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60));//change
@@ -198,7 +201,13 @@ public class Robot extends TimedRobot {
     else{
       rightmotor.stopMotor();
       leftmotor.stopMotor();
+    }
 
+    if(control.getRawButton(1)){
+      feederMotor.set(0.4);
+    }
+    else{
+      feederMotor.stopMotor();
     }
 
     //times 60 to go to RPM
