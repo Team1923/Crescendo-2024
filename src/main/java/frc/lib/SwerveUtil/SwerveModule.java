@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.lib.SwerveUtil;
 
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -11,7 +11,9 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.lib.SwerveMath.Conversions;
-import frc.lib.SwerveUtil.SwerveModuleConstants;
+import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.Constants.Swerve;
 
 public class SwerveModule {
     public int moduleNumber;
