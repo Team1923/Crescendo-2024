@@ -154,8 +154,8 @@ public class Robot extends TimedRobot {
      */
     var slot1Configs = new Slot1Configs();
     slot1Configs.kS = 0;
-    slot1Configs.kV = 0;
-    slot1Configs.kP = 0;
+    slot1Configs.kV = 0.11; // try increasing to get closer to goal at 6000
+    slot1Configs.kP = 0.11;
     slot1Configs.kI = 0;
     slot1Configs.kD = 0;
 
