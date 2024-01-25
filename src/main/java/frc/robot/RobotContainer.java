@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
+import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -36,8 +37,11 @@ public class RobotContainer {
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+
+    /* Helper Classes */
     private AutoInstantiator autoInstantiator = new AutoInstantiator();
     private final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
+    private final PositionRPMData positionRPMData = new PositionRPMData();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
