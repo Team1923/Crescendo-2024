@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+// Copytop (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -6,6 +6,7 @@ package frc.robot;
 
 
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
@@ -33,16 +34,16 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private TalonFX rightmotor = new TalonFX(0);//find ids on phoenix tuner
-  private TalonFX leftmotor = new TalonFX(1);
+  private TalonFX topmotor = new TalonFX(0);//find ids on phoenix tuner
+  private TalonFX bottommotor = new TalonFX(1);
   private TalonFX feederMotor = new TalonFX(2);
 
   private Joystick control = new Joystick(0);
 
 
   //being run in RPM
-  private final double velocityRight = 6000;
-  private final double velocityLeft = 6000;
+  private final double velocitytop = 6000;
+  private final double velocitybottom = 6000;
 
 
   private Timer offsetWait = new Timer();
@@ -56,11 +57,11 @@ public class Robot extends TimedRobot {
                   //max rpm/secs conversion to RPS
   //private final double kP = 0.4; //duty cycle per rps, if we are off by 6000 rps, use 100% speed
 
-  private final VelocityVoltage m_velocityRight = new VelocityVoltage(0);
-  private final VelocityVoltage m_velocityLeft = new VelocityVoltage(0);
+  private final VelocityVoltage m_velocitytop = new VelocityVoltage(0);
+  private final VelocityVoltage m_velocitybottom = new VelocityVoltage(0);
 
-  // private final VelocityDutyCycle m_velocityRight = new VelocityDutyCycle(0);
-  // private final VelocityDutyCycle m_velocityLeft = new VelocityDutyCycle(0);
+  // private final VelocityDutyCycle m_velocitytop = new VelocityDutyCycle(0);
+  // private final VelocityDutyCycle m_velocitybottom = new VelocityDutyCycle(0);
 
 
   //in RPM
@@ -133,12 +134,14 @@ public class Robot extends TimedRobot {
     offsetWait.start();
 
     //for motor 1
-    rightmotor.getConfigurator().apply(new TalonFXConfiguration());
+    topmotor.getConfigurator().apply(new TalonFXConfiguration());
     
 
     //var config = motor1.getConfigurator();
      
-
+    /**
+     * This is for the BOTTOM Motor
+     */
     var slot0Configs = new Slot0Configs();
     slot0Configs.kS = 0; //0.05
     slot0Configs.kV = 0.11;
@@ -146,17 +149,27 @@ public class Robot extends TimedRobot {
     slot0Configs.kI = 0; // 0
     slot0Configs.kD = 0; // old : 0.4, new: 0.0008007820136852395
 
+    /**
+     * We need to change this for TOP Motor
+     */
+    var slot1Configs = new Slot1Configs();
+    slot1Configs.kS = 0;
+    slot1Configs.kV = 0;
+    slot1Configs.kP = 0;
+    slot1Configs.kI = 0;
+    slot1Configs.kD = 0;
+
     // config.apply(slotConfigs);
 
     //for motor 2
-     leftmotor.getConfigurator().apply(new TalonFXConfiguration());
-     leftmotor.setInverted(false);
-     rightmotor.setInverted(false);
+     bottommotor.getConfigurator().apply(new TalonFXConfiguration());
+     bottommotor.setInverted(false);
+     topmotor.setInverted(false);
 
     // var config2 = motor2.getConfigurator();
 
-    rightmotor.getConfigurator().apply(slot0Configs, 0.05);
-    leftmotor.getConfigurator().apply(slot0Configs, 0.05);
+    topmotor.getConfigurator().apply(slot0Configs, 0.05);
+    bottommotor.getConfigurator().apply(slot0Configs, 0.05);
     // config2.apply(slotConfigs);
 
     feederMotor.getConfigurator().apply(new TalonFXConfiguration());
@@ -190,17 +203,17 @@ public class Robot extends TimedRobot {
 
 
     if(control.getRawButton(5)){
-      m_velocityLeft.Slot = 0;
-      m_velocityRight.Slot = 0;
-      rightmotor.setControl(m_velocityRight.withVelocity((velocityRight+v_rOffset)/60));//change
-      leftmotor.setControl(m_velocityLeft.withVelocity((velocityLeft+v_lOffset)/60));//change 
+      m_velocitybottom.Slot = 0;
+      m_velocitytop.Slot = 0;
+      topmotor.setControl(m_velocitytop.withVelocity((velocitytop+v_rOffset)/60));//change
+      bottommotor.setControl(m_velocitybottom.withVelocity((velocitybottom+v_lOffset)/60));//change 
       
-      // rightmotor.setControl(new VelocityDutyCycle(60));
+      // topmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
     }
     else{
-      rightmotor.stopMotor();
-      leftmotor.stopMotor();
+      topmotor.stopMotor();
+      bottommotor.stopMotor();
     }
 
     if(control.getRawButton(1)){
@@ -211,11 +224,11 @@ public class Robot extends TimedRobot {
     }
 
     //times 60 to go to RPM
-    SmartDashboard.putNumber("Velocity(RPM) of right motor", rightmotor.getVelocity().getValueAsDouble() * 60);
-    SmartDashboard.putNumber("Velocity(RPM) of left motor", leftmotor.getVelocity().getValueAsDouble() * 60);
+    SmartDashboard.putNumber("Velocity(RPM) of top motor", topmotor.getVelocity().getValueAsDouble() * 60);
+    SmartDashboard.putNumber("Velocity(RPM) of bottom motor", bottommotor.getVelocity().getValueAsDouble() * 60);
 
-    SmartDashboard.putNumber("Set Velocity(RPM) for right motor", velocityRight+v_rOffset);
-    SmartDashboard.putNumber("Set Velocity(RPM) for left motor", velocityLeft+v_lOffset);
+    SmartDashboard.putNumber("Set Velocity(RPM) for top motor", velocitytop+v_rOffset);
+    SmartDashboard.putNumber("Set Velocity(RPM) for bottom motor", velocitybottom+v_lOffset);
 
   }
 
