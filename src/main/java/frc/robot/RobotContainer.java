@@ -36,8 +36,8 @@ public class RobotContainer {
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
-
     private AutoInstantiator autoInstantiator = new AutoInstantiator();
+    private final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
