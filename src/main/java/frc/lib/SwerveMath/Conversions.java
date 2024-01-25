@@ -1,4 +1,4 @@
-package frc.lib.math;
+package frc.lib.SwerveMath;
 
 public class Conversions {
     

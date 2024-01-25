@@ -12,13 +12,82 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import frc.lib.util.COTSTalonFXSwerveConstants;
-import frc.lib.util.SwerveModuleConstants;
+import frc.lib.SwerveUtil.COTSTalonFXSwerveConstants;
+import frc.lib.SwerveUtil.SwerveModuleConstants;
 
 public final class Constants {
-    public static final double stickDeadband = 0.1;
+
+    public static final class LimeLightConstants{
+        //measure constants in inches
+        public static final double limelightMountAngle = 12; // for pivot, measured in degrees
+        public static final double limelightHeight = 0.29845; //for pivot, in meters (measured ~11.75 inches, converted)
+        public static final double speakerHeightFromFloor = Units.metersToInches(1.4511020000000001);
+    }
+
+    public static final class IntakeConstants {
+        /* Motor IDs */
+        public static final int intakeRollerMotorID = 0;
+        public static final int intakePrimaryID = 0;
+        public static final int intakeFollowerID = 0;
+    
+        /* Motion Magic Constants */
+        public static final double intakekP = 0;
+        public static final double intakekI = 0;
+        public static final double intakekD = 0;
+        public static final double maxIntakeVel = 0;
+        public static final double maxIntakeAccel = 0;
+    
+        /* Gearbox Ratios & Unit Conversions */
+        public static final double intakeGearRatio = 0;
+        //TODO: check this math? compared it against the 2023 repo and plugged into phoenix converter...
+        public static final double intakeRotsToRads = (2 * Math.PI) / intakeGearRatio;
+        public static final double intakeRadsToRots = intakeGearRatio / (2 * Math.PI);
+    
+        /* kG - gravity constant for motion of arm */
+        //TODO: discuss on how the max gravity constant should be found.
+        public static final double intakeMaxGravityConstant = 0;
+    }
+
+    public static final class ShooterConstants {
+        public static final int shooterMotorPrimaryID = 0;
+        public static final int shooterMotorFollowerID = 0;
+    
+        public static final double subwooferRPM = 0;
+      }
+    
+      public static final class FeederConstants {
+        public static final int feederMotorID = 0;
+    
+        public static final double feedStpt = 0;
+        public static final double ampStpt = 0;
+    }
+
+    public static final class ArmConstants {
+        /* Motor IDs */
+        public static final int armMotorPrimaryID = 0;
+        public static final int armMotorFollowerID = 0;
+    
+        /* Motion Magic Constants */
+        public static final double armkP = 0;
+        public static final double armkI = 0;
+        public static final double armkD = 0;
+        public static final double maxArmVel = 0;
+        public static final double maxArmAccel = 0;
+    
+        /* Gearbox Ratios & Unit Conversions */
+        public static final double armGearRatio = 0;
+        //TODO: check this math? compared it against the 2023 repo and plugged into phoenix converter...
+        public static final double armRotsToRads = (2 * Math.PI) / armGearRatio;
+        public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
+    
+        /* kG - gravity constant for motion of arm */
+        //TODO: discuss on how the max gravity constant should be found.
+        public static final double armMaxGravityConstant = 0;  
+    }
+
 
     public static final class Swerve {
+        public static final double stickDeadband = 0.1;
         public static final int pigeonID = 13;
 
         public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot

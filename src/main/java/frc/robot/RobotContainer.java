@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import frc.lib.AutoUtils.AutoChooser;
+import frc.lib.AutoUtils.AutoInstantiator;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -34,7 +35,9 @@ public class RobotContainer {
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
-    private final Swerve s_Swerve = new Swerve();
+    private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+
+    private AutoInstantiator autoInstantiator = new AutoInstantiator();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -69,8 +72,7 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return new PathPlannerAuto("BasicAuto");
-    }
+  public Command initializeAuto(AutoChooser selector){
+      return selector.startMode();
+  }
 }
