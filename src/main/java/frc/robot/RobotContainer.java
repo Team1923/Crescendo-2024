@@ -14,6 +14,9 @@ import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
 import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.commands.*;
+import frc.robot.commands.Swerve.AllignToAmp;
+import frc.robot.commands.Swerve.GoalCentricCommand;
+import frc.robot.commands.Swerve.TeleopSwerve;
 import frc.robot.subsystems.*;
 
 /**
@@ -35,7 +38,8 @@ public class RobotContainer {
     private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton leftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton rightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-    private final JoystickButton rightStickDown = new JoystickButton(driver, XboxController.Button.kRightStick.value);
+     private final JoystickButton rightStickDown = new JoystickButton(driver, XboxController.Button.kRightStick.value);
+
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
@@ -70,12 +74,13 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis), 
         () -> driver.getRawAxis(rotationAxis), () -> false));
 
         rightStickDown.whileTrue(new AllignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis), () -> false));
     }
+    
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.

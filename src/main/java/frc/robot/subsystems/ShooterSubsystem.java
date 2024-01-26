@@ -70,5 +70,11 @@ public class ShooterSubsystem extends SubsystemBase {
     stateHandler.setBBFourCovered(getBeamBreakFour());
     // SmartDashboard.putNumber("Velocity of Primary Motor", shooterPrimary.getVelocity().getValueAsDouble());
     // SmartDashboard.putNumber("Velocity of Follower Motor", shooterFollower.getVelocity().getValueAsDouble());
+
+    /*
+     * 
+     * 
+     * if current speed != desired speed -> spin at desired speed
+     */
   }
 }

@@ -36,5 +36,12 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     stateHandler.setBBOneCovered(getBeamBreakOne());
+
+    /*
+     * if current position = deployed and BB3 is triggered -> desiredPostion = stowed
+     * 
+     * if current position != desired position -> move to desired position
+     * if current wheel speed != desired wheel speed -> spin at desired wheel speed
+     */
   }
 }

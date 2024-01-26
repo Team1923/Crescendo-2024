@@ -9,8 +9,10 @@ import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.RobotStateUtils.StateHandler;
 
 
+
 public class ArmSubsystem extends SubsystemBase {
 
+  StateHandler stateHandler = StateHandler.getInstance();
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {}
 
@@ -27,8 +29,24 @@ public class ArmSubsystem extends SubsystemBase {
         //setPosition(ArmStates.AMP_EJECT.getArmPosition().getAngularSetpoint());
       case SPEAKER:
         //setPosition(positionData.getDesiredArmPosition(LimelightInterface.getInstance().getXOffset()));
+      case CLIMB:
+        //setPosition(ArmStates.CLIMB.getArmPosition().getAngularSetpoint());
       default:
         //idk
+
     }
+
+    /*
+     * PSUEDO CODE
+     * if currentPosition = Speaker -> active shot 
+     * if BB3 and BB4 Not triggered and current position = Speaker-> desiredPosition = stowed 
+     * 
+     * if currentPosition = Climb -> wait for Operator Input to climb -> Climb
+     * 
+     * if currentPosition = AMP -> active amp score
+     * if BB2 and BB3 not triggered and current position = AMP -> desiredPosition =  stowed
+     * 
+     * if desiredPostion != currentPosition -> move to desired Position
+     */
   }
 }
