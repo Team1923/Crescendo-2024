@@ -22,6 +22,8 @@ public final class Constants {
         public static final double limelightMountAngle = 12; // for pivot, measured in degrees
         public static final double limelightHeight = 0.29845; //for pivot, in meters (measured ~11.75 inches, converted)
         public static final double speakerHeightFromFloor = Units.metersToInches(1.4511020000000001);
+        public static final double limelightViewingAngle = 28.9; //degrees
+
     }
 
     public static final class IntakeConstants {

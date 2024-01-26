@@ -135,6 +135,10 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
 
+    /**
+     * Gets the gyro's current yaw using IEEE remainder and 360
+     * @return the gyro's current yaw
+     */
     public Rotation2d getGyroYaw() {
         return Rotation2d.fromDegrees(Math.IEEEremainder(gyro.getYaw().getValue(), 360));
     }
