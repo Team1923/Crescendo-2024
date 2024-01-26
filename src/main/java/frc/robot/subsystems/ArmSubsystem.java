@@ -21,11 +21,11 @@ public class ArmSubsystem extends SubsystemBase {
     ArmStates desiredArmState = StateHandler.getInstance().getDesiredArmState();
 
     switch(desiredArmState) {
-      case HOME:
+      case STOWED:
         //setPosition(ArmStates.HOME.getArmPosition().getAngularSetpoint());
-      case AMP_EJECT:
+      case AMP:
         //setPosition(ArmStates.AMP_EJECT.getArmPosition().getAngularSetpoint());
-      case SHOOTING:
+      case SPEAKER:
         //setPosition(positionData.getDesiredArmPosition(LimelightInterface.getInstance().getXOffset()));
       default:
         //idk

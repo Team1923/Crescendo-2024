@@ -2,11 +2,15 @@ package frc.lib.RobotStateUtils;
 
 public class StateVariables {
 
+
+    /**
+     * TODO: need to change
+     */
     public static enum ArmStates {
-        HOME(new ArmPosition(-9999)),
-        AMP_EJECT(new ArmPosition(-9999)),
-        SHOOTING,
-        CLIMB(new ArmPosition(-9999));
+        STOWED(new ArmPosition(0)),
+        AMP(new ArmPosition(1)),
+        SPEAKER,
+        CLIMB(new ArmPosition(2));
 
         private ArmPosition armPosition;
 
@@ -36,10 +40,13 @@ public class StateVariables {
         }
     }
 
+    /**
+     * TODO: These values need to be changed
+     */
     public static enum ShooterSpeeds {
-        STALL(new RPMValue(0)),
-        SHOOT,
-        AMP_ASSIST(new RPMValue(0));
+        IDLE(new RPMValue(100)),
+        RAMP(new RPMValue(200)),
+        SHOOT(new RPMValue(300));
 
         private RPMValue rpmValue;
 
@@ -72,10 +79,14 @@ public class StateVariables {
         }
     }
 
+
+    /**
+     * TODO: These values need to be changed
+     */
     public static enum IntakeRollerSpeeds {
         OFF(new PercentOutputValue(0)),
-        EJECT(new PercentOutputValue(0)),
-        INTAKE(new PercentOutputValue(0));
+        EJECT(new PercentOutputValue(-100)),
+        INTAKE(new PercentOutputValue(100));
 
         private PercentOutputValue percentOutputValue;
 
@@ -104,9 +115,12 @@ public class StateVariables {
         }
     }
 
+    /**
+     * TODO: Need to be changed
+     */
     public static enum IntakeStates {
-        INTAKE(new IntakePosition(0)),
-        HOME(new IntakePosition(0));
+        DEPLOYED(new IntakePosition(1)),
+        STOWED(new IntakePosition(0));
 
         private IntakePosition intakePosition;
 
@@ -135,9 +149,13 @@ public class StateVariables {
         }
     }
 
+    /**
+     * TODO: Need to be changed
+     */
     public static enum FeederSpeeds {
-        GRIP(new PercentOutputValue(0)),
-        AMP_EJECT(new PercentOutputValue(0));
+        OFF(new PercentOutputValue(0)),
+        INWARD(new PercentOutputValue(0.5)),
+        OUTWARD(new PercentOutputValue(-0.5));
 
         private PercentOutputValue percentOutputValue;
 

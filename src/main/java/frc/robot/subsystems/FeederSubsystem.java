@@ -40,10 +40,12 @@ public class FeederSubsystem extends SubsystemBase {
     
     FeederSpeeds desiredFeederSpeeds = StateHandler.getInstance().getDesiredFeederSpeed();
     switch(desiredFeederSpeeds) {
-      case GRIP:
-        setFeederMotorSpeed(FeederSpeeds.GRIP.percentOutputValue().getPercentOutputValue());
-      case AMP_EJECT:
-        setFeederMotorSpeed(FeederSpeeds.AMP_EJECT.percentOutputValue().getPercentOutputValue());
+      case OFF:
+        setFeederMotorSpeed(FeederSpeeds.OFF.percentOutputValue().getPercentOutputValue());
+      case OUTWARD:
+        setFeederMotorSpeed(FeederSpeeds.OUTWARD.percentOutputValue().getPercentOutputValue());
+      case INWARD:
+        setFeederMotorSpeed(FeederSpeeds.INWARD.percentOutputValue().getPercentOutputValue());
       default:
         stopFeederMotor();
     }
