@@ -17,25 +17,32 @@ public class StateHandler {
         return stateHandler;
     }
 
+    /* DESIRED STATES: These tell mechanisms to "go" to the state specified. */
     private ArmStates desiredArmState = ArmStates.STOWED;
     private ShooterSpeeds desiredShootingSpeed = ShooterSpeeds.IDLE;
     private IntakeRollerSpeeds desiredIntakeRollerSpeed = IntakeRollerSpeeds.OFF;
     private IntakeStates desiredIntakeState = IntakeStates.STOWED;
     private FeederSpeeds desiredFeederSpeed = FeederSpeeds.OFF;
 
+    /* CURRENT STATES: Mechanisms have arrived to the desired state. */
     private ArmStates currentArmState = ArmStates.STOWED;
     private ShooterSpeeds currentShootingSpeed = ShooterSpeeds.IDLE;
     private IntakeRollerSpeeds currentIntakeRollerSpeed = IntakeRollerSpeeds.OFF;
     private IntakeStates currentIntakeState = IntakeStates.STOWED;
     private FeederSpeeds currentFeederSpeed = FeederSpeeds.OFF;
 
-    
-
+    /* Extra variables needed to handle additional states. */
     private boolean limelightHasTag = false;
     private double aprilTagID = 0;
     private boolean hasValidSpeakerTag = false;
     private boolean hasValidAmpTag = false;
     private double distanceToTag = 0;
+
+    /* BEAM BREAK Values */
+    private boolean bbOneCovered = false;
+    private boolean bbTwoCovered = false;
+    private boolean bbThreeCovered = false;
+    private boolean bbFourCovered = false;
 
     /**
      * Method to set the desired arm state.
@@ -61,7 +68,7 @@ public class StateHandler {
         return currentArmState;
     }
 
-        /**
+    /**
      * Method to set the current arm state.
      * @param desiredArmState The current arm state to be commanded to the arm.
      */
@@ -276,6 +283,79 @@ public class StateHandler {
      */
     public double getDistanceToTag() {
         return distanceToTag;
+    }
+
+    /**
+     * Method to set the current state of Beam Break One.
+     * Use the current reading from Beam Break One to set 
+     * a more accessible reading within StateHandler.
+     * @param isCovered boolean variable to determine if BB One is covered.
+     */
+    public void setBBOneCovered(boolean isCovered) {
+        this.bbOneCovered = isCovered;
+    }
+
+    /**
+     * Method to get the current state of Beam Break One.
+     * @return a boolean variable to determine if BB One is covered.
+     */
+    public boolean getBBOneCovered() {
+        return bbOneCovered;
+    }
+
+
+    /**
+     * Method to set the current state of Beam Break Two.
+     * Use the current reading from Beam Break Two to set 
+     * a more accessible reading within StateHandler.
+     * @param isCovered boolean variable to determine if BB Two is covered.
+     */
+    public void setBBTwoCovered(boolean isCovered) {
+        this.bbTwoCovered = isCovered;
+    }
+
+    /**
+     * Method to get the current state of Beam Break Two.
+     * @return a boolean variable to determine if BB Two is covered.
+     */
+    public boolean getBBTwoCovered() {
+        return bbTwoCovered;
+    }
+
+    /**
+     * Method to set the current state of Beam Break Three.
+     * Use the current reading from Beam Break Three to set 
+     * a more accessible reading within StateHandler.
+     * @param isCovered boolean variable to determine if BB Three is covered.
+     */
+    public void setBBThreeCovered(boolean isCovered) {
+        this.bbThreeCovered = isCovered;
+    }
+
+    /**
+     * Method to get the current state of Beam Break Three.
+     * @return a boolean variable to determine if BB Three is covered.
+     */
+    public boolean getBBThreeCovered() {
+        return bbThreeCovered;
+    }
+
+    /**
+     * Method to set the current state of Beam Break Four.
+     * Use the current reading from Beam Break Four to set 
+     * a more accessible reading within StateHandler.
+     * @param isCovered boolean variable to determine if BB Four is covered.
+     */
+    public void setBBFourCovered(boolean isCovered) {
+        this.bbFourCovered = isCovered;
+    }
+
+    /**
+     * Method to get the current state of Beam Break Four.
+     * @return a boolean variable to determine if BB Four is covered.
+     */
+    public boolean getBBFourCovered() {
+        return bbFourCovered;
     }
 
 }

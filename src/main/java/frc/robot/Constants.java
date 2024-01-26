@@ -46,20 +46,27 @@ public final class Constants {
         /* kG - gravity constant for motion of arm */
         //TODO: discuss on how the max gravity constant should be found.
         public static final double intakeMaxGravityConstant = 0;
+
+        /* Beam Break ID */
+        public static final int beamBreakOneID = 0;
     }
 
     public static final class ShooterConstants {
+        /* Motor IDs */
         public static final int shooterMotorPrimaryID = 0;
         public static final int shooterMotorFollowerID = 0;
     
-        public static final double subwooferRPM = 0;
+        /* Beam Break ID */
+        public static final int beamBreakFourID = 0;
       }
     
       public static final class FeederConstants {
+        /* Motor ID */
         public static final int feederMotorID = 0;
     
-        public static final double feedStpt = 0;
-        public static final double ampStpt = 0;
+        /* Beam Break IDs */
+        public static final int beamBreakTwoID = 0;
+        public static final int beamBreakThreeID = 0;
     }
 
     public static final class ArmConstants {

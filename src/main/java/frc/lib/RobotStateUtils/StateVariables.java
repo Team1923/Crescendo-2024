@@ -1,25 +1,19 @@
 package frc.lib.RobotStateUtils;
 
 public class StateVariables {
-
-
     /**
      * TODO: need to change
      */
     public static enum ArmStates {
         STOWED(new ArmPosition(0)),
         AMP(new ArmPosition(1)),
-        SPEAKER,
+        SPEAKER(new ArmPosition(3)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING
         CLIMB(new ArmPosition(2));
 
         private ArmPosition armPosition;
 
         private ArmStates(ArmPosition a) {
             this.armPosition = a;
-        }
-
-        private ArmStates() {
-            /* Do Nothing, for SHOOTER enum. */
         }
 
         public ArmPosition getArmPosition() {
@@ -46,16 +40,12 @@ public class StateVariables {
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(100)),
         RAMP(new RPMValue(200)),
-        SHOOT;
+        SHOOT(new RPMValue(2000)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
 
         private RPMValue rpmValue;
 
         private ShooterSpeeds(RPMValue rpmValue) {
             this.rpmValue = rpmValue;
-        }
-
-        private ShooterSpeeds() {
-            /* Empty constructor for SHOOT enum. */
         }
 
         public RPMValue getRPMValue() {

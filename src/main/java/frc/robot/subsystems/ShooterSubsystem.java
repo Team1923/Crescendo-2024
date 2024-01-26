@@ -9,14 +9,17 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.lib.RobotStateUtils.StateHandler;
+import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-
   // private TalonFX shooterPrimary = new TalonFX(Constants.ShooterConstants.shooterMotorPrimaryID);
   // private TalonFX shooterFollower = new TalonFX(Constants.ShooterConstants.shooterMotorFollowerID);
+  private DigitalInput beamBreakFour = new DigitalInput(ShooterConstants.beamBreakFourID);
+  private StateHandler stateHandler = StateHandler.getInstance();
 
   private VelocityVoltage velocityPrimary = new VelocityVoltage(0);
   private VelocityVoltage velocityFollower = new VelocityVoltage(0);
@@ -52,9 +55,19 @@ public class ShooterSubsystem extends SubsystemBase {
     // shooterFollower.setControl(velocityFollower.withVelocity(velocityF));//change
   }
 
+  /**
+   * Method to get the digital input reading of BB4.
+   * TODO: verify if adding a NOT before the boolean is needed.
+   * @return the boolean value representing the digital input reading.
+   */
+  public boolean getBeamBreakFour() {
+    return beamBreakFour.get();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    stateHandler.setBBFourCovered(getBeamBreakFour());
     // SmartDashboard.putNumber("Velocity of Primary Motor", shooterPrimary.getVelocity().getValueAsDouble());
     // SmartDashboard.putNumber("Velocity of Follower Motor", shooterFollower.getVelocity().getValueAsDouble());
   }

@@ -95,7 +95,7 @@ public class LimelightInterface {
   }
 
   public boolean hasSpeakerTag() { 
-    return (((getID() == 3) || (getID() == 4) || (getID() == 7) || (getID() == 8)) && hasValidTag());
+    return (((getID() == 4) || (getID() == 7)) && hasValidTag());
   }
 
   public boolean hasAmpTag(){
