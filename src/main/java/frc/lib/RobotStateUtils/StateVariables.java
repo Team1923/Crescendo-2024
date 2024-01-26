@@ -46,7 +46,7 @@ public class StateVariables {
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(100)),
         RAMP(new RPMValue(200)),
-        SHOOT(new RPMValue(300));
+        SHOOT;
 
         private RPMValue rpmValue;
 

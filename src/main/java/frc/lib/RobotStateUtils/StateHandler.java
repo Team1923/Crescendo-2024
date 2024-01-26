@@ -23,11 +23,11 @@ public class StateHandler {
     private IntakeStates desiredIntakeState = IntakeStates.STOWED;
     private FeederSpeeds desiredFeederSpeed = FeederSpeeds.OFF;
 
-    private ArmStates armState = ArmStates.STOWED;
-    private ShooterSpeeds shootingSpeed = ShooterSpeeds.IDLE;
-    private IntakeRollerSpeeds intakeRollerSpeed = IntakeRollerSpeeds.OFF;
-    private IntakeStates intakeState = IntakeStates.STOWED;
-    private FeederSpeeds feederSpeed = FeederSpeeds.OFF;
+    private ArmStates currentArmState = ArmStates.STOWED;
+    private ShooterSpeeds currentShootingSpeed = ShooterSpeeds.IDLE;
+    private IntakeRollerSpeeds currentIntakeRollerSpeed = IntakeRollerSpeeds.OFF;
+    private IntakeStates currentIntakeState = IntakeStates.STOWED;
+    private FeederSpeeds currentFeederSpeed = FeederSpeeds.OFF;
 
     
 
@@ -57,16 +57,16 @@ public class StateHandler {
      * Method to get the current arm state to be commanded.
      * @return The current arm state.
      */
-    public ArmStates getArmState() {
-        return armState;
+    public ArmStates getCurrentArmState() {
+        return currentArmState;
     }
 
         /**
      * Method to set the current arm state.
      * @param desiredArmState The current arm state to be commanded to the arm.
      */
-    public void setArmState(ArmStates ArmState) {
-        this.armState = ArmState;
+    public void setCurrentArmState(ArmStates ArmState) {
+        this.currentArmState = ArmState;
     }
 
     /**
@@ -85,20 +85,20 @@ public class StateHandler {
         return desiredShootingSpeed;
     }
 
-        /**
+    /**
      * Sets the current shooting speed.
      * @param s The current shooting speed.
      */
-    public void setShootingSpeed(ShooterSpeeds s) {
-        this.shootingSpeed = s;
+    public void setCurrentShootingSpeed(ShooterSpeeds s) {
+        this.currentShootingSpeed = s;
     }
 
     /**
      * Method to get the current shooting speed to be commanded.
      * @return The current shooting speed.
      */
-    public ShooterSpeeds getShootingSpeed() {
-        return shootingSpeed;
+    public ShooterSpeeds getCurrentShootingSpeed() {
+        return currentShootingSpeed;
     }
 
     /**
@@ -121,16 +121,16 @@ public class StateHandler {
      * Sets the current intake roller speed.
      * @param i The current intake roller speed.
      */
-    public void setIntakeRollerSpeed(IntakeRollerSpeeds i) {
-        this.intakeRollerSpeed = i;
+    public void setCurrentIntakeRollerSpeed(IntakeRollerSpeeds i) {
+        this.currentIntakeRollerSpeed = i;
     }
 
     /**
      * Method to get the current intake roller speed to be commanded.
      * @return The current intake roller speed.
      */
-    public IntakeRollerSpeeds getIntakeRollerSpeed() {
-        return intakeRollerSpeed;
+    public IntakeRollerSpeeds getCurrentIntakeRollerSpeed() {
+        return currentIntakeRollerSpeed;
     }
 
     /**
@@ -153,16 +153,16 @@ public class StateHandler {
      * Sets the current intake state.
      * @param i The current intake state.
      */
-    public void setIntakeState(IntakeStates i) {
-        this.intakeState = i;
+    public void setCurrentIntakeState(IntakeStates i) {
+        this.currentIntakeState = i;
     }
 
     /**
      * Method to get the current intake state to be commanded.
      * @return The current intake state.
      */
-    public IntakeStates getIntakeState() {
-        return intakeState;
+    public IntakeStates getCurrentIntakeState() {
+        return currentIntakeState;
     }
 
     /**
@@ -185,16 +185,16 @@ public class StateHandler {
      * Sets the current feeder speed value.
      * @param f The current feeder speed.
      */
-    public void setFeederSpeed(FeederSpeeds f) {
-        this.feederSpeed = f;
+    public void setCurrentFeederSpeed(FeederSpeeds f) {
+        this.currentFeederSpeed = f;
     }
 
     /**
      * Method to get the current feeder speed to be commanded.
      * @return The current feeder speed.
      */
-    public FeederSpeeds getFeederSpeed() {
-        return feederSpeed;
+    public FeederSpeeds getCurrentFeederSpeed() {
+        return currentFeederSpeed;
     }
 
    
