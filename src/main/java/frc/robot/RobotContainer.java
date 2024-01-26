@@ -32,8 +32,9 @@ public class RobotContainer {
     private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton leftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton rightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
@@ -52,7 +53,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
+                () -> leftBumper.getAsBoolean()
             )
         );
 
@@ -68,7 +69,9 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis), 
+        () -> driver.getRawAxis(rotationAxis)));
     }
 
     /**
