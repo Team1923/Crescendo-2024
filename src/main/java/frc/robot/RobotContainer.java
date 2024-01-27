@@ -41,7 +41,7 @@ public class RobotContainer {
     private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton leftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton rightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-    private final JoystickButton rightStickDown = new JoystickButton(driver, XboxController.Button.kRightStick.value);
+    private final JoystickButton aButton = new JoystickButton(driver, XboxController.Button.kA.value);
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
@@ -84,7 +84,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis),
                 () -> -driver.getRawAxis(rotationAxis)));
 
-        rightStickDown.whileTrue(new AlignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis),
+        aButton.whileTrue(new AlignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis),
                 () -> driver.getRawAxis(strafeAxis), () -> false));
     }
 
