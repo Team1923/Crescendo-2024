@@ -8,6 +8,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -26,7 +27,7 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier translationSup;
   private DoubleSupplier strafeSup;
   private DoubleSupplier rotationSup;
-  private BooleanSupplier robotCentricSup;
+  private SlewRateLimiter translateLimiter, strafeLimiter, rotateLimiter;
 
   private final double kPTarget = 0.2; // Tune this by yourself.
 
@@ -36,6 +37,9 @@ public class GoalCentricCommand extends Command {
     this.translationSup = translationSup;
     this.strafeSup = strafeSup;
     this.rotationSup = rotationSup;
+    this.translateLimiter = new SlewRateLimiter(Swerve.maxAccel);
+    this.strafeLimiter = new SlewRateLimiter(Swerve.maxAccel);
+    this.rotateLimiter = new SlewRateLimiter(Swerve.maxAngularAccel);
 
     addRequirements(s_Swerve);
   }
@@ -64,6 +68,10 @@ public class GoalCentricCommand extends Command {
     translationVal = Math.abs(translationVal) > Swerve.stickDeadband ? translationVal : 0.0;
     strafeVal = Math.abs(strafeVal) > Swerve.stickDeadband ? strafeVal : 0.0;
     rotationVal = Math.abs(rotationVal) > Swerve.stickDeadband ? rotationVal : 0.0;
+
+    translationVal = translateLimiter.calculate(translationVal) * Swerve.maxSpeed;
+    strafeVal = strafeLimiter.calculate(strafeVal) * Swerve.maxSpeed;
+    rotationVal = rotateLimiter.calculate(rotationVal) * Swerve.maxAngularVelocity;
 
     ChassisSpeeds chassisSpeeds;
     if (DriverStation.getAlliance().get() == Alliance.Blue) {
