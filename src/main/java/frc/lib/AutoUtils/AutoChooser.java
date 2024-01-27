@@ -15,7 +15,9 @@ import frc.lib.AutoUtils.AutoInstantiator;
 
 public class AutoChooser {
     public enum AutoMode {
-		BASIC_AUTO;
+		BASIC_AUTO,
+		STRAIGHT_4_METERS_AUTO,
+		FOUR_NOTE_AUTO
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -29,6 +31,8 @@ public class AutoChooser {
 	public AutoChooser(){
 		chooser = new SendableChooser<>();
 		chooser.addOption("Basic Auto", AutoMode.BASIC_AUTO);
+		chooser.addOption("Straight 4 Meter Auto", AutoMode.STRAIGHT_4_METERS_AUTO);
+		chooser.addOption("4 Note Auto", AutoMode.FOUR_NOTE_AUTO);
 		auto.add(chooser);
 	}
 
@@ -37,6 +41,10 @@ public class AutoChooser {
 		switch(mode){
 			case BASIC_AUTO:
 				return autoInstantiator.getBasicAuto();
+			case STRAIGHT_4_METERS_AUTO:
+				return autoInstantiator.getstraight4MetersAuto();
+			case FOUR_NOTE_AUTO:
+				return autoInstantiator.get4NotesAuto();
 			default:
 				return null;
 		}

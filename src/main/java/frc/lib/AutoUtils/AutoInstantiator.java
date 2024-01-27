@@ -12,6 +12,8 @@ public class AutoInstantiator {
 	public static AutoInstantiator autoInstantiator;
 
     public PathPlannerAuto basicAuto;
+	public PathPlannerAuto straight4MetersAuto;
+	public PathPlannerAuto fournotes;
 	
     //Auto from pathplanner, not new sequential command
 	public static synchronized AutoInstantiator getInstance() {
@@ -23,10 +25,21 @@ public class AutoInstantiator {
 
 	public AutoInstantiator() {
 		basicAuto = new PathPlannerAuto("BasicAuto");
+		straight4MetersAuto = new PathPlannerAuto("Auto4Meters");
+		fournotes = new PathPlannerAuto("4NoteAuto");
+
 	}
 
 	public PathPlannerAuto getBasicAuto() {
 		return basicAuto;
+	}
+
+	public PathPlannerAuto getstraight4MetersAuto(){
+		return straight4MetersAuto;
+	}
+
+	public PathPlannerAuto get4NotesAuto(){
+		return fournotes;
 	}
 
 

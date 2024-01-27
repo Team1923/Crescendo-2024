@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
 import frc.lib.ShooterArmUtils.PositionRPMData;
-import frc.robot.commands.*;
 import frc.robot.commands.Swerve.AlignToAmp;
 import frc.robot.commands.Swerve.GoalCentricCommand;
 import frc.robot.commands.Swerve.TeleopSwerve;
@@ -45,6 +44,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+    private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
     /* Helper Classes */
     private AutoInstantiator autoInstantiator = new AutoInstantiator();

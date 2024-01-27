@@ -14,8 +14,10 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.LimelightUtil.LimelightInterface;
+import frc.lib.RobotStateUtils.StateHandler;
 import frc.robot.Constants;
 import frc.robot.Constants.Swerve;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -29,7 +31,7 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier rotationSup;
   private SlewRateLimiter translateLimiter, strafeLimiter, rotateLimiter;
 
-  private final double kPTarget = 0.2; // Tune this by yourself.
+  private final double kPTarget = 0.005; // Tune this by yourself.
 
   /** Creates a new GoalCentricCommand. */
   public GoalCentricCommand(SwerveSubsystem s, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup) {
@@ -60,18 +62,20 @@ public class GoalCentricCommand extends Command {
     if (Math.abs(rotationSup.getAsDouble()) > 0.5) {
       rotationVal = rotationSup.getAsDouble();
     } else if (limelight.hasSpeakerTag()) {
-      rotationVal = limelight.getXAngleOffset() * kPTarget;
+      rotationVal = -limelight.getXAngleOffset() * kPTarget;
     } else {
       rotationVal = 0;
     }
 
     translationVal = Math.abs(translationVal) > Swerve.stickDeadband ? translationVal : 0.0;
     strafeVal = Math.abs(strafeVal) > Swerve.stickDeadband ? strafeVal : 0.0;
-    rotationVal = Math.abs(rotationVal) > Swerve.stickDeadband ? rotationVal : 0.0;
+    // rotationVal = Math.abs(rotationVal) > 0.01 ? rotationVal : 0.0;
 
     translationVal = translateLimiter.calculate(translationVal) * Swerve.maxSpeed;
     strafeVal = strafeLimiter.calculate(strafeVal) * Swerve.maxSpeed;
     rotationVal = rotateLimiter.calculate(rotationVal) * Swerve.maxAngularVelocity;
+
+    SmartDashboard.putNumber("ROTATIONVAL", rotationVal);
 
     ChassisSpeeds chassisSpeeds;
     if (DriverStation.getAlliance().get() == Alliance.Blue) {
