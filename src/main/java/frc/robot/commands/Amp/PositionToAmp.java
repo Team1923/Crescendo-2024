@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 
-public class AmpCommand extends Command {
+public class PositionToAmp extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
   /** Creates a new AmpCommand. */
-  public AmpCommand() {
+  public PositionToAmp() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
