@@ -11,6 +11,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.lib.RobotStateUtils.StateVariables.IntakePosition;
 import frc.robot.Constants.IntakeConstants;
 
 
@@ -36,6 +37,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     stateHandler.setBBOneCovered(getBeamBreakOne());
+    
 
     /*
      * if current position = deployed and BB3 is triggered -> desiredPostion = stowed

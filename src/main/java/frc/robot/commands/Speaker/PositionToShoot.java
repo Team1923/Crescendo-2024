@@ -2,17 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Intake;
+package frc.robot.commands.Speaker;
+
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
-import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
-import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
+import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 
-public class StowIntakeCommand extends Command {
+public class PositionToShoot extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
-  /** Creates a new StowIntakeCommand. */
-  public StowIntakeCommand() {
+  /** Creates a new SpeakerPositionCommand. */
+  public PositionToShoot() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,12 +23,14 @@ public class StowIntakeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    stateHandler.setDesiredIntakeState(IntakeStates.STOWED);
+    stateHandler.setDesiredArmState(ArmStates.SPEAKER);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    stateHandler.setDesiredArmState(ArmStates.STOWED);
+  }
 
   // Returns true when the command should end.
   @Override

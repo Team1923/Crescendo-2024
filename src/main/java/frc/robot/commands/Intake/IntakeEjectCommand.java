@@ -7,6 +7,7 @@ package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
+import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 
 public class IntakeEjectCommand extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
@@ -23,11 +24,13 @@ public class IntakeEjectCommand extends Command {
   @Override
   public void execute() {
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.EJECT);
+    stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    stateHandler.setDesiredIntakeState(IntakeStates.STOWED);
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.OFF);
   }
 
