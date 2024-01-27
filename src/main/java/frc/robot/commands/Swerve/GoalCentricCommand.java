@@ -8,6 +8,10 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
+import com.ctre.phoenix6.hardware.Pigeon2;
+
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -31,7 +35,8 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier rotationSup;
   private SlewRateLimiter translateLimiter, strafeLimiter, rotateLimiter;
 
-  private final double kPTarget = 0.005; // Tune this by yourself.
+  private final double kPTarget = 0.004; // Tune this by yourself.
+  private PIDController target;
 
   /** Creates a new GoalCentricCommand. */
   public GoalCentricCommand(SwerveSubsystem s, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup) {
@@ -42,6 +47,9 @@ public class GoalCentricCommand extends Command {
     this.translateLimiter = new SlewRateLimiter(Swerve.maxAccel);
     this.strafeLimiter = new SlewRateLimiter(Swerve.maxAccel);
     this.rotateLimiter = new SlewRateLimiter(Swerve.maxAngularAccel);
+    
+
+    target =  new PIDController(kPTarget, 0, 0);
 
     addRequirements(s_Swerve);
   }
@@ -62,7 +70,7 @@ public class GoalCentricCommand extends Command {
     if (Math.abs(rotationSup.getAsDouble()) > 0.5) {
       rotationVal = rotationSup.getAsDouble();
     } else if (limelight.hasSpeakerTag()) {
-      rotationVal = -limelight.getXAngleOffset() * kPTarget;
+      rotationVal = target.calculate(limelight.getXAngleOffset(), 0);
     } else {
       rotationVal = 0;
     }
@@ -73,7 +81,7 @@ public class GoalCentricCommand extends Command {
 
     translationVal = translateLimiter.calculate(translationVal) * Swerve.maxSpeed;
     strafeVal = strafeLimiter.calculate(strafeVal) * Swerve.maxSpeed;
-    rotationVal = rotateLimiter.calculate(rotationVal) * Swerve.maxAngularVelocity;
+    rotationVal = MathUtil.applyDeadband(rotationVal,0.005) * Swerve.maxAngularVelocity;
 
     SmartDashboard.putNumber("ROTATIONVAL", rotationVal);
 

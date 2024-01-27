@@ -84,8 +84,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis),
                 () -> -driver.getRawAxis(rotationAxis)));
 
-        aButton.whileTrue(new AlignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis),
-                () -> driver.getRawAxis(strafeAxis), () -> false));
+        aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
     }
 
     /**

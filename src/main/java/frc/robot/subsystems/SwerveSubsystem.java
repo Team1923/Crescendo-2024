@@ -158,6 +158,8 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
         PathPlannerLogging.logCurrentPose(getPose());
 
+        SmartDashboard.putNumber("HEADING", getGyroYaw().getDegrees());
+
 
 
         for(SwerveModule mod : mSwerveMods){

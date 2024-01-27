@@ -162,7 +162,7 @@ public final class Constants {
         /** Meters per Second */
         public static final double maxSpeed = 5.4864; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static final double maxAngularVelocity = 35; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 40; //TODO: This must be tuned to specific robot
 
         /* Acceleration Parameters - CHANGE IF NEEDED*/
         public static final double maxAccel = 3;
