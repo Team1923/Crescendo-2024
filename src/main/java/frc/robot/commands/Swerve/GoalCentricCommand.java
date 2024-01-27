@@ -9,6 +9,8 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,65 +23,65 @@ public class GoalCentricCommand extends Command {
   private final SwerveSubsystem s_Swerve;
   private final LimelightInterface limelight = LimelightInterface.getInstance();
 
-    private DoubleSupplier translationSup;
-    private DoubleSupplier strafeSup;
-    private DoubleSupplier rotationSup;
-    private BooleanSupplier robotCentricSup;
+  private DoubleSupplier translationSup;
+  private DoubleSupplier strafeSup;
+  private DoubleSupplier rotationSup;
+  private BooleanSupplier robotCentricSup;
 
-  private final double kPTarget = 0.5/Constants.LimeLightConstants.limelightViewingAngle; // TODO: will most likley need to change, right now is half speed (0.5) / max angle
+  private final double kPTarget = 0.2; // Tune this by yourself.
 
   /** Creates a new GoalCentricCommand. */
-  public GoalCentricCommand(SwerveSubsystem s, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
-   this.s_Swerve = s;
-   this.translationSup = translationSup;
-   this.strafeSup = strafeSup;
-   this.rotationSup = rotationSup;
+  public GoalCentricCommand(SwerveSubsystem s, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup) {
+    this.s_Swerve = s;
+    this.translationSup = translationSup;
+    this.strafeSup = strafeSup;
+    this.rotationSup = rotationSup;
 
     addRequirements(s_Swerve);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   double translationVal = translationSup.getAsDouble();
-   double strafeVal = strafeSup.getAsDouble();
+    double translationVal = translationSup.getAsDouble();
+    double strafeVal = strafeSup.getAsDouble();
 
-   double rotationVal = 0;
+    double rotationVal = 0;
 
-   if(Math.abs(rotationSup.getAsDouble()) > 0.5){
-    rotationVal = rotationSup.getAsDouble();
-   } else if(limelight.hasSpeakerTag()){
+    if (Math.abs(rotationSup.getAsDouble()) > 0.5) {
+      rotationVal = rotationSup.getAsDouble();
+    } else if (limelight.hasSpeakerTag()) {
       rotationVal = limelight.getXAngleOffset() * kPTarget;
-   }
-   else{
-    rotationVal = 0;
-   }
+    } else {
+      rotationVal = 0;
+    }
 
-   translationVal = Math.abs(translationVal) > Swerve.stickDeadband? translationVal : 0.0;
-   strafeVal = Math.abs(strafeVal) > Swerve.stickDeadband ? strafeVal : 0.0;
-   rotationVal = Math.abs(rotationVal) > Swerve.stickDeadband ? rotationVal : 0.0;
+    translationVal = Math.abs(translationVal) > Swerve.stickDeadband ? translationVal : 0.0;
+    strafeVal = Math.abs(strafeVal) > Swerve.stickDeadband ? strafeVal : 0.0;
+    rotationVal = Math.abs(rotationVal) > Swerve.stickDeadband ? rotationVal : 0.0;
 
-   if(DriverStation.getAlliance().get() == Alliance.Blue){
-            s_Swerve.drive(new Translation2d(translationVal,strafeVal).times(Constants.Swerve.maxSpeed), 
-            rotationVal*Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
-        }
-        else{
-             s_Swerve.drive(new Translation2d(translationVal,strafeVal).times(-Constants.Swerve.maxSpeed), 
-            rotationVal*Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
-        }
+    ChassisSpeeds chassisSpeeds;
+    if (DriverStation.getAlliance().get() == Alliance.Blue) {
+      chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationVal, strafeVal, rotationVal, s_Swerve.getGyroYaw());
+    } else {
+      chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(-translationVal, -strafeVal, rotationVal, s_Swerve.getGyroYaw());
+    }
+
+    SwerveModuleState[] moduleStates = Swerve.swerveKinematics.toSwerveModuleStates(chassisSpeeds);
+    s_Swerve.setModuleStates(moduleStates);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    s_Swerve.stop();
   }
-
 
   // Returns true when the command should end.
   @Override

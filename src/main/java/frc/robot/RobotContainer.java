@@ -14,15 +14,18 @@ import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
 import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.commands.*;
-import frc.robot.commands.Swerve.AllignToAmp;
+import frc.robot.commands.Swerve.AlignToAmp;
 import frc.robot.commands.Swerve.GoalCentricCommand;
 import frc.robot.commands.Swerve.TeleopSwerve;
 import frc.robot.subsystems.*;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -38,8 +41,7 @@ public class RobotContainer {
     private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton leftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton rightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-     private final JoystickButton rightStickDown = new JoystickButton(driver, XboxController.Button.kRightStick.value);
-
+    private final JoystickButton rightStickDown = new JoystickButton(driver, XboxController.Button.kRightStick.value);
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
@@ -49,45 +51,49 @@ public class RobotContainer {
     private final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
     private final PositionRPMData positionRPMData = new PositionRPMData();
 
-
-    /** The container for the robot. Contains subsystems, OI devices, and commands. */
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
     public RobotContainer() {
         s_Swerve.setDefaultCommand(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
-                () -> leftBumper.getAsBoolean()
-            )
-        );
+                new TeleopSwerve(
+                        s_Swerve,
+                        () -> -driver.getRawAxis(translationAxis),
+                        () -> -driver.getRawAxis(strafeAxis),
+                        () -> -driver.getRawAxis(rotationAxis),
+                        () -> leftBumper.getAsBoolean()));
 
         // Configure the button bindings
         configureButtonBindings();
     }
 
     /**
-     * Use this method to define your button->command mappings. Buttons can be created by
+     * Use this method to define your button->command mappings. Buttons can be
+     * created by
      * instantiating a {@link GenericHID} or one of its subclasses ({@link
-     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+     * it to a {@link
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis), 
-        () -> driver.getRawAxis(rotationAxis), () -> false));
+        yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        rightStickDown.whileTrue(new AllignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis), () -> false));
+        rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 
+                () -> -driver.getRawAxis(translationAxis),
+                () -> -driver.getRawAxis(strafeAxis),
+                () -> -driver.getRawAxis(rotationAxis)));
+
+        rightStickDown.whileTrue(new AlignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis),
+                () -> driver.getRawAxis(strafeAxis), () -> false));
     }
-    
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *
      * @return the command to run in autonomous
      */
-  public Command initializeAuto(AutoChooser selector){
-      return selector.startMode();
-  }
+    public Command initializeAuto(AutoChooser selector) {
+        return selector.startMode();
+    }
 }

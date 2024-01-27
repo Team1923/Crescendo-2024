@@ -20,47 +20,43 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class AllignToAmp extends Command {
+public class AlignToAmp extends Command {
 
-    private final double kP = 0.1; //TODO: TUNE
-    private final double rotationDeadband = 0.05; //TODO: tune
-  
+    private final double kP = 0.1; // TODO: TUNE
+    private final double rotationDeadband = 0.05; // TODO: tune
+
     private SwerveSubsystem s_Swerve;
     private DoubleSupplier translationSup;
     private DoubleSupplier strafeSup;
     private BooleanSupplier robotCentricSup;
-    //private BooleanSupplier fieldSlowMode;
+    // private BooleanSupplier fieldSlowMode;
 
     private PIDController pid;
 
     private double angleGoal;
 
-    public AllignToAmp(SwerveSubsystem s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, BooleanSupplier robotCentricSup/*, BooleanSupplier fieldSlowMode*/) {
+    public AlignToAmp(SwerveSubsystem s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup,
+            BooleanSupplier robotCentricSup/* , BooleanSupplier fieldSlowMode */) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
         this.translationSup = translationSup;
         this.strafeSup = strafeSup;
         this.robotCentricSup = robotCentricSup;
-        //this.fieldSlowMode = fieldSlowMode;
+        // this.fieldSlowMode = fieldSlowMode;
 
-
-        //gives the angle of the amp relative to robot starting depending on alliance
+        // gives the angle of the amp relative to robot starting depending on alliance
         angleGoal = (DriverStation.getAlliance().get() == Alliance.Blue) ? 90 : -90;
 
-
-
-
-        //TODO: tune kp
+        // TODO: tune kp
         pid = new PIDController(kP, 0, 0);
 
-        pid.enableContinuousInput(-180, 180); //wraps around, treating -180 and 180 as same point
-
+        pid.enableContinuousInput(-180, 180); // wraps around, treating -180 and 180 as same point
 
     }
 
     @Override
-    public void initialize(){
+    public void initialize() {
     }
 
     @Override
@@ -71,36 +67,29 @@ public class AllignToAmp extends Command {
 
         rotationPercent = (Math.abs(rotationPercent) > rotationDeadband) ? rotationPercent : 0;
 
-        //SmartDashboard.putNumber("PID OUTPUT", rotationPercent);
+        // SmartDashboard.putNumber("PID OUTPUT", rotationPercent);
 
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Swerve.stickDeadband);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Swerve.stickDeadband);
         double rotationVal = MathUtil.applyDeadband(rotationPercent, Swerve.stickDeadband);
 
-
-        if(DriverStation.getAlliance().get() == Alliance.Blue){
-            s_Swerve.drive(new Translation2d(translationVal,strafeVal).times(Constants.Swerve.maxSpeed), 
-            rotationVal*Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
-        }
-        else{
-             s_Swerve.drive(new Translation2d(translationVal,strafeVal).times(-Constants.Swerve.maxSpeed), 
-            rotationVal*Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
+        if (DriverStation.getAlliance().get() == Alliance.Blue) {
+            s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed),
+                    rotationVal * Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
+        } else {
+            s_Swerve.drive(new Translation2d(translationVal, strafeVal).times(-Constants.Swerve.maxSpeed),
+                    rotationVal * Constants.Swerve.maxAngularVelocity, !robotCentricSup.getAsBoolean(), true);
         }
 
-
-
-        
-
-        
     }
 
     @Override
     public void end(boolean interrupted) {
-      
+        s_Swerve.stop();
     }
 
     @Override
-    public boolean isFinished(){
-      return false;
+    public boolean isFinished() {
+        return false;
     }
 }

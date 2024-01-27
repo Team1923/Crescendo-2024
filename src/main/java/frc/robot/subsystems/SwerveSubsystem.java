@@ -149,6 +149,10 @@ public class SwerveSubsystem extends SubsystemBase {
         }
     }
 
+    public void stop() {
+        drive(new Translation2d(0, 0), 0, true, false);
+    }
+
     @Override
     public void periodic(){
         swerveOdometry.update(getGyroYaw(), getModulePositions());
