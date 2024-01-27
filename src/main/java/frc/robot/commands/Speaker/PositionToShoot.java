@@ -35,6 +35,7 @@ public class PositionToShoot extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //when you let go of trigger, automatically ends
     return false;
   }
 }
