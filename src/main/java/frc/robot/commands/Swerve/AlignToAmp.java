@@ -94,6 +94,8 @@ public class AlignToAmp extends Command {
         double translationVal = MathUtil.applyDeadband(translationController.calculate(limelight.getXAngleOffset(), 0), 0.01);
         // double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Swerve.stickDeadband);
         // double rotationVal = MathUtil.applyDeadband(rotationPercent, Swerve.stickDeadband);
+
+        //TODO: swap 90 and -90, blue should actually be -90, only using 90 because of where we put the apriltag in the hallway
         double rotationVal = rotateLimiter.calculate(rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), DriverStation.getAlliance().get() == Alliance.Blue ? 90 : -90)
 );
         SmartDashboard.putNumber("ROTATION VAL", rotationVal);
