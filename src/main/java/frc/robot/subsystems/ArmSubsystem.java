@@ -20,18 +20,16 @@ import frc.robot.Constants.IntakeConstants;
 import frc.lib.LimelightUtil.LimelightInterface;
 import frc.lib.RobotStateUtils.StateHandler;
 
-
-
 public class ArmSubsystem extends SubsystemBase {
 
   StateHandler stateHandler = StateHandler.getInstance();
   LimelightInterface limelightInterface = LimelightInterface.getInstance();
   PositionRPMData positionData = PositionRPMData.getInstance();
 
-  private TalonFX armPrimary= new TalonFX(ArmConstants.armMotorPrimaryID);
+  private TalonFX armPrimary = new TalonFX(ArmConstants.armMotorPrimaryID);
   private TalonFX armFollower = new TalonFX(ArmConstants.armMotorFollowerID);
 
-  private MotionMagicVoltage motionMagicVoltage; 
+  private MotionMagicVoltage motionMagicVoltage;
 
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
@@ -59,49 +57,60 @@ public class ArmSubsystem extends SubsystemBase {
     armPrimary.getConfigurator().apply(armConfigs, 0.05);
     armFollower.getConfigurator().apply(armConfigs, 0.05);
 
-    //Need to change/test in lab
+    // Need to change/test in lab
     armFollower.setControl(new Follower(ArmConstants.armMotorPrimaryID, true));
 
     zeroArm();
   }
 
   /**
-   * Method to zero the intake arm. 
+   * Method to zero the intake arm.
    */
-  public void zeroArm(){
+  public void zeroArm() {
     armPrimary.setPosition(0);
-    //need to confirm/check
   }
 
   /**
    * Setting the intake to a position/
-   * @param position The position that we are setting the intake is. 
+   * 
+   * @param position The position that we are setting the intake is.
    */
-  public void setArmPosition(double position){
+  public void setArmPosition(double position) {
     armPrimary.setControl(motionMagicVoltage.withPosition(position * ArmConstants.armRadsToRots)
-    .withFeedForward(calculateArmFeedForward()));
+        .withFeedForward(calculateArmFeedForward()));
   }
 
   /**
    * Gets the position of the intake arm.
+   * 
    * @return The intake position in radians.
    */
-  public double getArmPosition(){
+  public double getArmPositionRads() {
+    return armPrimary.getPosition().getValueAsDouble() * ArmConstants.armRotsToRads;
+  }
+
+  /**
+   * Gets the position of the intake arm.
+   * 
+   * @return The intake position in rotations.
+   */
+  public double getArmPositionRots() {
     return armPrimary.getPosition().getValueAsDouble() * ArmConstants.armRotsToRads;
   }
 
   /**
    * Calculates the required Feedforward needed for the intake arm.
-   * @return The feedforward value needed by the intake. 
+   * 
+   * @return The feedforward value needed by the intake.
    */
-  public double calculateArmFeedForward(){
-    return IntakeConstants.intakeMaxGravityConstant * Math.cos(getArmPosition());
+  public double calculateArmFeedForward() {
+    return IntakeConstants.intakeMaxGravityConstant * Math.cos(getArmPositionRads());
   }
 
   /**
    * Stops the intake arm motors.
    */
-  public void stopIntakeArmMotors(){
+  public void stopIntakeArmMotors() {
     armPrimary.stopMotor();
     armFollower.stopMotor();
   }
@@ -109,27 +118,19 @@ public class ArmSubsystem extends SubsystemBase {
   /**
    * Disabling the MotionMagic Control
    */
-  public void disableMotionMagic(){
+  public void disableMotionMagic() {
     armPrimary.disable();
     armFollower.disable();
   }
 
-  /**
-   * Gets the current being drawn by the Intake Arm. 
-   * @return The raw stator current being drawn by the intake arm.
-   */
-  public double getRawIntakeArmCurrent(){
-    return armPrimary.getStatorCurrent().getValueAsDouble();
-  }
-
-  public boolean isAtArmState(ArmStates armState){
-    return Math.abs(getArmPosition() - armState.getArmPosition().getAngularSetpoint()) < ArmConstants.armStateThreshold;
+  public boolean isAtArmState(ArmStates armState) {
+    return Math
+        .abs(getArmPositionRads() - armState.getArmPosition().getAngularSetpoint()) < ArmConstants.armStateThreshold;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
- 
-    
+
   }
 }

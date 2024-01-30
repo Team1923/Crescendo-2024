@@ -25,7 +25,6 @@ public class FeederSubsystem extends SubsystemBase {
   /** Creates a new FeederSubsystem. */
   public FeederSubsystem() {
     feederMotor.getConfigurator().apply(new TalonFXConfiguration());
-
   }
 
   /**

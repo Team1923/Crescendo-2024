@@ -25,7 +25,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private DigitalInput beamBreakFour = new DigitalInput(ShooterConstants.beamBreakFourID);
   private StateHandler stateHandler = StateHandler.getInstance();
 
- private final VelocityVoltage m_velocitytop = new VelocityVoltage(0);
+  private final VelocityVoltage m_velocitytop = new VelocityVoltage(0);
   private final VelocityVoltage m_velocitybottom = new VelocityVoltage(0);
 
   /** Creates a new ShooterSubsystem. */
@@ -42,11 +42,11 @@ public class ShooterSubsystem extends SubsystemBase {
      * Rough values, need to tune them to final robot.
      */
     slot0Configs.kV = 0.12;
-    slot0Configs.kP = 0.11; 
-    slot0Configs.kI = 0.48; 
-    slot0Configs.kD = 0.01; 
+    slot0Configs.kP = 0.11;
+    slot0Configs.kI = 0.48;
+    slot0Configs.kD = 0.01;
 
-     /**
+    /**
      * We need to change this for TOP Motor
      */
     slot1Configs.kS = 0;
@@ -61,9 +61,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /**
    * Method to set speed of shooter motors, using velocity closed loop control.
+   * 
    * @param velocity The speed, in RPM, passed into the motors.
    */
-  public void set(double velocityP, double velocityF){
+  public void set(double velocityP, double velocityF) {
 
     m_velocitytop.Slot = 1;
     m_velocitybottom.Slot = 0;
@@ -75,6 +76,7 @@ public class ShooterSubsystem extends SubsystemBase {
   /**
    * Method to get the digital input reading of BB4.
    * TODO: verify if adding a NOT before the boolean is needed.
+   * 
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakFour() {
@@ -83,41 +85,46 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /**
    * Returns the velocity in RPM of the top shooter motor.
+   * 
    * @return Velocity in RPM.
    */
-  public double getVelocityTop(){
+  public double getTopRPM() {
     return shooterTop.getVelocity().getValueAsDouble() * 60;
   }
 
   /**
    * Returns the velocity in RPM of the bottom shooter motor.
+   * 
    * @return Velocity in RPM.
    */
-  public double getVelocityBottom(){
+  public double getBottomRPM() {
     return shooterBottom.getVelocity().getValueAsDouble() * 60;
   }
 
   /**
    * Stops the motors.
    */
-  public void stopMotors(){
+  public void stopMotors() {
     shooterTop.stopMotor();
     shooterBottom.stopMotor();
   }
 
-  public boolean isAtShooterSpeed(ShooterSpeeds s){
-    return Math.abs(getVelocityTop() - s.getRPMValue().getRPMValue()) < ShooterConstants.shooterSpeedThreshold && Math.abs(getVelocityBottom() - s.getRPMValue().getRPMValue()) < ShooterConstants.shooterSpeedThreshold;
+  public boolean isAtShooterSpeed(ShooterSpeeds s) {
+    return Math.abs(getTopRPM() - s.getRPMValue().getRPMValue()) < ShooterConstants.shooterSpeedThreshold
+        && Math.abs(getBottomRPM() - s.getRPMValue().getRPMValue()) < ShooterConstants.shooterSpeedThreshold;
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Velocity(RPM) of the top motor", getVelocityTop());
-    SmartDashboard.putNumber("Velocity(RPM) of the bottom motor", getVelocityBottom());
+    SmartDashboard.putNumber("Velocity(RPM) of the top motor", getTopRPM());
+    SmartDashboard.putNumber("Velocity(RPM) of the bottom motor", getBottomRPM());
 
     // This method will be called once per scheduler run
     stateHandler.setBBFourCovered(getBeamBreakFour());
-    // SmartDashboard.putNumber("Velocity of Primary Motor", shooterPrimary.getVelocity().getValueAsDouble());
-    // SmartDashboard.putNumber("Velocity of Follower Motor", shooterFollower.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Velocity of Primary Motor",
+    // shooterPrimary.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Velocity of Follower Motor",
+    // shooterFollower.getVelocity().getValueAsDouble());
 
     /*
      * 
