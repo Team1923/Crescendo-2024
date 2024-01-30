@@ -8,6 +8,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
 import frc.robot.Constants.FeederConstants;
@@ -19,9 +20,12 @@ public class FeederSubsystem extends SubsystemBase {
   private DigitalInput beamBreakThree = new DigitalInput(FeederConstants.beamBreakThreeID);
   private StateHandler stateHandler = StateHandler.getInstance();
 
+  private TalonFX feederMotor = new TalonFX(FeederConstants.feederMotorID);
+
   /** Creates a new FeederSubsystem. */
   public FeederSubsystem() {
-    // feederMotor.getConfigurator().apply(new TalonFXConfiguration());
+    feederMotor.getConfigurator().apply(new TalonFXConfiguration());
+
   }
 
   /**
@@ -29,14 +33,14 @@ public class FeederSubsystem extends SubsystemBase {
    * @param s The desired output speed.
    */
   public void setFeederMotorSpeed(double s) {
-    // feederMotor.set(s);
+    feederMotor.set(s);
   }
 
   /**
    * This method stops the motor.
    */
   public void stopFeederMotor() {
-    // feederMotor.stopMotor();
+    feederMotor.stopMotor();
   }
 
   /**

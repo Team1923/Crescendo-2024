@@ -51,5 +51,6 @@ public class AllignToAmpBetter extends Command {
     }
     
 
-    
+    return false;
+  }
 }

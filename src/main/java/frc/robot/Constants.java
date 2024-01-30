@@ -28,16 +28,26 @@ public final class Constants {
 
     public static final class IntakeConstants {
         /* Motor IDs */
-        public static final int intakeRollerMotorID = 0;
+        public static final int intakeWheelTopID = 0;
+        public static final int intakeWheelBottomID = 0;
         public static final int intakePrimaryID = 0;
         public static final int intakeFollowerID = 0;
     
         /* Motion Magic Constants */
+        public static final double intakeKS = 0;
+        public static final double intakeKV = 0;
         public static final double intakekP = 0;
         public static final double intakekI = 0;
         public static final double intakekD = 0;
+
+        /*Values from CTRE
+         * motionMagicConfigs.MotionMagicCruiseVelocity = 80; // 80 rps cruise velocity
+           motionMagicConfigs.MotionMagicAcceleration = 160; // 160 rps/s acceleration (0.5 seconds)
+           motionMagicConfigs.MotionMagicJerk = 1600; // 1600 rps/s^2 jerk (0.1 seconds)
+         */
         public static final double maxIntakeVel = 0;
         public static final double maxIntakeAccel = 0;
+        public static final double maxIntakeJerk = 0;
     
         /* Gearbox Ratios & Unit Conversions */
         public static final double intakeGearRatio = 0;
@@ -51,6 +61,8 @@ public final class Constants {
 
         /* Beam Break ID */
         public static final int beamBreakOneID = 0;
+
+        public static final double intakeStateThreshold = 0;
     }
 
     public static final class ShooterConstants {
@@ -60,6 +72,8 @@ public final class Constants {
     
         /* Beam Break ID */
         public static final int beamBreakFourID = 0;
+
+        public static final double shooterSpeedThreshold = 0;
       }
     
       public static final class FeederConstants {
@@ -77,11 +91,14 @@ public final class Constants {
         public static final int armMotorFollowerID = 0;
     
         /* Motion Magic Constants */
+        public static final double armKS = 0;
+        public static final double armKV = 0;
         public static final double armkP = 0;
         public static final double armkI = 0;
         public static final double armkD = 0;
         public static final double maxArmVel = 0;
         public static final double maxArmAccel = 0;
+        public static final double maxArmJerk = 0;
     
         /* Gearbox Ratios & Unit Conversions */
         public static final double armGearRatio = 0;
@@ -92,6 +109,8 @@ public final class Constants {
         /* kG - gravity constant for motion of arm */
         //TODO: discuss on how the max gravity constant should be found.
         public static final double armMaxGravityConstant = 0;  
+
+        public static final double armStateThreshold = 0; // allowed radians offset
     }
 
 
