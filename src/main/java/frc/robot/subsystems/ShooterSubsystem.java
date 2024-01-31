@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
-import frc.robot.Constants;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -36,27 +35,29 @@ public class ShooterSubsystem extends SubsystemBase {
 
     shooterTop.setInverted(false);
 
-    var slot0Configs = new Slot0Configs();
-    var slot1Configs = new Slot1Configs();
+    var bottomMotorConfig = new Slot0Configs();
+    var topMotorConfig = new Slot0Configs();
+
     /**
      * Rough values, need to tune them to final robot.
      */
-    slot0Configs.kV = 0.12;
-    slot0Configs.kP = 0.11;
-    slot0Configs.kI = 0.48;
-    slot0Configs.kD = 0.01;
+    bottomMotorConfig.kS = 0;
+    bottomMotorConfig.kV = 0.12;
+    bottomMotorConfig.kP = 0.11;
+    bottomMotorConfig.kI = 0.48;
+    bottomMotorConfig.kD = 0.01;
 
     /**
      * We need to change this for TOP Motor
      */
-    slot1Configs.kS = 0;
-    slot1Configs.kV = 0.11; // try increasing to get closer to goal at 6000
-    slot1Configs.kP = 0.11;
-    slot1Configs.kI = 0;
-    slot1Configs.kD = 0;
+    topMotorConfig.kS = 0;
+    topMotorConfig.kV = 0.11; // try increasing to get closer to goal at 6000
+    topMotorConfig.kP = 0.11;
+    topMotorConfig.kI = 0;
+    topMotorConfig.kD = 0;
 
-    shooterTop.getConfigurator().apply(slot1Configs, 0.05);
-    shooterBottom.getConfigurator().apply(slot0Configs, 0.05);
+    shooterTop.getConfigurator().apply(topMotorConfig, 0.05);
+    shooterBottom.getConfigurator().apply(bottomMotorConfig, 0.05);
   }
 
   /**
@@ -65,8 +66,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param velocity The speed, in RPM, passed into the motors.
    */
   public void set(double velocityP, double velocityF) {
-
-    m_velocitytop.Slot = 1;
+    m_velocitytop.Slot = 0;
     m_velocitybottom.Slot = 0;
 
     shooterTop.setControl(m_velocitytop.withVelocity(velocityP));
