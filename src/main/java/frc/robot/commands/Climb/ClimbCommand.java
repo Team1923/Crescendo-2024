@@ -18,12 +18,14 @@ public class ClimbCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    stateHandler.setDesiredArmState(ArmStates.CLIMB);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    stateHandler.setDesiredArmState(ArmStates.CLIMB);
+    
   }
 
   // Called once the command ends or is interrupted.
