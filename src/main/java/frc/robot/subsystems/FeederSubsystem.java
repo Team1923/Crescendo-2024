@@ -67,15 +67,14 @@ public class FeederSubsystem extends SubsystemBase {
     stateHandler.setBBThreeCovered(getBeamBreakThree());
 
     FeederSpeeds desiredFeederSpeeds = StateHandler.getInstance().getDesiredFeederSpeed();
-    switch (desiredFeederSpeeds) {
-      case OFF:
-        stopFeederMotor();
-      case OUTWARD:
-        setFeederMotorSpeed(FeederSpeeds.OUTWARD.percentOutputValue().getPercentOutputValue());
-      case INWARD:
-        setFeederMotorSpeed(FeederSpeeds.INWARD.percentOutputValue().getPercentOutputValue());
-      default:
-        stopFeederMotor();
+    if (desiredFeederSpeeds == FeederSpeeds.OFF) {
+      stopFeederMotor();
+    } else if (desiredFeederSpeeds == FeederSpeeds.INWARD) {
+      setFeederMotorSpeed(desiredFeederSpeeds.percentOutputValue().getPercentOutputValue());
+    } else if (desiredFeederSpeeds == FeederSpeeds.OUTWARD) {
+      setFeederMotorSpeed(desiredFeederSpeeds.percentOutputValue().getPercentOutputValue());
+    } else {
+      stopFeederMotor();
     }
 
   }

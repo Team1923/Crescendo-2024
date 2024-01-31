@@ -37,6 +37,8 @@ public class StateHandler {
     private boolean hasValidSpeakerTag = false;
     private boolean hasValidAmpTag = false;
     private double distanceToTag = 0;
+    private boolean wantToScoreSpeaker = false;
+    private boolean wantToScoreAmp = false;
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;

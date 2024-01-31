@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 
-public class PositionToShoot extends Command {
+public class PositionArmToShoot extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
   /** Creates a new SpeakerPositionCommand. */
-  public PositionToShoot() {
+  public PositionArmToShoot() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -36,6 +36,6 @@ public class PositionToShoot extends Command {
   @Override
   public boolean isFinished() {
     //when you let go of trigger, automatically ends
-    return false;
+    return !(stateHandler.getBBThreeCovered() && stateHandler.getBBFourCovered());
   }
 }

@@ -62,7 +62,7 @@ public final class Constants {
         /* Beam Break ID */
         public static final int beamBreakOneID = 0;
 
-        public static final double intakeStateThreshold = 0;
+        public static final double intakePositionAllowableOffset = 0;
     }
 
     public static final class ShooterConstants {
@@ -110,7 +110,7 @@ public final class Constants {
         //TODO: discuss on how the max gravity constant should be found.
         public static final double armMaxGravityConstant = 0;  
 
-        public static final double armStateThreshold = 0; // allowed radians offset
+        public static final double armPositionAllowableOffset = 0; // allowed radians offset
     }
 
 

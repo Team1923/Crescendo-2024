@@ -10,6 +10,7 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.lib.RobotStateUtils.StateVariables.ArmPosition;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.Constants.ArmConstants;
@@ -122,12 +123,37 @@ public class ArmSubsystem extends SubsystemBase {
 
   public boolean isAtArmState(ArmStates armState) {
     return Math
-        .abs(getArmPositionRads() - armState.getArmPosition().getAngularSetpoint()) < ArmConstants.armStateThreshold;
+        .abs(getArmPositionRads() - armState.getArmPosition().getAngularSetpoint()) < ArmConstants.armPositionAllowableOffset;
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    /*
+     * By default, whatever the desired position is, we will go to the desired
+     * position as commanded.
+     * EXCEPTION: shooting. If this is the case, then we will need to modify
+     * out arm position to be variable.
+     */
+
+    ArmStates desiredArmState = stateHandler.getDesiredArmState();
+    double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
+
+    if (desiredArmState == ArmStates.SPEAKER && limelightInterface.hasSpeakerTag()) {
+      armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToTag());
+    }
+
+    /**
+     * Set the arm position to whatever is the desired arm position.
+     */
+    setArmPosition(armSetpoint);
+
+    /**
+     * Below lines/logic is used to update the arm's position.
+     */
+    if (isAtArmState(desiredArmState)) {
+      stateHandler.setCurrentArmState(desiredArmState);
+    }
+
 
   }
 }

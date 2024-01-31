@@ -171,7 +171,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public boolean isAtIntakeState(IntakeStates intakeStates) {
     return Math.abs(getIntakeArmPositionRads() -
-        intakeStates.getIntakePosition().getAngularSetpoint()) < IntakeConstants.intakeStateThreshold;
+        intakeStates.getIntakePosition().getAngularSetpoint()) < IntakeConstants.intakePositionAllowableOffset;
   }
 
   @Override
