@@ -109,8 +109,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public boolean isAtShooterSpeed(ShooterSpeeds s) {
-    return Math.abs(getTopRPM() - s.getRPMValue().getRPMValue()) < ShooterConstants.shooterSpeedThreshold
-        && Math.abs(getBottomRPM() - s.getRPMValue().getRPMValue()) < ShooterConstants.shooterSpeedThreshold;
+    return Math.abs(getTopRPM() - s.getRPMValue().getRPM()) < ShooterConstants.shooterSpeedThreshold
+        && Math.abs(getBottomRPM() - s.getRPMValue().getRPM()) < ShooterConstants.shooterSpeedThreshold;
   }
 
   @Override
@@ -120,10 +120,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // This method will be called once per scheduler run
     stateHandler.setBBFourCovered(getBeamBreakFour());
-    // SmartDashboard.putNumber("Velocity of Primary Motor",
-    // shooterPrimary.getVelocity().getValueAsDouble());
-    // SmartDashboard.putNumber("Velocity of Follower Motor",
-    // shooterFollower.getVelocity().getValueAsDouble());
+
+    double desiredShooterSpeed = stateHandler.getDesiredShootingSpeed().getRPMValue().getRPM();
+
+    
+
+
 
     /*
      * 

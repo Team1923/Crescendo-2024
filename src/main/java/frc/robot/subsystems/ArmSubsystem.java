@@ -138,13 +138,27 @@ public class ArmSubsystem extends SubsystemBase {
     ArmStates desiredArmState = stateHandler.getDesiredArmState();
     double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
-    if (desiredArmState == ArmStates.SPEAKER && limelightInterface.hasSpeakerTag()) {
+    if (desiredArmState == ArmStates.SPEAKER && limelightInterface.hasSpeakerTag() && stateHandler.isHasGamePiece()) {
       armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToTag());
+    }
+    else if(desiredArmState == ArmStates.AMP && limelightInterface.hasAmpTag() && stateHandler.isHasGamePiece()){
+      armSetpoint = ArmStates.AMP.getArmPosition().getAngularSetpoint();
+    }
+    else if(desiredArmState == ArmStates.CLIMB){
+      armSetpoint = ArmStates.CLIMB.getArmPosition().getAngularSetpoint();
+    }
+
+    if(!stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() == ArmStates.SPEAKER){
+      stateHandler.setDesiredArmState(ArmStates.STOWED);
+    }
+    else if(!stateHandler.isHasGamePiece() && stateHandler.getCurrentArmState() == ArmStates.AMP){
+      stateHandler.setDesiredArmState(ArmStates.STOWED);
     }
 
     /**
      * Set the arm position to whatever is the desired arm position.
      */
+
     setArmPosition(armSetpoint);
 
     /**

@@ -66,7 +66,10 @@ public class FeederSubsystem extends SubsystemBase {
     stateHandler.setBBTwoCovered(getBeamBreakTwo());
     stateHandler.setBBThreeCovered(getBeamBreakThree());
 
+    stateHandler.setHasGamePiece(getBeamBreakThree() && getBeamBreakTwo());
+
     FeederSpeeds desiredFeederSpeeds = StateHandler.getInstance().getDesiredFeederSpeed();
+    
     if (desiredFeederSpeeds == FeederSpeeds.OFF) {
       stopFeederMotor();
     } else if (desiredFeederSpeeds == FeederSpeeds.INWARD) {

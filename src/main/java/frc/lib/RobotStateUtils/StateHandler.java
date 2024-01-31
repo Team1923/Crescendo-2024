@@ -39,6 +39,7 @@ public class StateHandler {
     private double distanceToTag = 0;
     private boolean wantToScoreSpeaker = false;
     private boolean wantToScoreAmp = false;
+    private boolean hasGamePiece = false;
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;
@@ -359,5 +360,15 @@ public class StateHandler {
     public boolean getBBFourCovered() {
         return bbFourCovered;
     }
+
+    public void setHasGamePiece(boolean hasGamePiece) {
+        this.hasGamePiece = hasGamePiece;
+    }
+
+    public boolean isHasGamePiece() {
+        return hasGamePiece;
+    }
+
+
 
 }

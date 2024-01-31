@@ -64,7 +64,7 @@ public class StateVariables {
             this.shooterRPM = s;
         }
 
-        public double getRPMValue() {
+        public double getRPM() {
             return shooterRPM;
         }
     }
