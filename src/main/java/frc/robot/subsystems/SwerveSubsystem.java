@@ -61,27 +61,27 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
+        ChassisSpeeds discretizedFieldChassisSpeeds = 
+            ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
+        ChassisSpeeds.discretize(discretizedFieldChassisSpeeds, 0.02);
+
+        ChassisSpeeds discretizedRobotRelChassisSpeeds = 
+            new ChassisSpeeds(translation.getX(), translation.getY(), rotation);
+        ChassisSpeeds.discretize(discretizedRobotRelChassisSpeeds, 0.02);
+
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation, 
-                                    getHeading()
-                                )
-                                : new ChassisSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation)
-                                );
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+                fieldRelative ? discretizedFieldChassisSpeeds : discretizedRobotRelChassisSpeeds);
 
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);        
+        
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
     }  
     
     public void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {
+        ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
         SwerveModuleState[] swerveModuleStates = Constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
         setModuleStates(swerveModuleStates);
     }
