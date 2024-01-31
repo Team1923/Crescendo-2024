@@ -18,13 +18,15 @@ public class IntakeEjectCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.EJECT);
+    stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.EJECT);
-    stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
+    
   }
 
   // Called once the command ends or is interrupted.
