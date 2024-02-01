@@ -122,10 +122,8 @@ public class ArmSubsystem extends SubsystemBase {
     armFollower.disable();
   }
 
-  //TODO: this doesn't work for when we are using a positionRPMDATA
-  public boolean isAtArmState(ArmStates armState) {
-    return Math
-        .abs(getArmPositionRads() - armState.getArmPosition().getAngularSetpoint()) < ArmConstants.armPositionAllowableOffset;
+  public boolean isAtArmState(double desiredSetpoint) {
+    return Math.abs(getArmPositionRads() - desiredSetpoint) < ArmConstants.armPositionAllowableOffset;
   }
 
   @Override
@@ -140,33 +138,30 @@ public class ArmSubsystem extends SubsystemBase {
     ArmStates desiredArmState = stateHandler.getDesiredArmState();
     double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
-    if (desiredArmState == ArmStates.SPEAKER){
-        
-        //subwoofer condition
-        if ((stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD) || (!limelightInterface.hasSpeakerTag() && stateHandler.wantToScoreSpeaker())){
-            armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
-        }
-        //distance to speaker condition
-        else if (stateHandler.getHasValidSpeakerTag()){
-            armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
-        }
+    if (desiredArmState == ArmStates.SPEAKER) {
+      // subwoofer condition
+      if ((stateHandler.getHasValidSpeakerTag()
+          && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD)
+          || (!limelightInterface.hasSpeakerTag())) {
+        armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
+      }
+      // distance to speaker condition
+      else if (stateHandler.getHasValidSpeakerTag()) {
+        armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+      }
     }
 
     /**
      * Set the arm position to whatever is the desired arm position.
      */
-
     setArmPosition(armSetpoint);
 
     /**
      * Below lines/logic is used to update the arm's position.
      */
-
-    //TODO: this doesn't work for when we are using a positionRPMDATa
-    if (isAtArmState(desiredArmState)) {
+    if (isAtArmState(armSetpoint)) {
       stateHandler.setCurrentArmState(desiredArmState);
     }
-
 
   }
 }

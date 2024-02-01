@@ -7,19 +7,23 @@ package frc.robot.commands.Speaker;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.lib.RobotStateUtils.StateVariables.ArmStates;
+import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
 
-public class SpeakerScore extends Command {
-
+public class ScoreInSpeaker extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
-  /** Creates a new SpeakerScore. */
-  public SpeakerScore() {
+  /** Creates a new SpeakerPositionCommand. */
+  public ScoreInSpeaker() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    stateHandler.setDesiredArmState(ArmStates.SPEAKER);
+    stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -28,15 +32,15 @@ public class SpeakerScore extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //verifying we did 
-    if (!stateHandler.hasGamePiece()){
-      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
-    }
+    stateHandler.setDesiredArmState(ArmStates.STOWED);
+    stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
+    stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !stateHandler.hasGamePiece();
+    //when you let go of trigger, automatically ends
+    return !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
   }
 }

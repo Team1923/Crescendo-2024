@@ -6,6 +6,7 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 
@@ -21,6 +22,7 @@ public class DeployIntakeCommand extends Command {
   public void initialize() {
     stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.INTAKE);
+    stateHandler.setDesiredFeederSpeed(FeederSpeeds.INWARD);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,6 +36,7 @@ public class DeployIntakeCommand extends Command {
   public void end(boolean interrupted) {
     stateHandler.setDesiredIntakeState(IntakeStates.STOWED);
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.OFF);
+    stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
   }
 
   // Returns true when the command should end.

@@ -71,7 +71,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * 
    * @param velocity The speed, in RPM, passed into the motors.
    */
-  public void set(double velocityP, double velocityF) {
+  public void setVelocities(double velocityP, double velocityF) {
     m_velocitytop.Slot = 0;
     m_velocitybottom.Slot = 0;
 
@@ -115,11 +115,9 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterBottom.stopMotor();
   }
 
-
-  //TODO: this doesn't work for when we are using a positionRPMDATa
-  public boolean isAtShooterSpeed(ShooterSpeeds s) {
-    return Math.abs(getTopRPM() - s.getRPMValue().getRPM()) < ShooterConstants.shooterSpeedThreshold
-        && Math.abs(getBottomRPM() - s.getRPMValue().getRPM()) < ShooterConstants.shooterSpeedThreshold;
+  public boolean isAtShooterSpeed(double desiredSetpoint) {
+    return Math.abs(getTopRPM() - desiredSetpoint) < ShooterConstants.shooterSpeedThreshold
+        && Math.abs(getBottomRPM() - desiredSetpoint) < ShooterConstants.shooterSpeedThreshold;
   }
 
   @Override
@@ -130,47 +128,31 @@ public class ShooterSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     stateHandler.setBBFourCovered(getBeamBreakFour());
 
-
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
-
     double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
 
-
-    //TODO: NOTE: These hasGamePiece in the wantToScores may turn off as the gamepiece is leaving the shooter, potentially stops running at shoot speed early? CHECK
-    //also, kinda weird that we are overriding states here
-
-    if (desiredShooterSpeedState == ShooterSpeeds.SHOOT){
-
-      //subwoofer condition
-        if ((stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD) || (!stateHandler.getHasValidSpeakerTag() && stateHandler.wantToScoreSpeaker())){
-            desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
-        }
-        //distance shot to speaker condition
-        else if (stateHandler.getHasValidSpeakerTag()){
-            desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
-        }
-      
+    if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
+      // subwoofer condition
+      if ((stateHandler.getHasValidSpeakerTag()
+          && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD)
+          || (!stateHandler.getHasValidSpeakerTag())) {
+        desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
+      }
+      // distance shot to speaker condition
+      else if (stateHandler.getHasValidSpeakerTag()) {
+        desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
+      }
     }
-    //overriding makes sense here, no amp shooter speed state so we infer that it is Idle
-    else if (stateHandler.wantToScoreAmp()){
-        desiredShooterSpeed = ShooterSpeeds.IDLE.getRPMValue().getRPM();
-    }
-    //does overriding make sense?
-    else if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()){
+
+    else if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()) {
       desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
     }
 
+    setVelocities(desiredShooterSpeed, desiredShooterSpeed);
 
-    
-
-    set(desiredShooterSpeed, desiredShooterSpeed);
-
-    
-    //TODO: this doesn't work for when we are using a positionRPMDATA
-    if (isAtShooterSpeed(desiredShooterSpeedState)){
-        stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    if (isAtShooterSpeed(desiredShooterSpeed)) {
+      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     }
 
-   
   }
 }

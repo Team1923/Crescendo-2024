@@ -37,6 +37,7 @@ public class StateHandler {
     private boolean hasValidSpeakerTag = false;
     private boolean hasValidAmpTag = false;
     private double distanceToTag = 0;
+    private boolean centeredToTag = true;
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;
@@ -46,6 +47,7 @@ public class StateHandler {
 
     /**
      * Method to set the desired arm state.
+     * 
      * @param desiredArmState The desired arm state to be commanded to the arm.
      */
     public void setDesiredArmState(ArmStates desiredArmState) {
@@ -54,6 +56,7 @@ public class StateHandler {
 
     /**
      * Method to get the desired arm state to be commanded.
+     * 
      * @return The desired arm state.
      */
     public ArmStates getDesiredArmState() {
@@ -62,6 +65,7 @@ public class StateHandler {
 
     /**
      * Method to get the current arm state to be commanded.
+     * 
      * @return The current arm state.
      */
     public ArmStates getCurrentArmState() {
@@ -70,6 +74,7 @@ public class StateHandler {
 
     /**
      * Method to set the current arm state.
+     * 
      * @param desiredArmState The current arm state to be commanded to the arm.
      */
     public void setCurrentArmState(ArmStates ArmState) {
@@ -78,6 +83,7 @@ public class StateHandler {
 
     /**
      * Sets the desired shooting speed.
+     * 
      * @param s The desired shooting speed.
      */
     public void setDesiredShootingSpeed(ShooterSpeeds s) {
@@ -86,6 +92,7 @@ public class StateHandler {
 
     /**
      * Method to get the desired shooting speed to be commanded.
+     * 
      * @return The desired shooting speed.
      */
     public ShooterSpeeds getDesiredShootingSpeed() {
@@ -94,6 +101,7 @@ public class StateHandler {
 
     /**
      * Sets the current shooting speed.
+     * 
      * @param s The current shooting speed.
      */
     public void setCurrentShootingSpeed(ShooterSpeeds s) {
@@ -102,6 +110,7 @@ public class StateHandler {
 
     /**
      * Method to get the current shooting speed to be commanded.
+     * 
      * @return The current shooting speed.
      */
     public ShooterSpeeds getCurrentShootingSpeed() {
@@ -110,6 +119,7 @@ public class StateHandler {
 
     /**
      * Sets the desired intake roller speed.
+     * 
      * @param i The desired intake roller speed.
      */
     public void setDesiredIntakeRollerSpeed(IntakeRollerSpeeds i) {
@@ -118,6 +128,7 @@ public class StateHandler {
 
     /**
      * Method to get the desired intake roller speed to be commanded.
+     * 
      * @return The desired intake roller speed.
      */
     public IntakeRollerSpeeds getDesiredIntakeRollerSpeed() {
@@ -126,6 +137,7 @@ public class StateHandler {
 
     /**
      * Sets the current intake roller speed.
+     * 
      * @param i The current intake roller speed.
      */
     public void setCurrentIntakeRollerSpeed(IntakeRollerSpeeds i) {
@@ -134,6 +146,7 @@ public class StateHandler {
 
     /**
      * Method to get the current intake roller speed to be commanded.
+     * 
      * @return The current intake roller speed.
      */
     public IntakeRollerSpeeds getCurrentIntakeRollerSpeed() {
@@ -142,6 +155,7 @@ public class StateHandler {
 
     /**
      * Sets the desired intake state.
+     * 
      * @param i The desired intake state.
      */
     public void setDesiredIntakeState(IntakeStates i) {
@@ -150,6 +164,7 @@ public class StateHandler {
 
     /**
      * Method to get the desired intake state to be commanded.
+     * 
      * @return The desired intake state.
      */
     public IntakeStates getDesiredIntakeState() {
@@ -158,6 +173,7 @@ public class StateHandler {
 
     /**
      * Sets the current intake state.
+     * 
      * @param i The current intake state.
      */
     public void setCurrentIntakeState(IntakeStates i) {
@@ -166,6 +182,7 @@ public class StateHandler {
 
     /**
      * Method to get the current intake state to be commanded.
+     * 
      * @return The current intake state.
      */
     public IntakeStates getCurrentIntakeState() {
@@ -174,6 +191,7 @@ public class StateHandler {
 
     /**
      * Sets the desired feeder speed value.
+     * 
      * @param f The desired feeder speed.
      */
     public void setDesiredFeederSpeed(FeederSpeeds f) {
@@ -182,6 +200,7 @@ public class StateHandler {
 
     /**
      * Method to get the desired feeder speed to be commanded.
+     * 
      * @return The desired feeder speed.
      */
     public FeederSpeeds getDesiredFeederSpeed() {
@@ -190,6 +209,7 @@ public class StateHandler {
 
     /**
      * Sets the current feeder speed value.
+     * 
      * @param f The current feeder speed.
      */
     public void setCurrentFeederSpeed(FeederSpeeds f) {
@@ -198,16 +218,18 @@ public class StateHandler {
 
     /**
      * Method to get the current feeder speed to be commanded.
+     * 
      * @return The current feeder speed.
      */
     public FeederSpeeds getCurrentFeederSpeed() {
         return currentFeederSpeed;
     }
 
-   
     /**
      * Sets if the Limelight has a valid target.
-     * @param limelightHasTarget The boolean value to determine if the Limelight has a valid target.
+     * 
+     * @param limelightHasTarget The boolean value to determine if the Limelight has
+     *                           a valid target.
      */
     public void setLimelightHasTag(boolean limelightHasTag) {
         this.limelightHasTag = limelightHasTag;
@@ -215,14 +237,16 @@ public class StateHandler {
 
     /**
      * Gets if the Limelight has a valid target.
+     * 
      * @return The boolean value if Limelight has a valid target.
      */
-     public boolean getLimelightHasTag() {
+    public boolean getLimelightHasTag() {
         return limelightHasTag;
     }
 
     /**
      * Sets the ID of the April Tag in frame.
+     * 
      * @param aprilTagID The double value that sets the Tag ID.
      */
     public void setAprilTagID(double aprilTagID) {
@@ -231,6 +255,7 @@ public class StateHandler {
 
     /**
      * Gets the ID of the April Tag in Frame;
+     * 
      * @return The double value of the TAG ID
      */
     public double getAprilTagID() {
@@ -239,7 +264,9 @@ public class StateHandler {
 
     /**
      * Sets the boolean of whether or not there is a valid Speaker April Tag.
-     * @param hasValidSpeakerTag The boolean which determines if there is a valid Speaker April Tag.
+     * 
+     * @param hasValidSpeakerTag The boolean which determines if there is a valid
+     *                           Speaker April Tag.
      */
     public void setHasValidSpeakerTag(boolean hasValidSpeakerTag) {
         this.hasValidSpeakerTag = hasValidSpeakerTag;
@@ -247,6 +274,7 @@ public class StateHandler {
 
     /**
      * Gets the boolean of whether or not there is a valid Speaker April Tag.
+     * 
      * @return The boolean of whether or not there is a valid Speaker April Tag.
      */
     public boolean getHasValidSpeakerTag() {
@@ -255,7 +283,9 @@ public class StateHandler {
 
     /**
      * Sets the boolean of whether or not there is a valid Amp April Tag.
-     * @param hasValidAmpTag The boolean which determines if there is a valid Amp April Tag.
+     * 
+     * @param hasValidAmpTag The boolean which determines if there is a valid Amp
+     *                       April Tag.
      */
     public void setHasValidAmpTag(boolean hasValidAmpTag) {
         this.hasValidAmpTag = hasValidAmpTag;
@@ -263,6 +293,7 @@ public class StateHandler {
 
     /**
      * Gets the boolean of whether or not there is a valid Amp April Tag.
+     * 
      * @return The boolean of whether or not there is a valid Amp April Tag.
      */
     public boolean getHasValidAmpTag() {
@@ -271,7 +302,9 @@ public class StateHandler {
 
     /**
      * Sets the distance to an April Tag.
-     * @param distanceToTag The double which is passed in to set the distance to the April Tag.
+     * 
+     * @param distanceToTag The double which is passed in to set the distance to the
+     *                      April Tag.
      */
     public void setDistanceToSpeakerTag(double distanceToTag) {
         this.distanceToTag = distanceToTag;
@@ -279,6 +312,7 @@ public class StateHandler {
 
     /**
      * Gets the distance to an April Tag.
+     * 
      * @return A double which is the distance to the April Tag.
      */
     public double getDistanceToSpeakerTag() {
@@ -287,8 +321,9 @@ public class StateHandler {
 
     /**
      * Method to set the current state of Beam Break One.
-     * Use the current reading from Beam Break One to set 
+     * Use the current reading from Beam Break One to set
      * a more accessible reading within StateHandler.
+     * 
      * @param isCovered boolean variable to determine if BB One is covered.
      */
     public void setBBOneCovered(boolean isCovered) {
@@ -297,17 +332,18 @@ public class StateHandler {
 
     /**
      * Method to get the current state of Beam Break One.
+     * 
      * @return a boolean variable to determine if BB One is covered.
      */
     public boolean getBBOneCovered() {
         return bbOneCovered;
     }
 
-
     /**
      * Method to set the current state of Beam Break Two.
-     * Use the current reading from Beam Break Two to set 
+     * Use the current reading from Beam Break Two to set
      * a more accessible reading within StateHandler.
+     * 
      * @param isCovered boolean variable to determine if BB Two is covered.
      */
     public void setBBTwoCovered(boolean isCovered) {
@@ -316,6 +352,7 @@ public class StateHandler {
 
     /**
      * Method to get the current state of Beam Break Two.
+     * 
      * @return a boolean variable to determine if BB Two is covered.
      */
     public boolean getBBTwoCovered() {
@@ -324,8 +361,9 @@ public class StateHandler {
 
     /**
      * Method to set the current state of Beam Break Three.
-     * Use the current reading from Beam Break Three to set 
+     * Use the current reading from Beam Break Three to set
      * a more accessible reading within StateHandler.
+     * 
      * @param isCovered boolean variable to determine if BB Three is covered.
      */
     public void setBBThreeCovered(boolean isCovered) {
@@ -334,6 +372,7 @@ public class StateHandler {
 
     /**
      * Method to get the current state of Beam Break Three.
+     * 
      * @return a boolean variable to determine if BB Three is covered.
      */
     public boolean getBBThreeCovered() {
@@ -342,8 +381,9 @@ public class StateHandler {
 
     /**
      * Method to set the current state of Beam Break Four.
-     * Use the current reading from Beam Break Four to set 
+     * Use the current reading from Beam Break Four to set
      * a more accessible reading within StateHandler.
+     * 
      * @param isCovered boolean variable to determine if BB Four is covered.
      */
     public void setBBFourCovered(boolean isCovered) {
@@ -352,14 +392,27 @@ public class StateHandler {
 
     /**
      * Method to get the current state of Beam Break Four.
+     * 
      * @return a boolean variable to determine if BB Four is covered.
      */
     public boolean getBBFourCovered() {
         return bbFourCovered;
     }
 
+    /**
+     * Sets a boolean that determines if the swerve drive is centered onto the AprilTag.
+     * @param centeredToTag the boolean to set to determine if the drivebase is centered onto the AprilTag.
+     */
+    public void setIsCenteredToTag(boolean centeredToTag) {
+        this.centeredToTag = centeredToTag;
+    }
 
-
-
+    /**
+     * Returns if the swerve drive is centered onto the AprilTag.
+     * @return a boolean that represents if the swerve drive is centered onto the april tag.
+     */
+    public boolean getIsCenteredToTag() {
+        return centeredToTag;
+    }
 
 }

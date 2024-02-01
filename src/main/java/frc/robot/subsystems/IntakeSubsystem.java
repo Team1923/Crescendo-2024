@@ -186,38 +186,28 @@ public class IntakeSubsystem extends SubsystemBase {
     double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
     double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
 
-
-
-
-    //if trying to eject while not deployed, don't let them deploy TODO: do we need this?
-    if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT){
+    /*
+     * EDGE CASE: Eject speed can only be run when the intake is actually in its deployed position.
+     */
+    if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
+        && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
       rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
     }
-    
-    
 
     setIntakePosition(intakeSetpoint);
     setBottomWheelSpeed(rollerSpeed);
     setTopWheelSpeed(rollerSpeed);
 
-    if (isAtIntakeState(desiredIntakeState)){
+    if (isAtIntakeState(desiredIntakeState)) {
       stateHandler.setCurrentIntakeState(desiredIntakeState);
     }
 
     stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
 
-
-
-
-
     // check the stator current to know whether or not we are hardstop.
-
-    /*
-     * if current position = deployed and BB3 is triggered -> desiredPostion =
-     * stowed
-     * 
-     * if current position != desired position -> move to desired position
-     * if current wheel speed != desired wheel speed -> spin at desired wheel speed
-     */
+    // if (current == BAD) {
+    //   stopIntakeArmMotors();
+    //   stateHandler.setCurrentArmState(desiredIntakeState);
+    // }
   }
 }

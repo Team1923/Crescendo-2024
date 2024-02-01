@@ -38,6 +38,6 @@ public class PositionToAmp extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+    return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered();
   }
 }

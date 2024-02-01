@@ -9,8 +9,11 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
+import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
+import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
 import frc.robot.Constants.FeederConstants;
 import frc.lib.RobotStateUtils.StateHandler;
 
@@ -67,28 +70,30 @@ public class FeederSubsystem extends SubsystemBase {
     stateHandler.setBBTwoCovered(getBeamBreakTwo());
     stateHandler.setBBThreeCovered(getBeamBreakThree());
 
-
     FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
 
-    double feederSpeedOut = desiredFeederSpeed.getPercentOutputValue().getPercentOut();
+    /*
+     * CONDITION: Want to eject game piece.
+     */
+    if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
+        && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.EJECT) {
+      desiredFeederSpeed = FeederSpeeds.OUTWARD;
+    }
 
-    //TODO: this doesn't really do anything right now, look at charged up, use set method inside if's
-    if (desiredFeederSpeed == FeederSpeeds.INWARD && stateHandler.getBBOneCovered() && stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){
-      feederSpeedOut = FeederSpeeds.INWARD.getPercentOutputValue().getPercentOut();
+    /*
+     * CONDITION: Ready to score into speaker.
+     * NOTE: the centeredToTag method will always return true on default.
+     */
+    else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
+        && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
+        && stateHandler.getIsCenteredToTag()) {
+      desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 
 
-    
-    if (desiredFeederSpeed == FeederSpeeds.OFF) {
-      stopFeederMotor();
-    } else if (desiredFeederSpeed == FeederSpeeds.INWARD) {
-      setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
-    } else if (desiredFeederSpeed == FeederSpeeds.OUTWARD) {
-      setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
-    } else {
-      stopFeederMotor();
-    }
+    setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
+    stateHandler.setCurrentFeederSpeed(desiredFeederSpeed);
 
   }
 
-} 
+}
