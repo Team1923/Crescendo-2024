@@ -14,6 +14,24 @@
       "/Shuffleboard/Driver Dashboard/Auto Mode/SendableChooser[0]": "String Chooser"
     }
   },
+  "NetworkTables": {
+    "retained": {
+      "SmartDashboard": {
+        "DeployIntakeCommand": {
+          "open": true
+        },
+        "PositionToAmp": {
+          "open": true
+        },
+        "open": true
+      }
+    },
+    "transitory": {
+      "SmartDashboard": {
+        "open": true
+      }
+    }
+  },
   "NetworkTables Info": {
     "Clients": {
       "open": true
