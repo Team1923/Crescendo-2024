@@ -28,10 +28,10 @@ public final class Constants {
 
     public static final class IntakeConstants {
         /* Motor IDs */
-        public static final int intakeWheelTopID = 0;
-        public static final int intakeWheelBottomID = 0;
-        public static final int intakePrimaryID = 0;
-        public static final int intakeFollowerID = 0;
+        public static final int intakeWheelTopID = 19;
+        public static final int intakeWheelBottomID = 20;
+        public static final int intakePrimaryID = 21;
+        public static final int intakeFollowerID = 22;
     
         /* Motion Magic Constants */
         public static final double intakeKS = 0;
@@ -67,8 +67,8 @@ public final class Constants {
 
     public static final class ShooterConstants {
         /* Motor IDs */
-        public static final int shooterMotorPrimaryID = 0;
-        public static final int shooterMotorFollowerID = 0;
+        public static final int shooterMotorPrimaryID = 17;
+        public static final int shooterMotorFollowerID = 18;
     
         /* Beam Break ID */
         public static final int beamBreakFourID = 0;
@@ -78,7 +78,7 @@ public final class Constants {
     
       public static final class FeederConstants {
         /* Motor ID */
-        public static final int feederMotorID = 0;
+        public static final int feederMotorID = 14;
     
         /* Beam Break IDs */
         public static final int beamBreakTwoID = 0;
@@ -87,8 +87,8 @@ public final class Constants {
 
     public static final class ArmConstants {
         /* Motor IDs */
-        public static final int armMotorPrimaryID = 0;
-        public static final int armMotorFollowerID = 0;
+        public static final int armMotorPrimaryID = 15;
+        public static final int armMotorFollowerID = 16;
     
         /* Motion Magic Constants */
         public static final double armKS = 0;
