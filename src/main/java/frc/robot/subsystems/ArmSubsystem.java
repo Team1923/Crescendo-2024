@@ -149,10 +149,12 @@ public class ArmSubsystem extends SubsystemBase {
       else if (stateHandler.getHasValidSpeakerTag()) {
         armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
       }
-    } else {
-      /* No edge cases, set the arm position to whatever is the desired arm position. */
-      setArmPosition(armSetpoint);
     }
+
+    /*
+     * Set the arm position to whatever is the desired arm position.
+     */
+    setArmPosition(armSetpoint);
 
     /*
      * Update the arm's position based on the desired setpoint.

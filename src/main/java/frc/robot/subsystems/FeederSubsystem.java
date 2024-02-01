@@ -81,10 +81,11 @@ public class FeederSubsystem extends SubsystemBase {
         && stateHandler.getIsCenteredToTag()) {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
-    } else {
-      /* Default state, no edge cases. */
-      setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
-    }
+    } 
+
+    /* Set the feeder motor speed to whatever it needs to be. */
+    setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
+
 
     stateHandler.setCurrentFeederSpeed(desiredFeederSpeed);
 

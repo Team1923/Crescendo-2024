@@ -146,10 +146,11 @@ public class ShooterSubsystem extends SubsystemBase {
     } else if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()) {
       /* If you have a game piece, start ramping up the shooter speed. */
       desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
-    } else {
-      /* No edge cases, just set the speeds. */
-      setVelocities(desiredShooterSpeed, desiredShooterSpeed);
-    }
+    } 
+
+    /* Set the desired velocity of the shooter wheels. */
+    setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+
 
     if (isAtShooterSpeed(desiredShooterSpeed)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
