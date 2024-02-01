@@ -7,12 +7,15 @@ import com.pathplanner.lib.path.PathPlannerTrajectory;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
+import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.ShooterArmUtils.PositionRPMData;
+import frc.robot.commands.Intake.DeployIntakeCommand;
 import frc.robot.commands.Swerve.AlignToAmp;
 import frc.robot.commands.Swerve.GoalCentricCommand;
 import frc.robot.commands.Swerve.TeleopSwerve;
@@ -45,6 +48,10 @@ public class RobotContainer {
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
     private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    private final ArmSubsystem armSubsystem = new ArmSubsystem();
+    private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    private final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     private AutoInstantiator autoInstantiator = new AutoInstantiator();
@@ -85,6 +92,9 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(rotationAxis)));
 
         aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
+
+        SmartDashboard.putData(new DeployIntakeCommand());
+        SmartDashboard.putData(new InstantCommand(() -> StateHandler.getInstance().setBBThreeCovered(true)));
     }
 
     /**
