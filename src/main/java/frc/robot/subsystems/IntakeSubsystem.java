@@ -187,20 +187,17 @@ public class IntakeSubsystem extends SubsystemBase {
     double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
 
     /*
-     * EDGE CASE: Eject speed can only be run when the intake is actually in its deployed position.
+     * EDGE CASE: Eject speed can only be run when the intake is actually in its
+     * deployed position.
      */
     if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
         && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
       rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
-    } 
-    
-    else {
+    } else {
       setIntakePosition(intakeSetpoint);
       setBottomWheelSpeed(rollerSpeed);
       setTopWheelSpeed(rollerSpeed);
     }
-
-
 
     if (isAtIntakeState(desiredIntakeState)) {
       stateHandler.setCurrentIntakeState(desiredIntakeState);
@@ -210,8 +207,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     // check the stator current to know whether or not we are hardstop.
     // if (current == BAD) {
-    //   stopIntakeArmMotors();
-    //   stateHandler.setCurrentArmState(desiredIntakeState);
+    // stopIntakeArmMotors();
+    // stateHandler.setCurrentArmState(desiredIntakeState);
     // }
   }
 }
