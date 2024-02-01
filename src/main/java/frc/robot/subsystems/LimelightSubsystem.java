@@ -30,13 +30,13 @@ public class LimelightSubsystem extends SubsystemBase {
     stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
 
-    SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
-    SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
-    SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
-    SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
-    SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
-    SmartDashboard.putNumber("X Angle Offset", limelight.getXAngleOffset());
-    SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
+    // SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
+    // SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
+    // SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
+    // SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
+    // SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
+    // SmartDashboard.putNumber("X Angle Offset", limelight.getXAngleOffset());
+    // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
 
 
   }

@@ -8,12 +8,15 @@ import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.lib.RobotStateUtils.StateHandler;
 
 public class ShuffleboardSubsystem extends SubsystemBase {
   /** Creates a new ShuffleboardSubsystem. */
 
   public ShuffleboardTab driverDashboard = Shuffleboard.getTab("Driver Dashboard");
+  private StateHandler stateHandler = StateHandler.getInstance();
 
   private GenericEntry driverStationTimeElapsed = driverDashboard
     .add("Time Elapsed", DriverStation.getMatchTime())
@@ -24,5 +27,31 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     driverStationTimeElapsed.setDouble(DriverStation.getMatchTime());
+    /*
+     * STATE HANDLER PRINTOUTS
+     */
+
+    /* BEAM BREAK VALUES */
+    SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());
+    SmartDashboard.putBoolean("BB TWO COVERED", stateHandler.getBBTwoCovered());
+    SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
+    SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
+
+    /* RELEVANT INTAKE STATES */
+    SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());
+    SmartDashboard.putString("DESIRED INTAKE POS", stateHandler.getDesiredIntakeState().toString());
+    SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
+
+    /* RELEVANT ARM STATES */
+    SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
+    SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
+
+    /* RELEVANT SHOOTER STATES */
+    SmartDashboard.putString("DESIRED SHOOTER STATE", stateHandler.getDesiredShootingSpeed().toString());
+    SmartDashboard.putString("CURRENT SHOOTER STATE", stateHandler.getCurrentShootingSpeed().toString());
+
+    /* RELEVANT FEEDER STATES */
+    SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
+
   }
 }
