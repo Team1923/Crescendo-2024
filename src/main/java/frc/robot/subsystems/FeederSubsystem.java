@@ -52,7 +52,7 @@ public class FeederSubsystem extends SubsystemBase {
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakTwo() {
-    return beamBreakTwo.get();
+    return !beamBreakTwo.get();
   }
 
   /**
@@ -62,7 +62,7 @@ public class FeederSubsystem extends SubsystemBase {
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakThree() {
-    return beamBreakThree.get();
+    return !beamBreakThree.get();
   }
 
   @Override

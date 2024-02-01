@@ -86,7 +86,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakFour() {
-    return beamBreakFour.get();
+    return !beamBreakFour.get();
   }
 
   /**

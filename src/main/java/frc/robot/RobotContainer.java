@@ -94,7 +94,6 @@ public class RobotContainer {
         aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
 
         SmartDashboard.putData(new DeployIntakeCommand());
-        SmartDashboard.putData(new InstantCommand(() -> StateHandler.getInstance().setBBThreeCovered(true)));
     }
 
     /**

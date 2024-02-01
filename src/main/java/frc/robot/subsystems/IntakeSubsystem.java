@@ -167,7 +167,7 @@ public class IntakeSubsystem extends SubsystemBase {
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakOne() {
-    return beamBreakOne.get();
+    return !beamBreakOne.get();
   }
 
   public boolean isAtIntakeState(IntakeStates intakeStates) {

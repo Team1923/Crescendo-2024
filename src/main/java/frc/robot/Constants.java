@@ -60,7 +60,7 @@ public final class Constants {
         public static final double intakeMaxGravityConstant = 0;
 
         /* Beam Break ID */
-        public static final int beamBreakOneID = 0;
+        public static final int beamBreakOneID = 1;
 
         public static final double intakePositionAllowableOffset = 0;
     }
@@ -71,7 +71,7 @@ public final class Constants {
         public static final int shooterMotorFollowerID = 18;
     
         /* Beam Break ID */
-        public static final int beamBreakFourID = 0;
+        public static final int beamBreakFourID = 4;
 
         public static final double shooterSpeedThreshold = 0;
       }
@@ -81,8 +81,8 @@ public final class Constants {
         public static final int feederMotorID = 14;
     
         /* Beam Break IDs */
-        public static final int beamBreakTwoID = 0;
-        public static final int beamBreakThreeID = 0;
+        public static final int beamBreakTwoID = 2;
+        public static final int beamBreakThreeID = 3;
     }
 
     public static final class ArmConstants {
