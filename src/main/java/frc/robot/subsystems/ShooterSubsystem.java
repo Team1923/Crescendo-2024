@@ -14,10 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables;
-import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
 import frc.lib.ShooterArmUtils.PositionRPMData;
-import frc.robot.Constants;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.ShooterConstants;
 
