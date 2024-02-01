@@ -148,7 +148,11 @@ public class ShooterSubsystem extends SubsystemBase {
       desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
     }
 
-    setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+    else {
+      setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+    }
+
+    
 
     if (isAtShooterSpeed(desiredShooterSpeed)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);

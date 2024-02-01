@@ -88,10 +88,13 @@ public class FeederSubsystem extends SubsystemBase {
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
         && stateHandler.getIsCenteredToTag()) {
       desiredFeederSpeed = FeederSpeeds.INWARD;
+    } 
+    
+    else {
+      setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
     }
 
 
-    setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
     stateHandler.setCurrentFeederSpeed(desiredFeederSpeed);
 
   }

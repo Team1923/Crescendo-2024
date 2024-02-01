@@ -151,12 +151,14 @@ public class ArmSubsystem extends SubsystemBase {
       }
     }
 
-    /**
-     * Set the arm position to whatever is the desired arm position.
-     */
-    setArmPosition(armSetpoint);
+    else {
+      /*
+       * Set the arm position to whatever is the desired arm position.
+       */
+      setArmPosition(armSetpoint);
+    }
 
-    /**
+    /*
      * Below lines/logic is used to update the arm's position.
      */
     if (isAtArmState(armSetpoint)) {
