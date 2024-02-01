@@ -15,6 +15,7 @@ import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.ShooterConstants;
 import frc.lib.LimelightUtil.LimelightInterface;
 import frc.lib.RobotStateUtils.StateHandler;
 
@@ -121,6 +122,7 @@ public class ArmSubsystem extends SubsystemBase {
     armFollower.disable();
   }
 
+  //TODO: this doesn't work for when we are using a positionRPMDATA
   public boolean isAtArmState(ArmStates armState) {
     return Math
         .abs(getArmPositionRads() - armState.getArmPosition().getAngularSetpoint()) < ArmConstants.armPositionAllowableOffset;
@@ -138,21 +140,16 @@ public class ArmSubsystem extends SubsystemBase {
     ArmStates desiredArmState = stateHandler.getDesiredArmState();
     double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
-    if (desiredArmState == ArmStates.SPEAKER && limelightInterface.hasSpeakerTag() && stateHandler.isHasGamePiece()) {
-      armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToTag());
-    }
-    else if(desiredArmState == ArmStates.AMP && limelightInterface.hasAmpTag() && stateHandler.isHasGamePiece()){
-      armSetpoint = ArmStates.AMP.getArmPosition().getAngularSetpoint();
-    }
-    else if(desiredArmState == ArmStates.CLIMB){
-      armSetpoint = ArmStates.CLIMB.getArmPosition().getAngularSetpoint();
-    }
-
-    if(!stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() == ArmStates.SPEAKER){
-      stateHandler.setDesiredArmState(ArmStates.STOWED);
-    }
-    else if(!stateHandler.isHasGamePiece() && stateHandler.getCurrentArmState() == ArmStates.AMP){
-      stateHandler.setDesiredArmState(ArmStates.STOWED);
+    if (desiredArmState == ArmStates.SPEAKER){
+        
+        //subwoofer condition
+        if ((stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD) || (!limelightInterface.hasSpeakerTag() && stateHandler.wantToScoreSpeaker())){
+            armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
+        }
+        //distance to speaker condition
+        else if (stateHandler.getHasValidSpeakerTag()){
+            armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+        }
     }
 
     /**
@@ -164,6 +161,8 @@ public class ArmSubsystem extends SubsystemBase {
     /**
      * Below lines/logic is used to update the arm's position.
      */
+
+    //TODO: this doesn't work for when we are using a positionRPMDATa
     if (isAtArmState(desiredArmState)) {
       stateHandler.setCurrentArmState(desiredArmState);
     }

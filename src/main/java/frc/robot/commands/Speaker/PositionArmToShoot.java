@@ -38,6 +38,6 @@ public class PositionArmToShoot extends Command {
   @Override
   public boolean isFinished() {
     //when you let go of trigger, automatically ends
-    return !(stateHandler.getBBThreeCovered() && stateHandler.getBBFourCovered());
+    return !stateHandler.hasGamePiece();
   }
 }

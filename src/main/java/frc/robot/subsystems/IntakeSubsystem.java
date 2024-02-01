@@ -12,6 +12,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 import frc.robot.Constants;
 import frc.robot.Constants.IntakeConstants;
@@ -178,6 +179,36 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     stateHandler.setBBOneCovered(getBeamBreakOne());
+
+    IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
+    IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
+
+    double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
+    double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
+
+
+
+
+    //if trying to eject while not deployed, don't let them deploy TODO: do we need this?
+    if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT){
+      rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
+    }
+    
+    
+
+    setIntakePosition(intakeSetpoint);
+    setBottomWheelSpeed(rollerSpeed);
+    setTopWheelSpeed(rollerSpeed);
+
+    if (isAtIntakeState(desiredIntakeState)){
+      stateHandler.setCurrentIntakeState(desiredIntakeState);
+    }
+
+    stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
+
+
+
+
 
     // check the stator current to know whether or not we are hardstop.
 

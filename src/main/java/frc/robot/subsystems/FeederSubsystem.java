@@ -10,6 +10,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
+import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 import frc.robot.Constants.FeederConstants;
 import frc.lib.RobotStateUtils.StateHandler;
 
@@ -66,20 +67,28 @@ public class FeederSubsystem extends SubsystemBase {
     stateHandler.setBBTwoCovered(getBeamBreakTwo());
     stateHandler.setBBThreeCovered(getBeamBreakThree());
 
-    stateHandler.setHasGamePiece(getBeamBreakThree() && getBeamBreakTwo());
 
-    FeederSpeeds desiredFeederSpeeds = StateHandler.getInstance().getDesiredFeederSpeed();
+    FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
+
+    double feederSpeedOut = desiredFeederSpeed.getPercentOutputValue().getPercentOut();
+
+    //TODO: this doesn't really do anything right now, look at charged up, use set method inside if's
+    if (desiredFeederSpeed == FeederSpeeds.INWARD && stateHandler.getBBOneCovered() && stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){
+      feederSpeedOut = FeederSpeeds.INWARD.getPercentOutputValue().getPercentOut();
+    }
+
+
     
-    if (desiredFeederSpeeds == FeederSpeeds.OFF) {
+    if (desiredFeederSpeed == FeederSpeeds.OFF) {
       stopFeederMotor();
-    } else if (desiredFeederSpeeds == FeederSpeeds.INWARD) {
-      setFeederMotorSpeed(desiredFeederSpeeds.percentOutputValue().getPercentOutputValue());
-    } else if (desiredFeederSpeeds == FeederSpeeds.OUTWARD) {
-      setFeederMotorSpeed(desiredFeederSpeeds.percentOutputValue().getPercentOutputValue());
+    } else if (desiredFeederSpeed == FeederSpeeds.INWARD) {
+      setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
+    } else if (desiredFeederSpeed == FeederSpeeds.OUTWARD) {
+      setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
     } else {
       stopFeederMotor();
     }
 
   }
 
-}
+} 

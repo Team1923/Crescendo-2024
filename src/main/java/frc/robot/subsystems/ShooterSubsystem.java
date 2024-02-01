@@ -13,7 +13,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.lib.RobotStateUtils.StateVariables;
+import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
+import frc.lib.ShooterArmUtils.PositionRPMData;
+import frc.robot.Constants;
+import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -22,6 +27,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private TalonFX shooterBottom = new TalonFX(ShooterConstants.shooterMotorFollowerID);
   private DigitalInput beamBreakFour = new DigitalInput(ShooterConstants.beamBreakFourID);
   private StateHandler stateHandler = StateHandler.getInstance();
+
+  PositionRPMData rpmData = PositionRPMData.getInstance();
 
   private final VelocityVoltage m_velocitytop = new VelocityVoltage(0);
   private final VelocityVoltage m_velocitybottom = new VelocityVoltage(0);
@@ -108,6 +115,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterBottom.stopMotor();
   }
 
+
+  //TODO: this doesn't work for when we are using a positionRPMDATa
   public boolean isAtShooterSpeed(ShooterSpeeds s) {
     return Math.abs(getTopRPM() - s.getRPMValue().getRPM()) < ShooterConstants.shooterSpeedThreshold
         && Math.abs(getBottomRPM() - s.getRPMValue().getRPM()) < ShooterConstants.shooterSpeedThreshold;
@@ -121,16 +130,47 @@ public class ShooterSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     stateHandler.setBBFourCovered(getBeamBreakFour());
 
-    double desiredShooterSpeed = stateHandler.getDesiredShootingSpeed().getRPMValue().getRPM();
+
+    ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
+
+    double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
+
+
+    //TODO: NOTE: These hasGamePiece in the wantToScores may turn off as the gamepiece is leaving the shooter, potentially stops running at shoot speed early? CHECK
+    //also, kinda weird that we are overriding states here
+
+    if (desiredShooterSpeedState == ShooterSpeeds.SHOOT){
+
+      //subwoofer condition
+        if ((stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD) || (!stateHandler.getHasValidSpeakerTag() && stateHandler.wantToScoreSpeaker())){
+            desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
+        }
+        //distance shot to speaker condition
+        else if (stateHandler.getHasValidSpeakerTag()){
+            desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
+        }
+      
+    }
+    //overriding makes sense here, no amp shooter speed state so we infer that it is Idle
+    else if (stateHandler.wantToScoreAmp()){
+        desiredShooterSpeed = ShooterSpeeds.IDLE.getRPMValue().getRPM();
+    }
+    //does overriding make sense?
+    else if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()){
+      desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
+    }
+
 
     
 
+    set(desiredShooterSpeed, desiredShooterSpeed);
 
+    
+    //TODO: this doesn't work for when we are using a positionRPMDATA
+    if (isAtShooterSpeed(desiredShooterSpeedState)){
+        stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    }
 
-    /*
-     * 
-     * 
-     * if current speed != desired speed -> spin at desired speed
-     */
+   
   }
 }

@@ -16,7 +16,7 @@ public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
 
-  public double calculateDistanceToTag(){
+  public double calculateDistanceToSpeakerTag(){
     double tagOffsetAngleVertical = limelight.getYAngleOffset();
     double angleToGoal = (LimeLightConstants.limelightMountAngle + tagOffsetAngleVertical) * (Math.PI / 180);
     return (LimeLightConstants.speakerHeightFromFloor - LimeLightConstants.limelightHeight) / Math.tan(angleToGoal);
@@ -24,13 +24,13 @@ public class LimelightSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    stateHandler.setDistanceToTag(calculateDistanceToTag());
+    stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
     stateHandler.setLimelightHasTag(limelight.hasValidTag());
     stateHandler.setAprilTagID(limelight.getID());
     stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
 
-    SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToTag());
+    SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
     SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
     SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
     SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());

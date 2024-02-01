@@ -84,7 +84,7 @@ public class StateVariables {
             this.percentOutputValue = p;
         }
 
-        public PercentOutputValue percentOutputValue() {
+        public PercentOutputValue getPercentOutputValue() {
             return percentOutputValue;
         }
     }
@@ -100,7 +100,7 @@ public class StateVariables {
             this.percentOutput = s;
         }
 
-        public double getPercentOutputValue() {
+        public double getPercentOut() {
             return percentOutput;
         }
     }
@@ -153,7 +153,7 @@ public class StateVariables {
             this.percentOutputValue = p;
         }
 
-        public PercentOutputValue percentOutputValue() {
+        public PercentOutputValue getPercentOutputValue() {
             return percentOutputValue;
         }
     }

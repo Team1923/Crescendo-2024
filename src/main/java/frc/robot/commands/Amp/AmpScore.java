@@ -4,40 +4,31 @@
 
 package frc.robot.commands.Amp;
 
-
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.lib.RobotStateUtils.StateHandler;
-import frc.lib.RobotStateUtils.StateVariables.ArmStates;
-import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
 
-public class PositionToAmp extends Command {
-  StateHandler stateHandler = StateHandler.getInstance();
-  /** Creates a new AmpCommand. */
-  public PositionToAmp() {
+public class AmpScore extends Command {
+  /** Creates a new AmpScore. */
+  public AmpScore() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stateHandler.setDesiredArmState(ArmStates.AMP);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    stateHandler.setDesiredArmState(ArmStates.STOWED);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+    return false;
   }
 }

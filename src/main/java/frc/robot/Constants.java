@@ -111,6 +111,8 @@ public final class Constants {
         public static final double armMaxGravityConstant = 0;  
 
         public static final double armPositionAllowableOffset = 0; // allowed radians offset
+
+        public static final double SUBWOOFER_THRESHHOLD = 0; //tune, how far away we are from subwoofer before we move arm to subwoofer pos.
     }
 
 

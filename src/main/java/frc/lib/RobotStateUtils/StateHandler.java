@@ -37,9 +37,6 @@ public class StateHandler {
     private boolean hasValidSpeakerTag = false;
     private boolean hasValidAmpTag = false;
     private double distanceToTag = 0;
-    private boolean wantToScoreSpeaker = false;
-    private boolean wantToScoreAmp = false;
-    private boolean hasGamePiece = false;
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;
@@ -276,7 +273,7 @@ public class StateHandler {
      * Sets the distance to an April Tag.
      * @param distanceToTag The double which is passed in to set the distance to the April Tag.
      */
-    public void setDistanceToTag(double distanceToTag) {
+    public void setDistanceToSpeakerTag(double distanceToTag) {
         this.distanceToTag = distanceToTag;
     }
 
@@ -284,7 +281,7 @@ public class StateHandler {
      * Gets the distance to an April Tag.
      * @return A double which is the distance to the April Tag.
      */
-    public double getDistanceToTag() {
+    public double getDistanceToSpeakerTag() {
         return distanceToTag;
     }
 
@@ -361,13 +358,7 @@ public class StateHandler {
         return bbFourCovered;
     }
 
-    public void setHasGamePiece(boolean hasGamePiece) {
-        this.hasGamePiece = hasGamePiece;
-    }
 
-    public boolean isHasGamePiece() {
-        return hasGamePiece;
-    }
 
 
 
