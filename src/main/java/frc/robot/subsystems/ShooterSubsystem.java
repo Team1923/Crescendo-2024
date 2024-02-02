@@ -123,7 +123,6 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Velocity(RPM) of the top motor", getTopRPM());
     SmartDashboard.putNumber("Velocity(RPM) of the bottom motor", getBottomRPM());
 
-    // This method will be called once per scheduler run
     stateHandler.setBBFourCovered(getBeamBreakFour());
 
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
