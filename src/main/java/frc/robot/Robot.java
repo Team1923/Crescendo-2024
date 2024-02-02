@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
   //being run in RPM
   private final double velocitytop = 6000;
   private final double velocitybottom = 6000;
+  
 
 
   private Timer offsetWait = new Timer();
@@ -66,7 +67,8 @@ public class Robot extends TimedRobot {
 
   //in RPM
 
-
+  private boolean isInRPMRange = false;
+  private final double treshold = 100;
 
   
 
@@ -223,9 +225,12 @@ public class Robot extends TimedRobot {
       feederMotor.stopMotor();
     }
 
+    isInRPMRange = (Math.abs(topmotor.getVelocity().getValueAsDouble()*60 - velocitytop) < treshold && Math.abs(bottommotor.getVelocity().getValueAsDouble()*60 - velocitytop) < treshold);
+
     //times 60 to go to RPM
     SmartDashboard.putNumber("Velocity(RPM) of top motor", topmotor.getVelocity().getValueAsDouble() * 60);
     SmartDashboard.putNumber("Velocity(RPM) of bottom motor", bottommotor.getVelocity().getValueAsDouble() * 60);
+    SmartDashboard.putBoolean("Are motors in Range", isInRPMRange);
 
     SmartDashboard.putNumber("Set Velocity(RPM) for top motor", velocitytop+v_rOffset);
     SmartDashboard.putNumber("Set Velocity(RPM) for bottom motor", velocitybottom+v_lOffset);
