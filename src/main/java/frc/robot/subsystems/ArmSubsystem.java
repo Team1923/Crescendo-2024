@@ -10,12 +10,10 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.lib.RobotStateUtils.StateVariables.ArmPosition;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.IntakeConstants;
-import frc.robot.Constants.ShooterConstants;
 import frc.lib.LimelightUtil.LimelightInterface;
 import frc.lib.RobotStateUtils.StateHandler;
 

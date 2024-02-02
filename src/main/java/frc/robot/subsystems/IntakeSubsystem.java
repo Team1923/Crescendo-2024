@@ -202,7 +202,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if (isAtIntakeState(desiredIntakeState)) {
       stateHandler.setCurrentIntakeState(desiredIntakeState);
     }
-
+    
     stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
 
     // check the stator current to know whether or not we are hardstop.

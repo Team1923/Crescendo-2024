@@ -27,9 +27,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     driverStationTimeElapsed.setDouble(DriverStation.getMatchTime());
-    /*
-     * STATE HANDLER PRINTOUTS
-     */
 
     /* BEAM BREAK VALUES */
     SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());

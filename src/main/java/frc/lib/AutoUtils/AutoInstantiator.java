@@ -1,11 +1,7 @@
 package frc.lib.AutoUtils;
 
-import java.nio.file.Path;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
-
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.SwerveSubsystem;
 
 public class AutoInstantiator {
 
@@ -13,9 +9,7 @@ public class AutoInstantiator {
 
     public PathPlannerAuto basicAuto;
 	public PathPlannerAuto straight4MetersAuto;
-	public PathPlannerAuto fournotes;
 	
-    //Auto from pathplanner, not new sequential command
 	public static synchronized AutoInstantiator getInstance() {
 		if (autoInstantiator == null) {
 			autoInstantiator = new AutoInstantiator();
@@ -26,7 +20,6 @@ public class AutoInstantiator {
 	public AutoInstantiator() {
 		basicAuto = new PathPlannerAuto("BasicAuto");
 		straight4MetersAuto = new PathPlannerAuto("Auto4Meters");
-		fournotes = new PathPlannerAuto("4NoteAuto");
 
 	}
 
@@ -37,12 +30,6 @@ public class AutoInstantiator {
 	public PathPlannerAuto getstraight4MetersAuto(){
 		return straight4MetersAuto;
 	}
-
-	public PathPlannerAuto get4NotesAuto(){
-		return fournotes;
-	}
-
-
 
 
 }

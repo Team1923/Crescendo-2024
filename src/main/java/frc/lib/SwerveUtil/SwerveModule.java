@@ -13,7 +13,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.lib.SwerveMath.Conversions;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.Constants.Swerve;
 
 public class SwerveModule {
     public int moduleNumber;

@@ -8,7 +8,7 @@ package frc.robot.commands.Amp;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
-import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
+
 
 public class PositionToAmp extends Command {
   StateHandler stateHandler = StateHandler.getInstance();

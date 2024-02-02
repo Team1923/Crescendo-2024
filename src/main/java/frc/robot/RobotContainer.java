@@ -82,14 +82,14 @@ public class RobotContainer {
         /* Driver Buttons */
         yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis),
-                () -> -driver.getRawAxis(strafeAxis),
-                () -> -driver.getRawAxis(rotationAxis)));
+        // rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 
+        //         () -> -driver.getRawAxis(translationAxis),
+        //         () -> -driver.getRawAxis(strafeAxis),
+        //         () -> -driver.getRawAxis(rotationAxis)));
 
-        aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
+        //aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
 
-        SmartDashboard.putData(new DeployIntakeCommand());
+        //SmartDashboard.putData(new DeployIntakeCommand());
     }
 
     /**

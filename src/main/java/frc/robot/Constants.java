@@ -10,19 +10,19 @@ import com.pathplanner.lib.util.ReplanningConfig;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frc.lib.SwerveUtil.COTSTalonFXSwerveConstants;
 import frc.lib.SwerveUtil.SwerveModuleConstants;
 
 public final class Constants {
 
-    public static final class LimeLightConstants{
-        //measure constants in inches
+    public static final class LimeLightConstants {
+        // measure constants in inches
         public static final double limelightMountAngle = 11.5; // for pivot, measured in degrees
-        public static final double limelightHeight = 10.5625; //for pivot, in inches (measured ~10 and 9/16 inches, converted)
-        public static final double speakerHeightFromFloor = 59.25;//for tag, measured
-        public static final double limelightViewingAngle = 28.9; //degrees
+        public static final double limelightHeight = 10.5625; // for pivot, in inches (measured ~10 and 9/16 inches,
+                                                              // converted)
+        public static final double speakerHeightFromFloor = 59.25;// for tag, measured
+        public static final double limelightViewingAngle = 28.9; // degrees
 
     }
 
@@ -32,7 +32,7 @@ public final class Constants {
         public static final int intakeWheelBottomID = 20;
         public static final int intakePrimaryID = 21;
         public static final int intakeFollowerID = 22;
-    
+
         /* Motion Magic Constants */
         public static final double intakeKS = 0;
         public static final double intakeKV = 0;
@@ -40,23 +40,24 @@ public final class Constants {
         public static final double intakekI = 0;
         public static final double intakekD = 0;
 
-        /*Values from CTRE
-         * motionMagicConfigs.MotionMagicCruiseVelocity = 80; // 80 rps cruise velocity
-           motionMagicConfigs.MotionMagicAcceleration = 160; // 160 rps/s acceleration (0.5 seconds)
-           motionMagicConfigs.MotionMagicJerk = 1600; // 1600 rps/s^2 jerk (0.1 seconds)
-         */
+        /*
+        * Values from CTRE
+        * motionMagicConfigs.MotionMagicCruiseVelocity = 80; // 80 rps cruise velocity
+        * motionMagicConfigs.MotionMagicAcceleration = 160; // 160 rps/s acceleration
+        * (0.5 seconds)
+        * motionMagicConfigs.MotionMagicJerk = 1600; // 1600 rps/s^2 jerk (0.1 seconds)
+        */
         public static final double maxIntakeVel = 0;
         public static final double maxIntakeAccel = 0;
         public static final double maxIntakeJerk = 0;
-    
+
         /* Gearbox Ratios & Unit Conversions */
         public static final double intakeGearRatio = 0;
-        //TODO: check this math? compared it against the 2023 repo and plugged into phoenix converter...
         public static final double intakeRotsToRads = (2 * Math.PI) / intakeGearRatio;
         public static final double intakeRadsToRots = intakeGearRatio / (2 * Math.PI);
-    
+
         /* kG - gravity constant for motion of arm */
-        //TODO: discuss on how the max gravity constant should be found.
+        // TODO: discuss on how the max gravity constant should be found.
         public static final double intakeMaxGravityConstant = 0;
 
         /* Beam Break ID */
@@ -69,17 +70,17 @@ public final class Constants {
         /* Motor IDs */
         public static final int shooterMotorPrimaryID = 17;
         public static final int shooterMotorFollowerID = 18;
-    
+
         /* Beam Break ID */
         public static final int beamBreakFourID = 4;
 
         public static final double shooterSpeedThreshold = 0;
-      }
-    
-      public static final class FeederConstants {
+    }
+
+    public static final class FeederConstants {
         /* Motor ID */
         public static final int feederMotorID = 14;
-    
+
         /* Beam Break IDs */
         public static final int beamBreakTwoID = 2;
         public static final int beamBreakThreeID = 3;
@@ -89,7 +90,7 @@ public final class Constants {
         /* Motor IDs */
         public static final int armMotorPrimaryID = 15;
         public static final int armMotorFollowerID = 16;
-    
+
         /* Motion Magic Constants */
         public static final double armKS = 0;
         public static final double armKV = 0;
@@ -99,42 +100,44 @@ public final class Constants {
         public static final double maxArmVel = 0;
         public static final double maxArmAccel = 0;
         public static final double maxArmJerk = 0;
-    
+
         /* Gearbox Ratios & Unit Conversions */
         public static final double armGearRatio = 0;
-        //TODO: check this math? compared it against the 2023 repo and plugged into phoenix converter...
         public static final double armRotsToRads = (2 * Math.PI) / armGearRatio;
         public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
-    
+
         /* kG - gravity constant for motion of arm */
-        //TODO: discuss on how the max gravity constant should be found.
-        public static final double armMaxGravityConstant = 0;  
+        // TODO: discuss on how the max gravity constant should be found.
+        public static final double armMaxGravityConstant = 0;
 
         public static final double armPositionAllowableOffset = 0; // allowed radians offset
 
-        public static final double SUBWOOFER_THRESHHOLD = 0; //tune, how far away we are from subwoofer before we move arm to subwoofer pos.
+        public static final double SUBWOOFER_THRESHHOLD = 0; // tune, how far away we are from subwoofer before we move
+                                                             // arm to subwoofer pos.
     }
-
 
     public static final class Swerve {
         public static final double stickDeadband = 0.1;
         public static final int pigeonID = 13;
 
-        public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
-        COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
+        public static final COTSTalonFXSwerveConstants chosenModule =
+                COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(18.75); //TODO: This must be tuned to specific robot
-        public static final double wheelBase = Units.inchesToMeters(18.75); //TODO: This must be tuned to specific robot
+        public static final double trackWidth = Units.inchesToMeters(18.75); // TODO: This must be tuned to specific robot
+        public static final double wheelBase = Units.inchesToMeters(18.75); // TODO: This must be tuned to specific robot
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 
-        /* Swerve Kinematics 
-         * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
-         public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
-            new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
-            new Translation2d(wheelBase / 2.0, -trackWidth / 2.0),
-            new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
-            new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
+        /*
+         * Swerve Kinematics
+         * No need to ever change this unless you are not doing a traditional
+         * rectangular/square 4 module swerve
+         */
+        public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
+                new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
+                new Translation2d(wheelBase / 2.0, -trackWidth / 2.0),
+                new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
+                new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
 
         /* Module Gear Ratios */
         public static final double driveGearRatio = chosenModule.driveGearRatio;
@@ -158,8 +161,11 @@ public final class Constants {
         public static final double driveCurrentThresholdTime = 0.1;
         public static final boolean driveEnableCurrentLimit = true;
 
-        /* These values are used by the drive falcon to ramp in open loop and closed loop driving.
-         * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc */
+        /*
+        * These values are used by the drive falcon to ramp in open loop and closed
+        * loop driving.
+        * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc
+        */
         public static final double openLoopRamp = 0.25;
         public static final double closedLoopRamp = 0.0;
 
@@ -169,23 +175,23 @@ public final class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         /* Drive Motor PID Values */
-        public static final double driveKP = 0.12; //TODO: This must be tuned to specific robot
+        public static final double driveKP = 0.12; 
         public static final double driveKI = 0.0;
         public static final double driveKD = 0.0;
         public static final double driveKF = 0.0;
 
         /* Drive Motor Characterization Values From SYSID */
-        public static final double driveKS = 0.32; //TODO: This must be tuned to specific robot
+        public static final double driveKS = 0.32; 
         public static final double driveKV = 1.51;
         public static final double driveKA = 0.27;
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 5.4864; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 5.4864; 
         /** Radians per Second */
-        public static final double maxAngularVelocity = 40; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 40;
 
-        /* Acceleration Parameters - CHANGE IF NEEDED*/
+        /* Acceleration Parameters - CHANGE IF NEEDED */
         public static final double maxAccel = 3;
         public static final double maxAngularAccel = 3;
 
@@ -195,49 +201,48 @@ public final class Constants {
 
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
-        public static final class Mod0 { //TODO: This must be tuned to specific robot
+        public static final class Mod0 { 
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 9;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(95.009);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(95.009); //TODO: tune
+            public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
+                    canCoderID, angleOffset);
         }
 
         /* Front Right Module - Module 1 */
-        public static final class Mod1 { //TODO: This must be tuned to specific robot
+        public static final class Mod1 { 
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(156.97);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(156.97); //TODO: tune
+            public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
+                    canCoderID, angleOffset);
         }
-        
+
         /* Back Left Module - Module 2 */
-        public static final class Mod2 { //TODO: This must be tuned to specific robot
+        public static final class Mod2 { 
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(110.023);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(110.023); //TODO: tune
+            public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
+                    canCoderID, angleOffset);
         }
 
         /* Back Right Module - Module 3 */
-        public static final class Mod3 { //TODO: This must be tuned to specific robot
+        public static final class Mod3 { 
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-54.755);
-            public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-54.755); //TODO: tune
+            public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID,
+                    canCoderID, angleOffset);
         }
 
-        public static final HolonomicPathFollowerConfig pathFollowerConfig = 
-            new HolonomicPathFollowerConfig(
-                new PIDConstants(5.0, 0, 0), //might need to lower P value
-                new PIDConstants(0.3, 0, 0), maxSpeed, 
+        public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
+                new PIDConstants(5.0, 0, 0), // might need to lower P value
+                new PIDConstants(0.3, 0, 0), maxSpeed,
                 Math.hypot(trackWidth / 2, wheelBase / 2),
                 new ReplanningConfig());
     }
