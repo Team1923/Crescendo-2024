@@ -68,9 +68,9 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   /**
-   * Setting the intake to a position/
+   * Setting the intake to a position in radians.
    * 
-   * @param position The position that we are setting the intake is.
+   * @param position The radian position to command the arm to.
    */
   public void setArmPosition(double position) {
     armPrimary.setControl(motionMagicVoltage.withPosition(position * ArmConstants.armRadsToRots)

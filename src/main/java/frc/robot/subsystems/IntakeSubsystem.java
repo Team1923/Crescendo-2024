@@ -73,9 +73,9 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   /**
-   * Setting the intake to a position/
+   * Setting the intake to a position in radians.
    * 
-   * @param position The position that we are setting the intake is.
+   * @param position The radian value the intake is commanded to.
    */
   public void setIntakePosition(double position) {
     intakeArmPrimary.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
