@@ -9,6 +9,7 @@ import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.ShooterArmUtils.PositionRPMData;
@@ -159,6 +160,10 @@ public class ArmSubsystem extends SubsystemBase {
      */
     if (isAtArmState(armSetpoint)) {
       stateHandler.setCurrentArmState(desiredArmState);
+    }
+
+    if (DriverStation.isDisabled()) {
+      disableMotionMagic();
     }
 
   }

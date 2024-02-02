@@ -10,6 +10,7 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
@@ -202,7 +203,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if (isAtIntakeState(desiredIntakeState)) {
       stateHandler.setCurrentIntakeState(desiredIntakeState);
     }
-    
+
     stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
 
     // check the stator current to know whether or not we are hardstop.
@@ -210,5 +211,9 @@ public class IntakeSubsystem extends SubsystemBase {
     // stopIntakeArmMotors();
     // stateHandler.setCurrentArmState(desiredIntakeState);
     // }
+
+    if (DriverStation.isDisabled()) {
+      disableMotionMagic();
+    }
   }
 }
