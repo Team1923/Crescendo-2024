@@ -34,32 +34,33 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private TalonFX topmotor = new TalonFX(0);//find ids on phoenix tuner
-  private TalonFX bottommotor = new TalonFX(1);
-  private TalonFX feederMotor = new TalonFX(2);
+  private TalonFX topmotor = new TalonFX(0, "rio");//find ids on phoenix tuner
+  // private TalonFX bottommotor = new TalonFX(1);
+  // private TalonFX feederMotor = new TalonFX(2);
 
   private Joystick control = new Joystick(0);
 
 
   //being run in RPM
-  private final double velocitytop = 6000;
-  private final double velocitybottom = 6000;
+  private final double velocitytop = 5000;
+  private final double veloTopInitial = 500;
+  // private final double velocitybottom = 6000;
   
 
 
-  private Timer offsetWait = new Timer();
+  // private Timer offsetWait = new Timer();
 
 
-  private final double RPMOFFSET = 200; //50 rpm every controller press to increase/decrease
-  private double v_lOffset = 0;
-  private double v_rOffset = 0;
+  // private final double RPMOFFSET = 200; //50 rpm every controller press to increase/decrease
+  // private double v_lOffset = 0;
+  // private double v_rOffset = 0;
 
                       
                   //max rpm/secs conversion to RPS
   //private final double kP = 0.4; //duty cycle per rps, if we are off by 6000 rps, use 100% speed
 
   private final VelocityVoltage m_velocitytop = new VelocityVoltage(0);
-  private final VelocityVoltage m_velocitybottom = new VelocityVoltage(0);
+  // private final VelocityVoltage m_velocitybottom = new VelocityVoltage(0);
 
   // private final VelocityDutyCycle m_velocitytop = new VelocityDutyCycle(0);
   // private final VelocityDutyCycle m_velocitybottom = new VelocityDutyCycle(0);
@@ -70,7 +71,7 @@ public class Robot extends TimedRobot {
   private boolean isInRPMRange = false;
   private final double treshold = 100;
 
-  
+  private Timer spinUpTimer = new Timer();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -132,8 +133,11 @@ public class Robot extends TimedRobot {
     }
 
 
-    offsetWait.reset();
-    offsetWait.start();
+    // offsetWait.reset();
+    // offsetWait.start();
+
+    spinUpTimer.reset();
+    spinUpTimer.stop();
 
     //for motor 1
     topmotor.getConfigurator().apply(new TalonFXConfiguration());
@@ -147,34 +151,35 @@ public class Robot extends TimedRobot {
     var slot0Configs = new Slot0Configs();
     slot0Configs.kS = 0; //0.05
     slot0Configs.kV = 0.11;
-    slot0Configs.kP = 0.11; // old: 0.2, new: 0.40039100684261975
-    slot0Configs.kI = 0; // 0
+    slot0Configs.kP = 0.5; // old: 0.2, new: 0.40039100684261975
+    slot0Configs.kI = 0.001; // 0
     slot0Configs.kD = 0; // old : 0.4, new: 0.0008007820136852395
+
 
     /**
      * We need to change this for TOP Motor
      */
-    var slot1Configs = new Slot1Configs();
-    slot1Configs.kS = 0;
-    slot1Configs.kV = 0.11; // try increasing to get closer to goal at 6000
-    slot1Configs.kP = 0.11;
-    slot1Configs.kI = 0;
-    slot1Configs.kD = 0;
+    // var slot1Configs = new Slot1Configs();
+    // slot1Configs.kS = 0;
+    // slot1Configs.kV = 0.11; // try increasing to get closer to goal at 6000
+    // slot1Configs.kP = 0.11;
+    // slot1Configs.kI = 0;
+    // slot1Configs.kD = 0;
 
     // config.apply(slotConfigs);
 
     //for motor 2
-     bottommotor.getConfigurator().apply(new TalonFXConfiguration());
-     bottommotor.setInverted(false);
-     topmotor.setInverted(false);
+    //  bottommotor.getConfigurator().apply(new TalonFXConfiguration());
+    //  bottommotor.setInverted(false);
+    //  topmotor.setInverted(false);
 
     // var config2 = motor2.getConfigurator();
 
     topmotor.getConfigurator().apply(slot0Configs, 0.05);
-    bottommotor.getConfigurator().apply(slot0Configs, 0.05);
-    // config2.apply(slotConfigs);
+    // bottommotor.getConfigurator().apply(slot0Configs, 0.05);
+    // // config2.apply(slotConfigs);
 
-    feederMotor.getConfigurator().apply(new TalonFXConfiguration());
+    // feederMotor.getConfigurator().apply(new TalonFXConfiguration());
 
   }
 
@@ -183,57 +188,71 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
 
-    if (offsetWait.hasElapsed(0.2)){
-      if (control.getPOV(0)==0){
-        v_lOffset+=RPMOFFSET;
-      }
-      if (control.getPOV()==180){
-        v_lOffset-=RPMOFFSET;
-      }
+    // if (offsetWait.hasElapsed(0.2)){
+    //   if (control.getPOV(0)==0){
+    //     v_lOffset+=RPMOFFSET;
+    //   }
+    //   if (control.getPOV()==180){
+    //     v_lOffset-=RPMOFFSET;
+    //   }
 
-      //VERIFY FOR IN LAB CONTROLLER
-      if (control.getRawButton(4)){
-        v_rOffset+=RPMOFFSET;
-      }
-      if (control.getRawButton(1)){
-        v_rOffset-=RPMOFFSET;
-      }
-      offsetWait.reset();
-      offsetWait.start();
+    //   //VERIFY FOR IN LAB CONTROLLER
+    //   if (control.getRawButton(4)){
+    //     v_rOffset+=RPMOFFSET;
+    //   }
+    //   if (control.getRawButton(1)){
+    //     v_rOffset-=RPMOFFSET;
+    //   }
+    //   offsetWait.reset();
+    //   offsetWait.start();
       
-    }
+    // }
 
 
     if(control.getRawButton(5)){
-      m_velocitybottom.Slot = 0;
+      // m_velocitybottom.Slot = 0;
       m_velocitytop.Slot = 0;
-      topmotor.setControl(m_velocitytop.withVelocity((velocitytop+v_rOffset)/60));//change
-      bottommotor.setControl(m_velocitybottom.withVelocity((velocitybottom+v_lOffset)/60));//change 
+      topmotor.setControl(m_velocitytop.withVelocity((velocitytop)/60));//change
+      // bottommotor.setControl(m_velocitybottom.withVelocity((velocitybottom+v_lOffset)/60));//change 
       
+      if (!spinUpTimer.hasElapsed(0.001)){
+        spinUpTimer.start();
+      }
+
       // topmotor.setControl(new VelocityDutyCycle(60));
       // motor2.setControl(new VelocityDutyCycle(velocity1/60));
     }
     else{
-      topmotor.stopMotor();
-      bottommotor.stopMotor();
+
+      topmotor.setControl(m_velocitytop.withVelocity(veloTopInitial/60));
+      // topmotor.stopMotor();
+      // bottommotor.stopMotor();
     }
 
-    if(control.getRawButton(1)){
-      feederMotor.set(0.4);
-    }
-    else{
-      feederMotor.stopMotor();
+    if (control.getRawButton(1) ){
+      spinUpTimer.reset();
     }
 
-    isInRPMRange = (Math.abs(topmotor.getVelocity().getValueAsDouble()*60 - velocitytop) < treshold && Math.abs(bottommotor.getVelocity().getValueAsDouble()*60 - velocitytop) < treshold);
+    // if(control.getRawButton(1)){
+    //   feederMotor.set(0.4);
+    // }
+    // else{
+    //   feederMotor.stopMotor();
+    // }
+
+    isInRPMRange = (Math.abs(topmotor.getVelocity().getValueAsDouble()*60 - velocitytop) < treshold /*&& Math.abs(bottommotor.getVelocity().getValueAsDouble()*60 - velocitytop) < treshold*/);
+    if (isInRPMRange){
+      spinUpTimer.stop();
+    }
 
     //times 60 to go to RPM
     SmartDashboard.putNumber("Velocity(RPM) of top motor", topmotor.getVelocity().getValueAsDouble() * 60);
-    SmartDashboard.putNumber("Velocity(RPM) of bottom motor", bottommotor.getVelocity().getValueAsDouble() * 60);
+    // SmartDashboard.putNumber("Velocity(RPM) of bottom motor", bottommotor.getVelocity().getValueAsDouble() * 60);
     SmartDashboard.putBoolean("Are motors in Range", isInRPMRange);
+    SmartDashboard.putNumber("Time", spinUpTimer.get());
 
-    SmartDashboard.putNumber("Set Velocity(RPM) for top motor", velocitytop+v_rOffset);
-    SmartDashboard.putNumber("Set Velocity(RPM) for bottom motor", velocitybottom+v_lOffset);
+    // SmartDashboard.putNumber("Set Velocity(RPM) for top motor", velocitytop+v_rOffset);
+    // SmartDashboard.putNumber("Set Velocity(RPM) for bottom motor", velocitybottom+v_lOffset);
 
   }
 
