@@ -22,7 +22,7 @@ public class FeederSubsystem extends SubsystemBase {
   private DigitalInput beamBreakThree = new DigitalInput(FeederConstants.beamBreakThreeID);
   private StateHandler stateHandler = StateHandler.getInstance();
 
-  private TalonFX feederMotor = new TalonFX(FeederConstants.feederMotorID);
+  private TalonFX feederMotor = new TalonFX(FeederConstants.feederMotorID, "rio");
 
   /** Creates a new FeederSubsystem. */
   public FeederSubsystem() {

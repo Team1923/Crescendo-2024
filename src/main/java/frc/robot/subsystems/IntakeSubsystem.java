@@ -22,11 +22,11 @@ public class IntakeSubsystem extends SubsystemBase {
   private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
   private StateHandler stateHandler = StateHandler.getInstance();
 
-  private TalonFX intakeArmPrimary = new TalonFX(Constants.IntakeConstants.intakePrimaryID);
-  private TalonFX intakeArmFollower = new TalonFX(Constants.IntakeConstants.intakeFollowerID);
+  private TalonFX intakeArmPrimary = new TalonFX(Constants.IntakeConstants.intakePrimaryID, "rio");
+  private TalonFX intakeArmFollower = new TalonFX(Constants.IntakeConstants.intakeFollowerID, "rio");
 
-  private TalonFX intakeWheelTop = new TalonFX(Constants.IntakeConstants.intakeWheelTopID);
-  private TalonFX intakeWheelBottom = new TalonFX(Constants.IntakeConstants.intakeWheelBottomID);
+  private TalonFX intakeWheelTop = new TalonFX(Constants.IntakeConstants.intakeWheelTopID, "rio");
+  private TalonFX intakeWheelBottom = new TalonFX(Constants.IntakeConstants.intakeWheelBottomID, "rio");
 
   private MotionMagicVoltage motionMagicVoltage;
 

@@ -24,8 +24,8 @@ public class ArmSubsystem extends SubsystemBase {
   LimelightInterface limelightInterface = LimelightInterface.getInstance();
   PositionRPMData positionData = PositionRPMData.getInstance();
 
-  private TalonFX armPrimary = new TalonFX(ArmConstants.armMotorPrimaryID);
-  private TalonFX armFollower = new TalonFX(ArmConstants.armMotorFollowerID);
+  private TalonFX armPrimary = new TalonFX(ArmConstants.armMotorPrimaryID, "rio");
+  private TalonFX armFollower = new TalonFX(ArmConstants.armMotorFollowerID, "rio");
 
   private MotionMagicVoltage motionMagicVoltage;
 
