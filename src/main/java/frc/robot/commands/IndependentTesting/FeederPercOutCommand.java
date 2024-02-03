@@ -4,12 +4,18 @@
 
 package frc.robot.commands.IndependentTesting;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.FeederSubsystem;
 
 public class FeederPercOutCommand extends Command {
+  FeederSubsystem feederSubsystem;
   /** Creates a new FeederPercOutCommand. */
-  public FeederPercOutCommand() {
+  public FeederPercOutCommand(FeederSubsystem f) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.feederSubsystem = f; 
+    addRequirements(feederSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -18,11 +24,16 @@ public class FeederPercOutCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    feederSubsystem.setFeederMotorSpeed(0.2);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    feederSubsystem.setFeederMotorSpeed(0);
+
+  }
 
   // Returns true when the command should end.
   @Override

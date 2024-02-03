@@ -14,6 +14,12 @@ import frc.lib.AutoUtils.AutoInstantiator;
 import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.commands.Amp.EjectIntoAmp;
 import frc.robot.commands.IndependentTesting.ActivateBeamBreak;
+import frc.robot.commands.IndependentTesting.ArmMotionMagicCommand;
+import frc.robot.commands.IndependentTesting.ArmPercOutCommand;
+import frc.robot.commands.IndependentTesting.FeederPercOutCommand;
+import frc.robot.commands.IndependentTesting.IntakeArmPercOutCommand;
+import frc.robot.commands.IndependentTesting.IntakeMotionMagicCommand;
+import frc.robot.commands.IndependentTesting.RunIntakeRollerCommand;
 import frc.robot.commands.Intake.DeployIntakeCommand;
 import frc.robot.commands.Intake.IntakeEjectCommand;
 import frc.robot.commands.Speaker.ScoreInSpeaker;
@@ -41,6 +47,9 @@ public class RobotContainer {
     private final int strafeAxis = XboxController.Axis.kLeftX.value;
     private final int rotationAxis = XboxController.Axis.kRightX.value;
 
+    private final int operatorLeftY = PS4Controller.Axis.kLeftY.value;
+    private final int operatorRightY = PS4Controller.Axis.kRightY.value;
+
     /* Driver Buttons */
     private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton aButton = new JoystickButton(driver, XboxController.Button.kA.value);
@@ -60,11 +69,11 @@ public class RobotContainer {
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
-    private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    private final ArmSubsystem armSubsystem = new ArmSubsystem();
-    private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    private final FeederSubsystem feederSubsystem = new FeederSubsystem();
+    // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+    // private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    // private final ArmSubsystem armSubsystem = new ArmSubsystem();
+    // private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    // private final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     private AutoInstantiator autoInstantiator = new AutoInstantiator();
@@ -83,6 +92,9 @@ public class RobotContainer {
                         () -> -driver.getRawAxis(rotationAxis),
                         () -> leftBumper.getAsBoolean()));
 
+        // intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> operator.getRawAxis(operatorLeftY)));
+        // armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () -> operatorRightY));
+
         // Configure the button bindings
         configureButtonBindings();
     }
@@ -99,11 +111,12 @@ public class RobotContainer {
         /* Driver Buttons */
         yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-    
+        // circleButton.whileTrue(new ArmMotionMagicCommand(armSubsystem));
+        // crossButton.whileTrue(new IntakeMotionMagicCommand(intakeSubsystem));
 
 
-       
-
+        // triangleButton.whileTrue(new FeederPercOutCommand(feederSubsystem));
+        // squareButton.whileTrue(new RunIntakeRollerCommand(intakeSubsystem));
         
 
         // rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 

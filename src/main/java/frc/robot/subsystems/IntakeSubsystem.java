@@ -12,6 +12,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
@@ -127,17 +128,9 @@ public class IntakeSubsystem extends SubsystemBase {
    * 
    * @param speed The speed passed in.
    */
-  public void setTopWheelSpeed(double speed) {
-    intakeWheelTop.set(speed);
-  }
-
-  /**
-   * Sets the speed for the bottom intake wheel.
-   * 
-   * @param speed The speed passed in.
-   */
-  public void setBottomWheelSpeed(double speed) {
-    intakeWheelBottom.set(speed);
+  public void setRollerWheelSpeed(double topSpeed, double BottomSpeed) {
+    intakeWheelTop.set(topSpeed);
+    intakeWheelBottom.set(BottomSpeed);
   }
 
   /**
@@ -192,6 +185,10 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     stateHandler.setBBOneCovered(getBeamBreakOne());
+
+    SmartDashboard.putNumber("Raw Postion INTAKE ", intakeArmPrimary.getPosition().getValueAsDouble());
+
+    SmartDashboard.putNumber("Intake Position Radians", getIntakeArmPositionRads());
     
 
     //TODO: STATE MACHINE PUT BACK OR SAD

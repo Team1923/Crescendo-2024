@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -49,9 +50,12 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotorConfig.kI = ShooterConstants.shooterKI;
     shooterMotorConfig.kD = ShooterConstants.shooterKD;
 
+    
 
     shooterTop.getConfigurator().apply(shooterMotorConfig, 0.05);
     shooterBottom.getConfigurator().apply(shooterMotorConfig, 0.05);
+
+    shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, true));
   }
 
   /**
@@ -110,11 +114,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // SmartDashboard.putNumber("Velocity(RPM) of the top motor", getTopRPM());
-    // SmartDashboard.putNumber("Velocity(RPM) of the bottom motor", getBottomRPM());
-
     stateHandler.setBBFourCovered(getBeamBreakFour());
 
+    SmartDashboard.putNumber("Raw RPS TOP SHOOTER", shooterTop.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER", shooterBottom.getVelocity().getValueAsDouble());
+
+    SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
+    SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
     //TODO: STATE MACHINE PUT BACK OR SAD
     // ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();

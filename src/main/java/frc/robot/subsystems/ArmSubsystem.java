@@ -11,6 +11,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.ShooterArmUtils.PositionRPMData;
@@ -137,12 +138,17 @@ public class ArmSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Raw Postion ARM ", armPrimary.getPosition().getValueAsDouble());
+
+    SmartDashboard.putNumber("Intake Position Radians", getArmPositionRads());
     /*
      * By default, whatever the desired position is, we will go to the desired
      * position as commanded.
      * EXCEPTION: shooting. If this is the case, then we will need to modify
      * out arm position to be variable.
      */
+
+
 
 
     //TODO: STATE MACHINE PUT BACK OR SAD

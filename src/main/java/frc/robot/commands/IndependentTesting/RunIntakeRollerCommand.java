@@ -5,11 +5,15 @@
 package frc.robot.commands.IndependentTesting;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.IntakeSubsystem;
 
 public class RunIntakeRollerCommand extends Command {
+  IntakeSubsystem intakeSubsystem;
   /** Creates a new IntakeRollerCommand. */
-  public RunIntakeRollerCommand() {
+  public RunIntakeRollerCommand(IntakeSubsystem i) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.intakeSubsystem = i;
+    addRequirements(i);
   }
 
   // Called when the command is initially scheduled.
@@ -18,11 +22,15 @@ public class RunIntakeRollerCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    intakeSubsystem.setRollerWheelSpeed(0.2, 0.2);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    intakeSubsystem.setRollerWheelSpeed(0,0);
+  }
 
   // Returns true when the command should end.
   @Override
