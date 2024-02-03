@@ -22,8 +22,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
   private StateHandler stateHandler = StateHandler.getInstance();
 
-  private TalonFX intakeArmPrimary = new TalonFX(Constants.IntakeConstants.intakePrimaryID);
-  private TalonFX intakeArmFollower = new TalonFX(Constants.IntakeConstants.intakeFollowerID);
+  private TalonFX intakeArmPrimary = new TalonFX(Constants.IntakeConstants.intakeArmPrimaryID);
+  private TalonFX intakeArmFollower = new TalonFX(Constants.IntakeConstants.intakeArmFollowerID);
 
   private TalonFX intakeWheelTop = new TalonFX(Constants.IntakeConstants.intakeWheelTopID);
   private TalonFX intakeWheelBottom = new TalonFX(Constants.IntakeConstants.intakeWheelBottomID);
@@ -61,7 +61,7 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeArmFollower.getConfigurator().apply(intakeArmConfigs, 0.05);
 
     // Need to change/test in lab
-    intakeArmFollower.setControl(new Follower(Constants.IntakeConstants.intakePrimaryID, true));
+    intakeArmFollower.setControl(new Follower(Constants.IntakeConstants.intakeArmPrimaryID, true));
 
     zeroIntakeArm();
   }
