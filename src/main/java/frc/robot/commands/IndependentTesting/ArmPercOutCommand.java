@@ -6,6 +6,7 @@ package frc.robot.commands.IndependentTesting;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ArmSubsystem;
 
@@ -28,6 +29,7 @@ public class ArmPercOutCommand extends Command {
   @Override
   public void execute() {
     armSubsystem.setPercentOut(armControl.getAsDouble());
+    SmartDashboard.putNumber("Joystick/Max gravity for arm", armControl.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
