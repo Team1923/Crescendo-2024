@@ -21,8 +21,8 @@ import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  private TalonFX shooterTop = new TalonFX(ShooterConstants.shooterMotorPrimaryID);
-  private TalonFX shooterBottom = new TalonFX(ShooterConstants.shooterMotorFollowerID);
+  private TalonFX shooterTop = new TalonFX(ShooterConstants.shooterMotorPrimaryID, "rio");
+  private TalonFX shooterBottom = new TalonFX(ShooterConstants.shooterMotorFollowerID, "rio");
   private DigitalInput beamBreakFour = new DigitalInput(ShooterConstants.beamBreakFourID);
   private StateHandler stateHandler = StateHandler.getInstance();
 
