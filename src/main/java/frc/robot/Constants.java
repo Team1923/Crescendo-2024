@@ -35,8 +35,7 @@ public final class Constants {
 
         /* Motion Magic Constants */
         public static final double intakeKS = 0;
-        public static final double intakeKV = 0;
-        public static final double intakekP = 0;
+        public static final double intakekP = 0.1;
         public static final double intakekI = 0;
         public static final double intakekD = 0;
 
@@ -47,12 +46,14 @@ public final class Constants {
         * (0.5 seconds)
         * motionMagicConfigs.MotionMagicJerk = 1600; // 1600 rps/s^2 jerk (0.1 seconds)
         */
-        public static final double maxIntakeVel = 0;
-        public static final double maxIntakeAccel = 0;
-        public static final double maxIntakeJerk = 0;
+        
+        //note, these should be VERY slow
+        public static final double maxIntakeVel = 20;
+        public static final double maxIntakeAccel = 40;
+        public static final double maxIntakeJerk = 200;
 
         /* Gearbox Ratios & Unit Conversions */
-        public static final double intakeGearRatio = 0;
+        public static final double intakeGearRatio = 1;
         public static final double intakeRotsToRads = (2 * Math.PI) / intakeGearRatio;
         public static final double intakeRadsToRots = intakeGearRatio / (2 * Math.PI);
 
@@ -63,18 +64,27 @@ public final class Constants {
         /* Beam Break ID */
         public static final int beamBreakOneID = 1;
 
-        public static final double intakePositionAllowableOffset = 0;
+        public static final double intakePositionAllowableOffset = 0.05; //radians
     }
 
     public static final class ShooterConstants {
         /* Motor IDs */
         public static final int shooterMotorPrimaryID = 17; //top
-        public static final int shooterMotorFollowerID = 18; //bottom   
+        public static final int shooterMotorFollowerID = 18; //bottom 
+
+        public static final double shooterRPSToRPM = 60;
+
+        /* PID Constants */
+        public static final double shooterKS = 0;
+        public static final double shooterKV = 0.11;
+        public static final double shooterKP = 0.5;
+        public static final double shooterKI = 0.001;
+        public static final double shooterKD = 0;
 
         /* Beam Break ID */
         public static final int beamBreakFourID = 4;
 
-        public static final double shooterSpeedThreshold = 0;
+        public static final double shooterSpeedThreshold = 50; //RPM
     }
 
     public static final class FeederConstants {
@@ -93,16 +103,15 @@ public final class Constants {
 
         /* Motion Magic Constants */
         public static final double armKS = 0;
-        public static final double armKV = 0;
-        public static final double armkP = 0;
+        public static final double armkP = 0.1;
         public static final double armkI = 0;
         public static final double armkD = 0;
-        public static final double maxArmVel = 0;
-        public static final double maxArmAccel = 0;
-        public static final double maxArmJerk = 0;
+        public static final double maxArmVel = 20;
+        public static final double maxArmAccel = 40;
+        public static final double maxArmJerk = 200;
 
         /* Gearbox Ratios & Unit Conversions */
-        public static final double armGearRatio = 0;
+        public static final double armGearRatio = 1;
         public static final double armRotsToRads = (2 * Math.PI) / armGearRatio;
         public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
 
@@ -110,9 +119,9 @@ public final class Constants {
         // TODO: discuss on how the max gravity constant should be found.
         public static final double armMaxGravityConstant = 0;
 
-        public static final double armPositionAllowableOffset = 0; // allowed radians offset
+        public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
 
-        public static final double SUBWOOFER_THRESHHOLD = 0; // tune, how far away we are from subwoofer before we move
+        public static final double SUBWOOFER_THRESHHOLD = 0; // TODO: tune, how far away we are from subwoofer before we move
                                                              // arm to subwoofer pos.
     }
 

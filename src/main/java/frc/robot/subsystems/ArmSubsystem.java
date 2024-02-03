@@ -8,13 +8,13 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.Constants.ArmConstants;
-import frc.robot.Constants.IntakeConstants;
 import frc.lib.LimelightUtil.LimelightInterface;
 import frc.lib.RobotStateUtils.StateHandler;
 
@@ -36,10 +36,11 @@ public class ArmSubsystem extends SubsystemBase {
 
     var armConfigs = new TalonFXConfiguration();
 
+    armConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
     var armSlot0Configs = armConfigs.Slot0;
 
     armSlot0Configs.kS = ArmConstants.armKS;
-    armSlot0Configs.kV = ArmConstants.armKV;
     armSlot0Configs.kP = ArmConstants.armkP;
     armSlot0Configs.kI = ArmConstants.armkI;
     armSlot0Configs.kD = ArmConstants.armkD;
@@ -62,14 +63,14 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   /**
-   * Method to zero the intake arm.
+   * Method to zero the arm.
    */
   public void zeroArm() {
     armPrimary.setPosition(0);
   }
 
   /**
-   * Setting the intake to a position in radians.
+   * Setting the arm to a position in radians.
    * 
    * @param position The radian position to command the arm to.
    */
@@ -77,38 +78,47 @@ public class ArmSubsystem extends SubsystemBase {
     armPrimary.setControl(motionMagicVoltage.withPosition(position * ArmConstants.armRadsToRots)
         .withFeedForward(calculateArmFeedForward()));
   }
+  
+  /**
+   * Moving the arm using percent out
+   * 
+   * @param out percent out speed to run the arm at
+   */
+  public void setPercentOut(double out){
+    armPrimary.set(out);
+  }
 
   /**
-   * Gets the position of the intake arm.
+   * Gets the position of the arm.
    * 
-   * @return The intake position in radians.
+   * @return The arm position in radians.
    */
   public double getArmPositionRads() {
     return armPrimary.getPosition().getValueAsDouble() * ArmConstants.armRotsToRads;
   }
 
   /**
-   * Gets the position of the intake arm.
+   * Gets the position of the arm.
    * 
-   * @return The intake position in rotations.
+   * @return The arm position in rotations.
    */
   public double getArmPositionRots() {
-    return armPrimary.getPosition().getValueAsDouble() * ArmConstants.armRotsToRads;
+    return armPrimary.getPosition().getValueAsDouble();
   }
 
   /**
-   * Calculates the required Feedforward needed for the intake arm.
+   * Calculates the required Feedforward needed for the arm.
    * 
-   * @return The feedforward value needed by the intake.
+   * @return The feedforward value needed by the arm.
    */
   public double calculateArmFeedForward() {
-    return IntakeConstants.intakeMaxGravityConstant * Math.cos(getArmPositionRads());
+    return ArmConstants.armMaxGravityConstant * Math.cos(getArmPositionRads());
   }
 
   /**
-   * Stops the intake arm motors.
+   * Stops the arm motors.
    */
-  public void stopIntakeArmMotors() {
+  public void stopArmMotors() {
     armPrimary.stopMotor();
     armFollower.stopMotor();
   }
@@ -134,33 +144,35 @@ public class ArmSubsystem extends SubsystemBase {
      * out arm position to be variable.
      */
 
-    ArmStates desiredArmState = stateHandler.getDesiredArmState();
-    double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
-    if (desiredArmState == ArmStates.SPEAKER) {
-      // subwoofer condition
-      if ((stateHandler.getHasValidSpeakerTag()
-          && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD)
-          || (!limelightInterface.hasSpeakerTag())) {
-        armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
-      }
-      // distance to speaker condition
-      else if (stateHandler.getHasValidSpeakerTag()) {
-        armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
-      }
-    }
+    //TODO: STATE MACHINE PUT BACK OR SAD
+    // ArmStates desiredArmState = stateHandler.getDesiredArmState();
+    // double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
-    /*
-     * Set the arm position to whatever is the desired arm position.
-     */
-    setArmPosition(armSetpoint);
+    // if (desiredArmState == ArmStates.SPEAKER) {
+    //   // subwoofer condition
+    //   if ((stateHandler.getHasValidSpeakerTag()
+    //       && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD)
+    //       || (!limelightInterface.hasSpeakerTag())) {
+    //     armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
+    //   }
+    //   // distance to speaker condition
+    //   else if (stateHandler.getHasValidSpeakerTag()) {
+    //     armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+    //   }
+    // }
 
-    /*
-     * Update the arm's position based on the desired setpoint.
-     */
-    if (isAtArmState(armSetpoint)) {
-      stateHandler.setCurrentArmState(desiredArmState);
-    }
+    // /*
+    //  * Set the arm position to whatever is the desired arm position.
+    //  */
+    // setArmPosition(armSetpoint);
+
+    // /*
+    //  * Update the arm's position based on the desired setpoint.
+    //  */
+    // if (isAtArmState(armSetpoint)) {
+    //   stateHandler.setCurrentArmState(desiredArmState);
+    // }
 
     if (DriverStation.isDisabled()) {
       disableMotionMagic();

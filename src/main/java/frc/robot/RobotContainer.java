@@ -34,7 +34,7 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
-    private final Joystick BBController = new Joystick(1);
+    private final Joystick operator= new Joystick(1);
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -52,10 +52,10 @@ public class RobotContainer {
     private final JoystickButton rightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /*Beam Break Buttons */
-    private final JoystickButton triangleButton = new JoystickButton(BBController, PS4Controller.Button.kTriangle.value);
-    private final JoystickButton squareButton = new JoystickButton(BBController, PS4Controller.Button.kSquare.value);
-    private final JoystickButton circleButton = new JoystickButton(BBController, PS4Controller.Button.kCircle.value);
-    private final JoystickButton crossButton = new JoystickButton(BBController, PS4Controller.Button.kCross.value);
+    private final JoystickButton triangleButton = new JoystickButton(operator, PS4Controller.Button.kTriangle.value);
+    private final JoystickButton squareButton = new JoystickButton(operator, PS4Controller.Button.kSquare.value);
+    private final JoystickButton circleButton = new JoystickButton(operator, PS4Controller.Button.kCircle.value);
+    private final JoystickButton crossButton = new JoystickButton(operator, PS4Controller.Button.kCross.value);
 
 
     /* Subsystems */
@@ -99,16 +99,10 @@ public class RobotContainer {
         /* Driver Buttons */
         yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        triangleButton.toggleOnTrue(new ActivateBeamBreak(1));
-        squareButton.toggleOnTrue(new ActivateBeamBreak(2));
-        circleButton.toggleOnTrue(new ActivateBeamBreak(3));
-        crossButton.toggleOnTrue(new ActivateBeamBreak(4));
+    
 
 
-        xButton.toggleOnTrue(new DeployIntakeCommand());
-        bButton.toggleOnTrue(new IntakeEjectCommand());
-        aButton.toggleOnTrue(new ScoreInSpeaker());
-        rightBumper.toggleOnTrue(new EjectIntoAmp());
+       
 
         
 

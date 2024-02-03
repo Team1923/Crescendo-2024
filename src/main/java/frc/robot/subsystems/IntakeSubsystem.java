@@ -8,6 +8,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -41,12 +42,14 @@ public class IntakeSubsystem extends SubsystemBase {
 
     var intakeArmSlot0Configs = intakeArmConfigs.Slot0;
 
+    intakeArmConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
+
     motionMagicVoltage = new MotionMagicVoltage(0);
     motionMagicVoltage.Slot = 0;
 
     // subject all to change
     intakeArmSlot0Configs.kS = Constants.IntakeConstants.intakeKS;
-    intakeArmSlot0Configs.kV = Constants.IntakeConstants.intakeKV;
     intakeArmSlot0Configs.kP = Constants.IntakeConstants.intakekP;
     intakeArmSlot0Configs.kI = Constants.IntakeConstants.intakekI;
     intakeArmSlot0Configs.kD = Constants.IntakeConstants.intakekD;
@@ -81,6 +84,15 @@ public class IntakeSubsystem extends SubsystemBase {
   public void setIntakePosition(double position) {
     intakeArmPrimary.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
         .withFeedForward(calculateIntakeFeedForward()));
+  }
+
+  /**
+   * Moving the intake arm using percent out
+   * 
+   * @param out percent out speed to run the intake arm at
+   */
+  public void setIntakeArmPercentOut(double out){
+    intakeArmPrimary.set(out);
   }
 
   /**
@@ -179,39 +191,40 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // stateHandler.setBBOneCovered(getBeamBreakOne());
+    stateHandler.setBBOneCovered(getBeamBreakOne());
     
 
-    IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
-    IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
+    //TODO: STATE MACHINE PUT BACK OR SAD
+    // IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
+    // IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
 
-    double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
-    double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
+    // double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
+    // double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
 
-    /*
-     * EDGE CASE: Eject speed can only be run when the intake is actually in its
-     * deployed position.
-     */
-    if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
-        && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
-      rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
-    }
-
-    setIntakePosition(intakeSetpoint);
-    setBottomWheelSpeed(rollerSpeed);
-    setTopWheelSpeed(rollerSpeed);
-
-    if (isAtIntakeState(desiredIntakeState)) {
-      stateHandler.setCurrentIntakeState(desiredIntakeState);
-    }
-
-    stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
-
-    // check the stator current to know whether or not we are hardstop.
-    // if (current == BAD) {
-    // stopIntakeArmMotors();
-    // stateHandler.setCurrentArmState(desiredIntakeState);
+    // /*
+    //  * EDGE CASE: Eject speed can only be run when the intake is actually in its
+    //  * deployed position.
+    //  */
+    // if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
+    //     && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
+    //   rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
     // }
+
+    // setIntakePosition(intakeSetpoint);
+    // setBottomWheelSpeed(rollerSpeed);
+    // setTopWheelSpeed(rollerSpeed);
+
+    // if (isAtIntakeState(desiredIntakeState)) {
+    //   stateHandler.setCurrentIntakeState(desiredIntakeState);
+    // }
+
+    // stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
+
+    // // check the stator current to know whether or not we are hardstop.
+    // // if (current == BAD) {
+    // // stopIntakeArmMotors();
+    // // stateHandler.setCurrentArmState(desiredIntakeState);
+    // // }
 
     if (DriverStation.isDisabled()) {
       disableMotionMagic();
