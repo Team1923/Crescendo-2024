@@ -67,8 +67,8 @@ public class FeederSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    stateHandler.setBBTwoCovered(getBeamBreakTwo());
-    stateHandler.setBBThreeCovered(getBeamBreakThree());
+    // stateHandler.setBBTwoCovered(getBeamBreakTwo());
+    // stateHandler.setBBThreeCovered(getBeamBreakThree());
 
     FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
 

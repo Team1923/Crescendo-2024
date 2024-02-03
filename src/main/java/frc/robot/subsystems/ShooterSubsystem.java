@@ -120,10 +120,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Velocity(RPM) of the top motor", getTopRPM());
-    SmartDashboard.putNumber("Velocity(RPM) of the bottom motor", getBottomRPM());
+    // SmartDashboard.putNumber("Velocity(RPM) of the top motor", getTopRPM());
+    // SmartDashboard.putNumber("Velocity(RPM) of the bottom motor", getBottomRPM());
 
-    stateHandler.setBBFourCovered(getBeamBreakFour());
+    // stateHandler.setBBFourCovered(getBeamBreakFour());
 
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
     double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();

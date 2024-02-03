@@ -28,8 +28,8 @@ public final class Constants {
 
     public static final class IntakeConstants {
         /* Motor IDs */
-        public static final int intakeWheelTopID = -1; //NOT ON ROBOT
-        public static final int intakeWheelBottomID = -1; //NOT ON ROBOT
+        public static final int intakeWheelTopID = 65; //NOT ON ROBOT
+        public static final int intakeWheelBottomID = 66; //NOT ON ROBOT
         public static final int intakeArmPrimaryID = 21; //right
         public static final int intakeArmFollowerID = 22; //left
 

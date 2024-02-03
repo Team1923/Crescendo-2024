@@ -3,6 +3,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -11,7 +12,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
 import frc.lib.ShooterArmUtils.PositionRPMData;
+import frc.robot.commands.Amp.EjectIntoAmp;
+import frc.robot.commands.IndependentTesting.ActivateBeamBreak;
 import frc.robot.commands.Intake.DeployIntakeCommand;
+import frc.robot.commands.Intake.IntakeEjectCommand;
+import frc.robot.commands.Speaker.ScoreInSpeaker;
 import frc.robot.commands.Swerve.AlignToAmp;
 import frc.robot.commands.Swerve.GoalCentricCommand;
 import frc.robot.commands.Swerve.TeleopSwerve;
@@ -29,6 +34,7 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
+    private final Joystick BBController = new Joystick(1);
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -37,9 +43,20 @@ public class RobotContainer {
 
     /* Driver Buttons */
     private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton aButton = new JoystickButton(driver, XboxController.Button.kA.value);
+    private final JoystickButton xButton = new JoystickButton(driver, XboxController.Button.kX.value);
+    private final JoystickButton bButton = new JoystickButton(driver, XboxController.Button.kB.value);
+
+
     private final JoystickButton leftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton rightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-    private final JoystickButton aButton = new JoystickButton(driver, XboxController.Button.kA.value);
+
+    /*Beam Break Buttons */
+    private final JoystickButton triangleButton = new JoystickButton(BBController, PS4Controller.Button.kTriangle.value);
+    private final JoystickButton squareButton = new JoystickButton(BBController, PS4Controller.Button.kSquare.value);
+    private final JoystickButton circleButton = new JoystickButton(BBController, PS4Controller.Button.kCircle.value);
+    private final JoystickButton crossButton = new JoystickButton(BBController, PS4Controller.Button.kCross.value);
+
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
@@ -81,6 +98,19 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+
+        triangleButton.toggleOnTrue(new ActivateBeamBreak(1));
+        squareButton.toggleOnTrue(new ActivateBeamBreak(2));
+        circleButton.toggleOnTrue(new ActivateBeamBreak(3));
+        crossButton.toggleOnTrue(new ActivateBeamBreak(4));
+
+
+        xButton.toggleOnTrue(new DeployIntakeCommand());
+        bButton.toggleOnTrue(new IntakeEjectCommand());
+        aButton.toggleOnTrue(new ScoreInSpeaker());
+        rightBumper.toggleOnTrue(new EjectIntoAmp());
+
+        
 
         // rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 
         //         () -> -driver.getRawAxis(translationAxis),

@@ -179,7 +179,8 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    stateHandler.setBBOneCovered(getBeamBreakOne());
+    // stateHandler.setBBOneCovered(getBeamBreakOne());
+    
 
     IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
     IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
