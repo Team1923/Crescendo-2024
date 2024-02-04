@@ -53,7 +53,7 @@ public final class Constants {
         public static final double maxIntakeJerk = 200;
 
         /* Gearbox Ratios & Unit Conversions */
-        public static final double intakeGearRatio = 1;
+        public static final double intakeGearRatio = 60;
         public static final double intakeRotsToRads = (2 * Math.PI) / intakeGearRatio;
         public static final double intakeRadsToRots = intakeGearRatio / (2 * Math.PI);
 
@@ -111,7 +111,7 @@ public final class Constants {
         public static final double maxArmJerk = 200;
 
         /* Gearbox Ratios & Unit Conversions */
-        public static final double armGearRatio = 1;
+        public static final double armGearRatio = 129.6;
         public static final double armRotsToRads = (2 * Math.PI) / armGearRatio;
         public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
 
@@ -133,8 +133,8 @@ public final class Constants {
                 COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(18.75); // TODO: This must be tuned to specific robot
-        public static final double wheelBase = Units.inchesToMeters(18.75); // TODO: This must be tuned to specific robot
+        public static final double trackWidth = Units.inchesToMeters(18.75);
+        public static final double wheelBase = Units.inchesToMeters(18.75); 
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 
         /*

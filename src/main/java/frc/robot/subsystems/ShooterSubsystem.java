@@ -55,7 +55,7 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterTop.getConfigurator().apply(shooterMotorConfig, 0.05);
     shooterBottom.getConfigurator().apply(shooterMotorConfig, 0.05);
 
-    shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, true));
+    shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, false));
   }
 
   /**
