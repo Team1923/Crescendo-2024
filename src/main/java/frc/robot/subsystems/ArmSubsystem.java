@@ -37,7 +37,7 @@ public class ArmSubsystem extends SubsystemBase {
 
     var armConfigs = new TalonFXConfiguration();
 
-    armConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    armConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;//change back to brake;
 
     var armSlot0Configs = armConfigs.Slot0;
 
@@ -138,9 +138,11 @@ public class ArmSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Raw Postion ARM ", armPrimary.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
 
-    SmartDashboard.putNumber("Intake Position Radians", getArmPositionRads());
+
+    SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
     /*
      * By default, whatever the desired position is, we will go to the desired
      * position as commanded.

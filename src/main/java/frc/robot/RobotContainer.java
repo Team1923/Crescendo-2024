@@ -68,15 +68,15 @@ public class RobotContainer {
 
 
     /* Subsystems */
-    private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+    // private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
     // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
     // private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    // private final ArmSubsystem armSubsystem = new ArmSubsystem();
+    private final ArmSubsystem armSubsystem = new ArmSubsystem();
     // private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
     // private final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
-    private AutoInstantiator autoInstantiator = new AutoInstantiator();
+    // private AutoInstantiator autoInstantiator = new AutoInstantiator();
     private final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
     private final PositionRPMData positionRPMData = new PositionRPMData();
 
@@ -84,16 +84,16 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
-        s_Swerve.setDefaultCommand(
-                new TeleopSwerve(
-                        s_Swerve,
-                        () -> -driver.getRawAxis(translationAxis),
-                        () -> -driver.getRawAxis(strafeAxis),
-                        () -> -driver.getRawAxis(rotationAxis),
-                        () -> leftBumper.getAsBoolean()));
+        // s_Swerve.setDefaultCommand(
+        //         new TeleopSwerve(
+        //                 s_Swerve,
+        //                 () -> -0.3*driver.getRawAxis(translationAxis),
+        //                 () -> -0.3* driver.getRawAxis(strafeAxis),
+        //                 () -> -0.3*driver.getRawAxis(rotationAxis),
+        //                 () -> leftBumper.getAsBoolean()));
 
         // intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> operator.getRawAxis(operatorLeftY)));
-        // armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () -> operatorRightY));
+        armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () -> 0.2 * operator.getRawAxis(operatorRightY)));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -109,7 +109,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        // yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         // circleButton.whileTrue(new ArmMotionMagicCommand(armSubsystem));
         // crossButton.whileTrue(new IntakeMotionMagicCommand(intakeSubsystem));
@@ -135,6 +135,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command initializeAuto(AutoChooser selector) {
-        return selector.startMode();
+        return null;
     }
 }
