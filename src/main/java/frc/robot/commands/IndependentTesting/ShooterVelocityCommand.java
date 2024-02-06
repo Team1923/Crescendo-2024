@@ -23,7 +23,7 @@ public class ShooterVelocityCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.setVelocities(100,100);
+    shooterSubsystem.setVelocities(6000,6000);
   }
 
   // Called once the command ends or is interrupted.
