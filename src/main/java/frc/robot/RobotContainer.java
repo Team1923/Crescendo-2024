@@ -72,15 +72,15 @@ public class RobotContainer {
     /* Subsystems */
     // private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
     // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-    // private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    private final ArmSubsystem armSubsystem = new ArmSubsystem();
-    private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    private final FeederSubsystem feederSubsystem = new FeederSubsystem();
+    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    public final ArmSubsystem armSubsystem = new ArmSubsystem();
+    public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    public final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     // private AutoInstantiator autoInstantiator = new AutoInstantiator();
-    private final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
-    private final PositionRPMData positionRPMData = new PositionRPMData();
+    public final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
+    public final PositionRPMData positionRPMData = new PositionRPMData();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.

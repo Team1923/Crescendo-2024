@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,6 +28,7 @@ public class FeederSubsystem extends SubsystemBase {
   /** Creates a new FeederSubsystem. */
   public FeederSubsystem() {
     feederMotor.getConfigurator().apply(new TalonFXConfiguration());
+    feederMotor.setNeutralMode(NeutralModeValue.Brake);
   }
 
   /**

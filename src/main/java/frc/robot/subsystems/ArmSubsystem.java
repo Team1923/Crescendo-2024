@@ -37,7 +37,7 @@ public class ArmSubsystem extends SubsystemBase {
 
     var armConfigs = new TalonFXConfiguration();
 
-    armConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;//change back to brake;
+    armConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
     var armSlot0Configs = armConfigs.Slot0;
 
@@ -134,6 +134,19 @@ public class ArmSubsystem extends SubsystemBase {
 
   public boolean isAtArmState(double desiredSetpoint) {
     return Math.abs(getArmPositionRads() - desiredSetpoint) < ArmConstants.armPositionAllowableOffset;
+  }
+
+  /*
+   * Methods to set coast/brake mode.
+   */
+  public void setArmCoast() {
+    armPrimary.setNeutralMode(NeutralModeValue.Coast);
+    armPrimary.setNeutralMode(NeutralModeValue.Coast);
+  }
+
+  public void setArmBrake() {
+    armPrimary.setNeutralMode(NeutralModeValue.Brake);
+    armPrimary.setNeutralMode(NeutralModeValue.Brake);
   }
 
   @Override

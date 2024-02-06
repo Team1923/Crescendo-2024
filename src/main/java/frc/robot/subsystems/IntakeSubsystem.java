@@ -44,7 +44,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     var intakeArmSlot0Configs = intakeArmConfigs.Slot0;
 
-    intakeArmConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    intakeArmConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
 
     // subject all to change
@@ -76,7 +76,7 @@ public class IntakeSubsystem extends SubsystemBase {
    */
   public void zeroIntakeArm() {
     intakeArmPrimary.setPosition(0);
-    // intakeArmFollower.setPosition(0);
+    intakeArmFollower.setPosition(0);
   }
 
   /**
@@ -87,6 +87,8 @@ public class IntakeSubsystem extends SubsystemBase {
   public void setIntakePosition(double position) {
     intakeArmPrimary.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
         .withFeedForward(calculateIntakeFeedForward()));
+    intakeArmFollower.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
+      .withFeedForward(calculateIntakeFeedForward()));
   }
 
   /**
@@ -96,7 +98,7 @@ public class IntakeSubsystem extends SubsystemBase {
    */
   public void setIntakeArmPercentOut(double out){
     intakeArmPrimary.set(out);
-    // intakeArmFollower.set(out);
+    intakeArmFollower.set(out);
   }
 
 
@@ -184,6 +186,17 @@ public class IntakeSubsystem extends SubsystemBase {
     return Math.abs(getIntakeArmPositionRads() -
         intakeStates.getIntakePosition().getAngularSetpoint()) < IntakeConstants.intakePositionAllowableOffset;
   }
+
+  public void setIntakeArmCoast() {
+    intakeArmPrimary.setNeutralMode(NeutralModeValue.Coast);
+    intakeArmFollower.setNeutralMode(NeutralModeValue.Coast);
+  }
+
+  public void setIntakeArmBrake() {
+    intakeArmPrimary.setNeutralMode(NeutralModeValue.Brake);
+    intakeArmFollower.setNeutralMode(NeutralModeValue.Brake);
+  }
+
 
   @Override
   public void periodic() {

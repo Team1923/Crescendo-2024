@@ -9,6 +9,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -56,6 +57,9 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterBottom.getConfigurator().apply(shooterMotorConfig, 0.05);
 
     shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, false));
+
+    shooterTop.setNeutralMode(NeutralModeValue.Brake);
+    shooterBottom.setNeutralMode(NeutralModeValue.Brake);
   }
 
   /**
