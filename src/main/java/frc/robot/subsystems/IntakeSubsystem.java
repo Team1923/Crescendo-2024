@@ -186,7 +186,8 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     stateHandler.setBBOneCovered(getBeamBreakOne());
 
-    SmartDashboard.putNumber("Raw Postion INTAKE ", intakeArmPrimary.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Postion INTAKE Primary ", intakeArmPrimary.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Intake Positin Follower", intakeArmFollower.getPosition().getValueAsDouble());
 
     SmartDashboard.putNumber("Intake Position Radians", getIntakeArmPositionRads());
     

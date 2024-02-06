@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.robot.subsystems.ArmSubsystem;
 
-public class ArmMotionMagicCommand extends Command {
+public class ArmMotionMagicCommandAMP extends Command {
 
   ArmSubsystem armSubsystem;
 
   /** Creates a new ArmMotionMagicCommand. */
-  public ArmMotionMagicCommand(ArmSubsystem arm) {
+  public ArmMotionMagicCommandAMP(ArmSubsystem arm) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     armSubsystem = arm;
@@ -28,7 +28,7 @@ public class ArmMotionMagicCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armSubsystem.setArmPosition(ArmStates.SPEAKER.getArmPosition().getAngularSetpoint());
+    armSubsystem.setArmPosition(ArmStates.AMP.getArmPosition().getAngularSetpoint());
   }
 
   // Called once the command ends or is interrupted.

@@ -103,12 +103,12 @@ public final class Constants {
 
         /* Motion Magic Constants */
         public static final double armKS = 0;
-        public static final double armkP = 0.1;
-        public static final double armkI = 0;
+        public static final double armkP = 0.8;
+        public static final double armkI = 0.005;
         public static final double armkD = 0;
-        public static final double maxArmVel = 20;
-        public static final double maxArmAccel = 40;
-        public static final double maxArmJerk = 200;
+        public static final double maxArmVel = 100;
+        public static final double maxArmAccel = 250;
+        public static final double maxArmJerk = 1000;
 
         /* Gearbox Ratios & Unit Conversions */
         public static final double armGearRatio = 129.6;
@@ -117,7 +117,7 @@ public final class Constants {
 
         /* kG - gravity constant for motion of arm */
         // TODO: discuss on how the max gravity constant should be found.
-        public static final double armMaxGravityConstant = 0;
+        public static final double armMaxGravityConstant = 0.045 * 12;
 
         public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
 

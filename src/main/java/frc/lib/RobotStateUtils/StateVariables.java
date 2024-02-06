@@ -6,8 +6,8 @@ public class StateVariables {
      */
     public static enum ArmStates {
         STOWED(new ArmPosition(0)),
-        AMP(new ArmPosition(1)),
-        SPEAKER(new ArmPosition(3)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING
+        AMP(new ArmPosition(-1.911)),
+        SPEAKER(new ArmPosition(-0.79)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING
         CLIMB(new ArmPosition(2));
 
         private ArmPosition armPosition;

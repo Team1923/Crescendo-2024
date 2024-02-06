@@ -143,6 +143,10 @@ public class ArmSubsystem extends SubsystemBase {
 
 
     SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
+
+    SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
+    SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
+
     /*
      * By default, whatever the desired position is, we will go to the desired
      * position as commanded.
