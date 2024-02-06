@@ -21,39 +21,40 @@ import frc.robot.Constants;
 import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
-  private StateHandler stateHandler = StateHandler.getInstance();
+  // private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
+  // private StateHandler stateHandler = StateHandler.getInstance();
 
   private TalonFX intakeArmPrimary = new TalonFX(Constants.IntakeConstants.intakeArmPrimaryID, "rio");
   private TalonFX intakeArmFollower = new TalonFX(Constants.IntakeConstants.intakeArmFollowerID, "rio");
 
-  private TalonFX intakeWheelTop = new TalonFX(Constants.IntakeConstants.intakeWheelTopID, "rio");
-  private TalonFX intakeWheelBottom = new TalonFX(Constants.IntakeConstants.intakeWheelBottomID, "rio");
+  // private TalonFX intakeWheelTop = new TalonFX(Constants.IntakeConstants.intakeWheelTopID, "rio");
+  // private TalonFX intakeWheelBottom = new TalonFX(Constants.IntakeConstants.intakeWheelBottomID, "rio");
 
   private MotionMagicVoltage motionMagicVoltage;
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
+
     intakeArmPrimary.getConfigurator().apply(new TalonFXConfiguration());
     intakeArmFollower.getConfigurator().apply(new TalonFXConfiguration());
-    intakeWheelTop.getConfigurator().apply(new TalonFXConfiguration());
-    intakeWheelBottom.getConfigurator().apply(new TalonFXConfiguration());
+    // intakeWheelTop.getConfigurator().apply(new TalonFXConfiguration());
+    // intakeWheelBottom.getConfigurator().apply(new TalonFXConfiguration());
 
     var intakeArmConfigs = new TalonFXConfiguration();
 
     var intakeArmSlot0Configs = intakeArmConfigs.Slot0;
 
-    intakeArmConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    intakeArmConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
-
-    motionMagicVoltage = new MotionMagicVoltage(0);
-    motionMagicVoltage.Slot = 0;
 
     // subject all to change
     intakeArmSlot0Configs.kS = Constants.IntakeConstants.intakeKS;
     intakeArmSlot0Configs.kP = Constants.IntakeConstants.intakekP;
     intakeArmSlot0Configs.kI = Constants.IntakeConstants.intakekI;
     intakeArmSlot0Configs.kD = Constants.IntakeConstants.intakekD;
+
+    motionMagicVoltage = new MotionMagicVoltage(0);
+    motionMagicVoltage.Slot = 0;
 
     // motion magic configs
     var motionMagicConfigs = intakeArmConfigs.MotionMagic;
@@ -65,7 +66,7 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeArmFollower.getConfigurator().apply(intakeArmConfigs, 0.05);
 
     // Need to change/test in lab
-    intakeArmFollower.setControl(new Follower(Constants.IntakeConstants.intakeArmPrimaryID, true));
+    intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
 
     zeroIntakeArm();
   }
@@ -75,6 +76,7 @@ public class IntakeSubsystem extends SubsystemBase {
    */
   public void zeroIntakeArm() {
     intakeArmPrimary.setPosition(0);
+    // intakeArmFollower.setPosition(0);
   }
 
   /**
@@ -94,7 +96,9 @@ public class IntakeSubsystem extends SubsystemBase {
    */
   public void setIntakeArmPercentOut(double out){
     intakeArmPrimary.set(out);
+    // intakeArmFollower.set(out);
   }
+
 
   /**
    * Gets the position of the intake arm.
@@ -127,11 +131,11 @@ public class IntakeSubsystem extends SubsystemBase {
    * Sets the speed for the top intake wheel.
    * 
    * @param speed The speed passed in.
-   */
-  public void setRollerWheelSpeed(double topSpeed, double BottomSpeed) {
-    intakeWheelTop.set(topSpeed);
-    intakeWheelBottom.set(BottomSpeed);
-  }
+  //  */
+  // public void setRollerWheelSpeed(double topSpeed, double BottomSpeed) {
+  //   intakeWheelTop.set(topSpeed);
+  //   intakeWheelBottom.set(BottomSpeed);
+  // }
 
   /**
    * Stops the intake arm motors.
@@ -143,11 +147,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
   /**
    * Stops the intake wheel motors.
-   */
-  public void stopIntakeWheels() {
-    intakeWheelTop.stopMotor();
-    intakeWheelBottom.stopMotor();
-  }
+  //  */
+  // public void stopIntakeWheels() {
+  //   intakeWheelTop.stopMotor();
+  //   intakeWheelBottom.stopMotor();
+  // }
 
   /**
    * Disabling the MotionMagic Control
@@ -172,9 +176,9 @@ public class IntakeSubsystem extends SubsystemBase {
    * 
    * @return the boolean value representing the digital input reading.
    */
-  public boolean getBeamBreakOne() {
-    return !beamBreakOne.get();
-  }
+  // public boolean getBeamBreakOne() {
+  //   return !beamBreakOne.get();
+  // }
 
   public boolean isAtIntakeState(IntakeStates intakeStates) {
     return Math.abs(getIntakeArmPositionRads() -
@@ -184,10 +188,10 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    stateHandler.setBBOneCovered(getBeamBreakOne());
+    // stateHandler.setBBOneCovered(getBeamBreakOne());
 
     SmartDashboard.putNumber("Raw Postion INTAKE Primary ", intakeArmPrimary.getPosition().getValueAsDouble());
-    SmartDashboard.putNumber("Raw Intake Positin Follower", intakeArmFollower.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Intake Position Follower", intakeArmFollower.getPosition().getValueAsDouble());
 
     SmartDashboard.putNumber("Intake Position Radians", getIntakeArmPositionRads());
     
