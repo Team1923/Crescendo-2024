@@ -67,8 +67,8 @@ public class ShooterSubsystem extends SubsystemBase {
     m_velocitytop.Slot = 0;
     m_velocitybottom.Slot = 0;
 
-    shooterTop.setControl(m_velocitytop.withVelocity(velocityP));
-    shooterBottom.setControl(m_velocitybottom.withVelocity(velocityF));
+    shooterTop.setControl(m_velocitytop.withVelocity(velocityP * ShooterConstants.shooterRPMToRPS));
+    shooterBottom.setControl(m_velocitybottom.withVelocity(velocityF * ShooterConstants.shooterRPMToRPS));
   }
 
   /**

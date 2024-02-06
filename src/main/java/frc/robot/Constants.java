@@ -73,6 +73,7 @@ public final class Constants {
         public static final int shooterMotorFollowerID = 18; //bottom 
 
         public static final double shooterRPSToRPM = 60;
+        public static final double shooterRPMToRPS = 1 / shooterRPSToRPM;
 
         /* PID Constants */
         public static final double shooterKS = 0;
