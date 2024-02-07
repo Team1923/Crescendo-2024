@@ -4,10 +4,9 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
-import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
@@ -30,8 +29,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   PositionRPMData rpmData = PositionRPMData.getInstance();
 
-  private final VelocityVoltage m_velocitytop = new VelocityVoltage(0);
-  private final VelocityVoltage m_velocitybottom = new VelocityVoltage(0);
+  private final MotionMagicVelocityVoltage motionMagicVelVoltage;
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
@@ -40,21 +38,28 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterBottom.getConfigurator().apply(new TalonFXConfiguration());
 
 
-    var shooterMotorConfig = new Slot0Configs();
+    var shooterFXConfig = new TalonFXConfiguration();
 
     /**
      * Rough values, need to tune them to final robot.
      */
+    var shooterMotorConfig = shooterFXConfig.Slot0;
     shooterMotorConfig.kS = ShooterConstants.shooterKS;
     shooterMotorConfig.kV = ShooterConstants.shooterKV;
+    shooterMotorConfig.kA = ShooterConstants.shooterKA;
     shooterMotorConfig.kP = ShooterConstants.shooterKP;
     shooterMotorConfig.kI = ShooterConstants.shooterKI;
     shooterMotorConfig.kD = ShooterConstants.shooterKD;
 
-    
+    motionMagicVelVoltage = new MotionMagicVelocityVoltage(0);
+    motionMagicVelVoltage.Slot = 0;
 
-    shooterTop.getConfigurator().apply(shooterMotorConfig, 0.05);
-    shooterBottom.getConfigurator().apply(shooterMotorConfig, 0.05);
+    var shooterMotionMagicConfig = shooterFXConfig.MotionMagic;
+    shooterMotionMagicConfig.MotionMagicAcceleration = 400;
+    shooterMotionMagicConfig.MotionMagicJerk = 4000;
+
+    shooterTop.getConfigurator().apply(shooterFXConfig, 0.05);
+    shooterBottom.getConfigurator().apply(shooterFXConfig, 0.05);
 
     shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, false));
 
@@ -69,11 +74,8 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param velocityF The speed, in RPM, passed into the bottom motor.
    */
   public void setVelocities(double velocityP, double velocityF) {
-    m_velocitytop.Slot = 0;
-    m_velocitybottom.Slot = 0;
-
-    shooterTop.setControl(m_velocitytop.withVelocity(velocityP * ShooterConstants.shooterRPMToRPS));
-    shooterBottom.setControl(m_velocitybottom.withVelocity(velocityF * ShooterConstants.shooterRPMToRPS));
+    shooterTop.setControl(motionMagicVelVoltage.withVelocity(velocityP * ShooterConstants.shooterRPMToRPS));
+    shooterBottom.setControl(motionMagicVelVoltage.withVelocity(velocityF * ShooterConstants.shooterRPMToRPS));
   }
 
   /**
