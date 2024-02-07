@@ -76,8 +76,8 @@ public class RobotContainer {
     // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
     public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public final ArmSubsystem armSubsystem = new ArmSubsystem();
-    public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    public final FeederSubsystem feederSubsystem = new FeederSubsystem();
+    // public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    // public final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     // private AutoInstantiator autoInstantiator = new AutoInstantiator();
@@ -96,7 +96,7 @@ public class RobotContainer {
         //                 () -> -0.3*driver.getRawAxis(rotationAxis),
         //                 () -> leftBumper.getAsBoolean()));
 
-        //  intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
+         intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
         // armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () -> 0.2 * operator.getRawAxis(operatorRightY)));
 
         // Configure the button bindings
@@ -115,11 +115,11 @@ public class RobotContainer {
         /* Driver Buttons */
         // yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        circleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
-        crossButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
+        // circleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
+        // crossButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
 
 
-        triangleButton.whileTrue(new FeederPercOutCommand(feederSubsystem));
+        // triangleButton.whileTrue(new FeederPercOutCommand(feederSubsystem));
         // squareButton.whileTrue(new RunIntakeRollerCommand(intakeSubsystem));
         
 
