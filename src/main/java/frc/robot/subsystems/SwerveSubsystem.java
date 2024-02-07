@@ -61,17 +61,15 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
-        ChassisSpeeds discretizedFieldChassisSpeeds = 
-            ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
-        discretizedFieldChassisSpeeds = ChassisSpeeds.discretize(discretizedFieldChassisSpeeds, 0.02);
+        ChassisSpeeds fieldChassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), 
+            rotation, getHeading());
 
-        ChassisSpeeds discretizedRobotRelChassisSpeeds = 
-            new ChassisSpeeds(translation.getX(), translation.getY(), rotation);
-        discretizedRobotRelChassisSpeeds = ChassisSpeeds.discretize(discretizedRobotRelChassisSpeeds, 0.02);
+        ChassisSpeeds robotRelChassisSpeeds = new ChassisSpeeds(translation.getX(), translation.getY(), rotation);
 
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? discretizedFieldChassisSpeeds : discretizedRobotRelChassisSpeeds);
+                fieldRelative ? ChassisSpeeds.discretize(fieldChassisSpeeds, 0.02) 
+                : ChassisSpeeds.discretize(robotRelChassisSpeeds, 0.02));
 
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);        
         
@@ -81,8 +79,8 @@ public class SwerveSubsystem extends SubsystemBase {
     }  
     
     public void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {
-        robotRelativeSpeeds = ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
-        SwerveModuleState[] swerveModuleStates = Constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
+        SwerveModuleState[] swerveModuleStates = 
+            Constants.Swerve.swerveKinematics.toSwerveModuleStates(ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02));
         setModuleStates(swerveModuleStates);
     }
 
