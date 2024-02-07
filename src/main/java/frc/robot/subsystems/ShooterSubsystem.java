@@ -21,27 +21,32 @@ import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-
+  /* Instantiate Shooter Motors (top + bottom) */
   private TalonFX shooterTop = new TalonFX(ShooterConstants.shooterMotorPrimaryID, "rio");
   private TalonFX shooterBottom = new TalonFX(ShooterConstants.shooterMotorFollowerID, "rio");
+
+  /* Instantiate DigitalInput object to get data from beam break. */
   private DigitalInput beamBreakFour = new DigitalInput(ShooterConstants.beamBreakFourID);
+
+  /* Initialize StateHandler to get important data about the robot. */
   private StateHandler stateHandler = StateHandler.getInstance();
 
+  /* Helper class used to get the RPM the shooter needs to operate at when shooting from range. */
   PositionRPMData rpmData = PositionRPMData.getInstance();
 
+  /* Declare MotionMagicVoltage object to command the shooter at a specific velocity. */
   private final MotionMagicVelocityVoltage motionMagicVelVoltage;
 
-  /** Creates a new ShooterSubsystem. */
+  /* Construct a new ShooterSubsystem to apply motor configurations. */
   public ShooterSubsystem() {
+    /* Wipe the data on the motor by applying a blank configuration. */
     shooterTop.getConfigurator().apply(new TalonFXConfiguration());
     shooterBottom.getConfigurator().apply(new TalonFXConfiguration());
 
-
+    /* Create a new TalonFXConfiguration. Will be used to set relevant constants for the shooter. */
     var shooterFXConfig = new TalonFXConfiguration();
 
-    /**
-     * Rough values, need to tune them to final robot.
-     */
+    /* Shooter motion constants applied to slot 0. TUNE THESE! */
     var shooterMotorConfig = shooterFXConfig.Slot0;
     shooterMotorConfig.kS = ShooterConstants.shooterKS;
     shooterMotorConfig.kV = ShooterConstants.shooterKV;
@@ -50,18 +55,23 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotorConfig.kI = ShooterConstants.shooterKI;
     shooterMotorConfig.kD = ShooterConstants.shooterKD;
 
+    /* Initialize MotionMagicVoltage object to apply motion magic on the shooter. */
     motionMagicVelVoltage = new MotionMagicVelocityVoltage(0);
     motionMagicVelVoltage.Slot = 0;
 
+    /* Get the MotionMagic configuration to specify acceleration and jerk. */
     var shooterMotionMagicConfig = shooterFXConfig.MotionMagic;
     shooterMotionMagicConfig.MotionMagicAcceleration = ShooterConstants.maxArmAccel; //TODO: Tune
     shooterMotionMagicConfig.MotionMagicJerk = ShooterConstants.maxArmJerk; //TODO: Tune
 
+    /* Apply configuration to each of the shooter motors. */
     shooterTop.getConfigurator().apply(shooterFXConfig, 0.05);
     shooterBottom.getConfigurator().apply(shooterFXConfig, 0.05);
 
+    /* Set one motor to follow the other. */
     shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, false));
 
+    /* Initially set motors to BRAKE. */
     shooterTop.setNeutralMode(NeutralModeValue.Brake);
     shooterBottom.setNeutralMode(NeutralModeValue.Brake);
   }
@@ -113,6 +123,11 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterBottom.stopMotor();
   }
 
+  /**
+   * Method to determine if the current shooter RPM is the commanded shooter RPM.
+   * @param desiredSetpoint the commanded velocity setpoint to check/analyze.
+   * @return a boolean to determine if the shooter's velocity is within range of the commanded velocity.
+   */
   public boolean isAtShooterSpeed(double desiredSetpoint) {
     return Math.abs(getTopRPM() - desiredSetpoint) < ShooterConstants.shooterSpeedThreshold
         && Math.abs(getBottomRPM() - desiredSetpoint) < ShooterConstants.shooterSpeedThreshold;
