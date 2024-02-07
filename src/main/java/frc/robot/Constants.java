@@ -82,11 +82,15 @@ public final class Constants {
         public static final double shooterKA = 0.01;
         public static final double shooterKI = 0.001;
         public static final double shooterKD = 0;
+        public static final double maxArmAccel = 100;
+        public static final double maxArmJerk = 1000;
 
         /* Beam Break ID */
         public static final int beamBreakFourID = 4;
 
         public static final double shooterSpeedThreshold = 50; //RPM
+
+
     }
 
     public static final class FeederConstants {

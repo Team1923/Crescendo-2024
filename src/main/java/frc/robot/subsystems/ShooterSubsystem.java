@@ -54,8 +54,8 @@ public class ShooterSubsystem extends SubsystemBase {
     motionMagicVelVoltage.Slot = 0;
 
     var shooterMotionMagicConfig = shooterFXConfig.MotionMagic;
-    shooterMotionMagicConfig.MotionMagicAcceleration = 100; //TODO: Tune
-    shooterMotionMagicConfig.MotionMagicJerk = 1000; //TODO: Tune
+    shooterMotionMagicConfig.MotionMagicAcceleration = ShooterConstants.maxArmAccel; //TODO: Tune
+    shooterMotionMagicConfig.MotionMagicJerk = ShooterConstants.maxArmJerk; //TODO: Tune
 
     shooterTop.getConfigurator().apply(shooterFXConfig, 0.05);
     shooterBottom.getConfigurator().apply(shooterFXConfig, 0.05);

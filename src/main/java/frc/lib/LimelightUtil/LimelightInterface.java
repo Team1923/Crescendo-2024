@@ -90,6 +90,10 @@ public class LimelightInterface {
     return getArrayEntry("botpose_targetspace");
   }
 
+  public double[] getBotPoseBlueAlliance(){
+    return getArrayEntry("botpose_wpiblue");  
+  }
+
   public double getID(){
     return hasValidTag() ? getDoubleEntry("tid") : -1;
   }
