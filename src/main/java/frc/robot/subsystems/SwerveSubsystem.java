@@ -63,11 +63,11 @@ public class SwerveSubsystem extends SubsystemBase {
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         ChassisSpeeds discretizedFieldChassisSpeeds = 
             ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
-        ChassisSpeeds.discretize(discretizedFieldChassisSpeeds, 0.02);
+        discretizedFieldChassisSpeeds = ChassisSpeeds.discretize(discretizedFieldChassisSpeeds, 0.02);
 
         ChassisSpeeds discretizedRobotRelChassisSpeeds = 
             new ChassisSpeeds(translation.getX(), translation.getY(), rotation);
-        ChassisSpeeds.discretize(discretizedRobotRelChassisSpeeds, 0.02);
+        discretizedRobotRelChassisSpeeds = ChassisSpeeds.discretize(discretizedRobotRelChassisSpeeds, 0.02);
 
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
@@ -81,7 +81,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }  
     
     public void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {
-        ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
+        robotRelativeSpeeds = ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
         SwerveModuleState[] swerveModuleStates = Constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
         setModuleStates(swerveModuleStates);
     }
