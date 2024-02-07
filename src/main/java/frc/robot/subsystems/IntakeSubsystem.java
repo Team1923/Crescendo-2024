@@ -66,7 +66,7 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeArmFollower.getConfigurator().apply(intakeArmConfigs, 0.05);
 
     // Need to change/test in lab
-    intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
+    // intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
 
     zeroIntakeArm();
   }
