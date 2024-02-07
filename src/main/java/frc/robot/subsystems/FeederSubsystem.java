@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -19,29 +15,35 @@ import frc.robot.Constants.FeederConstants;
 import frc.lib.RobotStateUtils.StateHandler;
 
 public class FeederSubsystem extends SubsystemBase {
+  /* Beam Break initializations. These are DigitalInput objects that return true/false. */
   private DigitalInput beamBreakTwo = new DigitalInput(FeederConstants.beamBreakTwoID);
   private DigitalInput beamBreakThree = new DigitalInput(FeederConstants.beamBreakThreeID);
+
+  /* Instantiate the StateHandler to get useful data on the robot's current state. */
   private StateHandler stateHandler = StateHandler.getInstance();
 
+  /* Initialize the Feeder Motor. */
   private TalonFX feederMotor = new TalonFX(FeederConstants.feederMotorID, "rio");
 
-  /** Creates a new FeederSubsystem. */
+  /* Construct the feeder subsystem. This will be used to apply any configs to the feeder motor. */
   public FeederSubsystem() {
+    /* Wipe the data on the feeder motor. */
     feederMotor.getConfigurator().apply(new TalonFXConfiguration());
+    
+    /* Set the NeutralMode of the FeederMotor to be BRAKE. */
     feederMotor.setNeutralMode(NeutralModeValue.Brake);
   }
 
   /**
-   * This method sets the speed of the feeder motor wheel.
-   * 
-   * @param s The desired output speed.
+   * Set the speed of the feeder motor (percent output based control).
+   * @param s The desired output speed as a decimal-representation of a percent.
    */
   public void setFeederMotorSpeed(double s) {
     feederMotor.set(s);
   }
 
   /**
-   * This method stops the motor.
+   * This method stops the feeder motor..
    */
   public void stopFeederMotor() {
     feederMotor.stopMotor();
