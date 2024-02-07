@@ -16,7 +16,6 @@ import frc.lib.LimelightUtil.LimelightInterface;
 import frc.lib.RobotStateUtils.StateHandler;
 
 public class ArmSubsystem extends SubsystemBase {
-
   /* Helper class instantiations to get useful data from the robot. */
   StateHandler stateHandler = StateHandler.getInstance();
   LimelightInterface limelightInterface = LimelightInterface.getInstance();
