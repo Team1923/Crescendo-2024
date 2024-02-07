@@ -33,7 +33,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-
     shooterTop.getConfigurator().apply(new TalonFXConfiguration());
     shooterBottom.getConfigurator().apply(new TalonFXConfiguration());
 

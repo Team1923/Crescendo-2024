@@ -75,7 +75,7 @@ public final class Constants {
         public static final double shooterRPSToRPM = 60;
         public static final double shooterRPMToRPS = 1 / shooterRPSToRPM;
 
-        /* PID Constants */
+        /* Motion Magic Velocity Constants */
         public static final double shooterKS = 0.25;
         public static final double shooterKV = 0.12;
         public static final double shooterKP = 0.5;
