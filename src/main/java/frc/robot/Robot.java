@@ -62,8 +62,8 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    m_robotContainer.armSubsystem.setArmCoast();
-    m_robotContainer.intakeSubsystem.setIntakeArmCoast();
+    // m_robotContainer.armSubsystem.setArmCoast();
+    // m_robotContainer.intakeSubsystem.setIntakeArmCoast();
   }
 
   @Override
@@ -74,8 +74,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.initializeAuto(selector);
     LimelightInterface.getInstance().aprilTagFieldLayout.setOrigin(OriginPosition.kBlueAllianceWallRightSide);
-    m_robotContainer.armSubsystem.setArmBrake();
-    m_robotContainer.intakeSubsystem.setIntakeArmBrake();
+    // m_robotContainer.armSubsystem.setArmBrake();
+    // m_robotContainer.intakeSubsystem.setIntakeArmBrake();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -89,8 +89,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    m_robotContainer.armSubsystem.setArmBrake();
-    m_robotContainer.intakeSubsystem.setIntakeArmBrake();
+    // m_robotContainer.armSubsystem.setArmBrake();
+    // m_robotContainer.intakeSubsystem.setIntakeArmBrake();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
