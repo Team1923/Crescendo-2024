@@ -30,10 +30,6 @@ public class ArmSubsystem extends SubsystemBase {
 
   /* Constructor of ArmSubsystem. Used for setting up motors & configurations. */
   public ArmSubsystem() {
-    /* Wipe the data on the motors. */
-    armPrimary.getConfigurator().apply(new TalonFXConfiguration());
-    armFollower.getConfigurator().apply(new TalonFXConfiguration());
-
     /*
      * Create a new configuration for the arm. This is the object
      * that will be used in order to set up the relevant
@@ -64,8 +60,8 @@ public class ArmSubsystem extends SubsystemBase {
     motionMagicConfigs.MotionMagicJerk = ArmConstants.maxArmJerk;
 
     /* Apply the generated configuration to the motors. */
-    armPrimary.getConfigurator().apply(armConfigs, 0.05);
-    armFollower.getConfigurator().apply(armConfigs, 0.05);
+    armPrimary.getConfigurator().apply(armConfigs);
+    armFollower.getConfigurator().apply(armConfigs);
 
     /* Set the motor to follow the primary motor & oppose its direction. */
     armFollower.setControl(new Follower(ArmConstants.armMotorPrimaryID, true));

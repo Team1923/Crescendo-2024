@@ -34,9 +34,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
-
-    intakeArmPrimary.getConfigurator().apply(new TalonFXConfiguration());
-    intakeArmFollower.getConfigurator().apply(new TalonFXConfiguration());
     intakeWheelTop.getConfigurator().apply(new TalonFXConfiguration());
     intakeWheelBottom.getConfigurator().apply(new TalonFXConfiguration());
 
@@ -62,8 +59,8 @@ public class IntakeSubsystem extends SubsystemBase {
     motionMagicConfigs.MotionMagicAcceleration = Constants.IntakeConstants.maxIntakeAccel;
     motionMagicConfigs.MotionMagicJerk = Constants.IntakeConstants.maxIntakeJerk;
 
-    intakeArmPrimary.getConfigurator().apply(intakeArmConfigs, 0.05);
-    intakeArmFollower.getConfigurator().apply(intakeArmConfigs, 0.05);
+    intakeArmPrimary.getConfigurator().apply(intakeArmConfigs);
+    intakeArmFollower.getConfigurator().apply(intakeArmConfigs);
 
     intakeArmPrimary.setInverted(true);
     intakeArmFollower.setInverted(true);

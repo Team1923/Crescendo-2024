@@ -39,10 +39,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /* Construct a new ShooterSubsystem to apply motor configurations. */
   public ShooterSubsystem() {
-    /* Wipe the data on the motor by applying a blank configuration. */
-    shooterTop.getConfigurator().apply(new TalonFXConfiguration());
-    shooterBottom.getConfigurator().apply(new TalonFXConfiguration());
-
     /* Create a new TalonFXConfiguration. Will be used to set relevant constants for the shooter. */
     var shooterFXConfig = new TalonFXConfiguration();
 
