@@ -42,6 +42,9 @@ public class ShooterSubsystem extends SubsystemBase {
     /* Create a new TalonFXConfiguration. Will be used to set relevant constants for the shooter. */
     var shooterFXConfig = new TalonFXConfiguration();
 
+    /* Setup shooter motors to operate in BRAKE mode. */
+    shooterFXConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
     /* Shooter motion constants applied to slot 0. TUNE THESE! */
     var shooterMotorConfig = shooterFXConfig.Slot0;
     shooterMotorConfig.kS = ShooterConstants.shooterKS;
@@ -66,10 +69,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /* Set one motor to follow the other. */
     shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, false));
-
-    /* Initially set motors to BRAKE. */
-    shooterTop.setNeutralMode(NeutralModeValue.Brake);
-    shooterBottom.setNeutralMode(NeutralModeValue.Brake);
   }
 
   /**
