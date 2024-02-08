@@ -138,33 +138,33 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
     SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
-    //TODO: STATE MACHINE PUT BACK OR SAD
-    ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
-    double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
+    // //TODO: STATE MACHINE PUT BACK OR SAD
+    // ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
+    // double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
 
-    if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
-      /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
-      if ((stateHandler.getHasValidSpeakerTag()
-          && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD)
-          || (!stateHandler.getHasValidSpeakerTag())) {
-        desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
-      }
-      /* If we have a valid tag, then get positional data. */
-      else if (stateHandler.getHasValidSpeakerTag()
-          && stateHandler.getDistanceToSpeakerTag() > ArmConstants.SUBWOOFER_THRESHHOLD) {
-        desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
-      }
-    } else if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()) {
-      /* If you have a game piece, start ramping up the shooter speed. */
-      desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
-    } 
+    // if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
+    //   /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
+    //   if ((stateHandler.getHasValidSpeakerTag()
+    //       && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD)
+    //       || (!stateHandler.getHasValidSpeakerTag())) {
+    //     desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
+    //   }
+    //   /* If we have a valid tag, then get positional data. */
+    //   else if (stateHandler.getHasValidSpeakerTag()
+    //       && stateHandler.getDistanceToSpeakerTag() > ArmConstants.SUBWOOFER_THRESHHOLD) {
+    //     desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
+    //   }
+    // } else if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()) {
+    //   /* If you have a game piece, start ramping up the shooter speed. */
+    //   desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
+    // } 
 
-    /* Set the desired velocity of the shooter wheels. */
-    setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+    // /* Set the desired velocity of the shooter wheels. */
+    // setVelocities(desiredShooterSpeed, desiredShooterSpeed);
 
 
-    if (isAtShooterSpeed(desiredShooterSpeed)) {
-      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    }
+    // if (isAtShooterSpeed(desiredShooterSpeed)) {
+    //   stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    // }
   }
 }
