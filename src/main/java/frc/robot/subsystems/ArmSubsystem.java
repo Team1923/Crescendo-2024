@@ -212,9 +212,9 @@ public class ArmSubsystem extends SubsystemBase {
     // stateHandler.setCurrentArmState(desiredArmState);
     // }
 
-    if (DriverStation.isDisabled()) {
-      disableMotionMagic();
-    }
+    // if (DriverStation.isDisabled()) {
+    //   disableMotionMagic();
+    // }
 
   }
 }

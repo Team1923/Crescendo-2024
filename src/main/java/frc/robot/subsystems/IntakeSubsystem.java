@@ -241,8 +241,8 @@ public class IntakeSubsystem extends SubsystemBase {
     // stateHandler.setCurrentArmState(desiredIntakeState);
     // }
 
-    if (DriverStation.isDisabled()) {
-      disableMotionMagic();
-    }
+    // if (DriverStation.isDisabled()) {
+    //   disableMotionMagic();
+    // }
   }
 }
