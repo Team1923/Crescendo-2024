@@ -95,9 +95,9 @@ public class PositionRPMData {
         return (positionRPMMap.get(lowerBound).getShooterRPM()) + ((deltaDistance * deltaRPMValues) / deltaDistanceBounds);
      }
 
-     public static void main(String[] args) {
-        PositionRPMData test = PositionRPMData.getInstance();
-        System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(1.0));
-        System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.0));    
-     }
+    //  public static void main(String[] args) {
+    //     PositionRPMData test = PositionRPMData.getInstance();
+    //     System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(1.0));
+    //     System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.0));    
+    //  }
 }
