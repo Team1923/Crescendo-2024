@@ -28,15 +28,15 @@ public final class Constants {
 
     public static final class IntakeConstants {
         /* Motor IDs */
-        public static final int intakeWheelTopID = 65; //NOT ON ROBOT
-        public static final int intakeWheelBottomID = 66; //NOT ON ROBOT
+        public static final int intakeWheelTopID = 25; //NOT ON ROBOT
+        public static final int intakeWheelBottomID = 26; //NOT ON ROBOT
         public static final int intakeArmPrimaryID = 22; //left
         public static final int intakeArmFollowerID = 21; //right
 
         /* Motion Magic Constants */
         public static final double intakeKS = 0;
-        public static final double intakekP = 0.1;
-        public static final double intakekI = 0;
+        public static final double intakekP = 0.9;
+        public static final double intakekI = 0.005;
         public static final double intakekD = 0;
 
         /*
@@ -48,9 +48,9 @@ public final class Constants {
         */
         
         //note, these should be VERY slow
-        public static final double maxIntakeVel = 20;
-        public static final double maxIntakeAccel = 40;
-        public static final double maxIntakeJerk = 200;
+        public static final double maxIntakeVel = 80;
+        public static final double maxIntakeAccel = 160;
+        public static final double maxIntakeJerk = 1600;
 
         /* Gearbox Ratios & Unit Conversions */
         public static final double intakeGearRatio = 60;

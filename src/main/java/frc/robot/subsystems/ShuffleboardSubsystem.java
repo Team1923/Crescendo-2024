@@ -29,10 +29,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     driverStationTimeElapsed.setDouble(DriverStation.getMatchTime());
 
     // /* BEAM BREAK VALUES */
-    // SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());
-    // SmartDashboard.putBoolean("BB TWO COVERED", stateHandler.getBBTwoCovered());
-    // SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
-    // SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
+    SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());
+    SmartDashboard.putBoolean("BB TWO COVERED", stateHandler.getBBTwoCovered());
+    SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
+    SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
 
     // /* RELEVANT INTAKE STATES */
     // SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());

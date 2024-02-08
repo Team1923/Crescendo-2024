@@ -38,9 +38,9 @@ public class StateVariables {
      * TODO: These values need to be changed
      */
     public static enum ShooterSpeeds {
-        IDLE(new RPMValue(100)),
-        RAMP(new RPMValue(200)),
-        SHOOT(new RPMValue(2000)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
+        IDLE(new RPMValue(0)),
+        RAMP(new RPMValue(0)),
+        SHOOT(new RPMValue(0)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
 
         private RPMValue rpmValue;
 
@@ -75,8 +75,8 @@ public class StateVariables {
      */
     public static enum IntakeRollerSpeeds {
         OFF(new PercentOutputValue(0)),
-        EJECT(new PercentOutputValue(-100)),
-        INTAKE(new PercentOutputValue(100));
+        EJECT(new PercentOutputValue(0.25)),
+        INTAKE(new PercentOutputValue(-0.25));
 
         private PercentOutputValue percentOutputValue;
 
@@ -109,7 +109,7 @@ public class StateVariables {
      * TODO: Need to be changed
      */
     public static enum IntakeStates {
-        DEPLOYED(new IntakePosition(1)),
+        DEPLOYED(new IntakePosition(2.06)),
         STOWED(new IntakePosition(0));
 
         private IntakePosition intakePosition;
@@ -144,8 +144,8 @@ public class StateVariables {
      */
     public static enum FeederSpeeds {
         OFF(new PercentOutputValue(0)),
-        INWARD(new PercentOutputValue(0.5)),
-        OUTWARD(new PercentOutputValue(-0.5));
+        INWARD(new PercentOutputValue(0.25)),
+        OUTWARD(new PercentOutputValue(-0.25));
 
         private PercentOutputValue percentOutputValue;
 

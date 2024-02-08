@@ -77,24 +77,24 @@ public class FeederSubsystem extends SubsystemBase {
 
 
     //TODO: STATE MACHINE PUT BACK OR SAD
-    // FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
+    FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
 
-    // if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
-    //     && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.EJECT) {
-    //   /* HANDLES EJECT CONDITION */
-    //   desiredFeederSpeed = FeederSpeeds.OUTWARD;
-    // } else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
-    //     && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-    //     && stateHandler.getIsCenteredToTag()) {
-    //   /* CONDITION: ready to sore (center to tag = true on default) */
-    //   desiredFeederSpeed = FeederSpeeds.INWARD;
-    // } 
+    if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
+        && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.EJECT) {
+      /* HANDLES EJECT CONDITION */
+      desiredFeederSpeed = FeederSpeeds.OUTWARD;
+    } else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
+        && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
+        && stateHandler.getIsCenteredToTag()) {
+      /* CONDITION: ready to sore (center to tag = true on default) */
+      desiredFeederSpeed = FeederSpeeds.INWARD;
+    } 
 
-    // /* Set the feeder motor speed to whatever it needs to be. */
-    // setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
+    /* Set the feeder motor speed to whatever it needs to be. */
+    setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
 
 
-    // stateHandler.setCurrentFeederSpeed(desiredFeederSpeed);
+    stateHandler.setCurrentFeederSpeed(desiredFeederSpeed);
 
   }
 

@@ -22,13 +22,13 @@ import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
   // private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
-  // private StateHandler stateHandler = StateHandler.getInstance();
+  private StateHandler stateHandler = StateHandler.getInstance();
 
   private TalonFX intakeArmPrimary = new TalonFX(Constants.IntakeConstants.intakeArmPrimaryID, "rio");
   private TalonFX intakeArmFollower = new TalonFX(Constants.IntakeConstants.intakeArmFollowerID, "rio");
 
-  // private TalonFX intakeWheelTop = new TalonFX(Constants.IntakeConstants.intakeWheelTopID, "rio");
-  // private TalonFX intakeWheelBottom = new TalonFX(Constants.IntakeConstants.intakeWheelBottomID, "rio");
+  private TalonFX intakeWheelTop = new TalonFX(Constants.IntakeConstants.intakeWheelTopID, "rio");
+  private TalonFX intakeWheelBottom = new TalonFX(Constants.IntakeConstants.intakeWheelBottomID, "rio");
 
   private MotionMagicVoltage motionMagicVoltage;
 
@@ -37,8 +37,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     intakeArmPrimary.getConfigurator().apply(new TalonFXConfiguration());
     intakeArmFollower.getConfigurator().apply(new TalonFXConfiguration());
-    // intakeWheelTop.getConfigurator().apply(new TalonFXConfiguration());
-    // intakeWheelBottom.getConfigurator().apply(new TalonFXConfiguration());
+    intakeWheelTop.getConfigurator().apply(new TalonFXConfiguration());
+    intakeWheelBottom.getConfigurator().apply(new TalonFXConfiguration());
 
     var intakeArmConfigs = new TalonFXConfiguration();
 
@@ -64,6 +64,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
     intakeArmPrimary.getConfigurator().apply(intakeArmConfigs, 0.05);
     intakeArmFollower.getConfigurator().apply(intakeArmConfigs, 0.05);
+
+    intakeArmPrimary.setInverted(true);
+    intakeArmFollower.setInverted(true);
+
 
     // Need to change/test in lab
     // intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
@@ -126,18 +130,18 @@ public class IntakeSubsystem extends SubsystemBase {
    * @return The feedforward value needed by the intake.
    */
   public double calculateIntakeFeedForward() {
-    return IntakeConstants.intakeMaxGravityConstant * Math.cos(getIntakeArmPositionRads());
+    return IntakeConstants.intakeMaxGravityConstant * Math.sin(getIntakeArmPositionRads());
   }
 
   /**
-   * Sets the speed for the top intake wheel.
+   * Sets the speed for the top intake wheel.(Make these negative)
    * 
    * @param speed The speed passed in.
   //  */
-  // public void setRollerWheelSpeed(double topSpeed, double BottomSpeed) {
-  //   intakeWheelTop.set(topSpeed);
-  //   intakeWheelBottom.set(BottomSpeed);
-  // }
+  public void setRollerWheelSpeed(double topSpeed, double BottomSpeed) {
+    // intakeWheelTop.set(topSpeed);
+    intakeWheelBottom.set(BottomSpeed);
+  }
 
   /**
    * Stops the intake arm motors.
@@ -150,10 +154,10 @@ public class IntakeSubsystem extends SubsystemBase {
   /**
    * Stops the intake wheel motors.
   //  */
-  // public void stopIntakeWheels() {
-  //   intakeWheelTop.stopMotor();
-  //   intakeWheelBottom.stopMotor();
-  // }
+  public void stopIntakeWheels() {
+    intakeWheelTop.stopMotor();
+    intakeWheelBottom.stopMotor();
+  }
 
   /**
    * Disabling the MotionMagic Control
@@ -210,36 +214,35 @@ public class IntakeSubsystem extends SubsystemBase {
     
 
     //TODO: STATE MACHINE PUT BACK OR SAD
-    // IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
-    // IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
+    IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
+    IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
 
-    // double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
-    // double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
+    double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
+    double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
 
-    // /*
-    //  * EDGE CASE: Eject speed can only be run when the intake is actually in its
-    //  * deployed position.
-    //  */
-    // if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
-    //     && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
-    //   rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
+    /*
+     * EDGE CASE: Eject speed can only be run when the intake is actually in its
+     * deployed position.
+     */
+    if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
+        && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
+      rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
+    }
+
+    setIntakePosition(intakeSetpoint);
+    setRollerWheelSpeed(0, rollerSpeed);
+
+    if (isAtIntakeState(desiredIntakeState)) {
+      stateHandler.setCurrentIntakeState(desiredIntakeState);
+    }
+
+    stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
+
+    // check the stator current to know whether or not we are hardstop.
+    // if (current == BAD) {
+    // stopIntakeArmMotors();
+    // stateHandler.setCurrentArmState(desiredIntakeState);
     // }
-
-    // setIntakePosition(intakeSetpoint);
-    // setBottomWheelSpeed(rollerSpeed);
-    // setTopWheelSpeed(rollerSpeed);
-
-    // if (isAtIntakeState(desiredIntakeState)) {
-    //   stateHandler.setCurrentIntakeState(desiredIntakeState);
-    // }
-
-    // stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
-
-    // // check the stator current to know whether or not we are hardstop.
-    // // if (current == BAD) {
-    // // stopIntakeArmMotors();
-    // // stateHandler.setCurrentArmState(desiredIntakeState);
-    // // }
 
     if (DriverStation.isDisabled()) {
       disableMotionMagic();
