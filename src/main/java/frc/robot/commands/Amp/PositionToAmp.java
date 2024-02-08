@@ -8,6 +8,7 @@ package frc.robot.commands.Amp;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
+import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
 
 
 public class PositionToAmp extends Command {
@@ -26,13 +27,16 @@ public class PositionToAmp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    if (stateHandler.getCurrentArmState() == ArmStates.AMP) {
+      stateHandler.setDesiredFeederSpeed(FeederSpeeds.OUTWARD);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     stateHandler.setDesiredArmState(ArmStates.STOWED);
+    stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
   }
 
   // Returns true when the command should end.

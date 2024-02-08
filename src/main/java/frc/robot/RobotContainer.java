@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
 import frc.lib.ShooterArmUtils.PositionRPMData;
-import frc.robot.commands.Amp.EjectIntoAmp;
 import frc.robot.commands.IndependentTesting.ActivateBeamBreak;
 import frc.robot.commands.IndependentTesting.ArmMotionMagicCommandAMP;
 import frc.robot.commands.IndependentTesting.ArmMotionMagicCommandShooter;
