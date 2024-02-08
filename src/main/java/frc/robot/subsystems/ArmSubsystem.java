@@ -124,18 +124,8 @@ public class ArmSubsystem extends SubsystemBase {
    * Stops the arm motors.
    */
   public void stopArmMotors() {
-    armPrimary.stopMotor();
-    armFollower.stopMotor();
-  }
-
-  /**
-   * Disables any theoretical trajectories that the arm could run.
-   * This was useful to have to prevent the arm from going anywhere new and 
-   * defaulting it to the STOW state.
-   */
-  public void disableMotionMagic() {
-    armPrimary.disable();
-    armFollower.disable();
+    armPrimary.set(0);
+    armFollower.set(0);
   }
 
   /**
@@ -210,10 +200,6 @@ public class ArmSubsystem extends SubsystemBase {
     // */
     // if (isAtArmState(armSetpoint)) {
     // stateHandler.setCurrentArmState(desiredArmState);
-    // }
-
-    // if (DriverStation.isDisabled()) {
-    //   disableMotionMagic();
     // }
 
   }

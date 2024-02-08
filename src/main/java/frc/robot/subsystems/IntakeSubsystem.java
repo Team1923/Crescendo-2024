@@ -144,24 +144,16 @@ public class IntakeSubsystem extends SubsystemBase {
    * Stops the intake arm motors.
    */
   public void stopIntakeArmMotors() {
-    intakeArmPrimary.stopMotor();
-    intakeArmFollower.stopMotor();
+    intakeArmPrimary.set(0);
+    intakeArmFollower.set(0);
   }
 
   /**
    * Stops the intake wheel motors.
   //  */
   public void stopIntakeWheels() {
-    intakeWheelTop.stopMotor();
-    intakeWheelBottom.stopMotor();
-  }
-
-  /**
-   * Disabling the MotionMagic Control
-   */
-  public void disableMotionMagic() {
-    intakeArmPrimary.disable();
-    intakeArmFollower.disable();
+    intakeWheelTop.set(0);
+    intakeWheelBottom.set(0);
   }
 
   /**
@@ -239,10 +231,6 @@ public class IntakeSubsystem extends SubsystemBase {
     // if (current == BAD) {
     // stopIntakeArmMotors();
     // stateHandler.setCurrentArmState(desiredIntakeState);
-    // }
-
-    // if (DriverStation.isDisabled()) {
-    //   disableMotionMagic();
     // }
   }
 }
