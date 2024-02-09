@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
@@ -13,6 +14,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.lib.RobotStateUtils.StateHandler;
 import frc.lib.RobotStateUtils.StateVariables;
 import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
@@ -36,6 +38,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /* Declare MotionMagicVoltage object to command the shooter at a specific velocity. */
   private final MotionMagicVelocityVoltage motionMagicVelVoltage;
+
 
   /* Construct a new ShooterSubsystem to apply motor configurations. */
   public ShooterSubsystem() {
@@ -144,17 +147,16 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
     //   /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
-    //   if ((stateHandler.getHasValidSpeakerTag()
-    //       && stateHandler.getDistanceToSpeakerTag() < ArmConstants.SUBWOOFER_THRESHHOLD)
-    //       || (!stateHandler.getHasValidSpeakerTag())) {
+    //   if (stateHandler.getWantToPositionForSubwoofer()) {
     //     desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
     //   }
     //   /* If we have a valid tag, then get positional data. */
-    //   else if (stateHandler.getHasValidSpeakerTag()
-    //       && stateHandler.getDistanceToSpeakerTag() > ArmConstants.SUBWOOFER_THRESHHOLD) {
+    //   else if (stateHandler.getHasValidSpeakerTag()) {
     //     desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
     //   }
-    // } else if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()) {
+    // } 
+    
+    // if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()) {
     //   /* If you have a game piece, start ramping up the shooter speed. */
     //   desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
     // } 
