@@ -86,8 +86,9 @@ public class ArmSubsystem extends SubsystemBase {
   public void setArmPosition(double position) {
     armPrimary.setControl(motionMagicVoltage.withPosition(position * ArmConstants.armRadsToRots)
         .withFeedForward(calculateArmFeedForward()));
-    armFollower.setControl(motionMagicVoltage.withPosition(position * ArmConstants.armRadsToRots)
-        .withFeedForward(calculateArmFeedForward()));
+        /* THE LINE BELOW SHOULD NOT BE NEEDED. setControl() refers to FOLLOWER LOGIC! */
+    // armFollower.setControl(motionMagicVoltage.withPosition(position * ArmConstants.armRadsToRots)
+    //     .withFeedForward(calculateArmFeedForward()));
   }
 
   /**

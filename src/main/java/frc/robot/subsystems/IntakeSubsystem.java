@@ -67,7 +67,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
 
     // Need to change/test in lab
-    // intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
+    intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
 
     zeroIntakeArm();
   }
@@ -88,8 +88,9 @@ public class IntakeSubsystem extends SubsystemBase {
   public void setIntakePosition(double position) {
     intakeArmPrimary.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
         .withFeedForward(calculateIntakeFeedForward()));
-    intakeArmFollower.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
-      .withFeedForward(calculateIntakeFeedForward()));
+        /* THE LINE BELOW SHOULD NOT BE NEEDED. setControl() refers to FOLLOWER LOGIC! */
+    // intakeArmFollower.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
+    //   .withFeedForward(calculateIntakeFeedForward()));
   }
 
   /**
