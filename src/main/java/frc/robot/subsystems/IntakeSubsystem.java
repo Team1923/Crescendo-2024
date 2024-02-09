@@ -100,7 +100,6 @@ public class IntakeSubsystem extends SubsystemBase {
    */
   public void setIntakeArmPercentOut(double out){
     intakeArmPrimary.set(out);
-    intakeArmFollower.set(out);
   }
 
 
