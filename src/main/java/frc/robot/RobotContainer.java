@@ -73,10 +73,10 @@ public class RobotContainer {
     /* Subsystems */
     // private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
     // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    // public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public final ArmSubsystem armSubsystem = new ArmSubsystem();
-    public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    public final FeederSubsystem feederSubsystem = new FeederSubsystem();
+    // public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    // public final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     // private AutoInstantiator autoInstantiator = new AutoInstantiator();
@@ -96,7 +96,7 @@ public class RobotContainer {
         //                 () -> leftBumper.getAsBoolean()));
 
          //intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
-        // armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () -> 0.2 * operator.getRawAxis(operatorRightY)));
+        armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () -> 0.2 * operator.getRawAxis(operatorRightY)));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -114,7 +114,7 @@ public class RobotContainer {
         /* Driver Buttons */
         // yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        circleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
+        // circleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
         // crossButton.whileTrue(new ScoreInSpeaker());
 
 

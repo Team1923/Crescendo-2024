@@ -17,7 +17,7 @@ import frc.lib.RobotStateUtils.StateHandler;
 
 public class ArmSubsystem extends SubsystemBase {
   /* Helper class instantiations to get useful data from the robot. */
-  StateHandler stateHandler = StateHandler.getInstance();
+  // StateHandler stateHandler = StateHandler.getInstance();
   LimelightInterface limelightInterface = LimelightInterface.getInstance();
   PositionRPMData positionData = PositionRPMData.getInstance();
 
@@ -98,7 +98,7 @@ public class ArmSubsystem extends SubsystemBase {
    */
   public void setPercentOut(double out) {
     armPrimary.set(out);
-    armFollower.set(out);
+    // armFollower.set(out);
   }
 
   /**
