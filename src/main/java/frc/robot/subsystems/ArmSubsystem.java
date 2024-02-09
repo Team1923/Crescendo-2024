@@ -71,7 +71,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   /**
-   * Method to zero the arm. All that we do is override the 
+   * Method to zero the arm. All that we do is override the
    * motor's position to 0 rots/rads.
    */
   public void zeroArm() {
@@ -80,6 +80,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   /**
    * Set the arm to a position in radians.
+   * 
    * @param position The radian position to command the arm to.
    */
   public void setArmPosition(double position) {
@@ -91,14 +92,17 @@ public class ArmSubsystem extends SubsystemBase {
 
   /**
    * Move the arm using percent output. Primarily used for testing purposes.
+   * 
    * @param out percent out speed to run the arm at
    */
   public void setPercentOut(double out) {
     armPrimary.set(out);
+    armFollower.set(out);
   }
 
   /**
    * Get the position of the arm from the encoder reading.
+   * 
    * @return The arm position in radians.
    */
   public double getArmPositionRads() {
@@ -107,6 +111,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   /**
    * Gets the position of the arm, converted from the encoder reading.
+   * 
    * @return The arm position in rotations.
    */
   public double getArmPositionRots() {
@@ -116,6 +121,7 @@ public class ArmSubsystem extends SubsystemBase {
   /**
    * Calculates the required Feedforward needed for the arm. This model
    * largely follows the Arm Feedforward model suggested by WPILib.
+   * 
    * @return The feedforward value needed by the arm.
    */
   public double calculateArmFeedForward() {
@@ -132,9 +138,11 @@ public class ArmSubsystem extends SubsystemBase {
 
   /**
    * Method to determine if the motor has arrived to the commanded state.
+   * 
    * @param desiredSetpoint the angular setpoint of the commanded state.
-   * @return a boolean to determine if the motor's current position is equal to the position
-   * that is specified by the desired state.
+   * @return a boolean to determine if the motor's current position is equal to
+   *         the position
+   *         that is specified by the desired state.
    */
   public boolean isAtArmState(double desiredSetpoint) {
     return Math.abs(getArmPositionRads() - desiredSetpoint) < ArmConstants.armPositionAllowableOffset;
@@ -178,30 +186,26 @@ public class ArmSubsystem extends SubsystemBase {
     // double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
     // if (desiredArmState == ArmStates.SPEAKER) {
-    // // subwoofer condition
-    // if ((stateHandler.getHasValidSpeakerTag()
-    // && stateHandler.getDistanceToSpeakerTag() <
-    // ArmConstants.SUBWOOFER_THRESHHOLD)
-    // || (!limelightInterface.hasSpeakerTag())) {
-    // armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
-    // }
-    // // distance to speaker condition
-    // else if (stateHandler.getHasValidSpeakerTag()) {
-    // armSetpoint =
-    // positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
-    // }
+    //   // subwoofer condition
+    //   if (stateHandler.getWantToPositionForSubwoofer()) {
+    //     armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
+    //   }
+    //   // distance to speaker condition
+    //   else if (stateHandler.getHasValidSpeakerTag()) {
+    //     armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+    //   }
     // }
 
     // /*
-    // * Set the arm position to whatever is the desired arm position.
-    // */
+    //  * Set the arm position to whatever is the desired arm position.
+    //  */
     // setArmPosition(armSetpoint);
 
     // /*
-    // * Update the arm's position based on the desired setpoint.
-    // */
+    //  * Update the arm's position based on the desired setpoint.
+    //  */
     // if (isAtArmState(armSetpoint)) {
-    // stateHandler.setCurrentArmState(desiredArmState);
+    //   stateHandler.setCurrentArmState(desiredArmState);
     // }
 
   }

@@ -38,6 +38,7 @@ public class StateHandler {
     private boolean hasValidAmpTag = false;
     private double distanceToTag = 0;
     private boolean centeredToTag = true;
+    private boolean wantToPositionForSubwoofer = false;
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;
@@ -413,6 +414,22 @@ public class StateHandler {
      */
     public boolean getIsCenteredToTag() {
         return centeredToTag;
+    }
+
+    /**
+     * Sets the boolean to determine if the arm should be positioned for a subwoofer shot.
+     * @param s boolean value to set to determine if the arm should be positioned for a subwoofer shot.
+     */
+    public void setWantToPositionForSubwoofer(boolean s) {
+        this.wantToPositionForSubwoofer = s;
+    }
+
+    /**
+     * Returns if the arm should be positioned for a subwoofer shot.
+     * @return a boolean that represents if the arm should be positioned for the subwoofer.
+     */
+    public boolean getWantToPositionForSubwoofer() {
+        return wantToPositionForSubwoofer;
     }
 
 }

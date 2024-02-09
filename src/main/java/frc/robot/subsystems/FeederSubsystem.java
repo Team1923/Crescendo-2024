@@ -80,6 +80,7 @@ public class FeederSubsystem extends SubsystemBase {
     FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
 
     if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
+        && stateHandler.getDesiredIntakeState() == IntakeStates.DEPLOYED
         && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.EJECT) {
       /* HANDLES EJECT CONDITION */
       desiredFeederSpeed = FeederSpeeds.OUTWARD;

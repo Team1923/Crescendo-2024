@@ -214,6 +214,7 @@ public class IntakeSubsystem extends SubsystemBase {
      * deployed position.
      */
     if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
+        && desiredIntakeState == IntakeStates.DEPLOYED
         && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
       rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
     }
