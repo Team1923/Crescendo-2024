@@ -94,8 +94,6 @@ public final class Constants {
         public static final int beamBreakFourID = 4;
 
         public static final double shooterSpeedThreshold = 50; //RPM
-
-
     }
 
     public static final class FeederConstants {
@@ -127,13 +125,9 @@ public final class Constants {
         public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
 
         /* kG - gravity constant for motion of arm */
-        // TODO: discuss on how the max gravity constant should be found.
         public static final double armMaxGravityConstant = 0.045 * 12; // 2 volts max ff 
 
         public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
-
-        public static final double SUBWOOFER_THRESHHOLD = 0; // TODO: tune, how far away we are from subwoofer before we move
-                                                             // arm to subwoofer pos.
     }
 
     public static final class Swerve {
