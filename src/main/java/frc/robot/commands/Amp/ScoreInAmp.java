@@ -11,10 +11,10 @@ import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
 
 
-public class PositionToAmp extends Command {
+public class ScoreInAmp extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
   /** Creates a new AmpCommand. */
-  public PositionToAmp() {
+  public ScoreInAmp() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

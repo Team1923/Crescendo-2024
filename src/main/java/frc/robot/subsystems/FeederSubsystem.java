@@ -70,9 +70,6 @@ public class FeederSubsystem extends SubsystemBase {
     stateHandler.setBBTwoCovered(getBeamBreakTwo());
     stateHandler.setBBThreeCovered(getBeamBreakThree());
 
-
-
-    // //TODO: STATE MACHINE PUT BACK OR SAD
     FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
 
     if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
