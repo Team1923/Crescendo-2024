@@ -163,47 +163,46 @@ public class ArmSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
-    SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
 
-    SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
+    // SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
 
-    SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
-    SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
+    // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
+    // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
 
     /*
      * By default, whatever the desired position is, we will go to the desired
      * position as commanded.
      * EXCEPTION: shooting. If this is the case, then we will need to modify
      * out arm position to be variable.
+    */
+
+    ArmStates desiredArmState = stateHandler.getDesiredArmState();
+    double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
+
+    if (desiredArmState == ArmStates.SPEAKER) {
+      // subwoofer condition
+      if (stateHandler.getWantToPositionForSubwoofer()) {
+        armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
+      }
+      // distance to speaker condition
+      else if (stateHandler.getHasValidSpeakerTag()) {
+        armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+      }
+    }
+
+    /*
+     * Set the arm position to whatever is the desired arm position.
      */
+    setArmPosition(armSetpoint);
 
-    // TODO: STATE MACHINE PUT BACK OR SAD
-    // ArmStates desiredArmState = stateHandler.getDesiredArmState();
-    // double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
-
-    // if (desiredArmState == ArmStates.SPEAKER) {
-    //   // subwoofer condition
-    //   if (stateHandler.getWantToPositionForSubwoofer()) {
-    //     armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
-    //   }
-    //   // distance to speaker condition
-    //   else if (stateHandler.getHasValidSpeakerTag()) {
-    //     armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
-    //   }
-    // }
-
-    // /*
-    //  * Set the arm position to whatever is the desired arm position.
-    //  */
-    // setArmPosition(armSetpoint);
-
-    // /*
-    //  * Update the arm's position based on the desired setpoint.
-    //  */
-    // if (isAtArmState(armSetpoint)) {
-    //   stateHandler.setCurrentArmState(desiredArmState);
-    // }
+    /*
+     * Update the arm's position based on the desired setpoint.
+     */
+    if (isAtArmState(armSetpoint)) {
+      stateHandler.setCurrentArmState(desiredArmState);
+    }
 
   }
 }

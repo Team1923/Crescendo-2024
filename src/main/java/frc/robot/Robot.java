@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.AutoUtils.AutoChooser;
@@ -38,9 +39,9 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     // this.selector = new AutoChooser();
-    for (int port = 5800; port <= 5807; port++) {
-        PortForwarder.add(port, "limelight.local", port);
-    }
+    // for (int port = 5800; port <= 5807; port++) {
+    //     PortForwarder.add(port, "limelight.local", port);
+    // }
   }
 
   /**
@@ -102,7 +103,8 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+  }
 
   @Override
   public void testInit() {

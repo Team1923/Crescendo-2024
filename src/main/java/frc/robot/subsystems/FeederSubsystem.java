@@ -77,13 +77,25 @@ public class FeederSubsystem extends SubsystemBase {
         && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.EJECT) {
       /* HANDLES EJECT CONDITION */
       desiredFeederSpeed = FeederSpeeds.OUTWARD;
-    } else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
+    } 
+    
+    else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
         && stateHandler.getIsCenteredToTag()) {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
-    } 
-
+    }
+    
+    else if (stateHandler.getDesiredFeederSpeed() == FeederSpeeds.OFF
+      && stateHandler.getCurrentArmState() == ArmStates.STOWED
+      && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.IDLE) {
+        if (stateHandler.getBBFourCovered()) {
+          desiredFeederSpeed = FeederSpeeds.BACKING;
+        } else if (!stateHandler.getBBFourCovered()) {
+          desiredFeederSpeed = FeederSpeeds.OFF;
+        }
+    }
+    
     // /* Set the feeder motor speed to whatever it needs to be. */
     setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
 

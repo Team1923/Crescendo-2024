@@ -1,6 +1,8 @@
 package frc.robot;
 
 
+import javax.print.attribute.standard.JobHoldUntil;
+
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -11,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
 import frc.lib.ShooterArmUtils.PositionRPMData;
@@ -25,7 +28,9 @@ import frc.robot.commands.IndependentTesting.RunIntakeRollerCommand;
 import frc.robot.commands.IndependentTesting.ShooterVelocityCommand;
 import frc.robot.commands.Intake.DeployIntakeCommand;
 import frc.robot.commands.Intake.IntakeEjectCommand;
-import frc.robot.commands.Speaker.ScoreInSpeaker;
+import frc.robot.commands.Scoring.RequireAmpPosition;
+import frc.robot.commands.Scoring.RequireSubwooferPosition;
+import frc.robot.commands.Scoring.ScoreGamePiece;
 import frc.robot.commands.Swerve.AlignToAmp;
 import frc.robot.commands.Swerve.GoalCentricCommand;
 import frc.robot.commands.Swerve.TeleopSwerve;
@@ -54,14 +59,14 @@ public class RobotContainer {
     private final int operatorRightY = PS4Controller.Axis.kRightY.value;
 
     /* Driver Buttons */
-    private final JoystickButton yButton = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton aButton = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton xButton = new JoystickButton(driver, XboxController.Button.kX.value);
-    private final JoystickButton bButton = new JoystickButton(driver, XboxController.Button.kB.value);
+    private final JoystickButton yButton = new JoystickButton(driver, 4);
+    private final JoystickButton aButton = new JoystickButton(driver, 1);
+    private final JoystickButton xButton = new JoystickButton(driver, 3);
+    private final JoystickButton bButton = new JoystickButton(driver, 2);
 
 
-    private final JoystickButton leftBumper = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton rightBumper = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+    private final JoystickButton driverLeftBumper = new JoystickButton(driver, 5);
+    private final JoystickButton driverRightBumper = new JoystickButton(driver, 6);
 
     /*Beam Break Buttons */
     private final JoystickButton triangleButton = new JoystickButton(operator, 4);
@@ -69,14 +74,17 @@ public class RobotContainer {
     private final JoystickButton circleButton = new JoystickButton(operator, 2);
     private final JoystickButton crossButton = new JoystickButton(operator, 1);
 
+    private final JoystickButton operatorLeftBumper = new JoystickButton(operator, 5);
+    private final JoystickButton operatorRightBunper = new JoystickButton(operator, 6);
+
 
     /* Subsystems */
-    // private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
-    // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-    // public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
+    private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public final ArmSubsystem armSubsystem = new ArmSubsystem();
-    // public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    // public final FeederSubsystem feederSubsystem = new FeederSubsystem();
+    public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    public final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     // private AutoInstantiator autoInstantiator = new AutoInstantiator();
@@ -87,13 +95,13 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
-        // s_Swerve.setDefaultCommand(
-        //         new TeleopSwerve(
-        //                 s_Swerve,
-        //                 () -> -0.3*driver.getRawAxis(translationAxis),
-        //                 () -> -0.3* driver.getRawAxis(strafeAxis),
-        //                 () -> -0.3*driver.getRawAxis(rotationAxis),
-        //                 () -> leftBumper.getAsBoolean()));
+
+        s_Swerve.setDefaultCommand(
+            new TeleopSwerve(s_Swerve,
+             () -> -driver.getRawAxis(translationAxis), 
+             () -> -driver.getRawAxis(strafeAxis), 
+             () -> -driver.getRawAxis(rotationAxis), 
+             () -> driverLeftBumper.getAsBoolean()));
 
         //  intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
         //armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () ->  operator.getRawAxis(operatorRightY)));
@@ -112,14 +120,16 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        // yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-
+        yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        
         // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
-        // crossButton.whileTrue(new DeployIntakeCommand());
+        operatorRightBunper.whileTrue(new DeployIntakeCommand());
+        operatorLeftBumper.whileTrue(new IntakeEjectCommand());
+        triangleButton.toggleOnTrue(new RequireAmpPosition());
+        crossButton.toggleOnTrue(new RequireSubwooferPosition());
 
-   
-        // triangleButton.whileTrue(new FeederPercOutCommand(feederSubsystem));
-        // squareButton.whileTrue(new RunIntakeRollerCommand(intakeSubsystem));
+        new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreGamePiece());
+        
         
 
         // rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 

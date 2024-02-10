@@ -21,7 +21,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  // private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
+  private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
   private StateHandler stateHandler = StateHandler.getInstance();
 
   private TalonFX intakeArmPrimary = new TalonFX(Constants.IntakeConstants.intakeArmPrimaryID, "rio");
@@ -166,9 +166,9 @@ public class IntakeSubsystem extends SubsystemBase {
    * Method to get the digital input reading of BB1.   * 
    * @return the boolean value representing the digital input reading.
    */
-  // public boolean getBeamBreakOne() {
-  //   return !beamBreakOne.get();
-  // }
+  public boolean getBeamBreakOne() {
+    return !beamBreakOne.get();
+  }
 
   public boolean isAtIntakeState(IntakeStates intakeStates) {
     return Math.abs(getIntakeArmPositionRads() -
@@ -188,13 +188,12 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    // stateHandler.setBBOneCovered(getBeamBreakOne());
+    stateHandler.setBBOneCovered(getBeamBreakOne());
 
-    SmartDashboard.putNumber("Raw Postion INTAKE Primary ", intakeArmPrimary.getPosition().getValueAsDouble());
-    SmartDashboard.putNumber("Raw Intake Position Follower", intakeArmFollower.getPosition().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw Postion INTAKE Primary ", intakeArmPrimary.getPosition().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw Intake Position Follower", intakeArmFollower.getPosition().getValueAsDouble());
 
-    SmartDashboard.putNumber("Intake Position Radians", getIntakeArmPositionRads());
+    // SmartDashboard.putNumber("Intake Position Radians", getIntakeArmPositionRads());
     
 
     //TODO: STATE MACHINE PUT BACK OR SAD

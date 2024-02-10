@@ -39,6 +39,7 @@ public class StateHandler {
     private double distanceToTag = 0;
     private boolean centeredToTag = true;
     private boolean wantToPositionForSubwoofer = false;
+    private boolean scoreInAmp = false;
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;
@@ -430,6 +431,14 @@ public class StateHandler {
      */
     public boolean getWantToPositionForSubwoofer() {
         return wantToPositionForSubwoofer;
+    }
+
+    public void setScoreInAmp(boolean a) {
+        this.scoreInAmp = a;
+    }
+
+    public boolean getScoreInAmp() {
+        return scoreInAmp;
     }
 
 }

@@ -133,38 +133,33 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     stateHandler.setBBFourCovered(getBeamBreakFour());
 
-    SmartDashboard.putNumber("Raw RPS TOP SHOOTER", shooterTop.getVelocity().getValueAsDouble());
-    SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER", shooterBottom.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw RPS TOP SHOOTER", shooterTop.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER", shooterBottom.getVelocity().getValueAsDouble());
 
-    SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
-    SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
+    // SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
+    // SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
-    // //TODO: STATE MACHINE PUT BACK OR SAD
-    // ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
-    // double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
+    ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
+    double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
 
-    // if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
-    //   /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
-    //   if (stateHandler.getWantToPositionForSubwoofer()) {
-    //     desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
-    //   }
-    //   /* If we have a valid tag, then get positional data. */
-    //   else if (stateHandler.getHasValidSpeakerTag()) {
-    //     desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
-    //   }
-    // } 
-    
-    // if (stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()) {
-    //   /* If you have a game piece, start ramping up the shooter speed. */
-    //   desiredShooterSpeed = StateVariables.ShooterSpeeds.RAMP.getRPMValue().getRPM();
-    // } 
+    if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
+      /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
+      if (stateHandler.getWantToPositionForSubwoofer()) {
+        desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
+      }
+      /* If we have a valid tag, then get positional data. */
+      else if (stateHandler.getHasValidSpeakerTag()) {
+        desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
+      }
+    } 
 
-    // /* Set the desired velocity of the shooter wheels. */
-    // setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+    /* Set the desired velocity of the shooter wheels. */
+    setVelocities(desiredShooterSpeed, desiredShooterSpeed);
 
 
-    // if (isAtShooterSpeed(desiredShooterSpeed)) {
-    //   stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    // }
+    if (isAtShooterSpeed(desiredShooterSpeed)) {
+      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    }
+
   }
 }
