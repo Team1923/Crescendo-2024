@@ -65,7 +65,7 @@ public class RobotContainer {
 
     /*Beam Break Buttons */
     private final JoystickButton triangleButton = new JoystickButton(operator, 4);
-    private final JoystickButton squareButton = new JoystickButton(operator, PS4Controller.Button.kSquare.value);
+    private final JoystickButton squareButton = new JoystickButton(operator, 3);
     private final JoystickButton circleButton = new JoystickButton(operator, 2);
     private final JoystickButton crossButton = new JoystickButton(operator, 1);
 
@@ -95,8 +95,8 @@ public class RobotContainer {
         //                 () -> -0.3*driver.getRawAxis(rotationAxis),
         //                 () -> leftBumper.getAsBoolean()));
 
-         //intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
-        armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () -> 0.2 * operator.getRawAxis(operatorRightY)));
+        //  intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
+        armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () ->  operator.getRawAxis(operatorRightY)));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -114,10 +114,10 @@ public class RobotContainer {
         /* Driver Buttons */
         // yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        // circleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
-        // crossButton.whileTrue(new ScoreInSpeaker());
+        // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
+        // crossButton.whileTrue(new DeployIntakeCommand());
 
-
+   
         // triangleButton.whileTrue(new FeederPercOutCommand(feederSubsystem));
         // squareButton.whileTrue(new RunIntakeRollerCommand(intakeSubsystem));
         

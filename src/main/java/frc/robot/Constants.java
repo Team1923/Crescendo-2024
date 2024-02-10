@@ -16,6 +16,11 @@ import frc.lib.SwerveUtil.SwerveModuleConstants;
 
 public final class Constants {
 
+    public static final class ResetButtonConfigs{
+        public static final int button1ID = 5; // close to radio (inside)
+        public static final int button2ID = 6; //away from radio (outside)
+    }
+
     public static final class LimeLightConstants {
         // measure constants in inches
         public static final double limelightMountAngle = 11.5; // for pivot, measured in degrees
@@ -48,9 +53,9 @@ public final class Constants {
         */
         
         //note, these should be VERY slow
-        public static final double maxIntakeVel = 80;
-        public static final double maxIntakeAccel = 160;
-        public static final double maxIntakeJerk = 1600;
+        public static final double maxIntakeVel = 100;
+        public static final double maxIntakeAccel = 500;
+        public static final double maxIntakeJerk = 2200;
 
         /* Gearbox Ratios & Unit Conversions */
         public static final double intakeGearRatio = 60;
@@ -77,13 +82,13 @@ public final class Constants {
 
         /* Motion Magic Velocity Constants */
         public static final double shooterKS = 0.25;
-        public static final double shooterKV = 0.12;
-        public static final double shooterKP = 0.5;
-        public static final double shooterKA = 0.01;
-        public static final double shooterKI = 0.001;
+        public static final double shooterKV = 0.105;
+        public static final double shooterKP = 0.2;
+        public static final double shooterKA = 0;
+        public static final double shooterKI = 0;
         public static final double shooterKD = 0;
-        public static final double maxArmAccel = 100;
-        public static final double maxArmJerk = 1000;
+        public static final double maxShooterAccel = 100;
+        public static final double maxShooterJerk = 1000;
 
         /* Beam Break ID */
         public static final int beamBreakFourID = 4;
@@ -109,7 +114,7 @@ public final class Constants {
 
         /* Motion Magic Constants */
         public static final double armKS = 0;
-        public static final double armkP = 0.8;
+        public static final double armkP = 1;
         public static final double armkI = 0.005;
         public static final double armkD = 0;
         public static final double maxArmVel = 100;
@@ -123,7 +128,7 @@ public final class Constants {
 
         /* kG - gravity constant for motion of arm */
         // TODO: discuss on how the max gravity constant should be found.
-        public static final double armMaxGravityConstant = 0.045 * 12;
+        public static final double armMaxGravityConstant = 0.045 * 12; // 2 volts max ff 
 
         public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
 

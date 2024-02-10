@@ -76,7 +76,7 @@ public class StateVariables {
     public static enum IntakeRollerSpeeds {
         OFF(new PercentOutputValue(0)),
         EJECT(new PercentOutputValue(0.25)),
-        INTAKE(new PercentOutputValue(-0.25));
+        INTAKE(new PercentOutputValue(-0.85));
 
         private PercentOutputValue percentOutputValue;
 
@@ -109,7 +109,7 @@ public class StateVariables {
      * TODO: Need to be changed
      */
     public static enum IntakeStates {
-        DEPLOYED(new IntakePosition(2.06)),
+        DEPLOYED(new IntakePosition(2.1)),
         STOWED(new IntakePosition(0));
 
         private IntakePosition intakePosition;
@@ -145,7 +145,7 @@ public class StateVariables {
     public static enum FeederSpeeds {
         OFF(new PercentOutputValue(0)),
         INWARD(new PercentOutputValue(0.25)),
-        OUTWARD(new PercentOutputValue(-0.25));
+        OUTWARD(new PercentOutputValue(-0.5));
 
         private PercentOutputValue percentOutputValue;
 

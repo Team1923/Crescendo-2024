@@ -136,7 +136,7 @@ public class IntakeSubsystem extends SubsystemBase {
    * @param speed The speed passed in.
   //  */
   public void setRollerWheelSpeed(double topSpeed, double BottomSpeed) {
-    // intakeWheelTop.set(topSpeed);
+    intakeWheelTop.set(topSpeed);
     intakeWheelBottom.set(BottomSpeed);
   }
 
@@ -220,7 +220,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     setIntakePosition(intakeSetpoint);
-    setRollerWheelSpeed(0, rollerSpeed);
+    setRollerWheelSpeed(rollerSpeed, rollerSpeed);
 
     if (isAtIntakeState(desiredIntakeState)) {
       stateHandler.setCurrentIntakeState(desiredIntakeState);

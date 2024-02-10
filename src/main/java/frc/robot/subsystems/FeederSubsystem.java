@@ -76,7 +76,7 @@ public class FeederSubsystem extends SubsystemBase {
 
 
 
-    //TODO: STATE MACHINE PUT BACK OR SAD
+    // //TODO: STATE MACHINE PUT BACK OR SAD
     FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
 
     if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
@@ -91,7 +91,7 @@ public class FeederSubsystem extends SubsystemBase {
       desiredFeederSpeed = FeederSpeeds.INWARD;
     } 
 
-    /* Set the feeder motor speed to whatever it needs to be. */
+    // /* Set the feeder motor speed to whatever it needs to be. */
     setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());
 
 

@@ -63,8 +63,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /* Get the MotionMagic configuration to specify acceleration and jerk. */
     var shooterMotionMagicConfig = shooterFXConfig.MotionMagic;
-    shooterMotionMagicConfig.MotionMagicAcceleration = ShooterConstants.maxArmAccel; //TODO: Tune
-    shooterMotionMagicConfig.MotionMagicJerk = ShooterConstants.maxArmJerk; //TODO: Tune
+    shooterMotionMagicConfig.MotionMagicAcceleration = ShooterConstants.maxShooterAccel; //TODO: Tune
+    shooterMotionMagicConfig.MotionMagicJerk = ShooterConstants.maxShooterJerk; //TODO: Tune
 
     /* Apply configuration to each of the shooter motors. */
     shooterTop.getConfigurator().apply(shooterFXConfig, 0.05);
@@ -117,8 +117,8 @@ public class ShooterSubsystem extends SubsystemBase {
    * Stops the motors.
    */
   public void stopMotors() {
-    shooterTop.stopMotor();
-    shooterBottom.stopMotor();
+    shooterTop.set(0);
+    shooterBottom.set(0);
   }
 
   /**
