@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "PositionRPMData",
+      "request": "launch",
+      "mainClass": "frc.lib.ShooterArmUtils.PositionRPMData",
+      "projectName": "Crescendo-2024"
+    },
+    {
+      "type": "java",
       "name": "Main",
       "request": "launch",
       "mainClass": "frc.robot.Main",

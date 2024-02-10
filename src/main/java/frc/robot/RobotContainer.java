@@ -122,7 +122,7 @@ public class RobotContainer {
         /* Driver Buttons */
         yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
-        // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
+        circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
         operatorRightBunper.whileTrue(new DeployIntakeCommand());
         operatorLeftBumper.whileTrue(new IntakeEjectCommand());
         triangleButton.toggleOnTrue(new RequireAmpPosition());

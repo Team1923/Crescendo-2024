@@ -6,8 +6,8 @@ public class StateVariables {
      */
     public static enum ArmStates {
         STOWED(new ArmPosition(0)),
-        AMP(new ArmPosition(-1.93)),
-        SPEAKER(new ArmPosition(-0.79)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING
+        AMP(new ArmPosition(-1.93)), 
+        SPEAKER(new ArmPosition(-0.79)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.79)
         CLIMB(new ArmPosition(2));
 
         private ArmPosition armPosition;
@@ -108,7 +108,7 @@ public class StateVariables {
      * TODO: Need to be changed
      */
     public static enum IntakeStates {
-        DEPLOYED(new IntakePosition(2.1)),
+        DEPLOYED(new IntakePosition(1.95)),
         STOWED(new IntakePosition(0));
 
         private IntakePosition intakePosition;

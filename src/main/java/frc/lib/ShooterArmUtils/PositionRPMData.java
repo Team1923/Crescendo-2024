@@ -31,15 +31,33 @@ public class PositionRPMData {
          * 
          * For now I'm trying test data to see if the linear interpolation works.
          */
+        // positionRPMMap.put(12 * (0.725 + 3.33333), new PositionRPMObject(-0.751, 5000));
+        // positionRPMMap.put(12 * (1.45 + 3.33333), new PositionRPMObject(-0.711, 5000));
+        // positionRPMMap.put(12 * (2.175 + 3.33333), new PositionRPMObject(-0.671, 5000));
+        // positionRPMMap.put(12 * (2.9 + 3.33333), new PositionRPMObject(-0.632, 5000));
+        // positionRPMMap.put(12 * (3.625 + 3.33333), new PositionRPMObject(-0.592, 5000));
+        // positionRPMMap.put(12 * (4.35 + 3.33333), new PositionRPMObject(-0.553, 5000));
+        // positionRPMMap.put(12 * (5.075 + 3.33333), new PositionRPMObject(-0.513, 5000));
+        // positionRPMMap.put(12 * (5.8 + 3.33333), new PositionRPMObject(-0.474, 5000));
+        // positionRPMMap.put(12 * (6.525 + 3.33333), new PositionRPMObject(-0.434, 5000));
+        // positionRPMMap.put(12 * (7.25 + 3.33333), new PositionRPMObject(-0.395, 5000));
+        // positionRPMMap.put(12 * (7.975 + 3.33333), new PositionRPMObject(-0.355, 5000));
+        // positionRPMMap.put(12 * (8.7 + 3.33333), new PositionRPMObject(-0.316, 5000));
+        // positionRPMMap.put(12 * (9.425 + 3.33333), new PositionRPMObject(-0.276, 5000));
+        // positionRPMMap.put(12 * (10.15 + 3.33333), new PositionRPMObject(-0.237, 5000));
+        // positionRPMMap.put(12 * (10.875 + 3.33333), new PositionRPMObject(-0.197, 5000));
+        // positionRPMMap.put(12 * (11.6 + 3.33333), new PositionRPMObject(-0.158, 5000));
+        // positionRPMMap.put(12 * (12.325 + 3.33333), new PositionRPMObject(-0.118, 5000));
+        // positionRPMMap.put(12 * (13.05 + 3.33333), new PositionRPMObject(-0.079, 5000));
+        // positionRPMMap.put(160.0, new PositionRPMObject(-0.039, 5000));
+        // positionRPMMap.put(166.0, new PositionRPMObject(0, 5000));
+        // positionRPMMap.put(190.0, new PositionRPMObject(0, 5000));
+        positionRPMMap.put(-200.0, new PositionRPMObject(-0.52, 3000));
+        positionRPMMap.put(1000.0, new PositionRPMObject(-0.52, 3000));
 
-        positionRPMMap.put(1.0, new PositionRPMObject(5, 2000));
-        positionRPMMap.put(1.5, new PositionRPMObject(7, 2250));
-        positionRPMMap.put(2.0, new PositionRPMObject(9, 2500));
-        positionRPMMap.put(2.5, new PositionRPMObject(14, 2600));
-        positionRPMMap.put(3.0, new PositionRPMObject(17, 2800));
-        positionRPMMap.put(3.5, new PositionRPMObject(19, 3000));
-        positionRPMMap.put(4.0, new PositionRPMObject(23, 3100));
-        positionRPMMap.put(4.5, new PositionRPMObject(14, 3400));
+
+    
+        
 
      }
 
@@ -95,9 +113,13 @@ public class PositionRPMData {
         return (positionRPMMap.get(lowerBound).getShooterRPM()) + ((deltaDistance * deltaRPMValues) / deltaDistanceBounds);
      }
 
-    //  public static void main(String[] args) {
-    //     PositionRPMData test = PositionRPMData.getInstance();
-    //     System.out.println("DESIRED ARM POSITION: " + test.getDesiredArmPosition(1.0));
-    //     System.out.println("DESIRED RPM: " + test.getDesiredShooterRPM(1.0));    
-    //  }
+     public static void main(String[] args) {
+        double slope = 0.05448275862069;
+        double yInt = -0.79;
+        double stepInterval = 0.725;
+        for (int i = 1; i <= 20; i++) {
+            double distance = stepInterval * i;
+            System.out.println("DISTANCE: " + distance + " ANGLE: " + (slope * distance + yInt));
+        } 
+     }
 }
