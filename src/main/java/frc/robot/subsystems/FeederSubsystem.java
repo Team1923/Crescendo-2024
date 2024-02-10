@@ -50,9 +50,7 @@ public class FeederSubsystem extends SubsystemBase {
   }
 
   /**
-   * Method to get the digital input reading of BB2.
-   * TODO: verify if adding a NOT before the boolean is needed.
-   * 
+   * Method to get the digital input reading of BB2.   * 
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakTwo() {
@@ -60,9 +58,7 @@ public class FeederSubsystem extends SubsystemBase {
   }
 
   /**
-   * Method to get the digital input reading of BB3.
-   * TODO: verify if adding a NOT before the boolean is needed.
-   * 
+   * Method to get the digital input reading of BB3.   * 
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakThree() {

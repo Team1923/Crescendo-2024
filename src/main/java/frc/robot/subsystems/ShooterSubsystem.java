@@ -86,9 +86,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   /**
-   * Method to get the digital input reading of BB4.
-   * TODO: verify if adding a NOT before the boolean is needed.
-   * 
+   * Method to get the digital input reading of BB4.   * 
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakFour() {

@@ -88,9 +88,6 @@ public class IntakeSubsystem extends SubsystemBase {
   public void setIntakePosition(double position) {
     intakeArmPrimary.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
         .withFeedForward(calculateIntakeFeedForward()));
-        /* THE LINE BELOW SHOULD NOT BE NEEDED. setControl() refers to FOLLOWER LOGIC! */
-    // intakeArmFollower.setControl(motionMagicVoltage.withPosition(position * Constants.IntakeConstants.intakeRadsToRots)
-    //   .withFeedForward(calculateIntakeFeedForward()));
   }
 
   /**
@@ -166,9 +163,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   /**
-   * Method to get the digital input reading of BB1.
-   * TODO: verify if adding a NOT before the boolean is needed.
-   * 
+   * Method to get the digital input reading of BB1.   * 
    * @return the boolean value representing the digital input reading.
    */
   // public boolean getBeamBreakOne() {
