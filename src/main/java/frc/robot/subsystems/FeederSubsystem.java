@@ -86,12 +86,12 @@ public class FeederSubsystem extends SubsystemBase {
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
     
-    else if (stateHandler.getCurrentArmState() == ArmStates.STOWED
+    else if (stateHandler.getCurrentArmState() != ArmStates.SPEAKER
       && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
       && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
         if (stateHandler.getBBFourCovered()) {
           desiredFeederSpeed = FeederSpeeds.BACKING;
-        } else if (!stateHandler.getBBFourCovered()) {
+        } else if (!stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() != ArmStates.AMP) {
           desiredFeederSpeed = FeederSpeeds.OFF;
         }
     }
