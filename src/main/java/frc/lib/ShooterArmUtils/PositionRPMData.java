@@ -52,8 +52,17 @@ public class PositionRPMData {
         // positionRPMMap.put(160.0, new PositionRPMObject(-0.039, 5000));
         // positionRPMMap.put(166.0, new PositionRPMObject(0, 5000));
         // positionRPMMap.put(190.0, new PositionRPMObject(0, 5000));
-        positionRPMMap.put(-200.0, new PositionRPMObject(-0.52, 3000));
-        positionRPMMap.put(1000.0, new PositionRPMObject(-0.52, 3000));
+        // positionRPMMap.put(-200.0, new PositionRPMObject(-0.52, 3000));
+        // positionRPMMap.put(1000.0, new PositionRPMObject(-0.52, 3000));
+        positionRPMMap.put(168.0, new PositionRPMObject(0, 5000));
+        positionRPMMap.put(156.0, new PositionRPMObject(-0.212, 4000));
+        positionRPMMap.put(144.0, new PositionRPMObject(-0.235, 4000));
+        positionRPMMap.put(132.0, new PositionRPMObject(-0.258, 4000));
+        positionRPMMap.put(120.0, new PositionRPMObject(-0.281, 4000));
+        positionRPMMap.put(108.0, new PositionRPMObject(-0.304, 4000));
+        positionRPMMap.put(84.0, new PositionRPMObject(-0.52, 3000));
+
+
 
 
     
