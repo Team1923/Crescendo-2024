@@ -27,6 +27,7 @@ public final class Constants {
         public static final double limelightHeight = 7; // for pivot, in inches (measured ~10 and 9/16 inches,
                                                               // converted)
         public static final double speakerHeightFromFloor = 56.5;// for tag, measured
+        public static final double xAngleThreshold = 0.005;
     }
 
     public static final class IntakeConstants {

@@ -76,8 +76,6 @@ public class GoalCentricCommand extends Command {
     strafeVal = strafeLimiter.calculate(strafeVal) * Swerve.maxSpeed;
     rotationVal = MathUtil.applyDeadband(rotationVal,0.005) * Swerve.maxAngularVelocity;
 
-    SmartDashboard.putNumber("ROTATIONVAL", rotationVal);
-
     ChassisSpeeds chassisSpeeds;
     if (DriverStation.getAlliance().get() == Alliance.Blue) {
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationVal, strafeVal, rotationVal, s_Swerve.getGyroYaw());

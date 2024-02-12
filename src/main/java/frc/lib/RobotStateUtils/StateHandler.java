@@ -37,7 +37,7 @@ public class StateHandler {
     private boolean hasValidSpeakerTag = false;
     private boolean hasValidAmpTag = false;
     private double distanceToTag = 0;
-    private boolean centeredToTag = true;
+    private boolean centeredToTag = false;
     private boolean wantToPositionForSubwoofer = false;
     private boolean scoreInAmp = false;
 

@@ -30,6 +30,7 @@ import frc.robot.commands.Intake.DeployIntakeCommand;
 import frc.robot.commands.Intake.IntakeEjectCommand;
 import frc.robot.commands.Scoring.RequireAmpPosition;
 import frc.robot.commands.Scoring.RequireSubwooferPosition;
+import frc.robot.commands.Scoring.ScoreCommandGroup;
 import frc.robot.commands.Scoring.ScoreGamePiece;
 import frc.robot.commands.Swerve.AlignToAmp;
 import frc.robot.commands.Swerve.GoalCentricCommand;
@@ -128,14 +129,14 @@ public class RobotContainer {
         triangleButton.toggleOnTrue(new RequireAmpPosition());
         crossButton.toggleOnTrue(new RequireSubwooferPosition());
 
-        new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreGamePiece());
+        //new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreGamePiece());
         
         
-
-        // rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 
-        //         () -> -driver.getRawAxis(translationAxis),
-        //         () -> -driver.getRawAxis(strafeAxis),
-        //         () -> -driver.getRawAxis(rotationAxis)));
+        /* This should handle all cases of scoring. If swerve is down, comment this out and use the above command instead. */
+        new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreCommandGroup(s_Swerve, 
+                () -> -driver.getRawAxis(translationAxis),
+                () -> -driver.getRawAxis(strafeAxis),
+                () -> -driver.getRawAxis(rotationAxis)));
 
         //aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
 
