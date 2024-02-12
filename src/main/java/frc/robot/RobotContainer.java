@@ -5,8 +5,12 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.MotorPercOutCommand;
+import frc.robot.commands.MotorVeloCommand;
+import frc.robot.subsystems.MotorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -26,8 +30,18 @@ public class RobotContainer {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
+
+  public MotorSubsystem motor = new MotorSubsystem(); 
+
     private Joystick controller = new Joystick(0);
 
+
+    //TODO: ID THESE
+    private int rightYAxis = -1;
+
+    private JoystickButton crossButton = new JoystickButton(controller, -1);
+    private JoystickButton squareButton = new JoystickButton(controller, -1);
+    private JoystickButton circleButton = new JoystickButton(controller, -1);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -50,6 +64,14 @@ public class RobotContainer {
    
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
+
+    motor.setDefaultCommand(new MotorPercOutCommand(motor, () -> controller.getRawAxis(rightYAxis)));
+
+
+    crossButton.whileTrue(new MotorVeloCommand(motor, 1000));
+    squareButton.whileTrue(new MotorVeloCommand(motor, 3000));
+    circleButton.whileTrue(new MotorVeloCommand(motor, 6000));
+
   }
 
   /**
