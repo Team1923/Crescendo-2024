@@ -8,11 +8,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.LimelightUtil.LimelightInterface;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.Constants.LimeLightConstants;
 
 public class LimelightSubsystem extends SubsystemBase {
   LimelightInterface limelight = LimelightInterface.getInstance();
   StateHandler stateHandler = StateHandler.getInstance();
+  PositionRPMData rpmData = PositionRPMData.getInstance();
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
 
@@ -34,6 +36,8 @@ public class LimelightSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
     SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
     SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
+    SmartDashboard.putNumber("Predicted Angle of Arm", rpmData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag()));
+    SmartDashboard.putNumber("Predicted RPM of the Tag", rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag()));
     //SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
     //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
     SmartDashboard.putNumber("X Angle Offset", limelight.getXAngleOffset());
