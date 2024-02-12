@@ -28,7 +28,7 @@ public class ScoreCommandGroup extends ParallelCommandGroup {
     /* Alignment is needed. */
     else {
       addCommands(
-          new GoalCentricCommand(swerve, null, null, null),
+          new GoalCentricCommand(swerve, translationSup, strafeSup, rotationSup),
           new ScoreGamePiece()
       );
     }
