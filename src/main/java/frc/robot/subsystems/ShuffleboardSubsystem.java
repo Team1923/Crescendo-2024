@@ -35,9 +35,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
 
     /* RELEVANT INTAKE STATES */
-    SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());
-    SmartDashboard.putString("DESIRED INTAKE POS", stateHandler.getDesiredIntakeState().toString());
-    SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
+    // SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());
+    // SmartDashboard.putString("DESIRED INTAKE POS", stateHandler.getDesiredIntakeState().toString());
+    // SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
 
     /* RELEVANT ARM STATES */
     SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
@@ -52,5 +52,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     SmartDashboard.putBoolean("AMP POSITION", stateHandler.getScoreInAmp());
     SmartDashboard.putBoolean("SUBWOOFER POSITION", stateHandler.getWantToPositionForSubwoofer());
+
+    SmartDashboard.putBoolean("CENTERED ON TAG", stateHandler.getIsCenteredToTag());
   }
 }

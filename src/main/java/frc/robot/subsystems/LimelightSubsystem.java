@@ -31,7 +31,7 @@ public class LimelightSubsystem extends SubsystemBase {
     stateHandler.setAprilTagID(limelight.getID());
     stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
-    stateHandler.setIsCenteredToTag(limelight.getXAngleOffset() <= LimeLightConstants.xAngleThreshold);
+    stateHandler.setIsCenteredToTag(Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold);
 
     SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
     SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());

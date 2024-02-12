@@ -20,14 +20,14 @@ public final class Constants {
         public static final int button1ID = 5; // close to radio (inside)
         public static final int button2ID = 6; //away from radio (outside)
     }
-
+    
     public static final class LimeLightConstants {
         // measure constants in inches
         public static final double limelightMountAngle = 27.358; // for pivot, measured in degrees
         public static final double limelightHeight = 7; // for pivot, in inches (measured ~10 and 9/16 inches,
                                                               // converted)
         public static final double speakerHeightFromFloor = 56.5;// for tag, measured
-        public static final double xAngleThreshold = 0.005;
+        public static final double xAngleThreshold = 2;
     }
 
     public static final class IntakeConstants {

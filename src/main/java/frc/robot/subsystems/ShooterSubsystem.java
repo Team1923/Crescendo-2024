@@ -82,11 +82,12 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelocities(double velocityP, double velocityF) {
     shooterTop.setControl(motionMagicVelVoltage.withVelocity(velocityP * ShooterConstants.shooterRPMToRPS));
-    if (velocityF == 0) {
-      shooterBottom.setControl(motionMagicVelVoltage.withVelocity(velocityF * ShooterConstants.shooterRPMToRPS));
-    } else {
-      shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF - 400) * ShooterConstants.shooterRPMToRPS));
-    }
+    // if (velocityF == 0) {
+    //   shooterBottom.setControl(motionMagicVelVoltage.withVelocity(velocityF * ShooterConstants.shooterRPMToRPS));
+    // } else {
+    //   shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF - 400) * ShooterConstants.shooterRPMToRPS));
+    // }
+    shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF) * ShooterConstants.shooterRPMToRPS));
   }
 
   /**
@@ -130,7 +131,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public boolean isAtShooterSpeed(double desiredSetpoint) {
     return Math.abs(getTopRPM() - desiredSetpoint) < ShooterConstants.shooterSpeedThreshold
-        && Math.abs(getBottomRPM() - (desiredSetpoint - 400)) < ShooterConstants.shooterSpeedThreshold;
+        && Math.abs(getBottomRPM() - (desiredSetpoint)) < ShooterConstants.shooterSpeedThreshold;
   }
 
   @Override
