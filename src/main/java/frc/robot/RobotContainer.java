@@ -37,11 +37,11 @@ public class RobotContainer {
 
 
     //TODO: ID THESE
-    private int rightYAxis = -1;
+    private int rightYAxis = 5;
 
-    private JoystickButton crossButton = new JoystickButton(controller, -1);
-    private JoystickButton squareButton = new JoystickButton(controller, -1);
-    private JoystickButton circleButton = new JoystickButton(controller, -1);
+    private JoystickButton crossButton = new JoystickButton(controller, 2);
+    private JoystickButton squareButton = new JoystickButton(controller, 1);
+    private JoystickButton circleButton = new JoystickButton(controller, 3);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -65,7 +65,7 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
 
-    motor.setDefaultCommand(new MotorPercOutCommand(motor, () -> controller.getRawAxis(rightYAxis)));
+    motor.setDefaultCommand(new MotorPercOutCommand(motor, () -> -controller.getRawAxis(rightYAxis)));
 
 
     crossButton.whileTrue(new MotorVeloCommand(motor, 1000));

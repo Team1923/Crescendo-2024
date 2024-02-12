@@ -31,7 +31,7 @@ public class MotorPercOutCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    motor.setPercOut(percOut.getAsDouble());
+    motor.setPercOut((Math.abs(percOut.getAsDouble())>0.05) ? percOut.getAsDouble() : 0);
   }
 
   // Called once the command ends or is interrupted.
