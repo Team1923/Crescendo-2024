@@ -39,9 +39,9 @@ public class RobotContainer {
     //TODO: ID THESE
     private int rightYAxis = 5;
 
-    private JoystickButton crossButton = new JoystickButton(controller, 2);
-    private JoystickButton squareButton = new JoystickButton(controller, 1);
-    private JoystickButton circleButton = new JoystickButton(controller, 3);
+    private JoystickButton crossButton = new JoystickButton(controller, 1);
+    private JoystickButton squareButton = new JoystickButton(controller, 3);
+    private JoystickButton circleButton = new JoystickButton(controller, 2);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

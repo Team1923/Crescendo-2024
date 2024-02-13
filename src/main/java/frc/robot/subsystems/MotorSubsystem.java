@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -18,18 +19,23 @@ public class MotorSubsystem extends SubsystemBase {
 
   TalonFX kraken = new TalonFX(0);
 
+  private VelocityVoltage m_VeloVolt;
+
   public MotorSubsystem() {
       kraken.getConfigurator().apply(new TalonFXConfiguration());
 
       //NOTE: These configs were found for TALONS
       var slot0Configs = new Slot0Configs();
-      slot0Configs.kS = 0; //0.05
-      slot0Configs.kV = 0.11;
-      slot0Configs.kP = 0.5; // old: 0.2, new: 0.40039100684261975
-      slot0Configs.kI = 0.001; // 0
-      slot0Configs.kD = 0; // old : 0.4, new: 0.0008007820136852395
+      slot0Configs.kS = 0; //0 
+      slot0Configs.kV = 0.05; //0.11
+      slot0Configs.kP = 0.4; // 0.5
+      slot0Configs.kI = 0.001; // 0.001
+      slot0Configs.kD = 0; //0
 
-      
+      m_VeloVolt = new VelocityVoltage(0);
+      m_VeloVolt.Slot = 0;
+
+      kraken.getConfigurator().apply(slot0Configs);
   }
 
   public void setPercOut(double out){
@@ -49,7 +55,7 @@ public class MotorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     SmartDashboard.putNumber("RAW MOTOR VELO (RPS)", kraken.getVelocity().getValueAsDouble());
-      SmartDashboard.putNumber("MOTOR VELO (RPM)", kraken.getVelocity().getValueAsDouble() * 60);
+    SmartDashboard.putNumber("MOTOR VELO (RPM)", kraken.getVelocity().getValueAsDouble() * 60);
 
   }
 }
