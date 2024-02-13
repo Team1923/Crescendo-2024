@@ -1,0 +1,216 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.7098358983042754,
+        "y": 6.373314171129768
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.621593476862148,
+        "y": 6.759057762058099
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.20038226774791,
+        "y": 7.107573740088099
+      },
+      "prevControl": {
+        "x": 2.369145282275139,
+        "y": 7.107573740088099
+      },
+      "nextControl": {
+        "x": 3.795117518976132,
+        "y": 7.107573740088099
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.205906929628587,
+        "y": 5.918103237631654
+      },
+      "prevControl": {
+        "x": 2.2645380558618715,
+        "y": 6.343178902822966
+      },
+      "nextControl": {
+        "x": 2.1279088638937385,
+        "y": 5.352617261054
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.093134927362492,
+        "y": 5.459864601439417
+      },
+      "prevControl": {
+        "x": 2.865235983478526,
+        "y": 5.723296185031991
+      },
+      "nextControl": {
+        "x": 3.3210338712464584,
+        "y": 5.196433017846843
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.8939146666891922,
+        "y": 5.12837282206631
+      },
+      "prevControl": {
+        "x": 1.9331929480261125,
+        "y": 5.166693096541354
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 8.972626614896354,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": 8.365886124032592,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": 30.650667957052757,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 3,
+      "rotationDegrees": -21.447736327105268,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "First Shot",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.05,
+      "constraints": {
+        "maxVelocity": 0.4,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    },
+    {
+      "name": "Second Shot",
+      "minWaypointRelativePos": 1.85,
+      "maxWaypointRelativePos": 2.2,
+      "constraints": {
+        "maxVelocity": 0.4,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    },
+    {
+      "name": "Third Shot",
+      "minWaypointRelativePos": 3.7,
+      "maxWaypointRelativePos": 4.0,
+      "constraints": {
+        "maxVelocity": 0.4,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "Score Preload and Deploy After",
+      "waypointRelativePos": 0.0,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "ScoreGamePiece"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Score 2nd and deploy after",
+      "waypointRelativePos": 1.85,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "ScoreGamePiece"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Score 3rd",
+      "waypointRelativePos": 3.75,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "ScoreGamePiece"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.5,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -18.970407808486662,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

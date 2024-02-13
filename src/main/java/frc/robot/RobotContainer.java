@@ -3,6 +3,7 @@ package frc.robot;
 
 import javax.print.attribute.standard.JobHoldUntil;
 
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -92,6 +93,7 @@ public class RobotContainer {
     public final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
     public final PositionRPMData positionRPMData = new PositionRPMData();
 
+    /*Auton Registered Commands */
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
@@ -104,6 +106,9 @@ public class RobotContainer {
              () -> -driver.getRawAxis(rotationAxis), 
              () -> driverLeftBumper.getAsBoolean()));
 
+
+        NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
+        NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
         //  intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
         //armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () ->  operator.getRawAxis(operatorRightY)));
 
