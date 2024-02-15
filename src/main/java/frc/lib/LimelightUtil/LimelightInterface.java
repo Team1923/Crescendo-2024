@@ -18,7 +18,7 @@ public class LimelightInterface {
   private static LimelightInterface limelightInterface;
 
   // network table declarations
-  private static NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight");
+  private static NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight-pivot");
 
 
   ArrayList<AprilTag> aprilTagList = new ArrayList<AprilTag>();

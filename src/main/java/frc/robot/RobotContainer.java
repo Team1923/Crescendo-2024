@@ -75,13 +75,14 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+        aButton.onTrue(new InstantCommand(() -> s_Swerve.resetModulesToAbsolute()));
 
         rightBumper.whileTrue(new GoalCentricCommand(s_Swerve, 
                 () -> -driver.getRawAxis(translationAxis),
                 () -> -driver.getRawAxis(strafeAxis),
                 () -> -driver.getRawAxis(rotationAxis)));
 
-        aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
+        //aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
     }
 
     /**

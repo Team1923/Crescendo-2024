@@ -58,15 +58,17 @@ public class GoalCentricCommand extends Command {
     double translationVal = translationSup.getAsDouble();
     double strafeVal = strafeSup.getAsDouble();
 
-    double rotationVal = 0;
+    double rotationVal = Math.abs(rotationSup.getAsDouble()) > 0.1 ? rotationSup.getAsDouble() : 0.0;
 
-    if (Math.abs(rotationSup.getAsDouble()) > 0.5) {
-      rotationVal = rotationSup.getAsDouble();
-    } else if (limelight.hasSpeakerTag()) {
+    
+    if (limelight.hasSpeakerTag()) {
       rotationVal = target.calculate(limelight.getXAngleOffset(), 0);
-    } else {
-      rotationVal = 0;
-    }
+    } 
+    // else if (Math.abs(rotationSup.getAsDouble()) > 0.5) {
+    //   rotationVal = rotationSup.getAsDouble();
+    // else {
+    //   rotationVal = 0;
+    // }
 
     translationVal = Math.abs(translationVal) > Swerve.stickDeadband ? translationVal : 0.0;
     strafeVal = Math.abs(strafeVal) > Swerve.stickDeadband ? strafeVal : 0.0;
@@ -82,6 +84,8 @@ public class GoalCentricCommand extends Command {
     } else {
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(-translationVal, -strafeVal, rotationVal, s_Swerve.getGyroYaw());
     }
+
+    
 
     SwerveModuleState[] moduleStates = Swerve.swerveKinematics.toSwerveModuleStates(chassisSpeeds);
     s_Swerve.setModuleStates(moduleStates);
