@@ -1,6 +1,5 @@
 package frc.lib.AutoUtils;
 
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
