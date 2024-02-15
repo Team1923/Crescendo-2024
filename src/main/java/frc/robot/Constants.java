@@ -19,9 +19,11 @@ public final class Constants {
 
     public static final class LimeLightConstants{
         //measure constants in inches
+
+        //REMEASURE THESE
         public static final double limelightMountAngle = 11.5; // for pivot, measured in degrees
         public static final double limelightHeight = 10.5625; //for pivot, in inches (measured ~10 and 9/16 inches, converted)
-        public static final double speakerHeightFromFloor = 59.25;//for tag, measured
+        public static final double speakerHeightFromFloor = 56.5;//for tag, measured
         public static final double limelightViewingAngle = 28.9; //degrees
 
     }

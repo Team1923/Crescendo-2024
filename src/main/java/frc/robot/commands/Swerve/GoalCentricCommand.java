@@ -4,16 +4,11 @@
 
 package frc.robot.commands.Swerve;
 
-import java.util.function.BooleanSupplier;
+
 import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
-
-import com.ctre.phoenix6.hardware.Pigeon2;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -21,8 +16,6 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.LimelightUtil.LimelightInterface;
-import frc.lib.RobotStateUtils.StateHandler;
-import frc.robot.Constants;
 import frc.robot.Constants.Swerve;
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -83,8 +76,6 @@ public class GoalCentricCommand extends Command {
     strafeVal = strafeLimiter.calculate(strafeVal) * Swerve.maxSpeed;
     rotationVal = MathUtil.applyDeadband(rotationVal,0.005) * Swerve.maxAngularVelocity;
 
-    SmartDashboard.putNumber("ROTATIONVAL", rotationVal);
-
     ChassisSpeeds chassisSpeeds;
     if (DriverStation.getAlliance().get() == Alliance.Blue) {
       chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationVal, strafeVal, rotationVal, s_Swerve.getGyroYaw());
@@ -100,7 +91,7 @@ public class GoalCentricCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    s_Swerve.stop();
+
   }
 
   // Returns true when the command should end.

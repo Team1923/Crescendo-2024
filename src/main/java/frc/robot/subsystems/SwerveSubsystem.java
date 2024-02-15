@@ -23,15 +23,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveSubsystem extends SubsystemBase {
+    /* Odometry object used to keep track of the robot's position on the field. */
     public SwerveDriveOdometry swerveOdometry;
+
+    /* Array of Swerve Modules. 
+     * Each module contains:
+     * - Drive Motor
+     * - Steering Motor
+     * - CANCoder (absolute encoder)
+     */
     public SwerveModule[] mSwerveMods;
+
+    /* Gyro/Accelerometer declaration. */
     public Pigeon2 gyro;
 
     public SwerveSubsystem() {
+        /* Initialize gyro, wipe configuration, and reset angle to 0 degrees. */
         gyro = new Pigeon2(Constants.Swerve.pigeonID, "rio");
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.setYaw(0);
 
+        /* Initialize array of swerve modules. Assign a module number to each module. */
         mSwerveMods = new SwerveModule[] {
             new SwerveModule(0, Constants.Swerve.Mod0.constants),
             new SwerveModule(1, Constants.Swerve.Mod1.constants),
@@ -39,11 +51,14 @@ public class SwerveSubsystem extends SubsystemBase {
             new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
 
+        /* Delay needed to properly ensure that modules are reset to their absolute position. */
         Timer.delay(1.0);
         resetModulesToAbsolute();
 
+        /* Initialize SwerveOdometry object. */
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
 
+        /* PathPlanner configuration. */
         AutoBuilder.configureHolonomic(
             this::getPose, 
             this::setPose, 
@@ -60,18 +75,17 @@ public class SwerveSubsystem extends SubsystemBase {
             this);
     }
 
+    /* Method to set the module states & drive the robot. */
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
-        ChassisSpeeds discretizedFieldChassisSpeeds = 
-            ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), rotation, getHeading());
-        ChassisSpeeds.discretize(discretizedFieldChassisSpeeds, 0.02);
+        ChassisSpeeds fieldChassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translation.getX(), translation.getY(), 
+            rotation, getHeading());
 
-        ChassisSpeeds discretizedRobotRelChassisSpeeds = 
-            new ChassisSpeeds(translation.getX(), translation.getY(), rotation);
-        ChassisSpeeds.discretize(discretizedRobotRelChassisSpeeds, 0.02);
+        ChassisSpeeds robotRelChassisSpeeds = new ChassisSpeeds(translation.getX(), translation.getY(), rotation);
 
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? discretizedFieldChassisSpeeds : discretizedRobotRelChassisSpeeds);
+                fieldRelative ? ChassisSpeeds.discretize(fieldChassisSpeeds, 0.02) 
+                : ChassisSpeeds.discretize(robotRelChassisSpeeds, 0.02));
 
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);        
         
@@ -80,12 +94,14 @@ public class SwerveSubsystem extends SubsystemBase {
         }
     }  
     
+    /* Drive ROBOT RELATIVE - only for PathPlanner! */
     public void driveRobotRelativeForPP(ChassisSpeeds robotRelativeSpeeds) {
-        ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
-        SwerveModuleState[] swerveModuleStates = Constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
+        SwerveModuleState[] swerveModuleStates = 
+            Constants.Swerve.swerveKinematics.toSwerveModuleStates(ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02));
         setModuleStates(swerveModuleStates);
     }
 
+    /* Get the current velocity of the modules relative to the robot's motion. */
     public ChassisSpeeds getRobotRelativeSpeeds(){
         return Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
     }
@@ -99,6 +115,7 @@ public class SwerveSubsystem extends SubsystemBase {
         }
     }
 
+    /* Get the current state of the modules (speed, position, direction, etc.) */
     public SwerveModuleState[] getModuleStates(){
         SwerveModuleState[] states = new SwerveModuleState[4];
         for(SwerveModule mod : mSwerveMods){
@@ -107,6 +124,7 @@ public class SwerveSubsystem extends SubsystemBase {
         return states;
     }
 
+    /* Get the specific position of the modules. */
     public SwerveModulePosition[] getModulePositions(){
         SwerveModulePosition[] positions = new SwerveModulePosition[4];
         for(SwerveModule mod : mSwerveMods){
@@ -115,40 +133,44 @@ public class SwerveSubsystem extends SubsystemBase {
         return positions;
     }
 
+    /* Get the pose of the robot returned by the odometry class. */
     public Pose2d getPose() {
         return swerveOdometry.getPoseMeters();
     }
 
+    /* Set the pose that the odometry class references. */
     public void setPose(Pose2d pose) {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
 
+    /* Get the heading of the robot. */
     public Rotation2d getHeading(){
         return getPose().getRotation();
     }
 
+    /* Set/override the heading of the robot. */
     public void setHeading(Rotation2d heading){
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), heading));
     }
 
+    /* Reset the position of the robot ("zeroing") */
     public void zeroHeading(){
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
 
-    /**
-     * Gets the gyro's current yaw using IEEE remainder and 360
-     * @return the gyro's current yaw
-     */
+    /* Gets the gyro's current yaw using IEEE remainder. Needed to fulfill range of (-180, 180]*/
     public Rotation2d getGyroYaw() {
         return Rotation2d.fromDegrees(Math.IEEEremainder(gyro.getYaw().getValue(), 360));
     }
 
+    /* Reset all the swerve modules. */
     public void resetModulesToAbsolute(){
         for(SwerveModule mod : mSwerveMods){
             mod.resetToAbsolute();
         }
     }
 
+    /* Stop the modules (pass in a velocity of 0) */
     public void stop() {
         drive(new Translation2d(0, 0), 0, true, false);
     }
@@ -158,14 +180,14 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
         PathPlannerLogging.logCurrentPose(getPose());
 
-        SmartDashboard.putNumber("HEADING", getGyroYaw().getDegrees());
+        // SmartDashboard.putNumber("HEADING", getGyroYaw().getDegrees());
 
 
 
-        for(SwerveModule mod : mSwerveMods){
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
-        }
+        // for(SwerveModule mod : mSwerveMods){
+        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
+        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
+        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+        // }
     }
 }

@@ -15,18 +15,18 @@ import frc.robot.subsystems.SwerveSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class FaceAndAllignAmp extends SequentialCommandGroup {
+public class FaceAndAlignAmp extends SequentialCommandGroup {
 
   LimelightInterface ll = LimelightInterface.getInstance();
 
   private final double tolerance = 1; //degree
 
   /** Creates a new PosAndAllignAmp. */
-  public FaceAndAllignAmp(SwerveSubsystem s, DoubleSupplier transSup, DoubleSupplier strafeSup, DoubleSupplier rotSup) {
+  public FaceAndAlignAmp(SwerveSubsystem s, DoubleSupplier transSup, DoubleSupplier strafeSup, DoubleSupplier rotSup) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new GoalCentricCommand(s, transSup, strafeSup, rotSup).onlyWhile(() -> isFacingAmp()),
+      new GoalCentricCommand(s, transSup, strafeSup, rotSup).onlyWhile(() -> !isFacingAmp()),
 
       new AlignToAmp(s, strafeSup)
 

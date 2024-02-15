@@ -44,6 +44,11 @@ public class StateHandler {
     private boolean bbThreeCovered = false;
     private boolean bbFourCovered = false;
 
+
+    private boolean scoreInAmp = false;
+    
+
+    private boolean scoreInSubwoofer = false;
     /**
      * Method to set the desired arm state.
      * @param desiredArmState The desired arm state to be commanded to the arm.
@@ -356,6 +361,25 @@ public class StateHandler {
      */
     public boolean getBBFourCovered() {
         return bbFourCovered;
+    }
+
+
+
+
+    public boolean getScoreInAmp() {
+        return scoreInAmp;
+    }
+
+    public void setScoreInAmp(boolean scoreInAmp) {
+        this.scoreInAmp = scoreInAmp;
+    }
+
+    public boolean getScoreInSubwoofer() {
+        return scoreInSubwoofer;
+    }
+
+    public void setScoreInSubwoofer(boolean scoreInSubwoofer) {
+        this.scoreInSubwoofer = scoreInSubwoofer;
     }
 
 }

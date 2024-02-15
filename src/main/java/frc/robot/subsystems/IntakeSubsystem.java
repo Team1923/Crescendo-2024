@@ -182,7 +182,7 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    stateHandler.setBBOneCovered(getBeamBreakOne());
+    // stateHandler.setBBOneCovered(getBeamBreakOne());
 
     // check the stator current to know whether or not we are hardstop.
 
