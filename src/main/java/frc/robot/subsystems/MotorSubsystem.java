@@ -27,7 +27,7 @@ public class MotorSubsystem extends SubsystemBase {
       //NOTE: These configs were found for TALONS
       var slot0Configs = new Slot0Configs();
       slot0Configs.kS = 0; //0 
-      slot0Configs.kV = 0.05; //0.11
+      slot0Configs.kV = 0.11; //0.11
       slot0Configs.kP = 0.4; // 0.5
       slot0Configs.kI = 0.001; // 0.001
       slot0Configs.kD = 0; //0
