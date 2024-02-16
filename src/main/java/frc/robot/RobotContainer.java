@@ -5,6 +5,8 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.DoubleMotorCommand;
+import frc.robot.commands.FeedCommand;
 import frc.robot.commands.MotorPercOutCommand;
 import frc.robot.commands.MotorVeloCommand;
 import frc.robot.subsystems.MotorSubsystem;
@@ -31,7 +33,10 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
 
-  public MotorSubsystem motor = new MotorSubsystem(); 
+  public MotorSubsystem shooterU = new MotorSubsystem(1); 
+    public MotorSubsystem shooterL = new MotorSubsystem(2); 
+  public MotorSubsystem feeder = new MotorSubsystem(3); 
+
 
     private Joystick controller = new Joystick(0);
 
@@ -42,6 +47,7 @@ public class RobotContainer {
     private JoystickButton crossButton = new JoystickButton(controller, 1);
     private JoystickButton squareButton = new JoystickButton(controller, 3);
     private JoystickButton circleButton = new JoystickButton(controller, 2);
+    private JoystickButton rightBumper = new JoystickButton(controller, 6);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -65,12 +71,18 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
 
-    motor.setDefaultCommand(new MotorPercOutCommand(motor, () -> -controller.getRawAxis(rightYAxis)));
+    // motor.setDefaultCommand(new MotorPercOutCommand(motor, () -> -controller.getRawAxis(rightYAxis)));
 
 
-    crossButton.whileTrue(new MotorVeloCommand(motor, 1000));
-    squareButton.whileTrue(new MotorVeloCommand(motor, 3000));
-    circleButton.whileTrue(new MotorVeloCommand(motor, 6000));
+    crossButton.whileTrue(new DoubleMotorCommand(shooterL, shooterU));
+
+    rightBumper.whileTrue(new FeedCommand(feeder));
+
+    
+
+    // crossButton.whileTrue(new MotorVeloCommand(motor, 1000));
+    // squareButton.whileTrue(new MotorVeloCommand(motor, 3000));
+    // circleButton.whileTrue(new MotorVeloCommand(motor, 6000));
 
   }
 

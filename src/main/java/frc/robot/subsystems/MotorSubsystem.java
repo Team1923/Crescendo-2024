@@ -17,11 +17,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class MotorSubsystem extends SubsystemBase {
   /** Creates a new MotorSubsystem. */
 
-  TalonFX kraken = new TalonFX(0);
+  TalonFX kraken;
+
+  private int id;
 
   private VelocityVoltage m_VeloVolt;
 
-  public MotorSubsystem() {
+  public MotorSubsystem(int id) {
+
+    this.id = id;
+
+    kraken = new TalonFX(id);
+
       kraken.getConfigurator().apply(new TalonFXConfiguration());
 
       //NOTE: These configs were found for TALONS
@@ -54,8 +61,8 @@ public class MotorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
 
-    SmartDashboard.putNumber("RAW MOTOR VELO (RPS)", kraken.getVelocity().getValueAsDouble());
-    SmartDashboard.putNumber("MOTOR VELO (RPM)", kraken.getVelocity().getValueAsDouble() * 60);
+    // SmartDashboard.putNumber(id + "RAW MOTOR VELO (RPS)", kraken.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber(id + "MOTOR VELO (RPM)", kraken.getVelocity().getValueAsDouble() * 60);
 
   }
 }
