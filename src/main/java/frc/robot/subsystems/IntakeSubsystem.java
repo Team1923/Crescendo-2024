@@ -19,6 +19,7 @@ import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 import frc.robot.Constants;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.commands.IndependentTesting.IntakeArmPercOutCommand;
 
 public class IntakeSubsystem extends SubsystemBase {
   private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
@@ -196,7 +197,6 @@ public class IntakeSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Intake Position Radians", getIntakeArmPositionRads());
     
 
-    //TODO: STATE MACHINE PUT BACK OR SAD
     IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
     IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
 
@@ -211,6 +211,15 @@ public class IntakeSubsystem extends SubsystemBase {
         && desiredIntakeState == IntakeStates.DEPLOYED
         && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
       rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
+    }
+    /*
+     * EDGE CASE: don't let the intake return to stow without the piece fully inside the robot
+     */
+    if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED 
+      && stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
+      && !stateHandler.getBBThreeCovered() && (stateHandler.getBBOneCovered() || stateHandler.getBBTwoCovered())){
+        rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
+        intakeSetpoint = IntakeStates.DEPLOYED.getIntakePosition().getAngularSetpoint();    
     }
 
     setIntakePosition(intakeSetpoint);
