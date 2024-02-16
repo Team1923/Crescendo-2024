@@ -12,7 +12,6 @@ import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 
 public class DeployIntakeCommand extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
-  boolean allowedToGoUp = false;
   /** Creates a new DeployIntakeCommand. */
   public DeployIntakeCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,11 +28,7 @@ public class DeployIntakeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (stateHandler.getBBOneCovered() && !stateHandler.getBBThreeCovered()) {
-      allowedToGoUp = false;
-    } else if (!stateHandler.getBBOneCovered() && stateHandler.getBBThreeCovered()) {
-      allowedToGoUp = true;
-    }
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -47,6 +42,6 @@ public class DeployIntakeCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getBBThreeCovered() && allowedToGoUp;
+    return stateHandler.getBBThreeCovered();
   }
 }
