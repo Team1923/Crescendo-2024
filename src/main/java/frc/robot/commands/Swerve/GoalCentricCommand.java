@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.LimelightUtil.LimelightInterface;
+import frc.lib.RobotStateUtils.StateHandler;
 import frc.robot.Constants.Swerve;
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -30,6 +31,7 @@ public class GoalCentricCommand extends Command {
 
   private final double kPTarget = 0.004; // Tune this by yourself.
   private PIDController target;
+  StateHandler stateHandler = StateHandler.getInstance();
 
   /** Creates a new GoalCentricCommand. */
   public GoalCentricCommand(SwerveSubsystem s, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup) {
@@ -91,12 +93,11 @@ public class GoalCentricCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+      return stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp();
   }
 }

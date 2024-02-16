@@ -20,19 +20,9 @@ public class ScoreCommandGroup extends ParallelCommandGroup {
 
   public ScoreCommandGroup(SwerveSubsystem swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup,
       DoubleSupplier rotationSup) {
-    /* No alignment needed conditions. */
-    if (stateHandler.getScoreInAmp() || stateHandler.getWantToPositionForSubwoofer()) {
-      addCommands(
-          new ScoreGamePiece());
-    } 
-    /* Alignment is needed. */
-    else {
-      addCommands(
-          new GoalCentricCommand(swerve, translationSup, strafeSup, rotationSup),
-          new ScoreGamePiece()
-      );
-    }
-
+    addCommands(
+        new GoalCentricCommand(swerve, translationSup, strafeSup, rotationSup),
+        new ScoreGamePiece());
   }
 
 }
