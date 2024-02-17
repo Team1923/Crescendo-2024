@@ -34,6 +34,7 @@ import frc.robot.commands.Scoring.RequireSubwooferPosition;
 import frc.robot.commands.Scoring.ScoreCommandGroup;
 import frc.robot.commands.Scoring.ScoreGamePiece;
 import frc.robot.commands.Swerve.AlignToAmp;
+import frc.robot.commands.Swerve.AlignToAmpWTranslate;
 import frc.robot.commands.Swerve.GoalCentricCommand;
 import frc.robot.commands.Swerve.TeleopSwerve;
 import frc.robot.subsystems.*;
@@ -82,11 +83,11 @@ public class RobotContainer {
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
-    private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    public final ArmSubsystem armSubsystem = new ArmSubsystem();
-    public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    public final FeederSubsystem feederSubsystem = new FeederSubsystem();
+    // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+    // public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    // public final ArmSubsystem armSubsystem = new ArmSubsystem();
+    // public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    // public final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     // private AutoInstantiator autoInstantiator = new AutoInstantiator();
@@ -107,8 +108,8 @@ public class RobotContainer {
              () -> driverLeftBumper.getAsBoolean()));
 
 
-        NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
-        NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
+        // NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
+        // NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
         //  intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
         //armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () ->  operator.getRawAxis(operatorRightY)));
 
@@ -128,22 +129,22 @@ public class RobotContainer {
         /* Driver Buttons */
         yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
-        circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
-        operatorRightBunper.whileTrue(new DeployIntakeCommand());
-        operatorLeftBumper.whileTrue(new IntakeEjectCommand());
-        triangleButton.toggleOnTrue(new RequireAmpPosition());
-        crossButton.toggleOnTrue(new RequireSubwooferPosition());
+        // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
+        // operatorRightBunper.whileTrue(new DeployIntakeCommand());
+        // operatorLeftBumper.whileTrue(new IntakeEjectCommand());
+        // triangleButton.toggleOnTrue(new RequireAmpPosition());
+        // crossButton.toggleOnTrue(new RequireSubwooferPosition());
 
         //new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreGamePiece());
         
         
         /* This should handle all cases of scoring. If swerve is down, comment this out and use the above command instead. */
-        new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreCommandGroup(s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis),
-                () -> -driver.getRawAxis(strafeAxis),
-                () -> -driver.getRawAxis(rotationAxis)));
+        // new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreCommandGroup(s_Swerve, 
+        //         () -> -driver.getRawAxis(translationAxis),
+        //         () -> -driver.getRawAxis(strafeAxis),
+        //         () -> -driver.getRawAxis(rotationAxis)));
 
-        //aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
+        aButton.whileTrue(new AlignToAmpWTranslate(s_Swerve, () -> -driver.getRawAxis(strafeAxis), () -> driver.getRawAxis(translationAxis)));
 
         //SmartDashboard.putData(new DeployIntakeCommand());
     }
