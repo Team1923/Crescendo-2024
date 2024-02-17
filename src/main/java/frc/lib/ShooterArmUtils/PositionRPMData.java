@@ -44,23 +44,12 @@ public class PositionRPMData {
         double upperBound = LimeLightConstants.lerpUpperBound;
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
-        if(distance > distanceValues[0]){
-            lowerBound = distanceValues[0];
-            upperBound = distanceValues[0 + 1];
-        }
-        else if(distance < distanceValues[distanceValues.length - 1]){
-            lowerBound = distanceValues[distanceValues.length -2];
-            upperBound = distanceValues[distanceValues.length -1];
-        }
-        else{
-            for (int i = 0; i < distanceValues.length - 1; i++) {
-                if (distance >= distanceValues[i] && distance <= distanceValues[i + 1]) {
-                    lowerBound = distanceValues[i];
-                    upperBound = distanceValues[i + 1];
-                }
+        for (int i = 0; i < distanceValues.length - 1; i++) {
+            if (distance >= distanceValues[i] && distance <= distanceValues[i + 1]) {
+                lowerBound = distanceValues[i];
+                upperBound = distanceValues[i + 1];
             }
         }
-
 
         double deltaDistance = distance - lowerBound;
         double deltaPositionValues = (positionRPMMap.get(upperBound).getArmPosition()) - 
@@ -80,20 +69,10 @@ public class PositionRPMData {
         double upperBound = LimeLightConstants.lerpUpperBound;
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
-        if(distance > distanceValues[0]){
-            lowerBound = distanceValues[0];
-            upperBound = distanceValues[0 + 1];
-        }
-        else if(distance < distanceValues[distanceValues.length - 1]){
-            lowerBound = distanceValues[distanceValues.length -2];
-            upperBound = distanceValues[distanceValues.length -1];
-        }
-        else{
-            for (int i = 0; i < distanceValues.length - 1; i++) {
-                if (distance >= distanceValues[i] && distance <= distanceValues[i + 1]) {
-                    lowerBound = distanceValues[i];
-                    upperBound = distanceValues[i + 1];
-                }
+        for (int i = 0; i < distanceValues.length - 1; i++) {
+            if (distance >= distanceValues[i] && distance <= distanceValues[i + 1]) {
+                lowerBound = distanceValues[i];
+                upperBound = distanceValues[i + 1];
             }
         }
 
