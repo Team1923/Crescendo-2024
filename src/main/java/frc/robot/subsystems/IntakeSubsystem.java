@@ -231,12 +231,13 @@ public class IntakeSubsystem extends SubsystemBase {
         && !stateHandler.getBBThreeCovered() && bb1Crossed) {
       rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
       intakeSetpoint = IntakeStates.DEPLOYED.getIntakePosition().getAngularSetpoint();
-    } else if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
-        && !bb1Crossed) {
-      rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
-      intakeSetpoint = IntakeStates.STOWED.getIntakePosition().getAngularSetpoint();
-      stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
-    }
+    } 
+    // else if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
+    //     && !bb1Crossed) {
+    //   rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
+    //   intakeSetpoint = IntakeStates.STOWED.getIntakePosition().getAngularSetpoint();
+    //   stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
+    // }
 
     setIntakePosition(intakeSetpoint);
     setRollerWheelSpeed(rollerSpeed, rollerSpeed);

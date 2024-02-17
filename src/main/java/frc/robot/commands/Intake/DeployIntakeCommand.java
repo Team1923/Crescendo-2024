@@ -35,6 +35,8 @@ public class DeployIntakeCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     stateHandler.setDesiredIntakeState(IntakeStates.STOWED);
+    stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
+    stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.OFF);
   }
 
   // Returns true when the command should end.

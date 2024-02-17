@@ -85,6 +85,13 @@ public class FeederSubsystem extends SubsystemBase {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
+
+    /*
+     * edge condition for running intake until note is fully in (already handled eject condition so this shouldn't override?)
+     */
+    else if (!stateHandler.getBBThreeCovered() && stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){
+        desiredFeederSpeed = FeederSpeeds.INWARD;
+    }
     
     else if (stateHandler.getCurrentArmState() != ArmStates.SPEAKER
       && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
