@@ -28,6 +28,8 @@ public final class Constants {
                                                               // converted)
         public static final double speakerHeightFromFloor = 56.5;// for tag, measured
         public static final double xAngleThreshold = 2;
+        public static final double lerpLowerBound = 84;
+        public static final double lerpUpperBound = 168;
     }
 
     public static final class IntakeConstants {

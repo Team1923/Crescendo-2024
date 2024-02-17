@@ -3,6 +3,8 @@ package frc.lib.ShooterArmUtils;
 
 import java.util.HashMap;
 
+import frc.robot.Constants.LimeLightConstants;
+
 public class PositionRPMData {
     private static PositionRPMData positionRPMData;
     private static HashMap<Double, PositionRPMObject> positionRPMMap = new HashMap<>();
@@ -38,9 +40,8 @@ public class PositionRPMData {
       * @return a setpoint for the arm's position.
       */
      public double getDesiredArmPosition(double distance) {
-        //TODO: what are the bounds for distance? what to do when distance = 0? Handle edge cases.
-        double lowerBound = 84;
-        double upperBound = 168;
+        double lowerBound = LimeLightConstants.lerpLowerBound;
+        double upperBound = LimeLightConstants.lerpUpperBound;
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {
@@ -64,9 +65,8 @@ public class PositionRPMData {
       * @return an RPM setpoint for the shooter's velocity.
       */
      public double getDesiredShooterRPM(double distance) {
-        //TODO: what are the bounds for distance? what to do when distance = 0? Handle edge cases.
-        double lowerBound = 84;
-        double upperBound = 168;
+        double lowerBound = LimeLightConstants.lerpLowerBound;
+        double upperBound = LimeLightConstants.lerpUpperBound;
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {

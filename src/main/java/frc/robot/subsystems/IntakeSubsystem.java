@@ -13,11 +13,11 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 import frc.robot.Constants;
 import frc.robot.Constants.IntakeConstants;
-
 
 public class IntakeSubsystem extends SubsystemBase {
   private DigitalInput beamBreakOne = new DigitalInput(IntakeConstants.beamBreakOneID);
@@ -44,7 +44,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
     intakeArmConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
-
     // subject all to change
     intakeArmSlot0Configs.kS = Constants.IntakeConstants.intakeKS;
     intakeArmSlot0Configs.kP = Constants.IntakeConstants.intakekP;
@@ -65,7 +64,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
     intakeArmPrimary.setInverted(true);
     intakeArmFollower.setInverted(true);
-
 
     // Need to change/test in lab
     intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
@@ -96,10 +94,9 @@ public class IntakeSubsystem extends SubsystemBase {
    * 
    * @param out percent out speed to run the intake arm at
    */
-  public void setIntakeArmPercentOut(double out){
+  public void setIntakeArmPercentOut(double out) {
     intakeArmPrimary.set(out);
   }
-
 
   /**
    * Gets the position of the intake arm.
@@ -132,7 +129,8 @@ public class IntakeSubsystem extends SubsystemBase {
    * Sets the speed for the top intake wheel.(Make these negative)
    * 
    * @param speed The speed passed in.
-  //  */
+   *              //
+   */
   public void setRollerWheelSpeed(double topSpeed, double BottomSpeed) {
     intakeWheelTop.set(topSpeed);
     intakeWheelBottom.set(BottomSpeed);
@@ -148,7 +146,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
   /**
    * Stops the intake wheel motors.
-  //  */
+   * //
+   */
   public void stopIntakeWheels() {
     intakeWheelTop.set(0);
     intakeWheelBottom.set(0);
@@ -164,7 +163,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   /**
-   * Method to get the digital input reading of BB1.   * 
+   * Method to get the digital input reading of BB1. *
+   * 
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakOne() {
@@ -186,23 +186,23 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeArmFollower.setNeutralMode(NeutralModeValue.Brake);
   }
 
-
   @Override
   public void periodic() {
     stateHandler.setBBOneCovered(getBeamBreakOne());
 
-    // SmartDashboard.putNumber("Raw Postion INTAKE Primary ", intakeArmPrimary.getPosition().getValueAsDouble());
-    // SmartDashboard.putNumber("Raw Intake Position Follower", intakeArmFollower.getPosition().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw Postion INTAKE Primary ",
+    // intakeArmPrimary.getPosition().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw Intake Position Follower",
+    // intakeArmFollower.getPosition().getValueAsDouble());
 
-    // SmartDashboard.putNumber("Intake Position Radians", getIntakeArmPositionRads());
-    
+    // SmartDashboard.putNumber("Intake Position Radians",
+    // getIntakeArmPositionRads());
 
     IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
     IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
 
     double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
     double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
-
 
     /*
      * EDGE CASE: Eject speed can only be run when the intake is actually in its
@@ -213,41 +213,29 @@ public class IntakeSubsystem extends SubsystemBase {
         && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
       rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
     }
-    /*
-     * EDGE CASE: don't let the intake return to stow without the piece fully inside the robot
-     */
-    // if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED 
-    //   && stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
-    //   && !stateHandler.getBBThreeCovered() && (stateHandler.getBBOneCovered() || stateHandler.getBBTwoCovered())){
-    //     rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
-    //     intakeSetpoint = IntakeStates.DEPLOYED.getIntakePosition().getAngularSetpoint();    
-    // }
 
     /*
-     * Edge case: prevent operator from bringing up intake until completition of intake command
+     * Edge case: prevent operator from bringing up intake until completition of
+     * intake command
      */
-
-    if(stateHandler.getBBOneCovered()){
+    if (stateHandler.getBBOneCovered()) {
       bb1Crossed = true;
     }
 
-    if(stateHandler.getBBThreeCovered() && !stateHandler.getBBOneCovered()){
+    if (stateHandler.getBBThreeCovered() && !stateHandler.getBBOneCovered()) {
       bb1Crossed = false;
     }
 
-    if(stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
-    && stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
-    && !stateHandler.getBBThreeCovered() && stateHandler.getBBOneCovered()){
+    if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
+        && !stateHandler.getBBThreeCovered() && bb1Crossed) {
       rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
       intakeSetpoint = IntakeStates.DEPLOYED.getIntakePosition().getAngularSetpoint();
+    } else if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
+        && !bb1Crossed) {
+      rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
+      intakeSetpoint = IntakeStates.STOWED.getIntakePosition().getAngularSetpoint();
+      stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
     }
-    else if(stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED 
-    && stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
-    && bb1Crossed){
-      rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
-      intakeSetpoint = IntakeStates.DEPLOYED.getIntakePosition().getAngularSetpoint();
-    }
-   
 
     setIntakePosition(intakeSetpoint);
     setRollerWheelSpeed(rollerSpeed, rollerSpeed);
