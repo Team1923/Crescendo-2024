@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.AutoUtils.AutoInstantiator;
 import frc.robot.commands.Swerve.AlignToAmp;
+import frc.robot.commands.Swerve.AlignToAmpWTranslate;
 import frc.robot.commands.Swerve.GoalCentricCommand;
 import frc.robot.commands.Swerve.TeleopSwerve;
 import frc.robot.subsystems.*;
@@ -82,7 +83,7 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis),
                 () -> -driver.getRawAxis(rotationAxis)));
 
-        //aButton.whileTrue(new AlignToAmp(s_Swerve, () -> -driver.getRawAxis(strafeAxis)));
+        aButton.whileTrue(new AlignToAmpWTranslate(s_Swerve, () -> -driver.getRawAxis(strafeAxis), () -> -driver.getRawAxis(translationAxis)));
     }
 
     /**
