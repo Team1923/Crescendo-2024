@@ -39,6 +39,8 @@ public class AlignToAmpWTranslate extends Command {
 
     private SlewRateLimiter rotateLimiter;
 
+    private final double TOLERANCE = 2;
+
 
     private SwerveSubsystem s_Swerve;
     private DoubleSupplier translationSup;
@@ -100,7 +102,8 @@ public class AlignToAmpWTranslate extends Command {
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Swerve.stickDeadband);
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Swerve.stickDeadband);
 
-        if (stateHandler.getHasValidAmpTag()){
+        //-GM: I know this doesn't adapt to the +-90 depending on alliance, but that shouldn't matter since if you are the wrong way you would not have the valid amp tag?
+        if (stateHandler.getHasValidAmpTag() && Math.abs(90-Math.abs(s_Swerve.getGyroYaw().getDegrees())) < TOLERANCE){
             translationVal = MathUtil.applyDeadband(translationController.calculate(limelight.getXAngleOffset(), 0), 0.01);
         }
 
