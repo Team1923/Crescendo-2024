@@ -79,10 +79,21 @@ public class FeederSubsystem extends SubsystemBase {
       desiredFeederSpeed = FeederSpeeds.OUTWARD;
     } 
     
+    /*
+     * Not subwoofer shot
+     */
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
         && stateHandler.getIsCenteredToTag()) {
       /* CONDITION: ready to sore (center to tag = true on default) */
+      desiredFeederSpeed = FeederSpeeds.INWARD;
+    }
+
+    /*
+     * Subwoofer shot
+     */
+    else if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
+    && stateHandler.getWantToPositionForSubwoofer()){
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 

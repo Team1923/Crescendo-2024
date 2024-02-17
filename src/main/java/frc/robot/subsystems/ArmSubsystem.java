@@ -163,10 +163,10 @@ public class ArmSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
-    // SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
 
-    // SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
+    SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
 
     // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
     // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
@@ -189,6 +189,10 @@ public class ArmSubsystem extends SubsystemBase {
       // distance to speaker condition
       else if (stateHandler.getHasValidSpeakerTag()) {
         armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+      }
+      else{
+        //condition for when when we lose tag
+        armSetpoint = getArmPositionRads();
       }
     }
 

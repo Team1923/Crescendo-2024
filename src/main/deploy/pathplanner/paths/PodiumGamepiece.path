@@ -1,0 +1,100 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.9203306782681937,
+        "y": 4.525637769224256
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.0021897593652738,
+        "y": 4.186507290393498
+      },
+      "isLocked": false,
+      "linkedName": "EndOfPreload"
+    },
+    {
+      "anchor": {
+        "x": 2.62197994481459,
+        "y": 4.128036518181299
+      },
+      "prevControl": {
+        "x": 2.571548903781568,
+        "y": 3.9972081653565015
+      },
+      "nextControl": {
+        "x": 2.672410985847612,
+        "y": 4.258864871006096
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.62197994481459,
+        "y": 4.864768248055015
+      },
+      "prevControl": {
+        "x": 2.6453682536994707,
+        "y": 4.712744240303296
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "EndOfPodium"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Shoot",
+      "waypointRelativePos": 1.6,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "ScoreGamePiece"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Deploy",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.5,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0.5,
+    "rotation": -8.130102354155882,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

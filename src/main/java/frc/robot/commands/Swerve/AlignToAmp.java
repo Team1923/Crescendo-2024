@@ -98,7 +98,7 @@ public class AlignToAmp extends Command {
         //TODO: swap 90 and -90, blue should actually be -90, only using 90 because of where we put the apriltag in the hallway
         //fixed code: double rotationVal = rotateLimiter.calculate(rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), DriverStation.getAlliance().get() == Alliance.Blue ? -90 : 90)
 
-        double rotationVal = rotateLimiter.calculate(rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), DriverStation.getAlliance().get() == Alliance.Blue ? 90 : -90)
+        double rotationVal = rotateLimiter.calculate(rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), DriverStation.getAlliance().get() == Alliance.Blue ? -90 : 90)
 );
         SmartDashboard.putNumber("ROTATION VAL", rotationVal);
 

@@ -91,6 +91,8 @@ public class AlignToAmpWTranslate extends Command {
 
     @Override
     public void execute() {
+
+        System.out.println("Working");
         /* Get Values, Deadband */
 
         // double rotationPercent = pid.calculate(s_Swerve.getGyroYaw().getDegrees(), angleGoal);

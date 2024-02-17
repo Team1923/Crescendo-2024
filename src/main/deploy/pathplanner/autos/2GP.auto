@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 2.0,
-      "y": 7.0
+      "x": 1.171904793952038,
+      "y": 5.344228580195052
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Straight3M"
+            "pathName": "Preload"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "PodiumGamepiece"
           }
         }
       ]

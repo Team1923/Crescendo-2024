@@ -83,7 +83,7 @@ public final class Constants {
 
         /* Motion Magic Velocity Constants */
         public static final double shooterKS = 0.25;
-        public static final double shooterKV = 0.105;
+        public static final double shooterKV = 0.12;
         public static final double shooterKP = 0.2;
         public static final double shooterKA = 0;
         public static final double shooterKI = 0;
@@ -126,7 +126,7 @@ public final class Constants {
         public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
 
         /* kG - gravity constant for motion of arm */
-        public static final double armMaxGravityConstant = 0.045 * 12; // 2 volts max ff 
+        public static final double armMaxGravityConstant = 0.050 * 12; // 2 volts max ff 
 
         public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
     }

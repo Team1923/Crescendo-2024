@@ -53,6 +53,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("AMP POSITION", stateHandler.getScoreInAmp());
     SmartDashboard.putBoolean("SUBWOOFER POSITION", stateHandler.getWantToPositionForSubwoofer());
 
-    SmartDashboard.putBoolean("CENTERED ON TAG", stateHandler.getIsCenteredToTag());
+    // SmartDashboard.putBoolean("CENTERED ON TAG", stateHandler.getIsCenteredToTag());
   }
 }
