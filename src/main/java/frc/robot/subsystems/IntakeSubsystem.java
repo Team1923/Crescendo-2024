@@ -218,7 +218,8 @@ public class IntakeSubsystem extends SubsystemBase {
      * Edge case: prevent operator from bringing up intake until completition of
      * intake command
      */
-    if (stateHandler.getBBOneCovered()) {
+    if (stateHandler.getBBOneCovered() 
+      && stateHandler.getDesiredIntakeRollerSpeed() != IntakeRollerSpeeds.EJECT) {
       bb1Crossed = true;
     }
 
