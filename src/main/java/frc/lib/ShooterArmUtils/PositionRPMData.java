@@ -42,6 +42,13 @@ public class PositionRPMData {
      public double getDesiredArmPosition(double distance) {
         double lowerBound = LimeLightConstants.lerpLowerBound;
         double upperBound = LimeLightConstants.lerpUpperBound;
+
+        if (distance <= lowerBound) {
+            return positionRPMMap.get(lowerBound).getArmPosition();
+        } else if (distance >= upperBound) {
+            return positionRPMMap.get(upperBound).getArmPosition();
+        }
+
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {
@@ -67,6 +74,13 @@ public class PositionRPMData {
      public double getDesiredShooterRPM(double distance) {
         double lowerBound = LimeLightConstants.lerpLowerBound;
         double upperBound = LimeLightConstants.lerpUpperBound;
+
+        if (distance <= lowerBound) {
+            return positionRPMMap.get(lowerBound).getShooterRPM();
+        } else if (distance >= upperBound) {
+            return positionRPMMap.get(upperBound).getShooterRPM();
+        }
+
         Double[] distanceValues = (Double[]) positionRPMMap.keySet().toArray(new Double[positionRPMMap.size()]);
 
         for (int i = 0; i < distanceValues.length - 1; i++) {
@@ -85,6 +99,6 @@ public class PositionRPMData {
      }
 
     //  public static void main(String[] args) {
-    //     System.out.println(PositionRPMData.getInstance().getDesiredShooterRPM(84.0));
+    //     System.out.println(PositionRPMData.getInstance().getDesiredShooterRPM(200.0));
     //  }
 }
