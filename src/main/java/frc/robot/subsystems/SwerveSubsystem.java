@@ -153,10 +153,15 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), heading));
     }
 
-    /* Reset the position of the robot ("zeroing") */
-    /* MAKE SURE GYRO IS ALWAYS SET AS 0 -> Faced Issues without it */
-    public void zeroHeading(){
+    /**
+     * Resets the robots heading to zero.
+     */
+    public void zeroGyro(){
         gyro.setYaw(0);
+    }
+
+    /* Reset the odometry */
+    public void resetOdometry(){
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
 
