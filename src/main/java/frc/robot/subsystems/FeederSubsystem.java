@@ -5,6 +5,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateVariables.ArmStates;
 import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
@@ -84,7 +85,7 @@ public class FeederSubsystem extends SubsystemBase {
      */
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-        && stateHandler.getIsCenteredToTag()) {
+        && (stateHandler.getIsCenteredToTag() || DriverStation.isAutonomousEnabled())) {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
