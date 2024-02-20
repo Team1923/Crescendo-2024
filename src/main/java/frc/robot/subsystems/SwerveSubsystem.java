@@ -57,7 +57,7 @@ public class SwerveSubsystem extends SubsystemBase {
         };
 
         /* Delay needed to properly ensure that modules are reset to their absolute position. */
-        Timer.delay(1.0);
+        Timer.delay(1.5);
         resetModulesToAbsolute();
 
         /* Initialize SwerveOdometry object. */
