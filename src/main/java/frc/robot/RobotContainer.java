@@ -29,8 +29,9 @@ import frc.robot.commands.IndependentTesting.RunIntakeRollerCommand;
 import frc.robot.commands.IndependentTesting.ShooterVelocityCommand;
 import frc.robot.commands.Intake.DeployIntakeCommand;
 import frc.robot.commands.Intake.IntakeEjectCommand;
-import frc.robot.commands.Scoring.RequireAmpPosition;
-import frc.robot.commands.Scoring.RequireSubwooferPosition;
+import frc.robot.commands.Scoring.SetAmp;
+import frc.robot.commands.Scoring.SetRanged;
+import frc.robot.commands.Scoring.SetSubWoofer;
 import frc.robot.commands.Scoring.ScoreCommandGroup;
 import frc.robot.commands.Scoring.ScoreGamePiece;
 import frc.robot.commands.Swerve.AlignToAmp;
@@ -134,8 +135,9 @@ public class RobotContainer {
         // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
         operatorRightBunper.whileTrue(new DeployIntakeCommand());
         // operatorLeftBumper.whileTrue(new IntakeEjectCommand());
-        triangleButton.toggleOnTrue(new RequireAmpPosition());
-        crossButton.toggleOnTrue(new RequireSubwooferPosition());
+        triangleButton.onTrue(new SetAmp());
+        crossButton.onTrue(new SetSubWoofer());
+        squareButton.onTrue(new SetRanged());
         // triangleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
 
 
