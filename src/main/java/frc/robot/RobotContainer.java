@@ -135,9 +135,9 @@ public class RobotContainer {
         // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
         operatorRightBunper.whileTrue(new DeployIntakeCommand());
         // operatorLeftBumper.whileTrue(new IntakeEjectCommand());
-        triangleButton.onTrue(new SetAmp());
+        triangleButton.onTrue(new SetRanged());
         crossButton.onTrue(new SetSubWoofer());
-        squareButton.onTrue(new SetRanged());
+        squareButton.onTrue(new SetAmp());
         // triangleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
 
 
