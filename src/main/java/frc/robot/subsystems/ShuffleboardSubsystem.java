@@ -67,12 +67,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     SmartDashboard.putString("CURRENT SHOOTER STATE", stateHandler.getCurrentShootingSpeed().toString());
 
     /* RELEVANT FEEDER STATES */
-    SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
+    // SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
 
-    SmartDashboard.putBoolean("AMP POSITION", stateHandler.getScoreInAmp());
-    SmartDashboard.putBoolean("SUBWOOFER POSITION", stateHandler.getWantToPositionForSubwoofer());
 
-    // SmartDashboard.putBoolean("CENTERED ON TAG", stateHandler.getIsCenteredToTag());
 
 
   }

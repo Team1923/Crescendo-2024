@@ -156,9 +156,7 @@ public class RobotContainer {
         // aButton.whileTrue(new AlignToAmpWTranslate(s_Swerve, () -> -driver.getRawAxis(strafeAxis), () -> driver.getRawAxis(translationAxis)));
         aButton.whileTrue(new FaceAndAlignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis), 
         ()-> driver.getRawAxis(rotationAxis)));
-        SmartDashboard.putData(new SetRanged());
-        SmartDashboard.putData(new SetSubWoofer());
-        SmartDashboard.putData(new SetAmp());
+
     }
 
     /**

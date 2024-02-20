@@ -192,14 +192,14 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveOdometry.update(getGyroYaw(), getModulePositions());
         PathPlannerLogging.logCurrentPose(getPose());
 
-        // SmartDashboard.putNumber("HEADING", getGyroYaw().getDegrees());
+        SmartDashboard.putNumber("HEADING", getGyroYaw().getDegrees());
 
 
 
-        // for(SwerveModule mod : mSwerveMods){
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
-        //     SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
-        // }
+        for(SwerveModule mod : mSwerveMods){
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+        }
     }
 }
