@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Preload"
+            "pathName": "PreloadClose"
           }
         },
         {
@@ -39,12 +39,6 @@
           "type": "path",
           "data": {
             "pathName": "AmpTo1"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "1To2"
           }
         }
       ]

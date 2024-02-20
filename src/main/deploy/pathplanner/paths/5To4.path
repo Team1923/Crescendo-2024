@@ -3,43 +3,59 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9203306782681937,
-        "y": 5.0655090401089895
+        "x": 5.229085367261644,
+        "y": 2.15494030988062
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.598379014939848,
-        "y": 5.373357655806221
+        "x": 6.229085367261644,
+        "y": 2.1549403098806206
       },
       "isLocked": false,
-      "linkedName": "EndOfPodium"
+      "linkedName": "EndOf5"
     },
     {
       "anchor": {
-        "x": 2.8909454969907094,
-        "y": 5.613194132371171
+        "x": 7.645230563188399,
+        "y": 2.425473941856975
       },
       "prevControl": {
-        "x": 2.68233772831182,
-        "y": 5.401343893596878
+        "x": 6.731013462026924,
+        "y": 2.2762140069734684
+      },
+      "nextControl": {
+        "x": 8.632163443964085,
+        "y": 2.5866058407591273
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.930565497494631,
+        "y": 4.515113030226061
+      },
+      "prevControl": {
+        "x": 7.035109797492321,
+        "y": 3.4889509779019567
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfMid"
+      "linkedName": "EndOf4"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.1,
-      "rotationDegrees": 24.766974312431845,
-      "rotateFast": true
+      "waypointRelativePos": 1,
+      "rotationDegrees": 0,
+      "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Deploy",
-      "waypointRelativePos": 0.2,
+      "name": "Intake",
+      "waypointRelativePos": 0.65,
       "command": {
         "type": "sequential",
         "data": {
@@ -56,7 +72,7 @@
     },
     {
       "name": "Shoot",
-      "waypointRelativePos": 0.75,
+      "waypointRelativePos": 1.95,
       "command": {
         "type": "sequential",
         "data": {
@@ -73,21 +89,21 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.5,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.5434251690775518,
+    "rotation": -14.743562836470687,
     "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
     "rotation": 0,
-    "velocity": 1.5
+    "velocity": 0
   },
   "useDefaultConstraints": false
 }

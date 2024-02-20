@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.171904793952038,
-      "y": 5.344228580195052
+      "x": 1.8893943242431936,
+      "y": 3.12512988662341
     },
-    "rotation": 0
+    "rotation": -43.0
   },
   "command": {
     "type": "sequential",
@@ -14,31 +14,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Preload"
+            "pathName": "PreloadFar"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "PodiumGamepiece"
+            "pathName": "PreFarTo5"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "MidGamepiece"
+            "pathName": "5To4"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "AmpGamepiece"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "AmpTo1"
+            "pathName": "4To3"
           }
         }
       ]
