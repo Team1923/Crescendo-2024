@@ -4,36 +4,32 @@
 
 package frc.robot.commands.Scoring;
 
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.lib.RobotStateUtils.StateHandler;
-import frc.lib.RobotStateUtils.StateVariables.ArmStates;
-import frc.lib.RobotStateUtils.StateVariables.FeederSpeeds;
 
-
-public class RequireAmpPosition extends Command {
-  StateHandler stateHandler = StateHandler.getInstance();
-  /** Creates a new AmpCommand. */
-  public RequireAmpPosition() {
+public class SetSubWoofer extends Command {
+  /** Creates a new RequireSubwooferPosition. */
+  private StateHandler stateHandler = StateHandler.getInstance();
+  public SetSubWoofer() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stateHandler.setScoreInAmp(true);
+    /* This is an operator button. Forces the arm to always score in the subwoofer. */
+    stateHandler.setWantToPositionForSubwoofer(true);
+    stateHandler.setScoreInAmp(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    stateHandler.setScoreInAmp(false);
+
   }
 
   // Returns true when the command should end.
