@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -13,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.AutoUtils.AutoChooser;
 import frc.lib.LimelightUtil.LimelightInterface;
 import frc.lib.SwerveUtil.CTREConfigs;
+import frc.robot.commands.Intake.DeployIntakeCommand;
+import frc.robot.commands.Scoring.ScoreGamePiece;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -37,8 +41,12 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+
+    NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
+    NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
+
     m_robotContainer = new RobotContainer();
-    // this.selector = new AutoChooser();
+    this.selector = new AutoChooser();
     // for (int port = 5800; port <= 5807; port++) {
     //     PortForwarder.add(port, "limelight.local", port);
     // }

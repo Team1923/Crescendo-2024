@@ -50,6 +50,10 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+    
+
+
     /* Controllers */
     private final Joystick driver = new Joystick(0);
     private final Joystick operator= new Joystick(1);
@@ -91,7 +95,7 @@ public class RobotContainer {
     public final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
-    // private AutoInstantiator autoInstantiator = new AutoInstantiator();
+    private AutoInstantiator autoInstantiator = new AutoInstantiator();
     public final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
     public final PositionRPMData positionRPMData = new PositionRPMData();
 
@@ -108,9 +112,8 @@ public class RobotContainer {
              () -> -driver.getRawAxis(rotationAxis), 
              () -> driverLeftBumper.getAsBoolean()));
 
-
-        NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
-        NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
+        
+        
         //  intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
         //armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () ->  operator.getRawAxis(operatorRightY)));
 
@@ -160,6 +163,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command initializeAuto(AutoChooser selector) {
-        return null;
+        return selector.startMode();
     }
 }
