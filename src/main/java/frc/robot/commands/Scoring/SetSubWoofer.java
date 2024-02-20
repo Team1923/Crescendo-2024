@@ -5,6 +5,7 @@
 package frc.robot.commands.Scoring;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.RobotStateUtils.StateHandler;
 
 public class SetSubWoofer extends Command {
@@ -29,12 +30,11 @@ public class SetSubWoofer extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return stateHandler.getWantToPositionForSubwoofer() == false;
   }
 }

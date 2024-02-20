@@ -11,7 +11,10 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
-      "/Shuffleboard/Driver Dashboard/Auto Mode/SendableChooser[0]": "String Chooser"
+      "/Shuffleboard/Driver Dashboard/Auto Mode/SendableChooser[0]": "String Chooser",
+      "/SmartDashboard/SetAmp": "Command",
+      "/SmartDashboard/SetRanged": "Command",
+      "/SmartDashboard/SetSubWoofer": "Command"
     }
   },
   "NetworkTables": {
