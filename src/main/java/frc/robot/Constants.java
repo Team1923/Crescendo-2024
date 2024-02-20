@@ -136,7 +136,7 @@ public final class Constants {
         public static final int pigeonID = 13;
 
         public static final COTSTalonFXSwerveConstants chosenModule =
-                COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
+                COTSTalonFXSwerveConstants.SDS.MK4i.KrakenX60(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L3);
 
         /* Drivetrain Constants */
         public static final double trackWidth = Units.inchesToMeters(18.75);
@@ -202,7 +202,7 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 5.4864; 
+        public static final double maxSpeed = 5.28; 
         /** Radians per Second */
         public static final double maxAngularVelocity = 40;
 
