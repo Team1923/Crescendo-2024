@@ -138,7 +138,7 @@ public class RobotContainer {
         triangleButton.onTrue(new SetRanged());
         crossButton.onTrue(new SetSubWoofer());
         squareButton.onTrue(new SetAmp());
-        // triangleButton.whileTrue(new ArmMotionMagicCommandShooter(armSubsystem));
+        circleButton.onTrue(new SetAmp());
 
 
         new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreGamePiece());
@@ -153,7 +153,9 @@ public class RobotContainer {
         // aButton.whileTrue(new AlignToAmpWTranslate(s_Swerve, () -> -driver.getRawAxis(strafeAxis), () -> driver.getRawAxis(translationAxis)));
         aButton.whileTrue(new FaceAndAlignToAmp(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis), 
         ()-> driver.getRawAxis(rotationAxis)));
-        //SmartDashboard.putData(new DeployIntakeCommand());
+        SmartDashboard.putData(new SetRanged());
+        SmartDashboard.putData(new SetSubWoofer());
+        SmartDashboard.putData(new SetAmp());
     }
 
     /**
@@ -162,6 +164,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command initializeAuto(AutoChooser selector) {
-        return null;
+        return selector.startMode();
     }
 }
