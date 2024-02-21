@@ -8,17 +8,29 @@ import java.util.Map;
 
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.RobotStateUtils.StateHandler;
+import frc.robot.Constants.LimeLightConstants;
 
-public class ShuffleboardSubsystem extends SubsystemBase {
+public class InfoSubsystem extends SubsystemBase {
   /** Creates a new ShuffleboardSubsystem. */
 
   public ShuffleboardTab driverDashboard = Shuffleboard.getTab("Driver Dashboard");
   private StateHandler stateHandler = StateHandler.getInstance();
+
+  private XboxController xboxController;
+  private PS4Controller ps4Controller;
+
+  public InfoSubsystem(XboxController x, PS4Controller p){
+    this.xboxController = x;
+    this.ps4Controller = p;
+  }
 
 	private GenericEntry ampPos = driverDashboard.add("AMP", false)
 			.withSize(3, 1)
@@ -44,6 +56,21 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     subwooferPos.setBoolean(stateHandler.getWantToPositionForSubwoofer());
     ampPos.setBoolean(stateHandler.getScoreInAmp());
     seeSpeakerTag.setBoolean(stateHandler.getHasValidSpeakerTag());
+
+    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered()){
+      xboxController.setRumble(RumbleType.kBothRumble, 0.2);
+      ps4Controller.setRumble(RumbleType.kBothRumble, 0.6);
+    } else{
+      xboxController.setRumble(RumbleType.kBothRumble, 0);
+      ps4Controller.setRumble(RumbleType.kBothRumble, 0);
+    }
+
+    if(stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.lerpUpperBound){
+      xboxController.setRumble(RumbleType.kBothRumble, 0.6);
+    }
+    else{
+      xboxController.setRumble(RumbleType.kBothRumble, 0);
+    }
     
 
     /* DEBUG PRINTOUTS - TODO: DISABLE WHEN IN MATCH! */

@@ -59,6 +59,9 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
     private final Joystick operator= new Joystick(1);
 
+    private final XboxController xboxDriver = new XboxController(0);
+    private final PS4Controller ps4Operator = new PS4Controller(1);
+
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
     private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -97,7 +100,7 @@ public class RobotContainer {
 
     /* Helper Classes */
     private AutoInstantiator autoInstantiator = new AutoInstantiator();
-    public final ShuffleboardSubsystem shuffleboardSubsystem = new ShuffleboardSubsystem();
+    public final InfoSubsystem infoSubsystem = new InfoSubsystem(xboxDriver, ps4Operator);
     public final PositionRPMData positionRPMData = new PositionRPMData();
 
     /*Auton Registered Commands */
