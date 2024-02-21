@@ -13,6 +13,7 @@ import frc.lib.RobotStateUtils.StateVariables.IntakeRollerSpeeds;
 import frc.lib.RobotStateUtils.StateVariables.IntakeStates;
 import frc.lib.RobotStateUtils.StateVariables.ShooterSpeeds;
 import frc.robot.Constants.FeederConstants;
+import frc.robot.Constants.LimeLightConstants;
 import frc.lib.RobotStateUtils.StateHandler;
 
 public class FeederSubsystem extends SubsystemBase {
@@ -85,7 +86,8 @@ public class FeederSubsystem extends SubsystemBase {
      */
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-        && (stateHandler.getIsCenteredToTag() || DriverStation.isAutonomousEnabled())) {
+        && (stateHandler.getIsCenteredToTag() || DriverStation.isAutonomousEnabled()) && 
+        (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.lerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.lerpLowerBound)) {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
@@ -114,6 +116,8 @@ public class FeederSubsystem extends SubsystemBase {
           desiredFeederSpeed = FeederSpeeds.OFF;
         }
     }
+
+
     
     // /* Set the feeder motor speed to whatever it needs to be. */
     setFeederMotorSpeed(desiredFeederSpeed.getPercentOutputValue().getPercentOut());

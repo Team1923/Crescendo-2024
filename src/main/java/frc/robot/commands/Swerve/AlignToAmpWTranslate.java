@@ -31,7 +31,7 @@ public class AlignToAmpWTranslate extends Command {
     // private final double kP = 0.002; // TODO: TUNE
     // private final double rotationDeadband = 0.001; // TODO: tune
 
-    PIDController rotationController = new PIDController(0.001, 0, 0);
+    PIDController rotationController = new PIDController(0.001, 0, 0);//try at 0.1
     PIDController translationController = new PIDController(0.03, 0, 0);
 
     StateHandler stateHandler = StateHandler.getInstance();
@@ -91,8 +91,6 @@ public class AlignToAmpWTranslate extends Command {
 
     @Override
     public void execute() {
-
-        System.out.println("Working");
         /* Get Values, Deadband */
 
         // double rotationPercent = pid.calculate(s_Swerve.getGyroYaw().getDegrees(), angleGoal);

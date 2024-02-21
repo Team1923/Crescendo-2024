@@ -6,8 +6,8 @@ public class StateVariables {
      */
     public static enum ArmStates {
         STOWED(new ArmPosition(0)),
-        AMP(new ArmPosition(-1.93)), 
-        SPEAKER(new ArmPosition(-0.27)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.79)
+        AMP(new ArmPosition(-1.96)), 
+        SPEAKER(new ArmPosition(-0.77)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.79)
         CLIMB(new ArmPosition(2));
 
         private ArmPosition armPosition;
@@ -39,7 +39,7 @@ public class StateVariables {
      */
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(0)),
-        SHOOT(new RPMValue(3500)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
+        SHOOT(new RPMValue(2000)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
 
         private RPMValue rpmValue;
 
@@ -74,7 +74,7 @@ public class StateVariables {
      */
     public static enum IntakeRollerSpeeds {
         OFF(new PercentOutputValue(0)),
-        EJECT(new PercentOutputValue(0.25)),
+        EJECT(new PercentOutputValue(0.75)),
         INTAKE(new PercentOutputValue(-0.85));
 
         private PercentOutputValue percentOutputValue;
@@ -108,7 +108,7 @@ public class StateVariables {
      * TODO: Need to be changed
      */
     public static enum IntakeStates {
-        DEPLOYED(new IntakePosition(1.95)),
+        DEPLOYED(new IntakePosition(1.97)),
         STOWED(new IntakePosition(0));
 
         private IntakePosition intakePosition;
@@ -145,6 +145,7 @@ public class StateVariables {
         OFF(new PercentOutputValue(0)),
         INWARD(new PercentOutputValue(0.25)),
         OUTWARD(new PercentOutputValue(-0.8)),
+        FORWARD(new PercentOutputValue(0.1)),
         BACKING(new PercentOutputValue(-0.1));
 
         private PercentOutputValue percentOutputValue;

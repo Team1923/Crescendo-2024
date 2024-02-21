@@ -26,12 +26,12 @@ public class PositionRPMData {
 
      private void fillMap() {
         positionRPMMap.put(168.0, new PositionRPMObject(0, 5000));
-        positionRPMMap.put(156.0, new PositionRPMObject(-0.212, 4000));
-        positionRPMMap.put(144.0, new PositionRPMObject(-0.235, 4000));
-        positionRPMMap.put(132.0, new PositionRPMObject(-0.258, 4000));
-        positionRPMMap.put(120.0, new PositionRPMObject(-0.281, 4000));
-        positionRPMMap.put(108.0, new PositionRPMObject(-0.304, 4000));
-        positionRPMMap.put(84.0, new PositionRPMObject(-0.52, 3000));
+        positionRPMMap.put(156.0, new PositionRPMObject(-0.262, 4000));
+        positionRPMMap.put(144.0, new PositionRPMObject(-0.285, 4000));
+        positionRPMMap.put(132.0, new PositionRPMObject(-0.308, 4000));
+        positionRPMMap.put(120.0, new PositionRPMObject(-0.331, 4000));
+        positionRPMMap.put(108.0, new PositionRPMObject(-0.354, 4000));
+        positionRPMMap.put(84.0, new PositionRPMObject(-0.57, 3000));
      }
 
      /**
