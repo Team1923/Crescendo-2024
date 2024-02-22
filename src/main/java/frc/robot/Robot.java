@@ -4,123 +4,73 @@
 
 package frc.robot;
 
-import com.pathplanner.lib.auto.NamedCommands;
-
-import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
-import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.lib.AutoUtils.AutoChooser;
-import frc.lib.LimelightUtil.LimelightInterface;
-import frc.lib.SwerveUtil.CTREConfigs;
-import frc.robot.commands.Intake.DeployIntakeCommand;
-import frc.robot.commands.Scoring.ScoreGamePiece;
 
-/**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
- * project.
- */
 public class Robot extends TimedRobot {
-  public static final CTREConfigs ctreConfigs = new CTREConfigs();
-
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
 
-  public AutoChooser selector;
-
-  /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
-   */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-
-    NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
-    NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
-
     m_robotContainer = new RobotContainer();
-    this.selector = new AutoChooser();
-    // for (int port = 5800; port <= 5807; port++) {
-    //     PortForwarder.add(port, "limelight.local", port);
-    // }
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for items like
-   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
-   * SmartDashboard integrated updating.
-   */
   @Override
   public void robotPeriodic() {
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
-    // block in order for anything in the Command-based framework to work.
-    CommandScheduler.getInstance().run();
+    CommandScheduler.getInstance().run(); 
   }
 
-  /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {
-    // m_robotContainer.armSubsystem.setArmCoast();
-    // m_robotContainer.intakeSubsystem.setIntakeArmCoast();
-  }
+  public void disabledInit() {}
 
   @Override
   public void disabledPeriodic() {}
 
-  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
+  @Override
+  public void disabledExit() {}
+
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.initializeAuto(selector);
-    LimelightInterface.getInstance().aprilTagFieldLayout.setOrigin(OriginPosition.kBlueAllianceWallRightSide);
-    // m_robotContainer.armSubsystem.setArmBrake();
-    // m_robotContainer.intakeSubsystem.setIntakeArmBrake();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
 
-  /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {}
 
   @Override
+  public void autonomousExit() {}
+
+  @Override
   public void teleopInit() {
-    // m_robotContainer.armSubsystem.setArmBrake();
-    // m_robotContainer.intakeSubsystem.setIntakeArmBrake();
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
   }
 
-  /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-  }
+  public void teleopPeriodic() {}
+
+  @Override
+  public void teleopExit() {}
 
   @Override
   public void testInit() {
-    // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
   }
 
-  /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
+  @Override
+  public void testExit() {}
+
+  @Override
+  public void simulationPeriodic() {}
 }
