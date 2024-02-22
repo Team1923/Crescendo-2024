@@ -132,9 +132,9 @@ public class FeederSubsystem extends SubsystemBase {
       stateHandler.getCurrentArmState() != ArmStates.SPEAKER
       && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
       && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
-        if (stateHandler.getBBTwoCovered()) {
+        if (!stateHandler.getBBFourCovered()) {
           desiredFeederSpeed = FeederSpeeds.FORWARD;
-        } else if (!stateHandler.getBBTwoCovered()) {
+        } else if (stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() != ArmStates.AMP) {
           desiredFeederSpeed = FeederSpeeds.OFF;
         }
     }
