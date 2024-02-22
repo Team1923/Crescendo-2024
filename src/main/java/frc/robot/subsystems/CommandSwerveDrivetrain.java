@@ -104,22 +104,15 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     @Override
     public void periodic() {
-        /* Periodically try to apply the operator perspective */
-        /*
+        /* Periodically try to apply the operator perspective.
          * If we haven't applied the operator perspective before, then we should apply
-         * it regardless of DS state
-         */
-        /*
+         * it regardless of DS state.
          * This allows us to correct the perspective in case the robot code restarts
-         * mid-match
-         */
-        /*
+         * mid-match.
          * Otherwise, only check and apply the operator perspective if the DS is
-         * disabled
-         */
-        /*
+         * disabled.
          * This ensures driving behavior doesn't change until an explicit disable event
-         * occurs during testing
+         * occurs during testing.
          */
         if (!hasAppliedOperatorPerspective || DriverStation.isDisabled()) {
             DriverStation.getAlliance().ifPresent((allianceColor) -> {
