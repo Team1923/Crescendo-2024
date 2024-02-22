@@ -59,14 +59,14 @@ public class InfoSubsystem extends SubsystemBase {
 
     if(DriverStation.isTeleop() && stateHandler.getBBOneCovered()){
       xboxController.setRumble(RumbleType.kBothRumble, 0.2);
-      ps4Controller.setRumble(RumbleType.kBothRumble, 0.6);
+      ps4Controller.setRumble(RumbleType.kBothRumble, 0.4);
     } else{
       xboxController.setRumble(RumbleType.kBothRumble, 0);
       ps4Controller.setRumble(RumbleType.kBothRumble, 0);
     }
 
-    if(stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.lerpUpperBound){
-      xboxController.setRumble(RumbleType.kBothRumble, 0.6);
+    if(DriverStation.isTeleop() && stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.lerpUpperBound){
+      xboxController.setRumble(RumbleType.kBothRumble, 0.4);
     }
     else{
       xboxController.setRumble(RumbleType.kBothRumble, 0);
@@ -86,12 +86,12 @@ public class InfoSubsystem extends SubsystemBase {
     // SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
 
     /* RELEVANT ARM STATES */
-    SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
-    SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
+    // SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
+    // SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
 
-    /* RELEVANT SHOOTER STATES */
-    SmartDashboard.putString("DESIRED SHOOTER STATE", stateHandler.getDesiredShootingSpeed().toString());
-    SmartDashboard.putString("CURRENT SHOOTER STATE", stateHandler.getCurrentShootingSpeed().toString());
+    // /* RELEVANT SHOOTER STATES */
+    // SmartDashboard.putString("DESIRED SHOOTER STATE", stateHandler.getDesiredShootingSpeed().toString());
+    // SmartDashboard.putString("CURRENT SHOOTER STATE", stateHandler.getCurrentShootingSpeed().toString());
 
     /* RELEVANT FEEDER STATES */
     // SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());

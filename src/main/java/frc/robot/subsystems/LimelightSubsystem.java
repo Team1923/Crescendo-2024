@@ -33,15 +33,15 @@ public class LimelightSubsystem extends SubsystemBase {
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
     stateHandler.setIsCenteredToTag(Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag());
 
-    SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
-    SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
-    SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
-    SmartDashboard.putNumber("Predicted Angle of Arm", rpmData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag()));
-    SmartDashboard.putNumber("Predicted RPM of the Tag", rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag()));
-    //SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
-    //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
-    SmartDashboard.putNumber("X Angle Offset", limelight.getXAngleOffset());
-    SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
+    // SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
+    // SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
+    // SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
+    // SmartDashboard.putNumber("Predicted Angle of Arm", rpmData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag()));
+    // SmartDashboard.putNumber("Predicted RPM of the Tag", rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag()));
+    // //SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
+    // //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
+    // SmartDashboard.putNumber("X Angle Offset", limelight.getXAngleOffset());
+    // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
 
 
   }

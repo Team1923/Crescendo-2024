@@ -92,11 +92,11 @@ public class RobotContainer {
 
     /* Subsystems */
     private final SwerveSubsystem s_Swerve = new SwerveSubsystem();
-    // private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-    // public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public final ArmSubsystem armSubsystem = new ArmSubsystem();
-    // public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    // public final FeederSubsystem feederSubsystem = new FeederSubsystem();
+    public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    public final FeederSubsystem feederSubsystem = new FeederSubsystem();
 
     /* Helper Classes */
     private AutoInstantiator autoInstantiator = new AutoInstantiator();
@@ -119,10 +119,10 @@ public class RobotContainer {
         
         
         //  intakeSubsystem.setDefaultCommand(new IntakeArmPercOutCommand(intakeSubsystem, () -> 0.2 * operator.getRawAxis(operatorLeftY)));
-        armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () ->  operator.getRawAxis(operatorRightY)));
+        // armSubsystem.setDefaultCommand(new ArmPercOutCommand(armSubsystem, () ->  operator.getRawAxis(operatorRightY)));
 
         // Configure the button bindings
-        // configureButtonBindings();
+        configureButtonBindings();
     }
 
     /**
@@ -135,26 +135,27 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        // yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
-        // bButton.onTrue(new InstantCommand(() -> s_Swerve.resetModulesToAbsolute()));
+        yButton.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+        bButton.onTrue(new InstantCommand(() -> s_Swerve.resetModulesToAbsolute()));
         
-        // // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));e
+        // // circleButton.whileTrue(new ShooterVelocityCommand(shooterSubsystem));
 
-        // operatorRightBunper.whileTrue(new DeployIntakeCommand());
-        // operatorLeftBumper.whileTrue(new IntakeEjectCommand());
-        // triangleButton.onTrue(new SetRanged());
-        // crossButton.onTrue(new SetSubWoofer());
-        // squareButton.onTrue(new SetAmp());
+        operatorRightBunper.whileTrue(new DeployIntakeCommand());
+        operatorLeftBumper.whileTrue(new IntakeEjectCommand());
+        triangleButton.onTrue(new SetRanged());
+        crossButton.onTrue(new SetSubWoofer());
+        squareButton.onTrue(new SetAmp());
+
 
 
         // // new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreGamePiece());
         
         
         // /* This should handle all cases of scoring. If swerve is down, comment this out and use the above command instead. */
-        // new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreCommandGroup(s_Swerve, 
-        //         () -> -driver.getRawAxis(translationAxis),
-        //         () -> -driver.getRawAxis(strafeAxis),
-        //         () -> -driver.getRawAxis(rotationAxis)));
+        new Trigger(() -> driver.getRawAxis(3) > 0.2).whileTrue(new ScoreCommandGroup(s_Swerve, 
+                () -> -driver.getRawAxis(translationAxis),
+                () -> -driver.getRawAxis(strafeAxis),
+                () -> -driver.getRawAxis(rotationAxis)));
 
         // // aButton.whileTrue(new AlignToAmpWTranslate(s_Swerve, () -> -driver.getRawAxis(strafeAxis), () -> driver.getRawAxis(translationAxis)));
         // aButton.whileTrue(new AlignToAmpWTranslate(s_Swerve, () -> driver.getRawAxis(translationAxis), ()-> driver.getRawAxis(strafeAxis)));

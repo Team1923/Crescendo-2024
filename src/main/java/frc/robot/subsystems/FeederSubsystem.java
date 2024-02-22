@@ -107,18 +107,7 @@ public class FeederSubsystem extends SubsystemBase {
         desiredFeederSpeed = FeederSpeeds.INWARD;
     }
     
-    else if (stateHandler.getCurrentArmState() != ArmStates.SPEAKER
-      && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
-      && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
-        if (stateHandler.getBBFourCovered()) {
-          desiredFeederSpeed = FeederSpeeds.BACKING;
-        } else if (!stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() != ArmStates.AMP) {
-          desiredFeederSpeed = FeederSpeeds.OFF;
-        }
-    }
-
-    // else if (((stateHandler.getWantToPositionForSubwoofer() && !stateHandler.getScoreInAmp()) || (!stateHandler.getWantToPositionForSubwoofer() && !stateHandler.getScoreInAmp())) &&
-    //   stateHandler.getCurrentArmState() != ArmStates.SPEAKER
+    // else if (stateHandler.getCurrentArmState() != ArmStates.SPEAKER
     //   && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
     //   && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
     //     if (stateHandler.getBBFourCovered()) {
@@ -128,16 +117,27 @@ public class FeederSubsystem extends SubsystemBase {
     //     }
     // }
 
-    // else if ((!stateHandler.getWantToPositionForSubwoofer() && stateHandler.getScoreInAmp()) &&
-    //   stateHandler.getCurrentArmState() != ArmStates.SPEAKER
-    //   && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
-    //   && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
-    //     if (stateHandler.getBBTwoCovered()) {
-    //       desiredFeederSpeed = FeederSpeeds.FORWARD;
-    //     } else if (!stateHandler.getBBTwoCovered() && stateHandler.getCurrentArmState() != ArmStates.AMP) {
-    //       desiredFeederSpeed = FeederSpeeds.OFF;
-    //     }
-    // }
+    else if (((stateHandler.getWantToPositionForSubwoofer() && !stateHandler.getScoreInAmp()) || (!stateHandler.getWantToPositionForSubwoofer() && !stateHandler.getScoreInAmp())) &&
+      stateHandler.getCurrentArmState() != ArmStates.SPEAKER
+      && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
+      && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
+        if (stateHandler.getBBFourCovered()) {
+          desiredFeederSpeed = FeederSpeeds.BACKING;
+        } else if (!stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() != ArmStates.AMP) {
+          desiredFeederSpeed = FeederSpeeds.OFF;
+        }
+    }
+
+    else if ((!stateHandler.getWantToPositionForSubwoofer() && stateHandler.getScoreInAmp()) &&
+      stateHandler.getCurrentArmState() != ArmStates.SPEAKER
+      && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
+      && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
+        if (stateHandler.getBBTwoCovered()) {
+          desiredFeederSpeed = FeederSpeeds.FORWARD;
+        } else if (!stateHandler.getBBTwoCovered()) {
+          desiredFeederSpeed = FeederSpeeds.OFF;
+        }
+    }
 
 
 
