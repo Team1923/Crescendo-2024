@@ -62,8 +62,15 @@ public class RobotContainer {
      * Index 1: driverXboxController.getLeftX();
      * Index 2: driverXboxController.getRightX();
      */
-    double[] blueJoystickValues = {-driverXboxController.getLeftY(), -driverXboxController.getLeftX(), -driverXboxController.getRightX()};
-    double[] redJoystickValues = {driverXboxController.getLeftY(), driverXboxController.getLeftX(), -driverXboxController.getRightX()};
+    double[] blueJoystickValues = {
+        -driverXboxController.getLeftY(), 
+        -driverXboxController.getLeftX(), 
+        -driverXboxController.getRightX()};
+
+    double[] redJoystickValues = {
+      driverXboxController.getLeftY(), 
+      driverXboxController.getLeftX(), 
+      -driverXboxController.getRightX()};
     
     if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
       return redJoystickValues;
