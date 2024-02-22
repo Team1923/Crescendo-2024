@@ -26,7 +26,7 @@ public class RobotContainer {
 
   /* Controller Instantiations */
   private final CommandXboxController driverXboxController = new CommandXboxController(0);
-  private final CommandPS4Controller operatorPS4Controller = new CommandPS4Controller(1); 
+  private final CommandPS4Controller operatorPS4Controller = new CommandPS4Controller(1);
 
   /* Subsystem Instantiations */
   private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain;
@@ -38,10 +38,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     /* Default Swerve Drive Command */
-    drivetrain.setDefaultCommand(
-        drivetrain.applyRequest(() -> drive.withVelocityX(-driverXboxController.getLeftY() * MaxSpeed)
-            .withVelocityY(-driverXboxController.getLeftX() * MaxSpeed)
-            .withRotationalRate(-driverXboxController.getRightX() * MaxAngularRate)));
+    defaultSwerveCommand();
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.y().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
@@ -51,6 +48,17 @@ public class RobotContainer {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
     drivetrain.registerTelemetry(logger::telemeterize);
+  }
+
+  /*
+   * Method for the default swerve command.
+   * TODO: alliance
+   */
+  public void defaultSwerveCommand() {
+    drivetrain.setDefaultCommand(
+        drivetrain.applyRequest(() -> drive.withVelocityX(-driverXboxController.getLeftY() * MaxSpeed)
+            .withVelocityY(-driverXboxController.getLeftX() * MaxSpeed)
+            .withRotationalRate(-driverXboxController.getRightX() * MaxAngularRate)));
   }
 
   public RobotContainer() {
