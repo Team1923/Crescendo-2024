@@ -11,6 +11,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
@@ -38,7 +40,10 @@ public class RobotContainer {
 
   private void configureBindings() {
     /* Default Swerve Drive Command */
-    defaultSwerveCommand();
+    drivetrain.setDefaultCommand(
+        drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] * MaxSpeed)
+            .withVelocityY(getSwerveJoystickInput()[1] * MaxSpeed)
+            .withRotationalRate(getSwerveJoystickInput()[2] * MaxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.y().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
@@ -50,15 +55,21 @@ public class RobotContainer {
     drivetrain.registerTelemetry(logger::telemeterize);
   }
 
-  /*
-   * Method for the default swerve command.
-   * TODO: alliance
-   */
-  public void defaultSwerveCommand() {
-    drivetrain.setDefaultCommand(
-        drivetrain.applyRequest(() -> drive.withVelocityX(-driverXboxController.getLeftY() * MaxSpeed)
-            .withVelocityY(-driverXboxController.getLeftX() * MaxSpeed)
-            .withRotationalRate(-driverXboxController.getRightX() * MaxAngularRate)));
+  /* Helper method that does some inversion based on the alliance color. */
+  public double[] getSwerveJoystickInput() {
+    /* 
+     * Index 0: driverXboxController.getLeftY();
+     * Index 1: driverXboxController.getLeftX();
+     * Index 2: driverXboxController.getRightX();
+     */
+    double[] blueJoystickValues = {-driverXboxController.getLeftY(), -driverXboxController.getLeftX(), -driverXboxController.getRightX()};
+    double[] redJoystickValues = {driverXboxController.getLeftY(), driverXboxController.getLeftX(), -driverXboxController.getRightX()};
+    
+    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
+      return redJoystickValues;
+    } else {
+      return blueJoystickValues;
+    }
   }
 
   public RobotContainer() {
