@@ -38,9 +38,9 @@ public class RobotContainer {
   private void configureBindings() {
     /* Default Swerve Drive Command */
     drivetrain.setDefaultCommand(
-        drivetrain.applyRequest(() -> drive.withVelocityX(-driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
-            .withVelocityY(-driverXboxController.getRightY() * SwerveConstants.maxSpeed)
-            .withRotationalRate(-driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
+        drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] * SwerveConstants.maxSpeed)
+            .withVelocityY(getSwerveJoystickInput()[1] * SwerveConstants.maxSpeed)
+            .withRotationalRate(getSwerveJoystickInput()[2] * SwerveConstants.maxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.y().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
@@ -50,6 +50,30 @@ public class RobotContainer {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
     drivetrain.registerTelemetry(logger::telemeterize);
+  }
+
+  /* Helper method that does some inversion based on the alliance color. */
+  public double[] getSwerveJoystickInput() {
+    /* 
+     * Index 0: driverXboxController.getLeftY();
+     * Index 1: driverXboxController.getLeftX();
+     * Index 2: driverXboxController.getRightX();
+     */
+    double[] blueJoystickValues = {
+        -driverXboxController.getLeftY(), 
+        -driverXboxController.getLeftX(), 
+        -driverXboxController.getRightX()};
+
+    double[] redJoystickValues = {
+      driverXboxController.getLeftY(), 
+      driverXboxController.getLeftX(), 
+      -driverXboxController.getRightX()};
+    
+    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
+      return redJoystickValues;
+    } else {
+      return blueJoystickValues;
+    }
   }
 
   public RobotContainer() {
