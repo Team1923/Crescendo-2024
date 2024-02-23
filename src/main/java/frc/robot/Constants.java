@@ -18,9 +18,20 @@ import frc.robot.generated.TunerConstants;
  */
 public final class Constants {
 
-    public final class SwerveConstants {
+    public static final class SwerveConstants {
         public static final double maxSpeed = TunerConstants.kSpeedAt12VoltsMps;
         public static final double maxAngularRate = (1.5 * Math.PI) * 8;
+    }
+
+    public static final class LimeLightConstants {
+        // measure constants in inches
+        public static final double limelightMountAngle = 27.358; // for pivot, measured in degrees
+        public static final double limelightHeight = 7; // for pivot, in inches (measured ~10 and 9/16 inches,
+                                                              // converted)
+        public static final double speakerHeightFromFloor = 56.5;// for tag, measured
+        public static final double xAngleThreshold = 2;
+        public static final double lerpLowerBound = 84;
+        public static final double lerpUpperBound = 168;
     }
 
 }

@@ -1,0 +1,103 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.930565497494631,
+        "y": 4.515113030226061
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.900755074237421,
+        "y": 4.3751818412727745
+      },
+      "isLocked": false,
+      "linkedName": "EndOf4"
+    },
+    {
+      "anchor": {
+        "x": 7.533285612025769,
+        "y": 4.1886069226683915
+      },
+      "prevControl": {
+        "x": 6.572424781213198,
+        "y": 4.30055187383102
+      },
+      "nextControl": {
+        "x": 8.494146442838346,
+        "y": 4.076661971505763
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.520100676564989,
+        "y": 4.888262867434826
+      },
+      "prevControl": {
+        "x": 6.273904911446187,
+        "y": 4.169949430807953
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake",
+      "waypointRelativePos": 0.75,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Shoot",
+      "waypointRelativePos": 1.95,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "ScoreGamePiece"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -4.513988458001303,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

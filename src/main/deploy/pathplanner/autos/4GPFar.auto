@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.8893943242431936,
+      "y": 3.12512988662341
+    },
+    "rotation": -43.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "PreloadFar"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "PreFarTo5"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "5To4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4To3"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
