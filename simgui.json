@@ -11,7 +11,12 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/Pose": "Field2d",
       "/Shuffleboard/Driver Dashboard/Auto Mode/SendableChooser[0]": "String Chooser",
+      "/SmartDashboard/Module 0": "Mechanism2d",
+      "/SmartDashboard/Module 1": "Mechanism2d",
+      "/SmartDashboard/Module 2": "Mechanism2d",
+      "/SmartDashboard/Module 3": "Mechanism2d",
       "/SmartDashboard/SetAmp": "Command",
       "/SmartDashboard/SetRanged": "Command",
       "/SmartDashboard/SetSubWoofer": "Command"

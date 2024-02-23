@@ -13,6 +13,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
+import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 
@@ -24,6 +25,7 @@ public class GoalCentricCommand extends Command {
       .withDeadband(SwerveConstants.maxSpeed * 0.1).withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
   private LimelightInterface limelight = LimelightInterface.getInstance();
+  private StateHandler stateHandler = StateHandler.getInstance();
 
   /* Fancy double stuff for input + output to swerve. */
   private DoubleSupplier translationSup;
@@ -83,6 +85,6 @@ public class GoalCentricCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp();
   }
 }

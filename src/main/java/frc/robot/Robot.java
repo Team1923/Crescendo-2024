@@ -4,18 +4,27 @@
 
 package frc.robot;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.lib.Autonomous.AutoChooser;
+import frc.robot.lib.Limelight.LimelightInterface;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
 
+  /* Chooser Initialization */
+  public AutoChooser selector;
+
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    this.selector = new AutoChooser();
+    
+    //TODO: add PathPlanner named commands!
   }
 
   @Override
@@ -37,7 +46,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = m_robotContainer.initializeAuto(selector);
+    LimelightInterface.getInstance().aprilTagFieldLayout.setOrigin(OriginPosition.kBlueAllianceWallRightSide);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

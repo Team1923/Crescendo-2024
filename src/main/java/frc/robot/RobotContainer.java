@@ -18,8 +18,15 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.SwerveConstants;
+import frc.robot.commands.desired_scoring_location.SetArmToAmp;
+import frc.robot.commands.desired_scoring_location.SetArmToRanged;
+import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
+import frc.robot.lib.Autonomous.AutoChooser;
+import frc.robot.lib.Autonomous.AutoInstantiator;
+import frc.robot.lib.ShooterArmUtils.PositionRPMData;
+import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class RobotContainer {
@@ -33,8 +40,15 @@ public class RobotContainer {
       .withDeadband(SwerveConstants.maxSpeed * 0.1).withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
+  /* Helper Classes Instantiation */
+  public final AutoInstantiator autoInstantiator = new AutoInstantiator();
+  public final PositionRPMData positionRPMData = new PositionRPMData();
+  //TODO: Add InfoSubsystem!
+
+  /* Simulation telemetry utility - makes simulating swerve easier. */
   private final Telemetry logger = new Telemetry(SwerveConstants.maxSpeed);
 
+  /* Separate method to configure all the button bindings. */
   private void configureBindings() {
     /* Default Swerve Drive Command */
     drivetrain.setDefaultCommand(
@@ -50,6 +64,15 @@ public class RobotContainer {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     }
     drivetrain.registerTelemetry(logger::telemeterize);
+
+    /* Driver Button Bindings */
+    //TODO: add "ScoreCommandGroup" here!
+
+    /* Operator Button Bindings */
+    operatorPS4Controller.triangle().onTrue(new SetArmToRanged());
+    operatorPS4Controller.square().onTrue(new SetArmToAmp());
+    operatorPS4Controller.cross().onTrue(new SetArmToSubwoofer());
+    //TODO: add intake commands here!
   }
 
   /* Helper method that does some inversion based on the alliance color. */
@@ -80,8 +103,12 @@ public class RobotContainer {
     configureBindings();
   }
 
-  /* TODO: update with our custom pathplanner implementation! */
-  public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command initializeAuto(AutoChooser selector) {
+    return selector.startMode();
   }
 }
