@@ -13,11 +13,6 @@ public class SetArmToSubwoofer extends Command {
   /** Creates a new SetArmToSubwoofer. */
   public SetArmToSubwoofer() {
     // Use addRequirements() here to declare subsystem dependencies.
-
-    
-
-
-
   }
 
   // Called when the command is initially scheduled.
