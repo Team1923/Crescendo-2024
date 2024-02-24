@@ -4,10 +4,14 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.intake.DeployIntakeCommand;
+import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Limelight.LimelightInterface;
 
@@ -21,10 +25,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
+    NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
+
     m_robotContainer = new RobotContainer();
-    this.selector = new AutoChooser();
-    
-    //TODO: add PathPlanner named commands!
+    this.selector = new AutoChooser();   
   }
 
   @Override

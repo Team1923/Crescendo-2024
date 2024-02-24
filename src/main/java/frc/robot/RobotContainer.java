@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.util.ResourceBundle.Control;
+
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
@@ -19,17 +21,27 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
+import frc.robot.commands.intake.DeployIntakeCommand;
+import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
 import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Autonomous.AutoInstantiator;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.FeederSubsystem;
+import frc.robot.subsystems.InfoSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
   /* Controller Instantiations */
@@ -41,10 +53,16 @@ public class RobotContainer {
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(SwerveConstants.maxSpeed * 0.1).withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
+  private final ArmSubsystem armSubsystem = new ArmSubsystem();
+  private final FeederSubsystem feederSubsystem = new FeederSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
   /* Helper Classes Instantiation */
   public final AutoInstantiator autoInstantiator = new AutoInstantiator();
   public final PositionRPMData positionRPMData = new PositionRPMData();
+  private final InfoSubsystem infoSubsystem = new InfoSubsystem(driverXboxController, operatorPS4Controller);
   //TODO: Add InfoSubsystem!
 
   /* Simulation telemetry utility - makes simulating swerve easier. */
@@ -64,7 +82,8 @@ public class RobotContainer {
           .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
-    driverXboxController.y().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+    driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+  
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {
@@ -74,13 +93,21 @@ public class RobotContainer {
 
     /* Driver Button Bindings */
     //TODO: add "ScoreCommandGroup" here!
+   driverXboxController.rightTrigger().whileTrue(new ScoreCommandGroup(drivetrain,
+    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
+    () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
+    () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
 
     /* Operator Button Bindings */
     //TODO: add buttons and IDs to constants
-    operatorPS4Controller.button(0).onTrue(new SetArmToRanged());
-    operatorPS4Controller.square().onTrue(new SetArmToAmp());
-    operatorPS4Controller.cross().onTrue(new SetArmToSubwoofer());
+    operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
+    operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
+    operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
+
     //TODO: add intake commands here!
+    operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());
+    operatorPS4Controller.button(ControllerConstants.Operator.operatorLeftBumper).whileTrue(new DeployIntakeCommand());
+
   }
 
   /* Helper method that does some inversion based on the alliance color. */

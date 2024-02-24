@@ -35,6 +35,28 @@ public final class Constants {
     }
 
     public static final class ControllerConstants {
+
+        static final class Driver{
+            public static final int yButton = 4;
+            public static final int aButton = 1;
+            public static final int xButton = 2;
+            public static final int bButton = 3;
+
+            public static final int driverLeftBumper = 5;
+            public static final int driverRightBumper = 6;
+        }
+
+        static final class Operator{
+            public static final int triangleButton = 4;
+            public static final int squareButton = 3;
+            public static final int circleButton = 2;
+            public static final int crossButton = 1;
+
+            public static final int operatorLeftBumper = 5;
+            public static final int operatorRightBumper = 6;
+        }
+
+
         
     }
 

@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.lib.StateMachine.StateHandler;
 
@@ -20,10 +22,10 @@ public class InfoSubsystem extends SubsystemBase {
   public ShuffleboardTab driverDashboard = Shuffleboard.getTab("Driver Dashboard");
   private StateHandler stateHandler = StateHandler.getInstance();
 
-  private XboxController xboxController;
-  private PS4Controller ps4Controller;
+  private CommandXboxController xboxController;
+  private CommandPS4Controller ps4Controller;
 
-  public InfoSubsystem(XboxController x, PS4Controller p){
+  public InfoSubsystem(CommandXboxController x, CommandPS4Controller p){
     this.xboxController = x;
     this.ps4Controller = p;
   }
@@ -54,18 +56,18 @@ public class InfoSubsystem extends SubsystemBase {
     seeSpeakerTag.setBoolean(stateHandler.getHasValidSpeakerTag());
 
     if(DriverStation.isTeleop() && stateHandler.getBBOneCovered()){
-      xboxController.setRumble(RumbleType.kBothRumble, 0.2);
-      ps4Controller.setRumble(RumbleType.kBothRumble, 0.4);
+      xboxController.getHID().setRumble(RumbleType.kBothRumble, 0.2);
+      ps4Controller.getHID().setRumble(RumbleType.kBothRumble, 0.4);
     } else{
-      xboxController.setRumble(RumbleType.kBothRumble, 0);
-      ps4Controller.setRumble(RumbleType.kBothRumble, 0);
+      xboxController.getHID().setRumble(RumbleType.kBothRumble, 0);
+      ps4Controller.getHID().setRumble(RumbleType.kBothRumble, 0);
     }
 
-    if(DriverStation.isTeleop() && stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.lerpUpperBound){
-      xboxController.setRumble(RumbleType.kBothRumble, 0.4);
+    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered() && stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.lerpUpperBound){
+      xboxController.getHID().setRumble(RumbleType.kBothRumble, 0.4);
     }
     else{
-      xboxController.setRumble(RumbleType.kBothRumble, 0);
+      xboxController.getHID().setRumble(RumbleType.kBothRumble, 0);
     }
     
 
