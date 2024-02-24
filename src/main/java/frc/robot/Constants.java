@@ -38,4 +38,103 @@ public final class Constants {
         
     }
 
+    public static final class IntakeConstants {
+        /* Motor IDs */
+        public static final int intakeWheelTopID = 25; //NOT ON ROBOT
+        public static final int intakeWheelBottomID = 26; //NOT ON ROBOT
+        public static final int intakeArmPrimaryID = 22; //left
+        public static final int intakeArmFollowerID = 21; //right
+
+        /* Motion Magic Constants */
+        public static final double intakeKS = 0;
+        public static final double intakekP = 0.9;
+        public static final double intakekI = 0.005;
+        public static final double intakekD = 0;
+
+        /*
+        * Values from CTRE
+        * motionMagicConfigs.MotionMagicCruiseVelocity = 80; // 80 rps cruise velocity
+        * motionMagicConfigs.MotionMagicAcceleration = 160; // 160 rps/s acceleration
+        * (0.5 seconds)
+        * motionMagicConfigs.MotionMagicJerk = 1600; // 1600 rps/s^2 jerk (0.1 seconds)
+        */
+        
+        //note, these should be VERY slow
+        public static final double maxIntakeVel = 100;
+        public static final double maxIntakeAccel = 500;
+        public static final double maxIntakeJerk = 2200;
+
+        /* Gearbox Ratios & Unit Conversions */
+        public static final double intakeGearRatio = 60;
+        public static final double intakeRotsToRads = (2 * Math.PI) / intakeGearRatio;
+        public static final double intakeRadsToRots = intakeGearRatio / (2 * Math.PI);
+
+        /* kG - gravity constant for motion of arm */
+        // TODO: discuss on how the max gravity constant should be found.
+        public static final double intakeMaxGravityConstant = 0;
+
+        /* Beam Break ID */
+        public static final int beamBreakOneID = 1;
+
+        public static final double intakePositionAllowableOffset = 0.05; //radians
+    }
+
+    public static final class ShooterConstants {
+        /* Motor IDs */
+        public static final int shooterMotorPrimaryID = 17; //top
+        public static final int shooterMotorFollowerID = 18; //bottom 
+
+        public static final double shooterRPSToRPM = 60;
+        public static final double shooterRPMToRPS = 1 / shooterRPSToRPM;
+
+        /* Motion Magic Velocity Constants */
+        public static final double shooterKS = 0.25;
+        public static final double shooterKV = 0.12;
+        public static final double shooterKP = 0.2;
+        public static final double shooterKA = 0;
+        public static final double shooterKI = 0;
+        public static final double shooterKD = 0;
+        public static final double maxShooterAccel = 100;
+        public static final double maxShooterJerk = 1000;
+
+        /* Beam Break ID */
+        public static final int beamBreakFourID = 4;
+
+        public static final double shooterSpeedThreshold = 50; //RPM
+    }
+
+    public static final class FeederConstants {
+        /* Motor ID */
+        public static final int feederMotorID = 14;
+
+        /* Beam Break IDs */
+        public static final int beamBreakTwoID = 2;
+        public static final int beamBreakThreeID = 3;
+    }
+
+    public static final class ArmConstants {
+        /* Motor IDs */
+        public static final int armMotorPrimaryID = 15; //right
+        public static final int armMotorFollowerID = 16; //left
+
+        /* Motion Magic Constants */
+        public static final double armKS = 0;
+        public static final double armkP = 1;
+        public static final double armkI = 0.005;
+        public static final double armkD = 0;
+        public static final double maxArmVel = 100;
+        public static final double maxArmAccel = 250;
+        public static final double maxArmJerk = 1000;
+
+        /* Gearbox Ratios & Unit Conversions */
+        public static final double armGearRatio = 129.6;
+        public static final double armRotsToRads = (2 * Math.PI) / armGearRatio;
+        public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
+
+        /* kG - gravity constant for motion of arm */
+        public static final double armMaxGravityConstant = 0.050 * 12; // 2 volts max ff 
+
+        public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
+    }
+
 }
