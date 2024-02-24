@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.264368346918512,
-      "y": 5.336042672085345
+      "x": 1.359011265031077,
+      "y": 5.507946742389212
     },
     "rotation": 0
   },
@@ -12,15 +12,33 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "PreloadClose"
+            "name": "wantSubwoofer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "wantRange"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "PodiumGamepiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
           }
         }
       ]

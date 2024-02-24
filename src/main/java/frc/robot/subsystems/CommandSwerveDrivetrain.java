@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.generated.TunerConstants;
 
@@ -65,7 +66,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     private void configurePathPlanner() {
 
         /*Have to do this here, because this needs to happen AFTER swerve subsystem is instantiated but BEFORE the autobuilder */
-        NamedCommands.registerCommand("ScoreGroup", new ScoreCommandGroup(this, ()->0, ()->0, ()->0));
+        NamedCommands.registerCommand("ScoreCommandGroup", new AutoScoreCommandGroup(this));
 
 
 

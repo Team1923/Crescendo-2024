@@ -12,9 +12,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.desired_scoring_location.SetArmToAmp;
-import frc.robot.commands.desired_scoring_location.SetArmToRanged;
-import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
+import frc.robot.commands.AutoCommand.AutoIntake;
+import frc.robot.commands.AutoCommand.AutoScoreCommand;
+import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
+import frc.robot.commands.AutoCommand.AutoSetArmToRanged;
+import frc.robot.commands.AutoCommand.AutoSetArmToSubwoofer;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
@@ -31,10 +33,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
-    NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
-    NamedCommands.registerCommand("wantSubwoofer", new SetArmToSubwoofer());
-    NamedCommands.registerCommand("wantRange", new SetArmToRanged());
+    NamedCommands.registerCommand("DeployIntake", new AutoIntake());
+    NamedCommands.registerCommand("ScoreGamePiece", new AutoScoreCommand());
+    NamedCommands.registerCommand("wantSubwoofer", new AutoSetArmToSubwoofer());
+    NamedCommands.registerCommand("wantRange", new AutoSetArmToRanged());
 
 
     m_robotContainer = new RobotContainer();

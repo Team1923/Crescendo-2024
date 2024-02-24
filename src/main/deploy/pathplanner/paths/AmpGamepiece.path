@@ -20,12 +20,12 @@
         "y": 6.700750495518085
       },
       "prevControl": {
-        "x": 0.973104168430559,
-        "y": 6.221290163378048
+        "x": 1.6396709716496354,
+        "y": 6.455173252226847
       },
       "nextControl": {
-        "x": 2.937101690085853,
-        "y": 7.034662874366604
+        "x": 2.9113785128289376,
+        "y": 7.0910270228164975
       },
       "isLocked": false,
       "linkedName": null
@@ -53,11 +53,11 @@
   ],
   "constraintZones": [
     {
-      "name": "Shooting",
-      "minWaypointRelativePos": 1.6,
-      "maxWaypointRelativePos": 2.0,
+      "name": "intake_drop",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.05,
       "constraints": {
-        "maxVelocity": 0.75,
+        "maxVelocity": 0.5,
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0
@@ -76,23 +76,6 @@
               "type": "named",
               "data": {
                 "name": "DeployIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Shoot",
-      "waypointRelativePos": 1.7,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "ScoreGamePiece"
               }
             }
           ]

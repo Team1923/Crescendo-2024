@@ -3,72 +3,67 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9640242916849469,
-        "y": 4.711016694760662
+        "x": 1.359011265031077,
+        "y": 5.507946742389212
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0138839138077134,
-        "y": 4.0110949737569
-      },
-      "isLocked": false,
-      "linkedName": "EndOfPreload"
-    },
-    {
-      "anchor": {
-        "x": 2.62197994481459,
-        "y": 4.128036518181299
-      },
-      "prevControl": {
-        "x": 2.63367409925703,
-        "y": 3.8473768115627407
-      },
-      "nextControl": {
-        "x": 2.597151409825845,
-        "y": 4.723921357911172
+        "x": 1.4088142175246081,
+        "y": 4.808020986773646
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.9203306782681937,
-        "y": 5.0655090401089895
+        "x": 2.5401208637175103,
+        "y": 4.244978062605699
       },
       "prevControl": {
-        "x": 2.1412754447777966,
-        "y": 4.944244416922813
+        "x": 2.5401208637175103,
+        "y": 4.11634236373886
+      },
+      "nextControl": {
+        "x": 2.5401208637175103,
+        "y": 4.525881291792083
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.5401208637175103,
+        "y": 4.794603321400375
+      },
+      "prevControl": {
+        "x": 2.5635091726023904,
+        "y": 4.408696224799857
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfPodium"
+      "linkedName": "EndofPodium2"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "intake drop",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.05,
+      "constraints": {
+        "maxVelocity": 0.5,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
-      "name": "Shoot",
-      "waypointRelativePos": 1.6,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "ScoreGamePiece"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Deploy",
+      "name": "Intake",
       "waypointRelativePos": 0,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
@@ -89,8 +84,8 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0.5,
-    "rotation": -8.203226519965066,
+    "velocity": 0.0,
+    "rotation": -12.380756928807225,
     "rotateFast": false
   },
   "reversed": false,

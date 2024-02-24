@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9203306782681937,
-        "y": 5.0655090401089895
+        "x": 2.5401208637175103,
+        "y": 4.794603321400375
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.598379014939848,
-        "y": 5.373357655806221
+        "x": 1.6162826627647557,
+        "y": 5.098651336903814
       },
       "isLocked": false,
-      "linkedName": "EndOfPodium"
+      "linkedName": "EndofPodium2"
     },
     {
       "anchor": {
@@ -30,16 +30,28 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.1,
-      "rotationDegrees": 24.766974312431845,
-      "rotateFast": true
+      "waypointRelativePos": 0.6,
+      "rotationDegrees": 20.0,
+      "rotateFast": false
     }
   ],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Intake_Drop",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.15,
+      "constraints": {
+        "maxVelocity": 0.5,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
       "name": "Deploy",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "sequential",
         "data": {
@@ -48,23 +60,6 @@
               "type": "named",
               "data": {
                 "name": "DeployIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Shoot",
-      "waypointRelativePos": 0.75,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "ScoreGamePiece"
               }
             }
           ]
