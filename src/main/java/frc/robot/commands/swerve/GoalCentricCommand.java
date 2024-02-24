@@ -35,7 +35,7 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier rotationSup;
 
   /* PID Things */
-  private final double kPTarget = 0.003;
+  private final double kPTarget = 0.005;
   private PIDController rotationController;
 
   /** Creates a new GoalCentricCommand. */
@@ -56,9 +56,8 @@ public class GoalCentricCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double translationValue = translationSup.getAsDouble();
-    double strafeValue = strafeSup.getAsDouble();
-
+    double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
+    double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
     double rotValue = 0;
     if(Math.abs(rotationSup.getAsDouble()) > 0.5){
       rotValue = rotationSup.getAsDouble();
