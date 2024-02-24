@@ -1,4 +1,4 @@
-package frc.robot.commands.Intake;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -7,6 +7,7 @@ import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeStates;
 
 public class DeployIntakeCommand extends Command {
+  
   StateHandler stateHandler = StateHandler.getInstance();
   /** Creates a new DeployIntakeCommand. */
   public DeployIntakeCommand() {

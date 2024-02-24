@@ -1,4 +1,4 @@
-package frc.robot.commands.Scoring;
+package frc.robot.commands.scoring;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -7,6 +7,7 @@ import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
 
 public class ScoreGamePiece extends Command {
+  
   StateHandler stateHandler = StateHandler.getInstance();
   /** Creates a new SpeakerPositionCommand. */
   public ScoreGamePiece() {
