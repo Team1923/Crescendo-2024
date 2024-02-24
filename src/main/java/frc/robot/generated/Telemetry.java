@@ -107,5 +107,7 @@ public class Telemetry {
             /* NOTE: uncomment this line if you want all the SD details about Swerve. */
             //SmartDashboard.putData("Module " + i, m_moduleMechanisms[i]);
         }
+
+        SmartDashboard.putNumber("YAW" ,state.Pose.getRotation().getDegrees());
     }
 }

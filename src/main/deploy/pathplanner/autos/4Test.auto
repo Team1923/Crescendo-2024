@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.264368346918512,
+      "y": 5.336042672085345
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "wantAmp"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "PreloadCloseTest"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "PodiumGamepieceTest"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "AmpGamepiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGroup"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "TestAutos",
+  "choreoAuto": false
+}

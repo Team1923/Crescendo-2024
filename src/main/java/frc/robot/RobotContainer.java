@@ -24,12 +24,12 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
+import frc.robot.commands.Intake.DeployIntakeCommand;
+import frc.robot.commands.Intake.IntakeEjectCommand;
+import frc.robot.commands.Scoring.ScoreCommandGroup;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
-import frc.robot.commands.intake.DeployIntakeCommand;
-import frc.robot.commands.intake.IntakeEjectCommand;
-import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
 import frc.robot.lib.Autonomous.AutoChooser;
@@ -50,7 +50,7 @@ public class RobotContainer {
   private final CommandPS4Controller operatorPS4Controller = new CommandPS4Controller(1);
 
   /* Subsystem Instantiations */
-  private final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain;
+  public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain;
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(SwerveConstants.maxSpeed * 0.1).withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
@@ -80,7 +80,7 @@ public class RobotContainer {
         drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
           * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
           .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
-          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
+          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRawAxis(2) * SwerveConstants.maxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));

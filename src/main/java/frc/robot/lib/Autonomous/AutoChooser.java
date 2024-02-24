@@ -16,7 +16,10 @@ public class AutoChooser {
 		SUBWOOFER_5_GP,
 		SUBWOOFER_6_GP,
         
-		FAR_4_GP;
+		FAR_4_GP,
+
+		TWO_TEST,
+		FOUR_TEST;
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -39,6 +42,9 @@ public class AutoChooser {
 		chooser.addOption("6 Gamepiece from Subwoofer", AutoMode.SUBWOOFER_6_GP);
 		
 		chooser.addOption("4 Gamepiece from Far Side", AutoMode.FAR_4_GP);
+
+		chooser.addOption("2 Gamepiece GC Test", AutoMode.TWO_TEST);
+		chooser.addOption("4 Gamepiece GC Test", AutoMode.FOUR_TEST);
 
 
 		auto.add(chooser);
@@ -63,6 +69,11 @@ public class AutoChooser {
 			
 			case STRAIGHT_4_METERS_AUTO:
 				return autoInstantiator.getStraight4MetersAuto();
+
+			case TWO_TEST:
+				return autoInstantiator.getTwoTest();
+			case FOUR_TEST:
+				return autoInstantiator.getFourTest();
 
 			default:
 				return null;

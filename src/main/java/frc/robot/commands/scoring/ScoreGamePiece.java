@@ -1,4 +1,4 @@
-package frc.robot.commands.scoring;
+package frc.robot.commands.Scoring;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;

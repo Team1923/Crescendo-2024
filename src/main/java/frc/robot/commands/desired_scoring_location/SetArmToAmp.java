@@ -13,6 +13,9 @@ public class SetArmToAmp extends Command {
   /** Creates a new SetArmToAmp. */
   public SetArmToAmp() {
     // Use addRequirements() here to declare subsystem dependencies.
+
+
+    
   }
 
   // Called when the command is initially scheduled.
@@ -33,6 +36,7 @@ public class SetArmToAmp extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    
     return stateHandler.getScoreInAmp() == false;
   }
 }

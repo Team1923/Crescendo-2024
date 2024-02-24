@@ -13,6 +13,8 @@ public class SetArmToRanged extends Command {
   /** Creates a new SetArmToRanged. */
   public SetArmToRanged() {
     // Use addRequirements() here to declare subsystem dependencies.
+
+
   }
 
   // Called when the command is initially scheduled.
@@ -20,6 +22,9 @@ public class SetArmToRanged extends Command {
   public void initialize() {
     stateHandler.setScoreInAmp(false);
     stateHandler.setWantToPositionForSubwoofer(false);
+    
+
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.

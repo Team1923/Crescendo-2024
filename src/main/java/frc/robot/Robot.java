@@ -4,14 +4,19 @@
 
 package frc.robot;
 
+import com.fasterxml.jackson.core.sym.Name;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.intake.DeployIntakeCommand;
-import frc.robot.commands.scoring.ScoreGamePiece;
+import frc.robot.commands.Desired_Scoring_Location.SetArmToAmp;
+import frc.robot.commands.Desired_Scoring_Location.SetArmToRanged;
+import frc.robot.commands.Intake.DeployIntakeCommand;
+import frc.robot.commands.Scoring.ScoreCommandGroup;
+import frc.robot.commands.Scoring.ScoreGamePiece;
 import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Limelight.LimelightInterface;
 
@@ -27,6 +32,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     NamedCommands.registerCommand("DeployIntake", new DeployIntakeCommand());
     NamedCommands.registerCommand("ScoreGamePiece", new ScoreGamePiece());
+    NamedCommands.registerCommand("wantAmp", new SetArmToAmp());
+        NamedCommands.registerCommand("wantRange", new SetArmToRanged());
+
 
     m_robotContainer = new RobotContainer();
     this.selector = new AutoChooser();   
@@ -76,6 +84,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putNumber("YAW2", m_robotContainer.drivetrain.getGyroYaw().getDegrees());
   }
 
   @Override
