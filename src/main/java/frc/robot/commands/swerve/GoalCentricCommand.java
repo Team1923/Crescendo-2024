@@ -10,6 +10,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
@@ -21,8 +23,7 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 public class GoalCentricCommand extends Command {
   /* Swerve + Limelight Initialization */
   private CommandSwerveDrivetrain swerve;
-  private SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-      .withDeadband(SwerveConstants.maxSpeed * 0.1).withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
+  private SwerveRequest.ApplyChassisSpeeds drive = new SwerveRequest.ApplyChassisSpeeds()
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
   private LimelightInterface limelight = LimelightInterface.getInstance();
   private StateHandler stateHandler = StateHandler.getInstance();
@@ -33,7 +34,7 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier rotationSup;
 
   /* PID Things */
-  private final double kPTarget = 0.01;
+  private final double kPTarget = 0.003;
   private PIDController rotationController;
 
   /** Creates a new GoalCentricCommand. */
@@ -43,7 +44,7 @@ public class GoalCentricCommand extends Command {
     this.strafeSup = s;
     this.rotationSup = r;
     rotationController = new PIDController(kPTarget, 0, 0);
-    addRequirements(swerve);
+    addRequirements(this.swerve);
   }
 
   // Called when the command is initially scheduled.
@@ -56,26 +57,25 @@ public class GoalCentricCommand extends Command {
   public void execute() {
     double translationValue = translationSup.getAsDouble();
     double strafeValue = strafeSup.getAsDouble();
+
+    double rotValue = 0;
+    if(Math.abs(rotationSup.getAsDouble()) > 0.5){
+      rotValue = rotationSup.getAsDouble();
+    } else if(limelight.hasSpeakerTag()){
+      rotValue = rotationController.calculate(limelight.getXAngleOffset(), 0); 
+    } else{
+      rotValue = 0;
+    }
+
+    SmartDashboard.putNumber("ROT VAL", rotValue);
+
+    ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
+    strafeValue  * SwerveConstants.maxSpeed, 
+    rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
     
-    swerve.applyRequest(() -> drive.withVelocityX(translationValue)
-      .withVelocityY(strafeValue)
-      .withRotationalRate(calculateRotationalValue()));
+    swerve.setControl(drive.withSpeeds(chassisSpeeds));
   }
 
-  private double calculateRotationalValue() {
-    /* There are 3 conditions for the rotational value:
-     * - Driver inputs a very large rotational value
-     * - The limelight has a valid tag, and the rotational speed is based on the angle to the tag.
-     * - Neither is true, which means that the rotational velocity is 0 (the rotation is preserved).
-     */
-    if (Math.abs(rotationSup.getAsDouble()) > 0.5) {
-      return rotationSup.getAsDouble();
-    } else if (limelight.hasSpeakerTag()) {
-      return rotationController.calculate(limelight.getXAngleOffset(), 0);
-    } else {
-      return 0;
-    }
-  }
 
   // Called once the command ends or is interrupted.
   @Override

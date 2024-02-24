@@ -39,8 +39,8 @@ public final class Constants {
         static final class Driver{
             public static final int yButton = 4;
             public static final int aButton = 1;
-            public static final int xButton = 2;
-            public static final int bButton = 3;
+            public static final int xButton = 3;
+            public static final int bButton = 2;
 
             public static final int driverLeftBumper = 5;
             public static final int driverRightBumper = 6;

@@ -27,9 +27,10 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.Intake.DeployIntakeCommand;
 import frc.robot.commands.Intake.IntakeEjectCommand;
 import frc.robot.commands.Scoring.ScoreCommandGroup;
-import frc.robot.commands.desired_scoring_location.SetArmToAmp;
-import frc.robot.commands.desired_scoring_location.SetArmToRanged;
-import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
+import frc.robot.commands.Swerve.GoalCentricCommand;
+import frc.robot.commands.Desired_Scoring_Location.SetArmToAmp;
+import frc.robot.commands.Desired_Scoring_Location.SetArmToRanged;
+import frc.robot.commands.Desired_Scoring_Location.SetArmToSubwoofer;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
 import frc.robot.lib.Autonomous.AutoChooser;
@@ -80,11 +81,14 @@ public class RobotContainer {
         drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
           * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
           .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
-          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRawAxis(2) * SwerveConstants.maxAngularRate)));
+          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-  
+    driverXboxController.button(ControllerConstants.Driver.driverLeftBumper).whileTrue(new GoalCentricCommand(drivetrain,
+    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
+    () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
+    () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {
