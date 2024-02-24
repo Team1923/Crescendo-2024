@@ -12,6 +12,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -48,13 +50,18 @@ public class RobotContainer {
   /* Simulation telemetry utility - makes simulating swerve easier. */
   private final Telemetry logger = new Telemetry(SwerveConstants.maxSpeed);
 
+  /* Swerve Controller Inversion Arrays */
+    int[] blueJoystickValues = {-1, -1, -1};
+    int[] redJoystickValues = {1, 1, -1};
+
   /* Separate method to configure all the button bindings. */
   private void configureBindings() {
     /* Default Swerve Drive Command */
     drivetrain.setDefaultCommand(
-        drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] * SwerveConstants.maxSpeed)
-            .withVelocityY(getSwerveJoystickInput()[1] * SwerveConstants.maxSpeed)
-            .withRotationalRate(getSwerveJoystickInput()[2] * SwerveConstants.maxAngularRate)));
+        drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
+          * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
+          .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
+          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.y().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
@@ -69,29 +76,20 @@ public class RobotContainer {
     //TODO: add "ScoreCommandGroup" here!
 
     /* Operator Button Bindings */
-    operatorPS4Controller.triangle().onTrue(new SetArmToRanged());
+    //TODO: add buttons and IDs to constants
+    operatorPS4Controller.button(0).onTrue(new SetArmToRanged());
     operatorPS4Controller.square().onTrue(new SetArmToAmp());
     operatorPS4Controller.cross().onTrue(new SetArmToSubwoofer());
     //TODO: add intake commands here!
   }
 
   /* Helper method that does some inversion based on the alliance color. */
-  public double[] getSwerveJoystickInput() {
+  public int[] getSwerveJoystickInput() {
     /* 
      * Index 0: driverXboxController.getLeftY();
      * Index 1: driverXboxController.getLeftX();
      * Index 2: driverXboxController.getRightX();
      */
-    double[] blueJoystickValues = {
-        -driverXboxController.getLeftY(), 
-        -driverXboxController.getLeftX(), 
-        -driverXboxController.getRightX()};
-
-    double[] redJoystickValues = {
-      driverXboxController.getLeftY(), 
-      driverXboxController.getLeftX(), 
-      -driverXboxController.getRightX()};
-    
     if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
       return redJoystickValues;
     } else {

@@ -34,4 +34,8 @@ public final class Constants {
         public static final double lerpUpperBound = 168;
     }
 
+    public static final class ControllerConstants {
+        
+    }
+
 }
