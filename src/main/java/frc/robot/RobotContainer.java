@@ -28,6 +28,7 @@ import frc.robot.commands.desired_scoring_location.SetArmToAmp;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
 import frc.robot.commands.intake.DeployIntakeCommand;
+import frc.robot.commands.intake.IntakeEjectCommand;
 import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
@@ -106,7 +107,7 @@ public class RobotContainer {
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());
-    operatorPS4Controller.button(ControllerConstants.Operator.operatorLeftBumper).whileTrue(new DeployIntakeCommand());
+    operatorPS4Controller.button(ControllerConstants.Operator.operatorLeftBumper).whileTrue(new IntakeEjectCommand());
 
   }
 
