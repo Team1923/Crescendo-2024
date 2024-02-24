@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
@@ -28,7 +29,7 @@ public class LimelightSubsystem extends SubsystemBase {
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
     stateHandler.setIsCenteredToTag(Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag());
 
-    // SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
+    SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
     // SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
     // SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
     // SmartDashboard.putNumber("Predicted Angle of Arm", rpmData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag()));

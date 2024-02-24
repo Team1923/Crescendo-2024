@@ -30,11 +30,13 @@ import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
 import frc.robot.commands.scoring.ScoreCommandGroup;
+import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.commands.swerve.GoalCentricCommand;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
 import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Autonomous.AutoInstantiator;
+import frc.robot.lib.Controller.ControllerLimiter;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.ArmSubsystem;
@@ -81,14 +83,11 @@ public class RobotContainer {
         drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
           * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
           .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
-          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
+          .withRotationalRate(getSwerveJoystickInput()[2] * ControllerLimiter.cubic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-    driverXboxController.button(ControllerConstants.Driver.driverLeftBumper).whileTrue(new GoalCentricCommand(drivetrain,
-    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
-    () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
-    () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
+
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {
@@ -98,10 +97,11 @@ public class RobotContainer {
 
     /* Driver Button Bindings */
     //TODO: add "ScoreCommandGroup" here!
-   driverXboxController.rightTrigger().whileTrue(new ScoreCommandGroup(drivetrain,
-    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
-    () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
-    () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
+    driverXboxController.rightTrigger().whileTrue(new ScoreGamePiece());
+  //  driverXboxController.rightTrigger().whileTrue(new ScoreCommandGroup(drivetrain,
+  //   () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
+  //   () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
+  //   () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
 
     /* Operator Button Bindings */
     //TODO: add buttons and IDs to constants

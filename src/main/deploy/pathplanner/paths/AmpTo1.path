@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 4.972504987745018,
-        "y": 6.712444649960525
+        "x": 4.142220022331783,
+        "y": 5.905547993432169
       },
       "prevControl": {
-        "x": 5.568906864309454,
-        "y": 6.911245275482004
+        "x": 4.738621898896219,
+        "y": 6.104348618953648
       },
       "nextControl": null,
       "isLocked": false,
@@ -58,23 +58,6 @@
               "type": "named",
               "data": {
                 "name": "DeployIntake"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Shoot",
-      "waypointRelativePos": 1.6,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "ScoreGamePiece"
               }
             }
           ]

@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.171904793952038,
-      "y": 5.344228580195052
+      "x": 1.359011265031077,
+      "y": 5.507946742389212
     },
     "rotation": 0
   },
@@ -12,9 +12,21 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "PreloadClose"
+            "name": "wantSubwoofer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "wantRange"
           }
         },
         {
@@ -24,9 +36,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "MidGamepiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
           }
         },
         {
@@ -36,9 +60,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "AmpTo1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
           }
         }
       ]
