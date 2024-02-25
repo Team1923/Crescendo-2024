@@ -63,7 +63,7 @@ public class InfoSubsystem extends SubsystemBase {
       ps4Controller.getHID().setRumble(RumbleType.kBothRumble, 0);
     }
 
-    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered() && stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.lerpUpperBound){
+    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered() && stateHandler.getHasValidSpeakerTag() && stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.speakerLerpUpperBound){
       xboxController.getHID().setRumble(RumbleType.kBothRumble, 0.4);
     }
     else{

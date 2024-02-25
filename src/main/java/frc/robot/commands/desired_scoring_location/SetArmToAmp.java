@@ -23,6 +23,7 @@ public class SetArmToAmp extends Command {
   public void initialize() {
     stateHandler.setScoreInAmp(true);
     stateHandler.setWantToPositionForSubwoofer(false);
+    stateHandler.setScoreInTrap(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

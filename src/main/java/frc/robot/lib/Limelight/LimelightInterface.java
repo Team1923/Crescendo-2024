@@ -106,6 +106,10 @@ public class LimelightInterface {
     return(((getID() == 6)|| (getID() == 5)) && hasValidTag());
   }
 
+  public boolean hasTrapTag(){
+    return hasValidTag() && (getID() == 14 || getID() ==15 || getID() == 16 || getID() == 13 || getID() == 11 || getID() ==12);
+  }
+
   public double getTL() {
     return getDoubleEntry("tl");
   }

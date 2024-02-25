@@ -2,36 +2,40 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.desired_scoring_location;
+package frc.robot.commands.Climb;
+
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.subsystems.ArmSubsystem;
 
-public class SetArmToRanged extends Command {
-  private StateHandler stateHandler = StateHandler.getInstance();
+public class ManualClimbCommand extends Command {
 
-  /** Creates a new SetArmToRanged. */
-  public SetArmToRanged() {
+  ArmSubsystem armSubsystem;
+  DoubleSupplier input;
+
+  /** Creates a new ManualClimbCommand. */
+  public ManualClimbCommand(ArmSubsystem arm, DoubleSupplier input) {
     // Use addRequirements() here to declare subsystem dependencies.
 
+    armSubsystem = arm;
+    this.input = input;
 
+    addRequirements(armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    stateHandler.setScoreInAmp(false);
-    stateHandler.setWantToPositionForSubwoofer(false);
-    stateHandler.setScoreInTrap(false);
-
-    
-
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (StateHandler.getInstance().getManuallyClimbing()){
+          armSubsystem.setPercentOut(input.getAsDouble());
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -40,6 +44,6 @@ public class SetArmToRanged extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getScoreInTrap();
+    return false;
   }
 }

@@ -186,18 +186,31 @@ public class ArmSubsystem extends SubsystemBase {
       }
       // distance to speaker condition
       else if (stateHandler.getHasValidSpeakerTag()) {
-        armSetpoint = positionData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+        armSetpoint = positionData.getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
       }
       else{
         //condition for when when we lose tag
         armSetpoint = getArmPositionRads();
       }
     }
+    else if (desiredArmState == ArmStates.TRAP){
+      if (stateHandler.getHasValidTrapTag()){
+        armSetpoint = positionData.getTrapDesiredArmPosition(stateHandler.getDistanceToTrapTag());
+      }
+      else{
+        armSetpoint = getArmPositionRads();
+
+      }
+    }
+   
 
     /*
      * Set the arm position to whatever is the desired arm position.
      */
-    setArmPosition(armSetpoint);
+    if (!stateHandler.getManuallyClimbing()){
+          setArmPosition(armSetpoint);
+
+    }
 
     /*
      * Update the arm's position based on the desired setpoint.

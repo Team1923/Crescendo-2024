@@ -143,11 +143,16 @@ public class ShooterSubsystem extends SubsystemBase {
       if (stateHandler.getWantToPositionForSubwoofer()) {
         desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
       }
-      /* If we have a valid tag, then get positional data. */
+      /* If we have a valid speaker tag, then get positional data. */
       else if (stateHandler.getHasValidSpeakerTag()) {
-        desiredShooterSpeed = rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
+        desiredShooterSpeed = rpmData.getSpeakerDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
+      }
+      /* If we have a valid speaker tag, then get positional data. */
+      else if (stateHandler.getHasValidTrapTag()) {
+        desiredShooterSpeed = rpmData.getTrapDesiredShooterRPM(stateHandler.getDistanceToTrapTag());
       }
     } 
+
 
     /* Set the desired velocity of the shooter wheels. */
     setVelocities(desiredShooterSpeed, desiredShooterSpeed);

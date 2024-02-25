@@ -86,8 +86,8 @@ public class FeederSubsystem extends SubsystemBase {
      */
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-        && (stateHandler.getIsCenteredToTag() || DriverStation.isAutonomousEnabled() /*- Don't want this for now, testing goal centric*/) && 
-        (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.lerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.lerpLowerBound)) {
+        && (stateHandler.getIsCenteredToTag()) && 
+        (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)) {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }

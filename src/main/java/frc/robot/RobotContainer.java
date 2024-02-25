@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
+import frc.robot.commands.Climb.ClimbCommandGroup;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
@@ -112,6 +113,9 @@ public class RobotContainer {
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());
     operatorPS4Controller.button(ControllerConstants.Operator.operatorLeftBumper).whileTrue(new IntakeEjectCommand());
+
+    //TODO: implement arm stuff
+    // operatorPS4Controller.button(-1).toggleOnTrue(new ClimbCommandGroup(armSubsystem, () -> operatorPS4Controller.getL2Axis()));
 
   }
 

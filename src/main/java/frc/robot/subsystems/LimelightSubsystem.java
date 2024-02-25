@@ -20,16 +20,26 @@ public class LimelightSubsystem extends SubsystemBase {
     return (LimeLightConstants.speakerHeightFromFloor - LimeLightConstants.limelightHeight) / Math.tan(angleToGoal);
   }
 
+  public double calculateDistanceToTrapTag() {
+    double tagOffsetAngleVertical = limelight.getYAngleOffset();
+    double angleToGoal = (LimeLightConstants.limelightMountAngle + tagOffsetAngleVertical) * (Math.PI / 180);
+    return (LimeLightConstants.trapHeightFromFloor - LimeLightConstants.limelightHeight) / Math.tan(angleToGoal);
+  }
+
   @Override
   public void periodic() {
     stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
+    stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());
     stateHandler.setLimelightHasTag(limelight.hasValidTag());
     stateHandler.setAprilTagID(limelight.getID());
     stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
+    stateHandler.setHasValidTrapTag(limelight.hasTrapTag());
     stateHandler.setIsCenteredToTag(Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag());
 
-    SmartDashboard.putNumber("Distance to April Tag", stateHandler.getDistanceToSpeakerTag());
+    SmartDashboard.putNumber("Distance to Speaker April Tag", stateHandler.getDistanceToSpeakerTag());
+    SmartDashboard.putNumber("Distance to Trap April Tag", stateHandler.getDistanceToSpeakerTag());
+
     // SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
     // SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
     // SmartDashboard.putNumber("Predicted Angle of Arm", rpmData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag()));

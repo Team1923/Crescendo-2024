@@ -4,6 +4,7 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.swerve.GoalCentricCommand;
+import frc.robot.commands.swerve.TrapCentricCommand;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
@@ -15,7 +16,7 @@ public class ScoreCommandGroup extends ParallelCommandGroup {
   public ScoreCommandGroup(CommandSwerveDrivetrain swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup,
       DoubleSupplier rotationSup) {
     addCommands(
-        new GoalCentricCommand(swerve, translationSup, strafeSup, rotationSup),
+        ((stateHandler.getScoreInTrap()) ? new TrapCentricCommand(swerve, translationSup, strafeSup, rotationSup) : new GoalCentricCommand(swerve, translationSup, strafeSup, rotationSup)),
         new ScoreGamePiece());
   }
 

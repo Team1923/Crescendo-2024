@@ -8,7 +8,8 @@ public class StateVariables {
         STOWED(new ArmPosition(0)),
         AMP(new ArmPosition(-1.96)), 
         SPEAKER(new ArmPosition(-0.77)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.77)
-        CLIMB(new ArmPosition(2));
+        TRAP(new ArmPosition(-0.9)), //TODO: FIND
+        CLIMB(new ArmPosition(2)); //TODO: find val
 
         private ArmPosition armPosition;
 

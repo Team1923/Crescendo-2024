@@ -36,11 +36,17 @@ public class StateHandler {
     private boolean limelightHasTag = false;
     private double aprilTagID = 0;
     private boolean hasValidSpeakerTag = false;
+    private boolean hasValidTrapTag = false;
     private boolean hasValidAmpTag = false;
-    private double distanceToTag = 0;
+    private double distanceToSpeakerTag = 0;
+    private double distanceToTrapTag = 0;
     private boolean centeredToTag = false;
     private boolean wantToPositionForSubwoofer = false;
     private boolean scoreInAmp = false;
+    private boolean scoreInTrap = false;
+    private boolean manuallyClimbing = false;
+
+    
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;
@@ -266,6 +272,25 @@ public class StateHandler {
     }
 
     /**
+     * Sets the boolean of whether or not there is a valid Trap April Tag.
+     * 
+     * @param hasValidTrapTag The boolean which determines if there is a valid
+     *                           Trap April Tag.
+     */
+    public void setHasValidTrapTag(boolean hasValidTrapTag) {
+        this.hasValidTrapTag = hasValidTrapTag;
+    }
+
+    /**
+     * Gets the boolean of whether or not there is a valid Trap April Tag.
+     * 
+     * @return The boolean of whether or not there is a valid Trap April Tag.
+     */
+    public boolean getHasValidTrapTag() {
+        return hasValidTrapTag;
+    }
+
+    /**
      * Sets the boolean of whether or not there is a valid Speaker April Tag.
      * 
      * @param hasValidSpeakerTag The boolean which determines if there is a valid
@@ -304,22 +329,41 @@ public class StateHandler {
     }
 
     /**
-     * Sets the distance to an April Tag.
+     * Sets the distance to speaker April Tag.
      * 
      * @param distanceToTag The double which is passed in to set the distance to the
      *                      April Tag.
      */
     public void setDistanceToSpeakerTag(double distanceToTag) {
-        this.distanceToTag = distanceToTag;
+        this.distanceToSpeakerTag = distanceToTag;
     }
 
     /**
-     * Gets the distance to an April Tag.
+     * Gets the distance to speaker April Tag.
      * 
      * @return A double which is the distance to the April Tag.
      */
     public double getDistanceToSpeakerTag() {
-        return distanceToTag;
+        return distanceToSpeakerTag;
+    }
+
+    /**
+     * Sets the distance to trap April Tag.
+     * 
+     * @param distanceToTag The double which is passed in to set the distance to the
+     *                      April Tag.
+     */
+    public void setDistanceToTrapTag(double distanceToTag) {
+        this.distanceToTrapTag = distanceToTag;
+    }
+
+    /**
+     * Gets the distance to trap April Tag.
+     * 
+     * @return A double which is the distance to the April Tag.
+     */
+    public double getDistanceToTrapTag() {
+        return distanceToTrapTag;
     }
 
     /**
@@ -440,6 +484,22 @@ public class StateHandler {
 
     public boolean getScoreInAmp() {
         return scoreInAmp;
+    }
+
+    public void setScoreInTrap(boolean a) {
+        this.scoreInTrap = a;
+    }
+
+    public boolean getScoreInTrap() {
+        return scoreInTrap;
+    }
+
+    public boolean getManuallyClimbing() {
+        return manuallyClimbing;
+    }
+
+    public void setManuallyClimbing(boolean manuallyClimbing) {
+        this.manuallyClimbing = manuallyClimbing;
     }
 
 }
