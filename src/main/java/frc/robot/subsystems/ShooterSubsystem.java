@@ -72,13 +72,13 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param velocityF The speed, in RPM, passed into the bottom motor.
    */
   public void setVelocities(double velocityP, double velocityF) {
-    shooterTop.setControl(motionMagicVelVoltage.withVelocity((velocityP/*ADD FOR HASMAP TUNING*/ +stateHandler.getRPMOffset()) * ShooterConstants.shooterRPMToRPS));
+    shooterTop.setControl(motionMagicVelVoltage.withVelocity((velocityP) * ShooterConstants.shooterRPMToRPS));
     // if (velocityF == 0) {
     //   shooterBottom.setControl(motionMagicVelVoltage.withVelocity(velocityF * ShooterConstants.shooterRPMToRPS));
     // } else {
     //   shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF - 400) * ShooterConstants.shooterRPMToRPS));
     // }
-    shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF/*ADD FOR HASMAP TUNING*/ +stateHandler.getRPMOffset()) * ShooterConstants.shooterRPMToRPS));
+    shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF) * ShooterConstants.shooterRPMToRPS));
   }
 
   /**

@@ -44,19 +44,19 @@ public class InfoSubsystem extends SubsystemBase {
   
   private GenericEntry trapPos = driverDashboard.add("TRAP", false)
   		.withSize(3, 1)
-			.withPosition(0, 1)
+			.withPosition(0, 2)
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#000080"))
 			.getEntry();
 
 	private GenericEntry seeSpeakerTag = driverDashboard.add("SPEAKER APRIL TAG", false)
 			.withSize(3, 1)
-			.withPosition(0, 2)
+			.withPosition(0, 3)
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
 			.getEntry();
 
   private GenericEntry seeTrapTag = driverDashboard.add("TRAP APRIL TAG", false)
   .withSize(3, 1)
-  .withPosition(0, 2)
+  .withPosition(0, 4)
   .withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
   .getEntry();
 

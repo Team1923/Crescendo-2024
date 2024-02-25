@@ -8,6 +8,8 @@ import com.fasterxml.jackson.core.sym.Name;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -38,6 +40,9 @@ public class Robot extends TimedRobot {
     NamedCommands.registerCommand("wantSubwoofer", new AutoSetArmToSubwoofer());
     NamedCommands.registerCommand("wantRange", new AutoSetArmToRanged());
 
+    CameraServer.startAutomaticCapture();
+
+
 
     m_robotContainer = new RobotContainer();
     this.selector = new AutoChooser();   
@@ -46,6 +51,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+
+    
   }
 
   @Override

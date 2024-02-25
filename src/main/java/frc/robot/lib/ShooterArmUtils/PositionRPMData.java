@@ -26,13 +26,21 @@ public class PositionRPMData {
      }
 
      private void fillMaps() {
-        speakerPositionRPMMap.put(168.0, new PositionRPMObject(0, 5000));
-        speakerPositionRPMMap.put(156.0, new PositionRPMObject(-0.262, 4000));
-        speakerPositionRPMMap.put(144.0, new PositionRPMObject(-0.285, 4000));
-        speakerPositionRPMMap.put(132.0, new PositionRPMObject(-0.308, 4000));
-        speakerPositionRPMMap.put(120.0, new PositionRPMObject(-0.331, 4000));
-        speakerPositionRPMMap.put(108.0, new PositionRPMObject(-0.354, 4000));
-        speakerPositionRPMMap.put(84.0, new PositionRPMObject(-0.57, 3000));
+        speakerPositionRPMMap.put(149.25, new PositionRPMObject(-0.255, 4000));
+        speakerPositionRPMMap.put(153.1, new PositionRPMObject(-0.255, 4000));
+        speakerPositionRPMMap.put(103.6, new PositionRPMObject(-0.4, 3000));
+        speakerPositionRPMMap.put(137.0, new PositionRPMObject(-0.29, 4000));
+        speakerPositionRPMMap.put(222.7, new PositionRPMObject(0, 4200));
+        speakerPositionRPMMap.put(105.1, new PositionRPMObject(-0.36, 3000));
+        speakerPositionRPMMap.put(235.9, new PositionRPMObject(0, 4500));
+        speakerPositionRPMMap.put(231.6, new PositionRPMObject(0, 4500));
+        speakerPositionRPMMap.put(198.2, new PositionRPMObject(-0.165, 4200));
+        speakerPositionRPMMap.put(181.5, new PositionRPMObject(-0.185, 4200));
+        speakerPositionRPMMap.put(159.4, new PositionRPMObject(-0.205, 4000));
+        speakerPositionRPMMap.put(92.1, new PositionRPMObject(-0.45, 3000));
+        speakerPositionRPMMap.put(78.7, new PositionRPMObject(-0.5, 3000));
+        speakerPositionRPMMap.put(56.6, new PositionRPMObject(-0.6, 3000));
+        speakerPositionRPMMap.put(52.3, new PositionRPMObject(-0.65, 3000));
 
 
         // trapPositionRPMMap.put(null, null);

@@ -29,8 +29,8 @@ public final class Constants {
         public static final double limelightHeight = 7; // for pivot, in inches (measured ~10 and 9/16 inches,
                                                               // converted)
         public static final double speakerHeightFromFloor = 56.5;// for tag, measured
-        public static final double speakerLerpLowerBound = 84;
-        public static final double speakerLerpUpperBound = 168;
+        public static final double speakerLerpLowerBound = 52.3;
+        public static final double speakerLerpUpperBound = 235.9;
 
         //TODO: TUNE
         public static final double trapHeightFromFloor = 0; 

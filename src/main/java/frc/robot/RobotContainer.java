@@ -87,7 +87,7 @@ public class RobotContainer {
         drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
           * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
           .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
-          .withRotationalRate(getSwerveJoystickInput()[2] * ControllerLimiter.cubic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate)));
+          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
@@ -109,18 +109,18 @@ public class RobotContainer {
 
 
   /* FOR HASMAP TUNING */
-  driverXboxController.povUp().whileTrue(new ChangePositionOffset(-0.01)); //angle up
-  driverXboxController.povDown().whileTrue(new ChangePositionOffset(0.01)); //angle down
+  // driverXboxController.povUp().whileTrue(new ChangePositionOffset(-0.01)); //angle up
+  // driverXboxController.povDown().whileTrue(new ChangePositionOffset(0.01)); //angle down
 
-  operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));
-  operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-100));
+  // operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));
+  // operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-100));
 
     /* Operator Button Bindings */
     //TODO: add buttons and IDs to constants
     operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
     operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
-    operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToTrap());
+    // operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToTrap());
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());

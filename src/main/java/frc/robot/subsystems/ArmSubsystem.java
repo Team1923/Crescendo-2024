@@ -82,7 +82,7 @@ public class ArmSubsystem extends SubsystemBase {
    * @param position The radian position to command the arm to.
    */
   public void setArmPosition(double position) {
-    armPrimary.setControl(motionMagicVoltage.withPosition((position/*ADD FOR HASMAP TUNING*/ +stateHandler.getPositionOffset()) * ArmConstants.armRadsToRots )
+    armPrimary.setControl(motionMagicVoltage.withPosition((position) * ArmConstants.armRadsToRots )
         .withFeedForward(calculateArmFeedForward()));
   }
 
