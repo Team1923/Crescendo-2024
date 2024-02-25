@@ -30,9 +30,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "PodiumGamepiece"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "PodiumGamepiece"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "DeployIntake"
+                }
+              }
+            ]
           }
         },
         {
@@ -42,9 +55,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "MidGamepiece"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "MidGamepiece"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "DeployIntake"
+                }
+              }
+            ]
           }
         },
         {

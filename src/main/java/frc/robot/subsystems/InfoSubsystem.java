@@ -41,6 +41,12 @@ public class InfoSubsystem extends SubsystemBase {
 			.withPosition(0, 1)
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#CE42F5"))
 			.getEntry();
+  
+  private GenericEntry trapPos = driverDashboard.add("TRAP", false)
+  		.withSize(3, 1)
+			.withPosition(0, 1)
+			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#000080"))
+			.getEntry();
 
 	private GenericEntry seeSpeakerTag = driverDashboard.add("SPEAKER APRIL TAG", false)
 			.withSize(3, 1)
@@ -48,12 +54,20 @@ public class InfoSubsystem extends SubsystemBase {
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
 			.getEntry();
 
+  private GenericEntry seeTrapTag = driverDashboard.add("TRAP APRIL TAG", false)
+  .withSize(3, 1)
+  .withPosition(0, 2)
+  .withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
+  .getEntry();
+
   @Override
   public void periodic() {
     /* Driver Dashboard Display */
     subwooferPos.setBoolean(stateHandler.getWantToPositionForSubwoofer());
     ampPos.setBoolean(stateHandler.getScoreInAmp());
+    trapPos.setBoolean(stateHandler.getScoreInTrap());
     seeSpeakerTag.setBoolean(stateHandler.getHasValidSpeakerTag());
+    seeTrapTag.setBoolean(stateHandler.getHasValidTrapTag());
 
     if(DriverStation.isTeleop() && stateHandler.getBBOneCovered()){
       xboxController.getHID().setRumble(RumbleType.kBothRumble, 0.2);

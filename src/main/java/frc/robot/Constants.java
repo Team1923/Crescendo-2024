@@ -156,6 +156,12 @@ public final class Constants {
         public static final double maxArmAccel = 250;
         public static final double maxArmJerk = 1000;
 
+
+        public static final double climbArmVel = 50;
+        public static final double climbArmAccel = 125;
+        public static final double climbArmJerk = 500;
+
+
         /* Gearbox Ratios & Unit Conversions */
         public static final double armGearRatio = 129.6;
         public static final double armRotsToRads = (2 * Math.PI) / armGearRatio;

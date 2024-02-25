@@ -101,11 +101,11 @@ public class RobotContainer {
 
     /* Driver Button Bindings */
     //TODO: add "ScoreCommandGroup" here!
-    driverXboxController.rightTrigger().whileTrue(new ScoreGamePiece());
-  //  driverXboxController.rightTrigger().whileTrue(new ScoreCommandGroup(drivetrain,
-  //   () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
-  //   () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
-  //   () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
+    // driverXboxController.rightTrigger().whileTrue(new ScoreGamePiece());
+   driverXboxController.rightTrigger().whileTrue(new ScoreCommandGroup(drivetrain,
+    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
+    () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
+    () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
 
 
   /* FOR HASMAP TUNING */
