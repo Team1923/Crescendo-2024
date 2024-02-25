@@ -94,7 +94,9 @@ public class InfoSubsystem extends SubsystemBase {
     /* RELEVANT FEEDER STATES */
     SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
 
-
+    /*POSRPM OFFSET */
+    SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
+    SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
 
 
   }

@@ -25,6 +25,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.Climb.ClimbCommandGroup;
+import frc.robot.commands.ManualHashTuningCommands.ChangePositionOffset;
+import frc.robot.commands.ManualHashTuningCommands.ChangeRPMOffset;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
@@ -103,6 +105,14 @@ public class RobotContainer {
   //   () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
   //   () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
   //   () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
+
+
+  /* FOR HASMAP TUNING */
+  driverXboxController.povUp().whileTrue(new ChangePositionOffset(-0.01)); //angle up
+  driverXboxController.povDown().whileTrue(new ChangePositionOffset(0.01)); //angle down
+
+  operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));
+  operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-100));
 
     /* Operator Button Bindings */
     //TODO: add buttons and IDs to constants
