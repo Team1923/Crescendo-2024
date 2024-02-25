@@ -46,6 +46,11 @@ public class StateHandler {
     private boolean scoreInTrap = false;
     private boolean manuallyClimbing = false;
 
+    /*PosRPM tuning values */
+    private double positionOffset = 0;
+    
+
+    private double RPMOffset = 0;
     
 
     /* BEAM BREAK Values */
@@ -500,6 +505,23 @@ public class StateHandler {
 
     public void setManuallyClimbing(boolean manuallyClimbing) {
         this.manuallyClimbing = manuallyClimbing;
+    }
+
+
+    public double getPositionOffset() {
+        return positionOffset;
+    }
+
+    public void setPositionOffset(double positionOffset) {
+        this.positionOffset = positionOffset;
+    }
+
+    public double getRPMOffset() {
+        return RPMOffset;
+    }
+
+    public void setRPMOffset(double rPMOffset) {
+        RPMOffset = rPMOffset;
     }
 
 }

@@ -19,7 +19,11 @@ public class ScoreGamePiece extends Command {
   public void initialize() {
     if (stateHandler.getScoreInAmp()) {
       stateHandler.setDesiredArmState(ArmStates.AMP);
-    } else {
+    } else if (stateHandler.getScoreInTrap()){
+      stateHandler.setDesiredArmState(ArmStates.TRAP);
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
+    } 
+    else {
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
     }
