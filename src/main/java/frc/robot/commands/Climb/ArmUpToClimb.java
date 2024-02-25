@@ -28,22 +28,18 @@ public class ArmUpToClimb extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (stateHandler.getCurrentArmState() == ArmStates.CLIMB){
-      stateHandler.setManuallyClimbing(true);
-    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    stateHandler.setDesiredArmState(ArmStates.STOWED);
-    stateHandler.setManuallyClimbing(false);
+    stateHandler.setManuallyClimbing(true);
 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return stateHandler.getCurrentArmState() == ArmStates.CLIMB;
   }
 }
