@@ -14,6 +14,7 @@ public class ManualClimbCommand extends Command {
 
   ArmSubsystem armSubsystem;
   DoubleSupplier input;
+  StateHandler stateHandler = StateHandler.getInstance();
 
   /** Creates a new ManualClimbCommand. */
   public ManualClimbCommand(ArmSubsystem arm, DoubleSupplier input) {
@@ -32,7 +33,7 @@ public class ManualClimbCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (StateHandler.getInstance().getManuallyClimbing()){
+    if (stateHandler.getManuallyClimbing()){
           armSubsystem.setPercentOut(input.getAsDouble());
     }
   }

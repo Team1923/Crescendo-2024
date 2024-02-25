@@ -7,9 +7,9 @@ public class StateVariables {
     public static enum ArmStates {
         STOWED(new ArmPosition(0)),
         AMP(new ArmPosition(-1.96)), 
-        SPEAKER(new ArmPosition(-0.65)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.77)
+        SPEAKER(new ArmPosition(-0.77)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.77)
         TRAP(new ArmPosition(-0.9)), //TODO: FIND
-        CLIMB(new ArmPosition(2)); //TODO: find val
+        CLIMB(new ArmPosition(-1.3)); //TODO: find val
 
         private ArmPosition armPosition;
 
@@ -40,7 +40,7 @@ public class StateVariables {
      */
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(0)),
-        SHOOT(new RPMValue(3000)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
+        SHOOT(new RPMValue(2000)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
 
         private RPMValue rpmValue;
 
@@ -109,7 +109,7 @@ public class StateVariables {
      * TODO: Need to be changed
      */
     public static enum IntakeStates {
-        DEPLOYED(new IntakePosition(1.97)),
+        DEPLOYED(new IntakePosition(2)),
         STOWED(new IntakePosition(0));
 
         private IntakePosition intakePosition;

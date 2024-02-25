@@ -9,6 +9,7 @@ import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
+import frc.robot.lib.StateMachine.StateVariables.IntakeStates;
 
 public class ArmUpToClimb extends Command {
 
@@ -23,6 +24,7 @@ public class ArmUpToClimb extends Command {
   @Override
   public void initialize() {
     stateHandler.setDesiredArmState(ArmStates.CLIMB);
+    stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

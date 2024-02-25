@@ -122,7 +122,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public boolean isAtShooterSpeed(double desiredSetpoint) {
     return Math.abs(getTopRPM() - desiredSetpoint) < ShooterConstants.shooterSpeedThreshold
-        && Math.abs(getBottomRPM() - (desiredSetpoint)) < ShooterConstants.shooterSpeedThreshold;
+        && Math.abs((getBottomRPM() - (desiredSetpoint))) < ShooterConstants.shooterSpeedThreshold;
   }
 
   @Override
@@ -155,7 +155,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
     /* Set the desired velocity of the shooter wheels. */
-    setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+    if(desiredShooterSpeedState == ShooterSpeeds.SHOOT){
+      setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+    }
+    else{
+      setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+    }
+
 
 
     if (isAtShooterSpeed(desiredShooterSpeed)) {
