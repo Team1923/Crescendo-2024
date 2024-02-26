@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import java.util.function.Supplier;
 
 import com.ctre.phoenix6.Utils;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrain;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
@@ -21,6 +22,8 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Constants;
+import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.generated.TunerConstants;
@@ -40,6 +43,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency,
             SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
+        setSwerveDriveCustomCurrentLimits();
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -48,6 +52,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules) {
         super(driveTrainConstants, modules);
+        setSwerveDriveCustomCurrentLimits();
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -61,6 +66,29 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     public ChassisSpeeds getCurrentRobotChassisSpeeds() {
         return m_kinematics.toChassisSpeeds(getState().ModuleStates);
+    }
+
+    public void setSwerveDriveCustomCurrentLimits() {   
+        //Create a current configuration to use for the drive motor of each swerve module.
+        var customCurrentLimitConfigs = new CurrentLimitsConfigs();
+
+        //Iterate through each module.
+        for (var module : Modules) {
+            //Get the Configurator for the current drive motor.
+            var currentConfigurator = module.getDriveMotor().getConfigurator();
+
+            //Refresh the current configuration, since the stator current limit has already been set.
+            currentConfigurator.refresh(customCurrentLimitConfigs);
+
+            //Set all of the parameters related to the supply current.  The values should come from Constants.
+            customCurrentLimitConfigs.SupplyCurrentLimit = SwerveConstants.kSwerveDriveSupplyCurrentLimit;
+            customCurrentLimitConfigs.SupplyCurrentLimitEnable = SwerveConstants.kSwerveDriveSupplyCurrentLimitEnable;
+            customCurrentLimitConfigs.SupplyCurrentThreshold = SwerveConstants.kSwerveDriveSupplyCurrentThreshold;
+            customCurrentLimitConfigs.SupplyTimeThreshold = SwerveConstants.kSwerveDriveSupplyTimeThreshold;
+
+            //Apply the new current limit configuration.
+            currentConfigurator.apply(customCurrentLimitConfigs);
+        }
     }
 
     private void configurePathPlanner() {

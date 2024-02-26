@@ -21,10 +21,21 @@ public final class Constants {
     public static final class SwerveConstants {
         public static final double maxSpeed = TunerConstants.kSpeedAt12VoltsMps;
         public static final double maxAngularRate = (1.5 * Math.PI) * 8;
+
+        public static final double kSwerveDriveSupplyCurrentLimit = 35;
+        public static final boolean kSwerveDriveSupplyCurrentLimitEnable = true;
+        public static final double kSwerveDriveSupplyCurrentThreshold = 60;
+        public static final double kSwerveDriveSupplyTimeThreshold = 0.1;
     }
 
     public static final class LimeLightConstants {
         // measure constants in inches
+        /*
+         * Dimensions for LL tower
+         * Front LL height -> 26.85 inches 
+         * Front LL Mount angle -> 20 degrees
+         * 
+         */
         public static final double limelightMountAngle = 27.358; // for pivot, measured in degrees
         public static final double limelightHeight = 7; // for pivot, in inches (measured ~10 and 9/16 inches,
                                                               // converted)
@@ -63,9 +74,11 @@ public final class Constants {
             public static final int operatorLeftBumper = 5;
             public static final int operatorRightBumper = 6;
         }
-
-
         
+    }
+
+    public static final class CANdleConstants{
+        public static final int candleID = 0;
     }
 
     public static final class IntakeConstants {
