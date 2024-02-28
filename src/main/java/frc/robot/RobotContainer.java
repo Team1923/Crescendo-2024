@@ -87,9 +87,8 @@ public class RobotContainer {
         drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
           * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
           .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
-          .withRotationalRate(getSwerveJoystickInput()[2] * driverXboxController.getRightX() * SwerveConstants.maxAngularRate)));
-
-    
+          .withRotationalRate(getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate)));
+    //getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));

@@ -43,7 +43,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency,
             SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
-        setSwerveDriveCustomCurrentLimits();
+        // setSwerveDriveCustomCurrentLimits();
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -52,7 +52,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules) {
         super(driveTrainConstants, modules);
-        setSwerveDriveCustomCurrentLimits();
+        // setSwerveDriveCustomCurrentLimits();
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -81,10 +81,16 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
             currentConfigurator.refresh(customCurrentLimitConfigs);
 
             //Set all of the parameters related to the supply current.  The values should come from Constants.
-            customCurrentLimitConfigs.SupplyCurrentLimit = SwerveConstants.kSwerveDriveSupplyCurrentLimit;
-            customCurrentLimitConfigs.SupplyCurrentLimitEnable = SwerveConstants.kSwerveDriveSupplyCurrentLimitEnable;
-            customCurrentLimitConfigs.SupplyCurrentThreshold = SwerveConstants.kSwerveDriveSupplyCurrentThreshold;
-            customCurrentLimitConfigs.SupplyTimeThreshold = SwerveConstants.kSwerveDriveSupplyTimeThreshold;
+
+            customCurrentLimitConfigs.StatorCurrentLimit = 80;
+            customCurrentLimitConfigs.StatorCurrentLimitEnable = true;
+
+            // customCurrentLimitConfigs.SupplyCurrentLimit = SwerveConstants.kSwerveDriveSupplyCurrentLimit;
+            // customCurrentLimitConfigs.SupplyCurrentLimitEnable = SwerveConstants.kSwerveDriveSupplyCurrentLimitEnable;
+            // customCurrentLimitConfigs.SupplyCurrentThreshold = SwerveConstants.kSwerveDriveSupplyCurrentThreshold;
+            // customCurrentLimitConfigs.SupplyTimeThreshold = SwerveConstants.kSwerveDriveSupplyTimeThreshold;
+
+  
 
             //Apply the new current limit configuration.
             currentConfigurator.apply(customCurrentLimitConfigs);

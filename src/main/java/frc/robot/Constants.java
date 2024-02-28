@@ -22,7 +22,7 @@ public final class Constants {
         public static final double maxSpeed = TunerConstants.kSpeedAt12VoltsMps;
         public static final double maxAngularRate = (1.5 * Math.PI) * 8;
 
-        public static final double kSwerveDriveSupplyCurrentLimit = 35;
+        public static final double kSwerveDriveSupplyCurrentLimit = 40;
         public static final boolean kSwerveDriveSupplyCurrentLimitEnable = true;
         public static final double kSwerveDriveSupplyCurrentThreshold = 60;
         public static final double kSwerveDriveSupplyTimeThreshold = 0.1;
