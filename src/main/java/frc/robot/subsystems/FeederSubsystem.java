@@ -1,12 +1,15 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.FeederConstants;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -31,6 +34,12 @@ public class FeederSubsystem extends SubsystemBase {
   public FeederSubsystem() {
     /* Wipe the data on the feeder motor. */
     feederMotor.getConfigurator().apply(new TalonFXConfiguration());
+
+    var currentConfigurator = new CurrentLimitsConfigs();
+    feederMotor.getConfigurator().refresh(currentConfigurator);
+    currentConfigurator.StatorCurrentLimit = CurrentConstants.kStatorCurrentLimit;
+    currentConfigurator.StatorCurrentLimitEnable = CurrentConstants.kStatorCurrentLimitEnable;
+    feederMotor.getConfigurator().apply(currentConfigurator);
     
     /* Set the NeutralMode of the FeederMotor to be BRAKE. */
     feederMotor.setNeutralMode(NeutralModeValue.Brake);
@@ -67,10 +76,18 @@ public class FeederSubsystem extends SubsystemBase {
     return !beamBreakThree.get();
   }
 
+  public void checkCurrentLimits(){
+    if (Math.abs(feederMotor.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+      SmartDashboard.putNumber("Over Stator on feeder", feederMotor.getStatorCurrent().getValueAsDouble());
+    }
+  }
+
   @Override
   public void periodic() {
     stateHandler.setBBTwoCovered(getBeamBreakTwo());
     stateHandler.setBBThreeCovered(getBeamBreakThree());
+
+    checkCurrentLimits();
 
     FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
 
@@ -96,7 +113,7 @@ public class FeederSubsystem extends SubsystemBase {
      * Subwoofer shot
      */
     else if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-    && stateHandler.getWantToPositionForSubwoofer()){
+    && (stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer())){
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 

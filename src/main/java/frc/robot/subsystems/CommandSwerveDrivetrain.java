@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants;
+import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreCommandGroup;
@@ -82,8 +83,8 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
             //Set all of the parameters related to the supply current.  The values should come from Constants.
 
-            customCurrentLimitConfigs.StatorCurrentLimit = 80;
-            customCurrentLimitConfigs.StatorCurrentLimitEnable = true;
+            customCurrentLimitConfigs.StatorCurrentLimit = CurrentConstants.kStatorCurrentLimit;
+            customCurrentLimitConfigs.StatorCurrentLimitEnable = CurrentConstants.kStatorCurrentLimitEnable;
 
             // customCurrentLimitConfigs.SupplyCurrentLimit = SwerveConstants.kSwerveDriveSupplyCurrentLimit;
             // customCurrentLimitConfigs.SupplyCurrentLimitEnable = SwerveConstants.kSwerveDriveSupplyCurrentLimitEnable;
@@ -147,5 +148,27 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
             updateSimState(deltaTime, RobotController.getBatteryVoltage());
         });
         m_simNotifier.startPeriodic(kSimLoopPeriod);
+    }
+
+
+    public void checkCurrentLimits(){
+
+        int id = 0;
+        for (var mod : Modules){
+
+            var drive = mod.getDriveMotor();
+            var steer = mod.getSteerMotor();
+
+            if (Math.abs(drive.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+                SmartDashboard.putNumber("Over Stator on drive "+id, drive.getStatorCurrent().getValueAsDouble());
+            }
+
+            if (Math.abs(drive.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+                SmartDashboard.putNumber("Over Stator on steer "+id, steer.getStatorCurrent().getValueAsDouble());
+            }
+
+            id++;
+        
+        }
     }
 }

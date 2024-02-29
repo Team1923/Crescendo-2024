@@ -18,14 +18,14 @@ import frc.robot.generated.TunerConstants;
  */
 public final class Constants {
 
+    public static final class CurrentConstants{
+        public static final double kStatorCurrentLimit = 80;
+        public static final boolean kStatorCurrentLimitEnable = true;
+    }
+
     public static final class SwerveConstants {
         public static final double maxSpeed = TunerConstants.kSpeedAt12VoltsMps;
         public static final double maxAngularRate = (1.5 * Math.PI) * 8;
-
-        public static final double kSwerveDriveSupplyCurrentLimit = 40;
-        public static final boolean kSwerveDriveSupplyCurrentLimitEnable = true;
-        public static final double kSwerveDriveSupplyCurrentThreshold = 60;
-        public static final double kSwerveDriveSupplyTimeThreshold = 0.1;
     }
 
     public static final class LimeLightConstants {
@@ -91,6 +91,7 @@ public final class Constants {
         /* Motion Magic Constants */
         public static final double intakeKS = 0;
         public static final double intakekP = 0.9;
+        public static final double intakekV = 0.1;
         public static final double intakekI = 0.005;
         public static final double intakekD = 0;
 
@@ -132,13 +133,13 @@ public final class Constants {
 
         /* Motion Magic Velocity Constants */
         public static final double shooterKS = 0.25;
-        public static final double shooterKV = 0.12;
+        public static final double shooterKV = 0.12; //0.12
         public static final double shooterKP = 0.2;
         public static final double shooterKA = 0;
         public static final double shooterKI = 0;
         public static final double shooterKD = 0;
-        public static final double maxShooterAccel = 100;
-        public static final double maxShooterJerk = 1000;
+        public static final double maxShooterAccel = 400;
+        public static final double maxShooterJerk = 5000;
 
         /* Beam Break ID */
         public static final int beamBreakFourID = 4;

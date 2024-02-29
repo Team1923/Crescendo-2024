@@ -29,6 +29,7 @@ import frc.robot.commands.ManualHashTuningCommands.ChangePositionOffset;
 import frc.robot.commands.ManualHashTuningCommands.ChangeRPMOffset;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
+import frc.robot.commands.desired_scoring_location.SetArmToReverseSubwoofer;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
 import frc.robot.commands.desired_scoring_location.SetArmToTrap;
 import frc.robot.commands.intake.DeployIntakeCommand;
@@ -117,7 +118,7 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
     operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
-    // operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToTrap());
+    operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());

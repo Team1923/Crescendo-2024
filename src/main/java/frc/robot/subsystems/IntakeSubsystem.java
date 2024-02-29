@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
@@ -7,8 +8,10 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
@@ -41,6 +44,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     // subject all to change
     intakeArmSlot0Configs.kS = Constants.IntakeConstants.intakeKS;
+    intakeArmSlot0Configs.kV = Constants.IntakeConstants.intakekV;
     intakeArmSlot0Configs.kP = Constants.IntakeConstants.intakekP;
     intakeArmSlot0Configs.kI = Constants.IntakeConstants.intakekI;
     intakeArmSlot0Configs.kD = Constants.IntakeConstants.intakekD;
@@ -63,7 +67,28 @@ public class IntakeSubsystem extends SubsystemBase {
     // Need to change/test in lab
     intakeArmFollower.setControl(new Follower(IntakeConstants.intakeArmPrimaryID, false));
 
+    configCurrentLimit();
     zeroIntakeArm();
+  }
+
+  public void configCurrentLimit(){
+    var customCurrentConfig = new CurrentLimitsConfigs();
+
+  
+    intakeWheelTop.getConfigurator().refresh(customCurrentConfig);
+    intakeWheelBottom.getConfigurator().refresh(customCurrentConfig);
+
+    intakeArmPrimary.getConfigurator().refresh(customCurrentConfig);
+    intakeArmFollower.getConfigurator().refresh(customCurrentConfig);
+
+    customCurrentConfig.StatorCurrentLimit = CurrentConstants.kStatorCurrentLimit;
+    customCurrentConfig.StatorCurrentLimitEnable = CurrentConstants.kStatorCurrentLimitEnable;
+
+    intakeWheelTop.getConfigurator().apply(customCurrentConfig);
+    intakeWheelBottom.getConfigurator().apply(customCurrentConfig);
+
+    intakeArmFollower.getConfigurator().apply(customCurrentConfig);
+    intakeArmPrimary.getConfigurator().apply(customCurrentConfig);
   }
 
   /**
@@ -181,6 +206,16 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeArmFollower.setNeutralMode(NeutralModeValue.Brake);
   }
 
+  public void checkCurrentLimits(){
+    if (Math.abs(intakeArmPrimary.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+      SmartDashboard.putNumber("Over Stator on intakeArm", intakeArmPrimary.getStatorCurrent().getValueAsDouble());
+    }
+    if (Math.abs(intakeWheelTop.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+      SmartDashboard.putNumber("Over Stator on intakeWheel", intakeWheelTop.getStatorCurrent().getValueAsDouble());
+    }
+  }
+
+
   @Override
   public void periodic() {
     stateHandler.setBBOneCovered(getBeamBreakOne());
@@ -192,6 +227,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     // SmartDashboard.putNumber("Intake Position Radians",
     // getIntakeArmPositionRads());
+
+    checkCurrentLimits();
 
     IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
     IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();

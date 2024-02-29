@@ -1,13 +1,16 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.CurrentConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -66,6 +69,21 @@ public class ArmSubsystem extends SubsystemBase {
 
     /* Finally, zero the arm so that its STOW position = 0 rads. */
     zeroArm();
+  }
+
+   public void configCurrentLimit(){
+    var customCurrentConfig = new CurrentLimitsConfigs();
+
+  
+    armPrimary.getConfigurator().refresh(customCurrentConfig);
+    armFollower.getConfigurator().refresh(customCurrentConfig);
+
+    customCurrentConfig.StatorCurrentLimit = CurrentConstants.kStatorCurrentLimit;
+    customCurrentConfig.StatorCurrentLimitEnable = CurrentConstants.kStatorCurrentLimitEnable;
+
+
+    armFollower.getConfigurator().apply(customCurrentConfig);
+    armPrimary.getConfigurator().apply(customCurrentConfig);
   }
 
   /**
@@ -159,6 +177,12 @@ public class ArmSubsystem extends SubsystemBase {
     armPrimary.setNeutralMode(NeutralModeValue.Brake);
   }
 
+  public void checkCurrentLimits(){
+    if (Math.abs(armPrimary.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+      SmartDashboard.putNumber("Over Stator on arm", armPrimary.getStatorCurrent().getValueAsDouble());
+    }
+  }
+
   @Override
   public void periodic() {
     // SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
@@ -176,6 +200,8 @@ public class ArmSubsystem extends SubsystemBase {
      * out arm position to be variable.
     */
 
+    checkCurrentLimits();
+
     ArmStates desiredArmState = stateHandler.getDesiredArmState();
     double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
@@ -183,6 +209,9 @@ public class ArmSubsystem extends SubsystemBase {
       // subwoofer condition
       if (stateHandler.getWantToPositionForSubwoofer()) {
         armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
+      }
+      else if(stateHandler.getReverseSubwoofer()){
+        armSetpoint = ArmStates.REVERSE_SUBWOOFER.getArmPosition().getAngularSetpoint();
       }
       // distance to speaker condition
       else if (stateHandler.getHasValidSpeakerTag()) {

@@ -44,6 +44,7 @@ public class StateHandler {
     private boolean wantToPositionForSubwoofer = false;
     private boolean scoreInAmp = false;
     private boolean scoreInTrap = false;
+    private boolean wantToPositionForReverseSubwoofer = false;
     private boolean manuallyClimbing = false;
 
     /*PosRPM tuning values */
@@ -497,6 +498,14 @@ public class StateHandler {
 
     public boolean getScoreInTrap() {
         return scoreInTrap;
+    }
+
+    public void setScoreInReverseSubwoofer(boolean a){
+        this.wantToPositionForReverseSubwoofer = a;
+    }
+
+    public boolean getReverseSubwoofer(){
+        return wantToPositionForReverseSubwoofer;
     }
 
     public boolean getManuallyClimbing() {

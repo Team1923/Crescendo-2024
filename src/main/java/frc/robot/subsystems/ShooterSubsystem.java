@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
@@ -7,7 +8,9 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -63,6 +66,27 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /* Set one motor to follow the other. */
     shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, false));
+
+    setShooterCurrentLimits();
+  }
+
+
+  /**
+   * Setting the current limits for the shooter motor.
+   */
+  public void setShooterCurrentLimits(){
+    var currentLimitsConfigs = new CurrentLimitsConfigs();
+    var currentConfigsTop = shooterTop.getConfigurator();
+    var currentConfigsBottom = shooterBottom.getConfigurator();
+
+    currentConfigsTop.refresh(currentLimitsConfigs);
+    currentConfigsBottom.refresh(currentLimitsConfigs);
+
+    currentLimitsConfigs.StatorCurrentLimit = 80;
+    currentLimitsConfigs.StatorCurrentLimitEnable = true;
+
+    currentConfigsTop.apply(currentLimitsConfigs);
+    currentConfigsBottom.apply(currentLimitsConfigs);
   }
 
   /**
@@ -125,6 +149,12 @@ public class ShooterSubsystem extends SubsystemBase {
         && Math.abs((getBottomRPM() - (desiredSetpoint))) < ShooterConstants.shooterSpeedThreshold;
   }
 
+  public void checkCurrentLimits(){
+    if (Math.abs(shooterTop.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+      SmartDashboard.putNumber("Over Stator on shooter", shooterTop.getStatorCurrent().getValueAsDouble());
+    }
+  }
+
   @Override
   public void periodic() {
     stateHandler.setBBFourCovered(getBeamBreakFour());
@@ -135,12 +165,14 @@ public class ShooterSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
     // SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
+    checkCurrentLimits();
+
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
     double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
 
     if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
       /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
-      if (stateHandler.getWantToPositionForSubwoofer()) {
+      if (stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer()) {
         desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
       }
       /* If we have a valid speaker tag, then get positional data. */
@@ -164,7 +196,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
 
-    if (isAtShooterSpeed(desiredShooterSpeed)) {
+    if ((stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer()) && isAtShooterSpeed(2000)) {
+      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    }
+    else if(isAtShooterSpeed(desiredShooterSpeed)){
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     }
 

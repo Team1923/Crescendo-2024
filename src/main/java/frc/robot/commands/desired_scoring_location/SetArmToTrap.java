@@ -22,9 +22,9 @@ public class SetArmToTrap extends Command {
   public void initialize() {
 
     stateHandler.setScoreInTrap(true);
-
     stateHandler.setScoreInAmp(false);
     stateHandler.setWantToPositionForSubwoofer(false);
+    stateHandler.setScoreInReverseSubwoofer(false);
 
 
 

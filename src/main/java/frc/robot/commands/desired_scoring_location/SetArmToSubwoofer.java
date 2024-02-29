@@ -21,6 +21,7 @@ public class SetArmToSubwoofer extends Command {
     stateHandler.setWantToPositionForSubwoofer(true);
     stateHandler.setScoreInAmp(false);
     stateHandler.setScoreInTrap(false);
+    stateHandler.setScoreInReverseSubwoofer(false);
 
   }
 

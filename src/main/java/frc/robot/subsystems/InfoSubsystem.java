@@ -42,7 +42,7 @@ public class InfoSubsystem extends SubsystemBase {
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#CE42F5"))
 			.getEntry();
   
-  private GenericEntry trapPos = driverDashboard.add("TRAP", false)
+  private GenericEntry reverseSubwooferPos = driverDashboard.add("REVERSE_SUBWOOFER", false)
   		.withSize(3, 1)
 			.withPosition(0, 2)
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#000080"))
@@ -60,12 +60,13 @@ public class InfoSubsystem extends SubsystemBase {
   .withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
   .getEntry();
 
+
   @Override
   public void periodic() {
     /* Driver Dashboard Display */
     subwooferPos.setBoolean(stateHandler.getWantToPositionForSubwoofer());
     ampPos.setBoolean(stateHandler.getScoreInAmp());
-    trapPos.setBoolean(stateHandler.getScoreInTrap());
+    reverseSubwooferPos.setBoolean(stateHandler.getReverseSubwoofer());
     seeSpeakerTag.setBoolean(stateHandler.getHasValidSpeakerTag());
     seeTrapTag.setBoolean(stateHandler.getHasValidTrapTag());
 
@@ -103,8 +104,8 @@ public class InfoSubsystem extends SubsystemBase {
     SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
 
     /*POSRPM OFFSET */
-    SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
-    SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
+    // SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
+    // SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
 
 
   }
