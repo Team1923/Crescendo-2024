@@ -85,6 +85,6 @@ public class GoalCentricCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp();
+    return stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getReverseSubwoofer();
   }
 }

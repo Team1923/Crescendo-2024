@@ -109,6 +109,8 @@ public class RobotContainer {
     () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
     () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
 
+    driverXboxController.leftTrigger().whileTrue(new ScoreGamePiece());
+
 
  
 
