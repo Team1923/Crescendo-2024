@@ -77,9 +77,7 @@ public final class Constants {
         
     }
 
-    public static final class CANdleConstants{
-        public static final int candleID = 0;
-    }
+    
 
     public static final class IntakeConstants {
         /* Motor IDs */
@@ -185,6 +183,13 @@ public final class Constants {
         public static final double armMaxGravityConstant = 0.050 * 12; // 2 volts max ff 
 
         public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
+    }
+
+    public static final class LEDConstants{
+        public static final int LEDCount = 41 + 8;
+        public static final int CANdleID = 23;
+
+
     }
 
 }

@@ -49,6 +49,7 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.InfoSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -67,6 +68,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final LEDSubsystem ledSubsystem = new LEDSubsystem();
 
   /* Helper Classes Instantiation */
   public final AutoInstantiator autoInstantiator = new AutoInstantiator();

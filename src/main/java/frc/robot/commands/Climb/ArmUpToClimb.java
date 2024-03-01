@@ -26,7 +26,7 @@ public class ArmUpToClimb extends Command {
   @Override
   public void initialize() {
     stateHandler.setDesiredArmState(ArmStates.CLIMB);
-    stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
+    // stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
