@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.428577011000176,
-        "y": 5.58980582348629
+        "x": 5.416882856557736,
+        "y": 5.8353830667775295
       },
       "isLocked": false,
       "linkedName": "EndOf1"
@@ -20,24 +20,24 @@
         "y": 5.940630456759489
       },
       "prevControl": {
-        "x": 8.135360078224895,
-        "y": 5.874942092329616
+        "x": 8.119189676554585,
+        "y": 5.8236511496653645
       },
       "nextControl": {
-        "x": 7.042370324056887,
-        "y": 6.116042773396089
+        "x": 7.077452787384207,
+        "y": 6.256372626705367
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.56320958225962,
-        "y": 6.057572001183889
+        "x": 5.370106238787976,
+        "y": 6.3616200166873265
       },
       "prevControl": {
-        "x": 5.978202269794852,
-        "y": 6.244678472262928
+        "x": 6.761710617438329,
+        "y": 6.3616200166873265
       },
       "nextControl": null,
       "isLocked": false,
@@ -69,34 +69,17 @@
           ]
         }
       }
-    },
-    {
-      "name": "Shoot",
-      "waypointRelativePos": 1.8,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "ScoreGamePiece"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 5.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 5.314545669944692,
     "rotateFast": false
   },
   "reversed": false,

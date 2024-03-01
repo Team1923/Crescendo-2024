@@ -43,7 +43,7 @@ public class LEDSubsystem extends SubsystemBase {
   // private Animation twinkleAnimation = new TwinkleAnimation(255, 255, 0);
   // private Animation singleFadeAnimation = new SingleFadeAnimation(255, 255, 0, 1, 0.7,LEDCount, 0);
 
-  private Timer waitTimer = new Timer();
+  // private Timer waitTimer = new Timer();
 
   private Colors currentColor = Colors.OFF;
 
@@ -73,6 +73,7 @@ public class LEDSubsystem extends SubsystemBase {
     OFF,
     SOLID,
     FLASHING,
+    FIRE,
     RAINBOW;
     public Animation anim;
 
@@ -90,7 +91,7 @@ public class LEDSubsystem extends SubsystemBase {
     config.brightnessScalar = 1;
     candle.configAllSettings(config);
 
-    waitTimer.start();
+    // waitTimer.start();
   }
 
   // public void set(Colors color){
@@ -136,23 +137,31 @@ public class LEDSubsystem extends SubsystemBase {
     int g = c.RGB[1];
     int b = c.RGB[2];
 
+    endAnimation();
+    candle.clearAnimation(0);
 
+
+    //trying useing animation slot 0 alwasy, maybe overrunning?
 
     switch(a){
       case SOLID:
-        candle.setLEDs(r,g , b,0,0, LEDCount);
+        candle.setLEDs(r, g, b, 0,0,LEDCount);
+        // candle.animate(new SingleFadeAnimation(r,g , b,0,0, LEDCount),0);
         break;
       case RAINBOW:
-        candle.animate(new RainbowAnimation());
+        candle.animate(new RainbowAnimation(),0);
         break;
       case HEARTBEAT:
-        candle.animate(new SingleFadeAnimation(r, g, b, 0, 0.7, LEDCount));
+        candle.animate(new SingleFadeAnimation(r, g, b, 0, 0.7, LEDCount),0);
         break;
       case FLASHING:
-        candle.animate(new StrobeAnimation(r, g, b, 0, 0.3, LEDCount, 0));
+        candle.animate(new StrobeAnimation(r, g, b, 0, 0.3, LEDCount, 0),0);
+        break;
+      case FIRE:
+        candle.animate(new FireAnimation());
         break;
       default:
-        candle.animate(new SingleFadeAnimation(0, 0, 0));
+        candle.animate(new SingleFadeAnimation(0, 0, 0),0);
         break;
     }
     
@@ -192,12 +201,12 @@ public class LEDSubsystem extends SubsystemBase {
 
 
 
+    if(stateHandler.getBBOneCovered()){    //quits out quickly
 
-    if(stateHandler.getBBOneCovered()){
       desiredColor = Colors.WHITE;
       desiredAnimation = Animations.FLASHING;
     }
-    else if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){
+    else if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){ //doesn't always go
       desiredColor = Colors.ORANGE;
       desiredAnimation = Animations.SOLID;
     }
@@ -259,7 +268,8 @@ public class LEDSubsystem extends SubsystemBase {
               desiredAnimation = Animations.RAINBOW;
           }
           else{
-            desiredAnimation = Animations.SOLID;
+            desiredAnimation = Animations.RAINBOW;
+            desiredColor = Colors.RAINBOW;
           }
         }
         else{
@@ -270,7 +280,7 @@ public class LEDSubsystem extends SubsystemBase {
     }
     else{
       desiredColor = Colors.RED;
-      desiredAnimation = Animations.SOLID;
+      desiredAnimation = Animations.FIRE;
     }
 
     SmartDashboard.putString("CurrentAnim", currentAnimation.name());
@@ -279,16 +289,16 @@ public class LEDSubsystem extends SubsystemBase {
     SmartDashboard.putString("desiredAnim", desiredAnimation.name());
     SmartDashboard.putString("desiredColor", desiredColor.name());
 
-    SmartDashboard.putNumber("WaitTimer", waitTimer.get());
+    // SmartDashboard.putNumber("WaitTimer", waitTimer.get());
 
    
 
-    if (waitTimer.hasElapsed(0.5) && (desiredColor != null && desiredAnimation != null) && (currentAnimation != desiredAnimation || currentColor != desiredColor)){
+    if (/*waitTimer.hasElapsed(0.5) &&*/ (desiredColor != null && desiredAnimation != null) && (currentAnimation != desiredAnimation || currentColor != desiredColor)){
       apply(desiredColor, desiredAnimation);
-      System.out.println("Applied " +desiredColor.name()+ " "+desiredAnimation.name());
+      // System.out.println("Applied " +desiredColor.name()+ " "+desiredAnimation.name());
       currentColor = desiredColor;
       currentAnimation = desiredAnimation;
-      waitTimer.restart();
+      // waitTimer.restart();
     }
   }
 }

@@ -49,6 +49,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.05
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "ScoreCommandGroup"
@@ -71,6 +77,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.05
           }
         },
         {
@@ -99,9 +111,21 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.05
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.05
           }
         },
         {

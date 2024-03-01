@@ -12,27 +12,96 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "PreloadClose"
+            "name": "wantSubwoofer"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "PodiumGamepiece"
+            "name": "ScoreGamePiece"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "MidGamepiece"
+            "name": "wantRange"
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "AmpGamepiece"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "PodiumGamepiece"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "DeployIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "MidGamepiece"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "DeployIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "AmpGamepiece"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "DeployIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
           }
         },
         {
@@ -42,9 +111,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "1To2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
           }
         }
       ]
