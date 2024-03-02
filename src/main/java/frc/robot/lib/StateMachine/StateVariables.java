@@ -10,7 +10,7 @@ public class StateVariables {
         AMP(new ArmPosition(-1.96)), 
         SPEAKER(new ArmPosition(-0.77)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.77)
         TRAP(new ArmPosition(-0.9)), //TODO: FIND
-        CLIMB(new ArmPosition(-1.3)); //TODO: find val
+        CLIMB(new ArmPosition(-1.3));
 
         private ArmPosition armPosition;
 
@@ -41,8 +41,8 @@ public class StateVariables {
      */
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(0)),
-        SHOOT(new RPMValue(2000)); //THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
-
+        SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
+        
         private RPMValue rpmValue;
 
         private ShooterSpeeds(RPMValue rpmValue) {

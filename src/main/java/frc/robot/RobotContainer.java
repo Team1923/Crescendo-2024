@@ -113,8 +113,14 @@ public class RobotContainer {
 
     driverXboxController.leftTrigger().whileTrue(new ScoreGamePiece());
 
+    /* manual hashmap tuning */
+    operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));
+    operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-100));
 
- 
+    driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.02));
+    driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.02));
+
+
 
 
     /* Operator Button Bindings */
@@ -129,7 +135,7 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.operatorLeftBumper).whileTrue(new IntakeEjectCommand());
 
     //TODO: implement arm stuff
-    operatorPS4Controller.povUp().toggleOnTrue(new ClimbCommandGroup(armSubsystem, () -> operatorPS4Controller.getRawAxis(5)));
+    operatorPS4Controller.button(ControllerConstants.Operator.littleRightButton).toggleOnTrue(new ClimbCommandGroup(armSubsystem, () -> operatorPS4Controller.getRawAxis(5)));
 
   }
 

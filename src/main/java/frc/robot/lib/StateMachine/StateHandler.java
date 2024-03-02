@@ -49,10 +49,13 @@ public class StateHandler {
 
     /*PosRPM tuning values */
     private double positionOffset = 0;
-    
 
     private double RPMOffset = 0;
+
+    private boolean posRPMTuning = false;
     
+
+   
 
     /* BEAM BREAK Values */
     private boolean bbOneCovered = false;
@@ -531,6 +534,10 @@ public class StateHandler {
 
     public void setRPMOffset(double rPMOffset) {
         RPMOffset = rPMOffset;
+    }
+
+     public boolean isPosRPMTuning() {
+        return posRPMTuning;
     }
 
 }

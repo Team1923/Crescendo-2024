@@ -8,6 +8,7 @@ import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.CANdle.LEDStripType;
 import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
+import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
 import com.ctre.phoenix.led.CANdleConfiguration;
 import com.ctre.phoenix.led.ColorFlowAnimation;
 import com.ctre.phoenix.led.FireAnimation;
@@ -35,6 +36,8 @@ public class LEDSubsystem extends SubsystemBase {
 
   StateHandler stateHandler = StateHandler.getInstance();
 
+  
+
   private int LEDCount = Constants.LEDConstants.LEDCount;
   // private RainbowAnimation rainbowAnim = new RainbowAnimation(1,1,-1);
   // private Animation strobeAnimation = new StrobeAnimation(255, 255, 0,0,0.3,-1);
@@ -43,7 +46,6 @@ public class LEDSubsystem extends SubsystemBase {
   // private Animation twinkleAnimation = new TwinkleAnimation(255, 255, 0);
   // private Animation singleFadeAnimation = new SingleFadeAnimation(255, 255, 0, 1, 0.7,LEDCount, 0);
 
-  // private Timer waitTimer = new Timer();
 
   private Colors currentColor = Colors.OFF;
 
@@ -74,6 +76,7 @@ public class LEDSubsystem extends SubsystemBase {
     SOLID,
     FLASHING,
     FIRE,
+    LARSON,
     RAINBOW;
     public Animation anim;
 
@@ -90,6 +93,8 @@ public class LEDSubsystem extends SubsystemBase {
     config.v5Enabled = true;
     config.brightnessScalar = 1;
     candle.configAllSettings(config);
+
+
 
     // waitTimer.start();
   }
@@ -160,6 +165,9 @@ public class LEDSubsystem extends SubsystemBase {
       case FIRE:
         candle.animate(new FireAnimation());
         break;
+      case LARSON: 
+        candle.animate(new LarsonAnimation(r, g, b, 0, 0.5,LEDCount,BounceMode.Front, 4), 0);
+        break;
       default:
         candle.animate(new SingleFadeAnimation(0, 0, 0),0);
         break;
@@ -206,6 +214,10 @@ public class LEDSubsystem extends SubsystemBase {
       desiredColor = Colors.WHITE;
       desiredAnimation = Animations.FLASHING;
     }
+    else if (stateHandler.getManuallyClimbing()){
+        desiredColor = Colors.PINK;
+        desiredAnimation = Animations.HEARTBEAT;
+    }
     else if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){ //doesn't always go
       desiredColor = Colors.ORANGE;
       desiredAnimation = Animations.SOLID;
@@ -215,7 +227,7 @@ public class LEDSubsystem extends SubsystemBase {
 
       //for amp
       if (stateHandler.getScoreInAmp()){
-        desiredColor = Colors.PURPLE;
+        desiredColor = Colors.ORANGE;
         if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.OUTWARD){
           desiredAnimation = Animations.SOLID;
         }
@@ -226,6 +238,7 @@ public class LEDSubsystem extends SubsystemBase {
 
       //for subwoofer 
       else if (stateHandler.getWantToPositionForSubwoofer()){
+      
         desiredColor = Colors.BLUE;
         if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
           desiredAnimation = Animations.SOLID;
@@ -237,12 +250,20 @@ public class LEDSubsystem extends SubsystemBase {
       //for reverse subwoofer
       else if (stateHandler.getReverseSubwoofer()){
 
-        desiredColor = (currentColor == Colors.BLUE) ? Colors.WHITE : Colors.BLUE; //note, not sure if this will look good
-        desiredAnimation = Animations.SOLID;
+
+        desiredColor = Colors.PURPLE;
+        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
+          desiredAnimation = Animations.SOLID;
+        }
+        else{
+          desiredAnimation = Animations.HEARTBEAT;
+        }
+
+        
       }
       // for trap
       else if (stateHandler.getScoreInTrap()){
-        desiredColor = Colors.PINK;
+        desiredColor = Colors.OFF;
         
         if (stateHandler.getHasValidTrapTag()){
           if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
@@ -256,10 +277,6 @@ public class LEDSubsystem extends SubsystemBase {
         else{
           desiredAnimation = Animations.HEARTBEAT;
         }
-      }
-      else if (stateHandler.getManuallyClimbing()){
-        desiredColor = Colors.YELLOW;
-        desiredAnimation = Animations.HEARTBEAT;
       }
       //implied ranged
       else{

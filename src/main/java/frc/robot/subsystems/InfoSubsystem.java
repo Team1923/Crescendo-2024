@@ -28,6 +28,15 @@ public class InfoSubsystem extends SubsystemBase {
   public InfoSubsystem(CommandXboxController x, CommandPS4Controller p){
     this.xboxController = x;
     this.ps4Controller = p;
+
+    // if (stateHandler.isPosRPMTuning()){
+    //   GenericEntry POSRPMTUNING = driverDashboard.add("IN POSRPM MODE", false)
+    //   .withSize(3, 3)
+    //   .withPosition(0, 0)
+    //   .withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
+    //   .getEntry();
+
+    // }
   }
 
 	private GenericEntry ampPos = driverDashboard.add("AMP", false)
@@ -65,6 +74,8 @@ public class InfoSubsystem extends SubsystemBase {
   .withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
   .getEntry();
 
+  
+  
 
   @Override
   public void periodic() {
@@ -110,9 +121,12 @@ public class InfoSubsystem extends SubsystemBase {
     SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
 
     /*POSRPM OFFSET */
-    // SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
-    // SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
-
+    if (stateHandler.isPosRPMTuning()){
+        SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
+        SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
+    }
+    
+// 
 
   }
 }

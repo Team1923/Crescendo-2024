@@ -162,8 +162,8 @@ public class ShooterSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Raw RPS TOP SHOOTER", shooterTop.getVelocity().getValueAsDouble());
     // SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER", shooterBottom.getVelocity().getValueAsDouble());
 
-    // SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
-    // SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
+    SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
+    SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
     checkCurrentLimits();
 
@@ -172,8 +172,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
       /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
+    
       if (stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer()) {
-        desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM();
+        desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM() + (stateHandler.isPosRPMTuning() ? stateHandler.getRPMOffset(): 0);
       }
       /* If we have a valid speaker tag, then get positional data. */
       else if (stateHandler.getHasValidSpeakerTag()) {
@@ -195,7 +196,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
 
-
+   
     if ((stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer()) && isAtShooterSpeed(2000)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     }

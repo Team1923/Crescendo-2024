@@ -188,7 +188,7 @@ public class ArmSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
     // SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
 
-    // SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
+    SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
 
     // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
     // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
@@ -208,7 +208,7 @@ public class ArmSubsystem extends SubsystemBase {
     if (desiredArmState == ArmStates.SPEAKER) {
       // subwoofer condition
       if (stateHandler.getWantToPositionForSubwoofer()) {
-        armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint();
+        armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint() + (stateHandler.isPosRPMTuning() ? stateHandler.getPositionOffset() : 0);
       }
       else if(stateHandler.getReverseSubwoofer()){
         armSetpoint = ArmStates.REVERSE_SUBWOOFER.getArmPosition().getAngularSetpoint();

@@ -27,7 +27,7 @@ public class ArmUpToClimb extends Command {
   public void initialize() {
     stateHandler.setDesiredArmState(ArmStates.CLIMB);
 
-    // stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
+    stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,7 +46,7 @@ public class ArmUpToClimb extends Command {
     else{
       stateHandler.setManuallyClimbing(false);
       stateHandler.setDesiredArmState(ArmStates.STOWED);
-      // stateHandler.setDesiredIntakeState(IntakeStates.STOWED);
+      stateHandler.setDesiredIntakeState(IntakeStates.STOWED);
     }
 
   }

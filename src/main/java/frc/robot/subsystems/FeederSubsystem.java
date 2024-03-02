@@ -101,6 +101,16 @@ public class FeederSubsystem extends SubsystemBase {
     /*
      * Not subwoofer shot
      */
+    // if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER){
+    //   System.out.println("ARM READY");
+    // }
+    // if (stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
+    //   System.out.println("SHOOTER READY");
+    // }
+    // if (stateHandler.getIsCenteredToTag() && (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)){
+    //   System.out.println("LL CENTERED and WITHIN DISTANCE");
+    // }
+
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
         && (stateHandler.getIsCenteredToTag()) && 

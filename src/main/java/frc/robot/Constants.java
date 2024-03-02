@@ -71,6 +71,8 @@ public final class Constants {
             public static final int circleButton = 2;
             public static final int crossButton = 1;
 
+            public static final int littleRightButton = 8;
+
             public static final int operatorLeftBumper = 5;
             public static final int operatorRightBumper = 6;
         }
