@@ -120,7 +120,7 @@ public class FeederSubsystem extends SubsystemBase {
     /*
      * edge condition for running intake until note is fully in (already handled eject condition so this shouldn't override?)
      */
-    else if (!stateHandler.getBBThreeCovered() && stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){
+    else if (!stateHandler.getBBThreeCovered() && stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED && !(stateHandler.getDesiredArmState() == ArmStates.CLIMB) && !stateHandler.getManuallyClimbing()){
         desiredFeederSpeed = FeederSpeeds.INWARD;
     }
     

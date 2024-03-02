@@ -47,6 +47,11 @@ public class InfoSubsystem extends SubsystemBase {
 			.withPosition(0, 2)
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#000080"))
 			.getEntry();
+    private GenericEntry manualClimbing = driverDashboard.add("Manual Climbing", false)
+  		.withSize(3, 1)
+			.withPosition(1, 1)
+			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#000080"))
+			.getEntry();
 
 	private GenericEntry seeSpeakerTag = driverDashboard.add("SPEAKER APRIL TAG", false)
 			.withSize(3, 1)
@@ -69,6 +74,7 @@ public class InfoSubsystem extends SubsystemBase {
     reverseSubwooferPos.setBoolean(stateHandler.getReverseSubwoofer());
     seeSpeakerTag.setBoolean(stateHandler.getHasValidSpeakerTag());
     seeTrapTag.setBoolean(stateHandler.getHasValidTrapTag());
+    manualClimbing.setBoolean(stateHandler.getManuallyClimbing());
 
     if(DriverStation.isTeleop() && stateHandler.getBBOneCovered()){
       xboxController.getHID().setRumble(RumbleType.kBothRumble, 0.2);

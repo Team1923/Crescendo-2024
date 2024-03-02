@@ -6,7 +6,7 @@ package frc.robot.commands.Climb;
 
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -26,19 +26,28 @@ public class ArmUpToClimb extends Command {
   @Override
   public void initialize() {
     stateHandler.setDesiredArmState(ArmStates.CLIMB);
+
     // stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("ArmUpToClimb", true);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putString("Working", "A");
-    stateHandler.setManuallyClimbing(true);
+    SmartDashboard.putBoolean("ArmUpToClimb", false);
+    if (stateHandler.getCurrentArmState() == ArmStates.CLIMB){
+          stateHandler.setManuallyClimbing(true);
+    }
+    else{
+      stateHandler.setManuallyClimbing(false);
+      stateHandler.setDesiredArmState(ArmStates.STOWED);
+      // stateHandler.setDesiredIntakeState(IntakeStates.STOWED);
+    }
 
   }
 

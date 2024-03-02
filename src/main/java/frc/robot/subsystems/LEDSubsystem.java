@@ -224,19 +224,21 @@ public class LEDSubsystem extends SubsystemBase {
         }
       }
 
-      //for subwoofer and recerse subwoofer
+      //for subwoofer 
       else if (stateHandler.getWantToPositionForSubwoofer()){
         desiredColor = Colors.BLUE;
         if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
           desiredAnimation = Animations.SOLID;
         }
-        else if (stateHandler.getCurrentArmState() == ArmStates.REVERSE_SUBWOOFER){
-          desiredColor = (currentColor == Colors.BLUE) ? Colors.WHITE : Colors.BLUE; //note, not sure if this will look good
-          desiredAnimation = Animations.SOLID;
-        }
         else{
           desiredAnimation = Animations.HEARTBEAT;
         }
+      }
+      //for reverse subwoofer
+      else if (stateHandler.getReverseSubwoofer()){
+
+        desiredColor = (currentColor == Colors.BLUE) ? Colors.WHITE : Colors.BLUE; //note, not sure if this will look good
+        desiredAnimation = Animations.SOLID;
       }
       // for trap
       else if (stateHandler.getScoreInTrap()){
