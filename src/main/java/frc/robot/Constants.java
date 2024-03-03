@@ -49,7 +49,7 @@ public final class Constants {
         public static final double trapLerpUpperBound = 0;
         
 
-        public static final double xAngleThreshold = 2;
+        public static final double xAngleThreshold = 2.5;
         
     }
 

@@ -93,6 +93,6 @@ public class Align90 extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return limelight.hasAmpTag() && (Math.abs(limelight.getXAngleOffset()) < tolerance);
+    return false;
   }
 }

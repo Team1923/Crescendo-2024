@@ -37,6 +37,7 @@ import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
 import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
+import frc.robot.commands.swerve.Align90;
 import frc.robot.commands.swerve.AlignAmp;
 import frc.robot.commands.swerve.FaceAndAlignToAmp;
 import frc.robot.commands.swerve.GoalCentricCommand;
@@ -99,8 +100,7 @@ public class RobotContainer {
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
-    driverXboxController.rightStick().whileTrue(new FaceAndAlignToAmp(drivetrain, () -> driverXboxController.getLeftY(), () -> driverXboxController.getLeftX() , () -> driverXboxController.getRightX()));
-
+    driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> driverXboxController.getLeftY(), () -> driverXboxController.getLeftX()));
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {

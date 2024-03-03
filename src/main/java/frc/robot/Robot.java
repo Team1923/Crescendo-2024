@@ -70,21 +70,21 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    if (outsideButton.get()){
-      m_robotContainer.armSubsystem.setArmCoast();
-      m_robotContainer.intakeSubsystem.setIntakeArmCoast();
+    // if (outsideButton.get()){
+    //   m_robotContainer.armSubsystem.setArmCoast();
+    //   m_robotContainer.intakeSubsystem.setIntakeArmCoast();
 
-    }
-    else{
-      m_robotContainer.armSubsystem.setArmBrake();
-      m_robotContainer.intakeSubsystem.setIntakeArmBrake();
+    // }
+    // else{
+    //   m_robotContainer.armSubsystem.setArmBrake();
+    //   m_robotContainer.intakeSubsystem.setIntakeArmBrake();
 
-    }
-    if (insideButton.get()){
-      m_robotContainer.drivetrain.zeroGyro();
-      m_robotContainer.armSubsystem.zeroArm();
-      m_robotContainer.intakeSubsystem.zeroIntakeArm();
-    }
+    // }
+    // if (insideButton.get()){
+    //   m_robotContainer.drivetrain.zeroGyro();
+    //   m_robotContainer.armSubsystem.zeroArm();
+    //   m_robotContainer.intakeSubsystem.zeroIntakeArm();
+    // }
   }
 
   @Override

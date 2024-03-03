@@ -260,8 +260,11 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     //having 2 gamepiece test 
-    if (stateHandler.getBBThreeCovered() && !stateHandler.getBBOneCovered()){
+    if (stateHandler.getBBThreeCovered() && stateHandler.getBBOneCovered()){
       stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.EJECT);
+    }
+    else if (stateHandler.getBBThreeCovered() && !stateHandler.getBBOneCovered()){
+      stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.OFF);
     }
 
     if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
