@@ -259,6 +259,11 @@ public class IntakeSubsystem extends SubsystemBase {
       bb1Crossed = false;
     }
 
+    //having 2 gamepiece test 
+    if (stateHandler.getBBThreeCovered() && !stateHandler.getBBOneCovered()){
+      stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.EJECT);
+    }
+
     if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
         && !stateHandler.getBBThreeCovered() && bb1Crossed) {
       rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
