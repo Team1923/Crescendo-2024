@@ -1,5 +1,8 @@
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+import java.util.Queue;
+
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -23,6 +26,12 @@ public class FeederSubsystem extends SubsystemBase {
   /* Beam Break initializations. These are DigitalInput objects that return true/false. */
   private DigitalInput beamBreakTwo = new DigitalInput(FeederConstants.beamBreakTwoID);
   private DigitalInput beamBreakThree = new DigitalInput(FeederConstants.beamBreakThreeID);
+
+  boolean armP =false;
+  boolean llP = false;
+  boolean shooterP = false;
+
+  ArrayList<String> events = new ArrayList<>();
 
   /* Instantiate the StateHandler to get useful data on the robot's current state. */
   private StateHandler stateHandler = StateHandler.getInstance();
@@ -101,15 +110,18 @@ public class FeederSubsystem extends SubsystemBase {
     /*
      * Not subwoofer shot
      */
-    // if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER){
-    //   System.out.println("ARM READY");
-    // }
-    // if (stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
-    //   System.out.println("SHOOTER READY");
-    // }
-    // if (stateHandler.getIsCenteredToTag() && (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)){
-    //   System.out.println("LL CENTERED and WITHIN DISTANCE");
-    // }
+    if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER && !armP){
+      events.add("ARM READY");
+      armP = true;
+    }
+    if (stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT && !shooterP){
+      events.add("SHOOTER READY");
+      shooterP = true;
+    }
+    if (stateHandler.getIsCenteredToTag() && (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound) && !llP){
+      events.add("LL CENTERED and WITHIN DISTANCE");
+      llP = true;
+    }
 
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
@@ -117,6 +129,14 @@ public class FeederSubsystem extends SubsystemBase {
         (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)) {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
+
+      System.out.println(events);
+
+      llP = false;
+      armP = false;
+      shooterP = false;
+
+      events.clear();
     }
 
     /*

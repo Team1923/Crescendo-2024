@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SuppliedValueWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
@@ -58,7 +59,7 @@ public class InfoSubsystem extends SubsystemBase {
 			.getEntry();
     private GenericEntry manualClimbing = driverDashboard.add("Manual Climbing", false)
   		.withSize(3, 1)
-			.withPosition(1, 1)
+			.withPosition(2, 1)
 			.withProperties(Map.of("Color when false", "#000000", "Color when true", "#000080"))
 			.getEntry();
 
@@ -73,6 +74,9 @@ public class InfoSubsystem extends SubsystemBase {
   .withPosition(0, 4)
   .withProperties(Map.of("Color when false", "#000000", "Color when true", "#57F542"))
   .getEntry();
+
+  private SuppliedValueWidget<Double> distToSpeaker = driverDashboard.addNumber("DIST TO SPEAKER TAG", () -> stateHandler.getDistanceToSpeakerTag())
+          .withPosition(4, 3);
 
   
   

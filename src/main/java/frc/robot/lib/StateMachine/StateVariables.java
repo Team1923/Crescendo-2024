@@ -10,7 +10,7 @@ public class StateVariables {
         AMP(new ArmPosition(-1.96)), 
         SPEAKER(new ArmPosition(-0.77)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.77)
         TRAP(new ArmPosition(-0.9)), //TODO: FIND
-        CLIMB(new ArmPosition(-1.3));
+        CLIMB(new ArmPosition(-1.35));
 
         private ArmPosition armPosition;
 

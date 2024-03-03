@@ -1,0 +1,89 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.814783697943464,
+        "y": 6.01079538341413
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.773704362223539,
+        "y": 6.4083966344570875
+      },
+      "isLocked": false,
+      "linkedName": "EndOf1Mid"
+    },
+    {
+      "anchor": {
+        "x": 7.8217676625377015,
+        "y": 5.742607589728245
+      },
+      "prevControl": {
+        "x": 7.703324616492291,
+        "y": 7.258678579109509
+      },
+      "nextControl": {
+        "x": 7.9387092069621,
+        "y": 4.245755821095933
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.364408956738141,
+        "y": 6.1979018544931685
+      },
+      "prevControl": {
+        "x": 6.001590578679733,
+        "y": 7.495952997604001
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "EndOf2Mid"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": -32.71656598890848,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "deploy",
+      "waypointRelativePos": 0.3,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.5,
+    "maxAcceleration": 4.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "5 Piece Mid",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

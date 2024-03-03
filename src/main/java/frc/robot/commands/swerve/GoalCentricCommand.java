@@ -11,6 +11,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveConstants;
@@ -35,7 +37,9 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier rotationSup;
 
   /* PID Things */
-  private final double kPTarget = 0.003;
+  private final double kPTarget = 0.0027;
+  private final double kI = 0.000002;
+  private final double kD = 0.0002;
   private PIDController rotationController;
 
   /** Creates a new GoalCentricCommand. */
@@ -44,7 +48,8 @@ public class GoalCentricCommand extends Command {
     this.translationSup = t;
     this.strafeSup = s;
     this.rotationSup = r;
-    rotationController = new PIDController(kPTarget, 0, 0);
+
+    rotationController = new PIDController(kPTarget, kI, kD);
     addRequirements(this.swerve);
   }
 
@@ -67,13 +72,17 @@ public class GoalCentricCommand extends Command {
       rotValue = 0;
     }
 
-    SmartDashboard.putNumber("ROT VAL", rotValue);
+    // SmartDashboard.putNumber("ROT VAL", rotValue);
 
-    ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
-    strafeValue  * SwerveConstants.maxSpeed, 
-    rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
+      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
+      strafeValue  * SwerveConstants.maxSpeed, 
+      rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
     
-    swerve.setControl(drive.withSpeeds(chassisSpeeds));
+      swerve.setControl(drive.withSpeeds(chassisSpeeds));
+    
+    
+
+    
   }
 
 

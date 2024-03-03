@@ -37,6 +37,11 @@ public class TunerConstants {
     // This needs to be tuned to your individual robot
     private static final double kSlipCurrentA = 300.0;
 
+    //Current limit (ADDED BY GRIFFIN)
+    public static final double kSwerveDriveStatorCurrentLimit = 60;
+    public static final double kSwerveSteerStatorCurrentLimit = 80;
+    public static final boolean kSwerveStatorCurrentLimitEnable = true;
+
     // Theoretical free speed (m/s) at 12v applied output;
     // This needs to be tuned to your individual robot
     public static final double kSpeedAt12VoltsMps = 5.21;

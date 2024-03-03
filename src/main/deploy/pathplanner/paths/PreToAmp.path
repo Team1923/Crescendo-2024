@@ -1,0 +1,55 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.6747534349769553,
+        "y": 7.36
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.060660531577473,
+        "y": 7.3015292277878
+      },
+      "isLocked": false,
+      "linkedName": "EndOfPreMid"
+    },
+    {
+      "anchor": {
+        "x": 2.8441688792209487,
+        "y": 7.016492665463964
+      },
+      "prevControl": {
+        "x": 2.481650091505311,
+        "y": 7.086657592118604
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "EndOfAmpMid"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.45,
+      "rotationDegrees": -17.05359424521864,
+      "rotateFast": true
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 2.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 27.8240963842532,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "5 Piece Mid",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

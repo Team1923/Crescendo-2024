@@ -90,7 +90,7 @@ public class RobotContainer {
         drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
           * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
           .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
-          .withRotationalRate(getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate)));
+          .withRotationalRate(getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()*0.6) * SwerveConstants.maxAngularRate)));
     //getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
@@ -114,11 +114,11 @@ public class RobotContainer {
     driverXboxController.leftTrigger().whileTrue(new ScoreGamePiece());
 
     /* manual hashmap tuning */
-    operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));
-    operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-100));
+    // operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));
+    // operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-100));
 
-    driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.02));
-    driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.02));
+    // driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.02));
+    // driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.02));
 
 
 

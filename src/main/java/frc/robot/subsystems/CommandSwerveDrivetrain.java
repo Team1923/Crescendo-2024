@@ -83,8 +83,8 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
             //Set all of the parameters related to the supply current.  The values should come from Constants.
 
-            customCurrentLimitConfigs.StatorCurrentLimit = CurrentConstants.kStatorCurrentLimit;
-            customCurrentLimitConfigs.StatorCurrentLimitEnable = CurrentConstants.kStatorCurrentLimitEnable;
+            customCurrentLimitConfigs.StatorCurrentLimit = TunerConstants.kSwerveDriveStatorCurrentLimit;
+            customCurrentLimitConfigs.StatorCurrentLimitEnable = TunerConstants.kSwerveStatorCurrentLimitEnable;
 
             // customCurrentLimitConfigs.SupplyCurrentLimit = SwerveConstants.kSwerveDriveSupplyCurrentLimit;
             // customCurrentLimitConfigs.SupplyCurrentLimitEnable = SwerveConstants.kSwerveDriveSupplyCurrentLimitEnable;
@@ -170,5 +170,9 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
             id++;
         
         }
+    }
+
+    public void zeroGyro(){
+        this.getPigeon2().setYaw(0);
     }
 }
