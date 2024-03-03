@@ -52,7 +52,7 @@ public class GoalCentricCommand extends Command {
     rotationController = new PIDController(kPTarget, kI, kD);
     addRequirements(this.swerve);
   }
-  
+
 
   // Called when the command is initially scheduled.
   @Override

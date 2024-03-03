@@ -52,6 +52,9 @@ public class AlignAmp extends Command {
         this.s_Swerve = s;
         this.strafeSup = strafeS;
 
+        rotationController.enableContinuousInput(-180, 180);
+
+
 
 
     }

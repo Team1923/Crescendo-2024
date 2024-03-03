@@ -53,6 +53,8 @@ public class Align90 extends Command {
     this.strafeSup = s;
 
     rotationController = new PIDController(kPTarget, kI, kD);
+
+    rotationController.enableContinuousInput(-180, 180);
     addRequirements(this.swerve);
   }
   

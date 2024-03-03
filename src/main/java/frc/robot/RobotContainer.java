@@ -37,7 +37,7 @@ import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
 import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
-import frc.robot.commands.swerve.AlignToAmp;
+import frc.robot.commands.swerve.AlignAmp;
 import frc.robot.commands.swerve.FaceAndAlignToAmp;
 import frc.robot.commands.swerve.GoalCentricCommand;
 import frc.robot.generated.Telemetry;

@@ -47,7 +47,7 @@ public class BabyBird extends Command {
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
   }
-  
+
 
   // Returns true when the command should end.
   @Override
