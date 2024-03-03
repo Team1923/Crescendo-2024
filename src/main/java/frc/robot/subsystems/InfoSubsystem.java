@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import edu.wpi.first.networktables.GenericEntry;
@@ -16,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.lib.StateMachine.StateVariables.ArmStates;
+import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
 
 public class InfoSubsystem extends SubsystemBase {
   /** Creates a new ShuffleboardSubsystem. */
@@ -26,6 +29,7 @@ public class InfoSubsystem extends SubsystemBase {
   private CommandXboxController xboxController;
   private CommandPS4Controller ps4Controller;
 
+  
   public InfoSubsystem(CommandXboxController x, CommandPS4Controller p){
     this.xboxController = x;
     this.ps4Controller = p;
@@ -129,6 +133,8 @@ public class InfoSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
         SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
     }
+
+    
     
 // 
 

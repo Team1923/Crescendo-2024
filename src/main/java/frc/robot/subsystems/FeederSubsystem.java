@@ -98,18 +98,6 @@ public class FeederSubsystem extends SubsystemBase {
 
     checkCurrentLimits();
 
-    FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
-
-    if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
-        && stateHandler.getDesiredIntakeState() == IntakeStates.DEPLOYED
-        && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.EJECT) {
-      /* HANDLES EJECT CONDITION */
-      desiredFeederSpeed = FeederSpeeds.OUTWARD;
-    } 
-    
-    /*
-     * Not subwoofer shot
-     */
     if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER && !armP){
       events.add("ARM READY");
       armP = true;
@@ -123,6 +111,20 @@ public class FeederSubsystem extends SubsystemBase {
       llP = true;
     }
 
+
+    FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
+
+    if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED
+        && stateHandler.getDesiredIntakeState() == IntakeStates.DEPLOYED
+        && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.EJECT) {
+      /* HANDLES EJECT CONDITION */
+      desiredFeederSpeed = FeederSpeeds.OUTWARD;
+    } 
+    
+    /*
+     * Not subwoofer shot
+     */
+  
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
         && (stateHandler.getIsCenteredToTag()) && 
