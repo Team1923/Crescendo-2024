@@ -4,6 +4,7 @@
   "holonomicMode": true,
   "pathFolders": [
     "6Piece",
+    "5PieceFar",
     "TestAutos"
   ],
   "autoFolders": [

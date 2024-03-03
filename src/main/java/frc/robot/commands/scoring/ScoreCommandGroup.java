@@ -17,13 +17,9 @@ public class ScoreCommandGroup extends ParallelCommandGroup {
 
   public ScoreCommandGroup(CommandSwerveDrivetrain swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup,
       DoubleSupplier rotationSup) {
-        if (stateHandler.getScoreInAmp()){
-          addCommands(new ScoreGamePiece());
-        }
-        else{
           addCommands(new GoalCentricCommand(swerve, translationSup, strafeSup, rotationSup),
           new ScoreGamePiece());
-        }
+        
   }
 
 }

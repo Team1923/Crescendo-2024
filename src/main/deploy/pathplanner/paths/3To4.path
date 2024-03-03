@@ -1,0 +1,102 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.7147411242040724,
+        "y": 5.340141464876368
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.745294740232842,
+        "y": 4.239322829572906
+      },
+      "isLocked": false,
+      "linkedName": "EndOf3"
+    },
+    {
+      "anchor": {
+        "x": 5.635318317712241,
+        "y": 4.122214464115091
+      },
+      "prevControl": {
+        "x": 4.922402853372063,
+        "y": 4.292342018105361
+      },
+      "nextControl": {
+        "x": 6.665871933741013,
+        "y": 3.876286896653679
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.7198472228613495,
+        "y": 2.389010655339427
+      },
+      "prevControl": {
+        "x": 7.767257404060824,
+        "y": 3.164813620421729
+      },
+      "nextControl": {
+        "x": 7.591028020857753,
+        "y": 0.2810600770987556
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.105777623823435,
+        "y": 3.0096849922658473
+      },
+      "prevControl": {
+        "x": 4.803848922961757,
+        "y": 1.4521437316769061
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "EndOf4"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "deploy",
+      "waypointRelativePos": 1.2000000000000002,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.5,
+    "maxAcceleration": 4.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -28.610459665965323,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "5PieceFar",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

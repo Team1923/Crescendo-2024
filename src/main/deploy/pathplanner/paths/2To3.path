@@ -3,45 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.7196527120326968,
-        "y": 2.3415152284850027
+        "x": 5.370106238787976,
+        "y": 6.3616200166873265
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.4510064136518674,
-        "y": 1.6595168684225041
+        "x": 6.370106238787976,
+        "y": 6.3616200166873265
       },
       "isLocked": false,
-      "linkedName": "EndOfPreFar"
+      "linkedName": "EndOf2"
     },
     {
       "anchor": {
-        "x": 7.813147989932344,
-        "y": 0.8302583877895031
+        "x": 7.684714713224005,
+        "y": 4.133925300660873
       },
       "prevControl": {
-        "x": 6.804564291436851,
-        "y": 0.8302583877895031
+        "x": 7.769754329141069,
+        "y": 6.146529544031389
       },
       "nextControl": {
-        "x": 8.821731688427835,
-        "y": 0.8302583877895031
+        "x": 7.64958220358666,
+        "y": 3.3024559059103855
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.229085367261644,
-        "y": 2.15494030988062
+        "x": 3.7147411242040724,
+        "y": 5.340141464876368
       },
       "prevControl": {
-        "x": 6.0127000254000365,
-        "y": 1.2500519546493645
+        "x": 4.909246451873784,
+        "y": 3.829443550470554
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOf5"
+      "linkedName": "EndOf3"
     }
   ],
   "rotationTargets": [
@@ -54,10 +54,10 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake",
-      "waypointRelativePos": 0.55,
+      "name": "deploy",
+      "waypointRelativePos": 0.15,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
@@ -69,38 +69,21 @@
           ]
         }
       }
-    },
-    {
-      "name": "Shoot",
-      "waypointRelativePos": 1.9,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "ScoreGamePiece"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
-    "maxAcceleration": 3.5,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -39.28940686250035,
+    "rotation": 1.1691393279073665,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "5PieceFar",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
