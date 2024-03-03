@@ -37,6 +37,8 @@ import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
 import frc.robot.commands.scoring.ScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
+import frc.robot.commands.swerve.AlignToAmp;
+import frc.robot.commands.swerve.FaceAndAlignToAmp;
 import frc.robot.commands.swerve.GoalCentricCommand;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
@@ -64,9 +66,9 @@ public class RobotContainer {
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(SwerveConstants.maxSpeed * 0.1).withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
-  private final ArmSubsystem armSubsystem = new ArmSubsystem();
+  public final ArmSubsystem armSubsystem = new ArmSubsystem();
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final LEDSubsystem ledSubsystem = new LEDSubsystem();
@@ -81,8 +83,8 @@ public class RobotContainer {
   private final Telemetry logger = new Telemetry(SwerveConstants.maxSpeed);
 
   /* Swerve Controller Inversion Arrays */
-    int[] blueJoystickValues = {-1, -1, -1};
-    int[] redJoystickValues = {1, 1, -1};
+  public static final int[] blueJoystickValues = {-1, -1, -1};
+  public static final int[] redJoystickValues = {1, 1, -1};
 
   /* Separate method to configure all the button bindings. */
   private void configureBindings() {
@@ -96,6 +98,8 @@ public class RobotContainer {
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+
+    driverXboxController.rightStick().whileTrue(new FaceAndAlignToAmp(drivetrain, () -> driverXboxController.getLeftY(), () -> driverXboxController.getLeftX() , () -> driverXboxController.getRightX()));
 
 
     /* Simulation tool for Swerve */
@@ -143,7 +147,7 @@ public class RobotContainer {
   }
 
   /* Helper method that does some inversion based on the alliance color. */
-  public int[] getSwerveJoystickInput() {
+  public static int[] getSwerveJoystickInput() {
     /* 
      * Index 0: driverXboxController.getLeftY();
      * Index 1: driverXboxController.getLeftX();

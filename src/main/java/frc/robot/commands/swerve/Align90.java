@@ -4,6 +4,7 @@
 
 package frc.robot.commands.swerve;
 
+import java.sql.Driver;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
@@ -15,6 +16,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -22,7 +25,7 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 
 /* TODO: cross check with existing code to get state handler integration going */
-public class GoalCentricCommand extends Command {
+public class Align90 extends Command {
   
   /* Swerve + Limelight Initialization */
   private CommandSwerveDrivetrain swerve;
@@ -34,7 +37,8 @@ public class GoalCentricCommand extends Command {
   /* Fancy double stuff for input + output to swerve. */
   private DoubleSupplier translationSup;
   private DoubleSupplier strafeSup;
-  private DoubleSupplier rotationSup;
+
+  double tolerance = 2;
 
   /* PID Things */
   private final double kPTarget = 0.0027;
@@ -43,11 +47,10 @@ public class GoalCentricCommand extends Command {
   private PIDController rotationController;
 
   /** Creates a new GoalCentricCommand. */
-  public GoalCentricCommand(CommandSwerveDrivetrain swerve, DoubleSupplier t, DoubleSupplier s, DoubleSupplier r) {
+  public Align90(CommandSwerveDrivetrain swerve, DoubleSupplier t, DoubleSupplier s) {
     this.swerve = swerve;
     this.translationSup = t;
     this.strafeSup = s;
-    this.rotationSup = r;
 
     rotationController = new PIDController(kPTarget, kI, kD);
     addRequirements(this.swerve);
@@ -64,19 +67,12 @@ public class GoalCentricCommand extends Command {
   public void execute() {
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
-    double rotValue = 0;
-    if(Math.abs(rotationSup.getAsDouble()) > 0.5){
-      rotValue = rotationSup.getAsDouble();
-    } else if(limelight.hasSpeakerTag()){
-      rotValue = rotationController.calculate(limelight.getXAngleOffset(), 0); 
-    } else{
-      rotValue = 0;
-    }
+    double rotValue = rotationController.calculate(swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? 90 : -90);
 
     // SmartDashboard.putNumber("ROT VAL", rotValue);
 
-      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
-      strafeValue  * SwerveConstants.maxSpeed, 
+      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(RobotContainer.getSwerveJoystickInput()[0] * translationValue * SwerveConstants.maxSpeed, 
+      RobotContainer.getSwerveJoystickInput()[1] * strafeValue  * SwerveConstants.maxSpeed, 
       rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
     
       swerve.setControl(drive.withSpeeds(chassisSpeeds));
@@ -95,6 +91,6 @@ public class GoalCentricCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getReverseSubwoofer();
+    return limelight.hasAmpTag() && (Math.abs(limelight.getXAngleOffset()) < tolerance);
   }
 }

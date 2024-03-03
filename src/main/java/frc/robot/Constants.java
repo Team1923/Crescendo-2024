@@ -194,4 +194,10 @@ public final class Constants {
 
     }
 
+    public static final class ButtonConstants{
+        public static final int insideButton = 5;
+        public static final int outsideButton = 6;
+
+    }
+
 }

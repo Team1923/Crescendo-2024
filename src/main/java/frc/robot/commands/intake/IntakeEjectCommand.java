@@ -20,6 +20,9 @@ public class IntakeEjectCommand extends Command {
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.EJECT);
     stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
   }
+  
+
+  
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

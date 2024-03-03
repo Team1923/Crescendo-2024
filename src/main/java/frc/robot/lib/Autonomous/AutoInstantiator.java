@@ -46,7 +46,7 @@ public class AutoInstantiator {
 
 		fiveMid = new PathPlannerAuto("5GPMid");
 
-		fourFar = new PathPlannerAuto("4GPFar");
+		// fourFar = new PathPlannerAuto("4GPFar");
 		
 		twoTest = new PathPlannerAuto("2Test");
 		fourTest = new PathPlannerAuto("4Test");

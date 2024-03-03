@@ -36,9 +36,13 @@ public class DeployIntakeCommand extends Command {
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.OFF);
   }
 
+  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return stateHandler.getBBThreeCovered();
   }
+
+
+  
 }
