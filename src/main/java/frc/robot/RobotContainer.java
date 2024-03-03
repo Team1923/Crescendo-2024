@@ -32,6 +32,7 @@ import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToReverseSubwoofer;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
 import frc.robot.commands.desired_scoring_location.SetArmToTrap;
+import frc.robot.commands.intake.BabyBird;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
 import frc.robot.commands.scoring.ScoreCommandGroup;
@@ -136,6 +137,8 @@ public class RobotContainer {
 
     //TODO: implement arm stuff
     operatorPS4Controller.button(ControllerConstants.Operator.littleRightButton).toggleOnTrue(new ClimbCommandGroup(armSubsystem, () -> operatorPS4Controller.getRawAxis(5)));
+
+    operatorPS4Controller.povLeft().whileTrue(new BabyBird());
 
   }
 

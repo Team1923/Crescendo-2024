@@ -42,7 +42,7 @@ public class StateVariables {
      */
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(0)),
-        BABY_BIRD(new RPMValue(1000)),
+        BABY_BIRD(new RPMValue(-1000)),
         SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
         
         private RPMValue rpmValue;
