@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -65,7 +66,10 @@ public class GoalCentricCommand extends Command {
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
     double rotValue = 0;
-    if(Math.abs(rotationSup.getAsDouble()) > 0.5){
+    if  (stateHandler.getScoreInAmp() || stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer() || stateHandler.getScoreInTrap()){      //babyproofing from misclick
+      rotValue = MathUtil.applyDeadband(rotationSup.getAsDouble(), 0.1);
+    }
+    else if(Math.abs(rotationSup.getAsDouble()) > 0.5){
       rotValue = rotationSup.getAsDouble();
     } else if(limelight.hasSpeakerTag()){
       rotValue = rotationController.calculate(limelight.getXAngleOffset(), 0); 
@@ -81,7 +85,6 @@ public class GoalCentricCommand extends Command {
     
       swerve.setControl(drive.withSpeeds(chassisSpeeds));
     
-    
 
     
   }
@@ -95,6 +98,6 @@ public class GoalCentricCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getReverseSubwoofer();
+    return false;//stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getReverseSubwoofer();
   }
 }
