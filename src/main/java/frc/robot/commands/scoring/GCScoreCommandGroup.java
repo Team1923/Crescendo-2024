@@ -9,12 +9,12 @@ import frc.robot.commands.swerve.GoalCentricCommand;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
-public class ScoreCommandGroup extends ParallelCommandGroup {
+public class GCScoreCommandGroup extends ParallelCommandGroup {
   /** Creates a new ScoreCommandGroup. */
   
    StateHandler stateHandler = StateHandler.getInstance();
 
-  public ScoreCommandGroup(CommandSwerveDrivetrain swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup,
+  public GCScoreCommandGroup(CommandSwerveDrivetrain swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup,
       DoubleSupplier rotationSup) {
           addCommands(new GoalCentricCommand(swerve, translationSup, strafeSup, rotationSup),
           new ScoreGamePiece());

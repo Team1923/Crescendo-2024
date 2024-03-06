@@ -35,7 +35,7 @@ import frc.robot.commands.desired_scoring_location.SetArmToTrap;
 import frc.robot.commands.intake.BabyBird;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
-import frc.robot.commands.scoring.ScoreCommandGroup;
+import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.commands.swerve.Align90;
 import frc.robot.commands.swerve.AlignAmp;
@@ -100,7 +100,7 @@ public class RobotContainer {
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
-    driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> driverXboxController.getLeftY(), () -> driverXboxController.getLeftX()));
+    // driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> driverXboxController.getLeftY(), () -> driverXboxController.getLeftX()));
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {
@@ -111,12 +111,12 @@ public class RobotContainer {
     /* Driver Button Bindings */
     //TODO: add "ScoreCommandGroup" here!
     // driverXboxController.rightTrigger().whileTrue(new ScoreGamePiece());
-   driverXboxController.rightTrigger().whileTrue(new ScoreCommandGroup(drivetrain,
+   driverXboxController.leftTrigger().whileTrue(new GCScoreCommandGroup(drivetrain,
     () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
     () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
     () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
 
-    driverXboxController.leftTrigger().whileTrue(new ScoreGamePiece());
+    driverXboxController.rightTrigger().whileTrue(new ScoreGamePiece());
 
     /* manual hashmap tuning */
     // operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));

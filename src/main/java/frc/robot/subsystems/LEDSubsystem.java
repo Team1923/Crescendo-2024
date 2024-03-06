@@ -45,7 +45,7 @@ public class LEDSubsystem extends SubsystemBase {
   // private Animation fireAnimation = new FireAnimation();
   // private Animation twinkleAnimation = new TwinkleAnimation(255, 255, 0);
   // private Animation singleFadeAnimation = new SingleFadeAnimation(255, 255, 0, 1, 0.7,LEDCount, 0);
-
+  Timer flashTimer = new Timer();
 
   private Colors currentColor = Colors.OFF;
 
@@ -163,7 +163,7 @@ public class LEDSubsystem extends SubsystemBase {
         candle.animate(new StrobeAnimation(r, g, b, 0, 0.3, LEDCount, 0),0);
         break;
       case FIRE:
-        candle.animate(new FireAnimation());
+        candle.animate(new FireAnimation(1, 0.3, -1, 1, 1, false, 0));
         break;
       case LARSON: 
         candle.animate(new LarsonAnimation(r, g, b, 0, 0.5,LEDCount,BounceMode.Front, 4), 0);
@@ -206,13 +206,22 @@ public class LEDSubsystem extends SubsystemBase {
     //No Code/Comms
 
     //intake related'
+    if (flashTimer.hasElapsed(2)){
+      flashTimer.stop();
+      flashTimer.reset();
+    }
+    
 
-
-
-    if(stateHandler.getBBOneCovered()){    //quits out quickly
+      //regular                          
+    if((flashTimer.get()<2) &&(stateHandler.getBBOneCovered() 
+    || (stateHandler.getDesiredArmState() == ArmStates.BABY_BIRD && stateHandler.getBBFourCovered()))){ //baby bird
 
       desiredColor = Colors.WHITE;
       desiredAnimation = Animations.FLASHING;
+
+      if (flashTimer.get() == 0){
+        flashTimer.start();
+      }
     }
     else if (stateHandler.getManuallyClimbing()){
         desiredColor = Colors.PINK;

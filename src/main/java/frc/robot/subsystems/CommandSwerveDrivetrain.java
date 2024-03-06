@@ -26,7 +26,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
-import frc.robot.commands.scoring.ScoreCommandGroup;
+import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.generated.TunerConstants;
 
 /**

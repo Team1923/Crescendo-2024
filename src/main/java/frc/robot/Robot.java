@@ -23,7 +23,7 @@ import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.AutoCommand.AutoSetArmToRanged;
 import frc.robot.commands.AutoCommand.AutoSetArmToSubwoofer;
 import frc.robot.commands.intake.DeployIntakeCommand;
-import frc.robot.commands.scoring.ScoreCommandGroup;
+import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Limelight.LimelightInterface;
