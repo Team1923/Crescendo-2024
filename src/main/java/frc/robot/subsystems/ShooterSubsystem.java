@@ -173,6 +173,11 @@ public class ShooterSubsystem extends SubsystemBase {
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
     double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
 
+
+    if(stateHandler.getFullEject()){
+      desiredShooterSpeed = -1* ShooterSpeeds.BABY_BIRD.getRPMValue().getRPM();
+    }
+
     if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
       /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
     
@@ -200,10 +205,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
    //If we want to shoot at subwoofer, we shoot instantly when we are at 2000 rpm to save time
-    if ((stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()) && isAtShooterSpeed(2000)) {
-      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    }
-    else if(isAtShooterSpeed(desiredShooterSpeed)){
+     if(isAtShooterSpeed(desiredShooterSpeed)){
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     }
 

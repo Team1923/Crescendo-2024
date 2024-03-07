@@ -246,6 +246,13 @@ public class IntakeSubsystem extends SubsystemBase {
     double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
     double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
 
+    /**
+     * TO FULL EJECT IN CASE OF AN ERROR
+     */
+    if(stateHandler.getFullEject()){
+      rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
+    }
+    
     /*
      * EDGE CASE: Eject speed can only be run when the intake is actually in its
      * deployed position.

@@ -13,6 +13,7 @@ public class GCScoreCommandGroup extends ParallelCommandGroup {
   /** Creates a new ScoreCommandGroup. */
   
    StateHandler stateHandler = StateHandler.getInstance();
+  
 
   public GCScoreCommandGroup(CommandSwerveDrivetrain swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup,
       DoubleSupplier rotationSup) {

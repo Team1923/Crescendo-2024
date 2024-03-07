@@ -46,6 +46,15 @@ public class StateHandler {
     private boolean scoreInTrap = false;
     private boolean wantToPositionForReverseSubwoofer = false;
     private boolean manuallyClimbing = false;
+    private boolean fullEject = false;
+
+    public boolean getFullEject() {
+        return fullEject;
+    }
+
+    public void setFullEject(boolean fullEject) {
+        this.fullEject = fullEject;
+    }
 
     /*PosRPM tuning values */
     private double positionOffset = 0;
