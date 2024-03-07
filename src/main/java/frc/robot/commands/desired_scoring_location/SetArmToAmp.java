@@ -22,7 +22,7 @@ public class SetArmToAmp extends Command {
   @Override
   public void initialize() {
     stateHandler.setScoreInAmp(true);
-    stateHandler.setWantToPositionForSubwoofer(false);
+    stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInTrap(false);
     stateHandler.setScoreInReverseSubwoofer(false);
   }

@@ -22,7 +22,7 @@ public class AutoSetArmToAmp extends Command {
   @Override
   public void initialize() {
     stateHandler.setScoreInAmp(true);
-    stateHandler.setWantToPositionForSubwoofer(false);
+    stateHandler.setScoreInSubwoofer(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -44,7 +44,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency,
             SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
-        // setSwerveDriveCustomCurrentLimits();
+        setSwerveDriveCustomCurrentLimits();
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -53,7 +53,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules) {
         super(driveTrainConstants, modules);
-        // setSwerveDriveCustomCurrentLimits();
+        setSwerveDriveCustomCurrentLimits();
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -131,6 +131,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
             this);
     }  
 
+    //getting from the pigeon used to generate CommandSwerveDriveTrain
     public Rotation2d getGyroYaw(){
         return Rotation2d.fromDegrees(Math.IEEEremainder(this.getPigeon2().getYaw().getValueAsDouble(),360));
     }
@@ -171,7 +172,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         
         }
     }
-
+    //getting from the pigeon used to generate CommandSwerveDriveTrain
     public void zeroGyro(){
         this.getPigeon2().setYaw(0);
     }

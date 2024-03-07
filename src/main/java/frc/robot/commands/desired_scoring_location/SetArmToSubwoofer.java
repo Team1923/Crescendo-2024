@@ -18,7 +18,7 @@ public class SetArmToSubwoofer extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stateHandler.setWantToPositionForSubwoofer(true);
+    stateHandler.setScoreInSubwoofer(true);
     stateHandler.setScoreInAmp(false);
     stateHandler.setScoreInTrap(false);
     stateHandler.setScoreInReverseSubwoofer(false);
@@ -36,6 +36,6 @@ public class SetArmToSubwoofer extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getWantToPositionForSubwoofer() == false;
+    return stateHandler.getScoreInSubwoofer() == false;
   }
 }

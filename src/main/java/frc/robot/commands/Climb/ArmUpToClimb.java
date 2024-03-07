@@ -33,13 +33,13 @@ public class ArmUpToClimb extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("ArmUpToClimb", true);
+    // SmartDashboard.putBoolean("ArmUpToClimb", true);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("ArmUpToClimb", false);
+    // SmartDashboard.putBoolean("ArmUpToClimb", false);
     if (stateHandler.getCurrentArmState() == ArmStates.CLIMB){
           stateHandler.setManuallyClimbing(true);
     }

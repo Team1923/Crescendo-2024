@@ -14,12 +14,20 @@ public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
 
+  /**
+   * This method returns the distance to the closest speaker tag using math provided by Limelight docs.
+   * @return The distance from limelight to tag in inches.
+   */
   public double calculateDistanceToSpeakerTag(){
     double tagOffsetAngleVertical = limelight.getYAngleOffset();
     double angleToGoal = (LimeLightConstants.limelightMountAngle + tagOffsetAngleVertical) * (Math.PI / 180);
     return (LimeLightConstants.speakerHeightFromFloor - LimeLightConstants.limelightHeight) / Math.tan(angleToGoal);
   }
 
+  /**
+   * This method returns the distance to the closest trap tag using math provided by Limelight docs.
+   * @return The distance from limelight to tag in inches.
+   */
   public double calculateDistanceToTrapTag() {
     double tagOffsetAngleVertical = limelight.getYAngleOffset();
     double angleToGoal = (LimeLightConstants.limelightMountAngle + tagOffsetAngleVertical) * (Math.PI / 180);
@@ -28,6 +36,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    //Update Limelight data 
     stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
     stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());
     stateHandler.setLimelightHasTag(limelight.hasValidTag());

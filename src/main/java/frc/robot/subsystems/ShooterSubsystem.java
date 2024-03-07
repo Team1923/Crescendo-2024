@@ -149,6 +149,9 @@ public class ShooterSubsystem extends SubsystemBase {
         && Math.abs((getBottomRPM() - (desiredSetpoint))) < ShooterConstants.shooterSpeedThreshold;
   }
 
+  /**
+   * Checks the current limit for the speaker motors and prints out a commment if exceeded.
+   */
   public void checkCurrentLimits(){
     if (Math.abs(shooterTop.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
       SmartDashboard.putNumber("Over Stator on shooter", shooterTop.getStatorCurrent().getValueAsDouble());
@@ -173,7 +176,7 @@ public class ShooterSubsystem extends SubsystemBase {
     if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
       /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
     
-      if (stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer()) {
+      if (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()) {
         desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM() + (stateHandler.isPosRPMTuning() ? stateHandler.getRPMOffset(): 0);
       }
       /* If we have a valid speaker tag, then get positional data. */
@@ -196,8 +199,8 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
 
-   
-    if ((stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer()) && isAtShooterSpeed(2000)) {
+   //If we want to shoot at subwoofer, we shoot instantly when we are at 2000 rpm to save time
+    if ((stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()) && isAtShooterSpeed(2000)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     }
     else if(isAtShooterSpeed(desiredShooterSpeed)){

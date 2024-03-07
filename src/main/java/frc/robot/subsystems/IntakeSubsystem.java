@@ -70,7 +70,9 @@ public class IntakeSubsystem extends SubsystemBase {
     configCurrentLimit();
     zeroIntakeArm();
   }
-
+/**
+ * Sets the current limits for the intake arm motors and intake roller motors.
+ */
   public void configCurrentLimit(){
     var customCurrentConfig = new CurrentLimitsConfigs();
 
@@ -191,6 +193,11 @@ public class IntakeSubsystem extends SubsystemBase {
     return !beamBreakOne.get();
   }
 
+  /**
+   * Determines wheter or not we are at intake position.
+   * @param intakeStates The intake state we pass in. 
+   * @return A boolean, true or false, if we are or are not at the intake state.
+   */
   public boolean isAtIntakeState(IntakeStates intakeStates) {
     return Math.abs(getIntakeArmPositionRads() -
         intakeStates.getIntakePosition().getAngularSetpoint()) < IntakeConstants.intakePositionAllowableOffset;
@@ -206,6 +213,9 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeArmFollower.setNeutralMode(NeutralModeValue.Brake);
   }
 
+  /**
+   * Sets the Stator Current limit for the intake motors.
+   */
   public void checkCurrentLimits(){
     if (Math.abs(intakeArmPrimary.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
       SmartDashboard.putNumber("Over Stator on intakeArm", intakeArmPrimary.getStatorCurrent().getValueAsDouble());

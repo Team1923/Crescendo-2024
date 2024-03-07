@@ -21,7 +21,7 @@ public class AutoSetArmToRanged extends Command {
   @Override
   public void initialize() {
     stateHandler.setScoreInAmp(false);
-    stateHandler.setWantToPositionForSubwoofer(false);
+    stateHandler.setScoreInSubwoofer(false);
     
 
 

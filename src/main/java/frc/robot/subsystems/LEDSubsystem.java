@@ -39,12 +39,6 @@ public class LEDSubsystem extends SubsystemBase {
   
 
   private int LEDCount = Constants.LEDConstants.LEDCount;
-  // private RainbowAnimation rainbowAnim = new RainbowAnimation(1,1,-1);
-  // private Animation strobeAnimation = new StrobeAnimation(255, 255, 0,0,0.3,-1);
-  // private Animation colorFlowAnimation = new ColorFlowAnimation(255, 255, 0,0,0.5,LEDCount,Direction.Forward);
-  // private Animation fireAnimation = new FireAnimation();
-  // private Animation twinkleAnimation = new TwinkleAnimation(255, 255, 0);
-  // private Animation singleFadeAnimation = new SingleFadeAnimation(255, 255, 0, 1, 0.7,LEDCount, 0);
   Timer flashTimer = new Timer();
 
   private Colors currentColor = Colors.OFF;
@@ -98,44 +92,6 @@ public class LEDSubsystem extends SubsystemBase {
 
     // waitTimer.start();
   }
-
-  // public void set(Colors color){
-    // switch(color){
-    //   case RED: 
-    //     candle.setLEDs(255, 0, 0,0,0, LEDCount);
-    //     break;
-    //   case GREEN: 
-    //     candle.setLEDs(0, 255, 0,0,0, LEDCount);
-    //     break;
-    //   case BLUE: 
-    //     candle.setLEDs(0, 0, 255,0,0, LEDCount);
-    //     break;
-    //   // case RAINBOW:
-    //   //   candle.animate(rainbowAnim);
-    //   //   break;
-    //   // case STROBE:
-    //   //   candle.animate(strobeAnimation);
-    //   //   break;
-    //   // case COLOR_FLOW:
-    //   //   candle.animate(colorFlowAnimation);
-    //   //   break;
-    //   // case FIRE:
-    //   //   candle.animate(fireAnimation);
-    //   //   break;
-    //   // case TWINKLE:
-    //   //   candle.animate(twinkleAnimation);
-    //   //   break;
-    //   // case sFADE:
-    //   //   candle.animate(singleFadeAnimation);
-    //   //   break;
-    //   case TEST:
-    //     candle.animate(singleFadeAnimation);
-    //     break;
-    //   default:
-    //     candle.setLEDs(255, 255, 255, 0, 0, LEDCount);
-    // }
-
-  // }
 
   public void apply(Colors c, Animations a) {
     int r = c.RGB[0];
@@ -246,7 +202,7 @@ public class LEDSubsystem extends SubsystemBase {
       }
 
       //for subwoofer 
-      else if (stateHandler.getWantToPositionForSubwoofer()){
+      else if (stateHandler.getScoreInSubwoofer()){
       
         desiredColor = Colors.BLUE;
         if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
@@ -257,7 +213,7 @@ public class LEDSubsystem extends SubsystemBase {
         }
       }
       //for reverse subwoofer
-      else if (stateHandler.getReverseSubwoofer()){
+      else if (stateHandler.getScoreInReverseSubwoofer()){
 
 
         desiredColor = Colors.PURPLE;

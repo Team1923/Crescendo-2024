@@ -18,7 +18,7 @@ public class SetArmToReverseSubwoofer extends Command {
   @Override
   public void initialize() {
     stateHandler.setScoreInReverseSubwoofer(true);
-    stateHandler.setWantToPositionForSubwoofer(false);
+    stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInAmp(false);
     stateHandler.setScoreInTrap(false);
   }
@@ -34,6 +34,6 @@ public class SetArmToReverseSubwoofer extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getReverseSubwoofer() == false;
+    return stateHandler.getScoreInReverseSubwoofer() == false;
   }
 }

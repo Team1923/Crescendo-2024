@@ -20,11 +20,6 @@ public class AutoInstantiator {
 
 	public PathPlannerAuto twoTest;
 	public PathPlannerAuto fourTest;
-	
-	
-	
-
-	
 
 	public static synchronized AutoInstantiator getInstance() {
 		if (autoInstantiator == null) {

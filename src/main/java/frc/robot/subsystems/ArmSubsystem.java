@@ -70,7 +70,9 @@ public class ArmSubsystem extends SubsystemBase {
     /* Finally, zero the arm so that its STOW position = 0 rads. */
     zeroArm();
   }
-
+  /**
+   * Limits the stator current for the intake motors as necessary. 
+   */
    public void configCurrentLimit(){
     var customCurrentConfig = new CurrentLimitsConfigs();
 
@@ -207,10 +209,11 @@ public class ArmSubsystem extends SubsystemBase {
 
     if (desiredArmState == ArmStates.SPEAKER) {
       // subwoofer condition
-      if (stateHandler.getWantToPositionForSubwoofer()) {
+      if (stateHandler.getScoreInSubwoofer()) {
         armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint() + (stateHandler.isPosRPMTuning() ? stateHandler.getPositionOffset() : 0);
       }
-      else if(stateHandler.getReverseSubwoofer()){
+      //reverse subwoofer
+      else if(stateHandler.getScoreInReverseSubwoofer()){
         armSetpoint = ArmStates.REVERSE_SUBWOOFER.getArmPosition().getAngularSetpoint();
       }
       // distance to speaker condition
@@ -222,6 +225,7 @@ public class ArmSubsystem extends SubsystemBase {
         armSetpoint = getArmPositionRads();
       }
     }
+    //trap score (NOT IMPLEMENTED YET)
     else if (desiredArmState == ArmStates.TRAP){
       if (stateHandler.getHasValidTrapTag()){
         armSetpoint = positionData.getTrapDesiredArmPosition(stateHandler.getDistanceToTrapTag());

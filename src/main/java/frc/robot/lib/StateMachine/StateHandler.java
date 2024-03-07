@@ -475,7 +475,7 @@ public class StateHandler {
      * Sets the boolean to determine if the arm should be positioned for a subwoofer shot.
      * @param s boolean value to set to determine if the arm should be positioned for a subwoofer shot.
      */
-    public void setWantToPositionForSubwoofer(boolean s) {
+    public void setScoreInSubwoofer(boolean s) {
         this.wantToPositionForSubwoofer = s;
     }
 
@@ -483,14 +483,22 @@ public class StateHandler {
      * Returns if the arm should be positioned for a subwoofer shot.
      * @return a boolean that represents if the arm should be positioned for the subwoofer.
      */
-    public boolean getWantToPositionForSubwoofer() {
+    public boolean getScoreInSubwoofer() {
         return wantToPositionForSubwoofer;
     }
 
+    /**
+     * Sets the boolean to determine if the arm should be positioned for an amp score.
+     * @param a boolean value to set to determine if the arm should be positioned for an amp score.
+     */
     public void setScoreInAmp(boolean a) {
         this.scoreInAmp = a;
     }
 
+    /**
+     * Returns if the arm should be positioned for an amp score.
+     * @return a boolean that reperesents if the arm should be positioned for the amp.
+     */
     public boolean getScoreInAmp() {
         return scoreInAmp;
     }
@@ -503,21 +511,40 @@ public class StateHandler {
         return scoreInTrap;
     }
 
+    /**
+     * Sets the boolean to determine if we want to score in the Subwoofer with the Reversed Subwoofer state.
+     * @param a a boolean value to set to determine if the arm should be positioned reversed subwoofer.
+     */
     public void setScoreInReverseSubwoofer(boolean a){
         this.wantToPositionForReverseSubwoofer = a;
     }
 
-    public boolean getReverseSubwoofer(){
+    /**
+     * Returns if the arm should be positioned for reverseSubwoofer.
+     * @return a boolean that represents if the arm should be positioned for reverse subwoofer.
+     */
+    public boolean getScoreInReverseSubwoofer(){
         return wantToPositionForReverseSubwoofer;
     }
 
+   /**
+    * Returns if the arm is ready for manual climb.
+    * @return A boolean value that represents if the arm is ready for manual climb.
+    */
     public boolean getManuallyClimbing() {
         return manuallyClimbing;
     }
 
+    /**
+     * Sets the boolean to determine if we want to move the arm to climb, and are ready for manual climb.
+     * @param a a boolean value to set to determine if the arm is ready for manual climb.
+     */
     public void setManuallyClimbing(boolean manuallyClimbing) {
         this.manuallyClimbing = manuallyClimbing;
     }
+
+
+    //HASHMAP TUNING
 
 
     public double getPositionOffset() {

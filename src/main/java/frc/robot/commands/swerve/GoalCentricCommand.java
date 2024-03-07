@@ -66,7 +66,7 @@ public class GoalCentricCommand extends Command {
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
     double rotValue = 0;
-    if  (stateHandler.getScoreInAmp() || stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer() || stateHandler.getScoreInTrap()){      //babyproofing from misclick
+    if  (stateHandler.getScoreInAmp() || stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer() || stateHandler.getScoreInTrap()){      //babyproofing from misclick
       rotValue = MathUtil.applyDeadband(rotationSup.getAsDouble(), 0.1);
     }
     else if(Math.abs(rotationSup.getAsDouble()) > 0.5){

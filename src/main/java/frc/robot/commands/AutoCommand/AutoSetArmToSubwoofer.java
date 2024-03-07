@@ -18,7 +18,7 @@ public class AutoSetArmToSubwoofer extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stateHandler.setWantToPositionForSubwoofer(true);
+    stateHandler.setScoreInSubwoofer(true);
     stateHandler.setScoreInAmp(false);
   }
 

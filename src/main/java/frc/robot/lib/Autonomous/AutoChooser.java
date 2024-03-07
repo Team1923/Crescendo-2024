@@ -9,17 +9,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class AutoChooser {
     public enum AutoMode {
 		STRAIGHT_4_METERS_AUTO,
-
 		SUBWOOFER_2_GP,
 		SUBWOOFER_3_GP,
 		SUBWOOFER_4_GP,
 		SUBWOOFER_5_GP,
 		SUBWOOFER_6_GP,
-
 		MID_5_GP,
-        
 		// FAR_4_GP,
-
 		TWO_TEST,
 		FOUR_TEST;
 	}

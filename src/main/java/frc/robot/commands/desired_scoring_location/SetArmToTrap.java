@@ -23,7 +23,7 @@ public class SetArmToTrap extends Command {
 
     stateHandler.setScoreInTrap(true);
     stateHandler.setScoreInAmp(false);
-    stateHandler.setWantToPositionForSubwoofer(false);
+    stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInReverseSubwoofer(false);
 
 

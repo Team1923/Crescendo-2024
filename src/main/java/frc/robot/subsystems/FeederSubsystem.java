@@ -85,6 +85,9 @@ public class FeederSubsystem extends SubsystemBase {
     return !beamBreakThree.get();
   }
 
+  /**
+   * Setting the stator current limit for the feeder motors.
+   */
   public void checkCurrentLimits(){
     if (Math.abs(feederMotor.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
       SmartDashboard.putNumber("Over Stator on feeder", feederMotor.getStatorCurrent().getValueAsDouble());
@@ -98,6 +101,9 @@ public class FeederSubsystem extends SubsystemBase {
 
     checkCurrentLimits();
 
+    /**
+     * Checks the conditions that 
+     */
     if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER && !armP){
       events.add("ARM READY");
       armP = true;
@@ -145,7 +151,7 @@ public class FeederSubsystem extends SubsystemBase {
      * Subwoofer shot
      */
     else if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-    && (stateHandler.getWantToPositionForSubwoofer() || stateHandler.getReverseSubwoofer())){
+    && (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer())){
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 

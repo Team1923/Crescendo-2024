@@ -10,7 +10,7 @@ public class AutoIntake extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
 
-  boolean hasPickedGP;
+  boolean hasPickedGP; // may not need it based on how we changed how paths are made(path + intake in parallel, ask griffin)
 
   /** Creates a new DeployIntakeCommand. */
   public AutoIntake() {
