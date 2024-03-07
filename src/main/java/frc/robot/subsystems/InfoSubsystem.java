@@ -92,8 +92,8 @@ public class InfoSubsystem extends SubsystemBase {
   private SuppliedValueWidget<String> desiredIntakePosition = stateDashboard.addString("Desired Intake Position", () -> stateHandler.getDesiredIntakeState().toString()).withPosition(2, 1);
   private SuppliedValueWidget<String> currentShooterSpeeds = stateDashboard.addString("Current Shooter Speed", () -> stateHandler.getCurrentShootingSpeed().toString()).withPosition(3, 0);
   private SuppliedValueWidget<String> desiredShooterSpeeds = stateDashboard.addString("Desired Shooter Speeds", () -> stateHandler.getDesiredShootingSpeed().toString()).withPosition(3, 1);
-  private SuppliedValueWidget<String> currentFeederSpeed = stateDashboard.addString("Current Feeder Speed", () -> stateHandler.getCurrentFeederSpeed().toString()).withPosition(2, 0);
-  private SuppliedValueWidget<String> desiredFeederSpeed = stateDashboard.addString("Desired Feeder Speed", () -> stateHandler.getDesiredFeederSpeed().toString()).withPosition(2, 0);
+  private SuppliedValueWidget<String> currentFeederSpeed = stateDashboard.addString("Current Feeder Speed", () -> stateHandler.getCurrentFeederSpeed().toString()).withPosition(4, 0);
+  private SuppliedValueWidget<String> desiredFeederSpeed = stateDashboard.addString("Desired Feeder Speed", () -> stateHandler.getDesiredFeederSpeed().toString()).withPosition(4, 1);
   
   
 
