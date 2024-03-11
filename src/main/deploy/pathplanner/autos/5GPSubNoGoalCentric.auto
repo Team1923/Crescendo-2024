@@ -80,7 +80,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreCommandGroup"
+                  "name": "ScoreGamePiece"
                 }
               }
             ]
@@ -137,7 +137,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreCommandGroup"
+                  "name": "ScoreGamePiece"
                 }
               }
             ]
@@ -194,7 +194,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreCommandGroup"
+                  "name": "ScoreGamePiece"
                 }
               }
             ]
@@ -241,7 +241,7 @@
         {
           "type": "named",
           "data": {
-            "name": "ScoreCommandGroup"
+            "name": "ScoreGamePiece"
           }
         }
       ]

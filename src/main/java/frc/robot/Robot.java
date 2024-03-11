@@ -22,6 +22,8 @@ import frc.robot.commands.AutoCommand.AutoScoreCommand;
 import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.AutoCommand.AutoSetArmToRanged;
 import frc.robot.commands.AutoCommand.AutoSetArmToSubwoofer;
+import frc.robot.commands.desired_scoring_location.SetArmToRanged;
+import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
@@ -47,6 +49,11 @@ public class Robot extends TimedRobot {
     NamedCommands.registerCommand("ScoreGamePiece", new AutoScoreCommand());
     NamedCommands.registerCommand("wantSubwoofer", new AutoSetArmToSubwoofer());
     NamedCommands.registerCommand("wantRange", new AutoSetArmToRanged());
+
+    NamedCommands.registerCommand("NonAutoDeployIntake", new DeployIntakeCommand());
+    NamedCommands.registerCommand("NonAutoScoreGamePiece", new ScoreGamePiece());
+    NamedCommands.registerCommand("NonAutoWantSubwoofer", new SetArmToSubwoofer());
+    NamedCommands.registerCommand("NonAutoWantRange", new SetArmToRanged());
 
     CameraServer.startAutomaticCapture();
 

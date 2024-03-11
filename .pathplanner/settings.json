@@ -6,10 +6,10 @@
     "5 Piece Mid",
     "5PieceFar",
     "6Piece",
-    "5PieceSubwoofer",
     "TestAutos"
   ],
   "autoFolders": [
+    "SmallerPaths",
     "TestAutos"
   ],
   "defaultMaxVel": 3.0,

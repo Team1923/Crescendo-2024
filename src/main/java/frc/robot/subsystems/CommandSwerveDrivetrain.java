@@ -118,6 +118,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
         /*Have to do this here, because this needs to happen AFTER swerve subsystem is instantiated but BEFORE the autobuilder */
         NamedCommands.registerCommand("ScoreCommandGroup", new AutoScoreCommandGroup(this));
+        NamedCommands.registerCommand("NonAutoScoreCommandGroup", new GCScoreCommandGroup(this, () -> 0, () -> 0, () -> 0));
 
 
 

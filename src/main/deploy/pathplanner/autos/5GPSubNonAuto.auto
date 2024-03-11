@@ -14,19 +14,19 @@
         {
           "type": "named",
           "data": {
-            "name": "wantSubwoofer"
+            "name": "NonAutoWantSubwoofer"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "ScoreGamePiece"
+            "name": "NonAutoScoreGamePiece"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "wantRange"
+            "name": "NonAutoWantRange"
           }
         },
         {
@@ -46,7 +46,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "DeployIntake"
+                        "name": "NonAutoDeployIntake"
                       }
                     },
                     {
@@ -80,7 +80,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreCommandGroup"
+                  "name": "NonAutoScoreCommandGroup"
                 }
               }
             ]
@@ -109,7 +109,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "DeployIntake"
+                        "name": "NonAutoDeployIntake"
                       }
                     }
                   ]
@@ -137,7 +137,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreCommandGroup"
+                  "name": "NonAutoScoreCommandGroup"
                 }
               }
             ]
@@ -166,7 +166,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "DeployIntake"
+                        "name": "NonAutoDeployIntake"
                       }
                     }
                   ]
@@ -194,7 +194,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreCommandGroup"
+                  "name": "NonAutoScoreCommandGroup"
                 }
               }
             ]
@@ -213,7 +213,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "AmpTo1"
+                  "pathName": "AmpTo1NonAuto"
                 }
               },
               {
@@ -221,15 +221,15 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "path",
                       "data": {
-                        "name": "DeployIntake"
+                        "pathName": "AmpTo1NonAuto"
                       }
                     },
                     {
-                      "type": "wait",
+                      "type": "named",
                       "data": {
-                        "waitTime": 4.0
+                        "name": "NonAutoDeployIntake"
                       }
                     }
                   ]
@@ -241,7 +241,7 @@
         {
           "type": "named",
           "data": {
-            "name": "ScoreCommandGroup"
+            "name": "NonAutoScoreCommandGroup"
           }
         }
       ]
