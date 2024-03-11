@@ -26,6 +26,8 @@ public class PositionRPMData {
      }
 
      private void fillMaps() {
+
+        /* MANUAL DATA */
         speakerPositionRPMMap.put(149.25, new PositionRPMObject(-0.285, 4000));
         speakerPositionRPMMap.put(153.1, new PositionRPMObject(-0.285, 4000));
         speakerPositionRPMMap.put(103.6, new PositionRPMObject(-0.43, 3000));
@@ -41,6 +43,29 @@ public class PositionRPMData {
         speakerPositionRPMMap.put(78.7, new PositionRPMObject(-0.53, 3000));
         speakerPositionRPMMap.put(56.6, new PositionRPMObject(-0.63, 3000));
         speakerPositionRPMMap.put(52.3, new PositionRPMObject(-0.68, 3000));
+        // speakerPositionRPMMap.put(117.6, new PositionRPMObject(-0.34, 3300));
+        // speakerPositionRPMMap.put(126.3, new PositionRPMObject(-0.35, 3300));
+
+
+        /*BEST FIT */
+        // speakerPositionRPMMap.put(52.3, new PositionRPMObject(-0.629, 3000));
+        // speakerPositionRPMMap.put(56.6, new PositionRPMObject(-0.613, 3000));
+        // speakerPositionRPMMap.put(78.7, new PositionRPMObject(-0.537, 3000));
+        // speakerPositionRPMMap.put(92.1, new PositionRPMObject(-0.49, 3000));
+        // speakerPositionRPMMap.put(103.6, new PositionRPMObject(-0.451, 3000));
+        // speakerPositionRPMMap.put(105.1, new PositionRPMObject(-0.445, 3000));
+        // speakerPositionRPMMap.put(137.0, new PositionRPMObject(-0.335, 4000));
+        // speakerPositionRPMMap.put(149.25, new PositionRPMObject(-0.292, 4000));
+        // speakerPositionRPMMap.put(153.1, new PositionRPMObject(-0.279, 4000));
+        // speakerPositionRPMMap.put(159.4, new PositionRPMObject(-0.257, 4000));
+        // speakerPositionRPMMap.put(181.5, new PositionRPMObject(-0.180, 4200));
+        // speakerPositionRPMMap.put(198.2, new PositionRPMObject(-0.122, 4200));
+        // speakerPositionRPMMap.put(222.7, new PositionRPMObject(-0.037, 4200));
+        // speakerPositionRPMMap.put(231.6, new PositionRPMObject(-0.006, 4500));
+        // speakerPositionRPMMap.put(235.9, new PositionRPMObject(0, 4500));
+
+
+
 
 
         // trapPositionRPMMap.put(null, null);

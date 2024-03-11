@@ -38,6 +38,7 @@ import frc.robot.commands.intake.FullEjectCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
+import frc.robot.commands.scoring.ScoreGamePieceNoRanged;
 import frc.robot.commands.swerve.Align90;
 import frc.robot.commands.swerve.AlignAmp;
 import frc.robot.commands.swerve.FaceAndAlignToAmp;
@@ -117,7 +118,7 @@ public class RobotContainer {
     () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
     () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
 
-    driverXboxController.rightTrigger().whileTrue(new ScoreGamePiece());
+    driverXboxController.rightTrigger().whileTrue(new ScoreGamePieceNoRanged());
 
     /* manual hashmap tuning */
     // operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));

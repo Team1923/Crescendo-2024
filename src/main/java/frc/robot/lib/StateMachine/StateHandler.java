@@ -47,6 +47,15 @@ public class StateHandler {
     private boolean wantToPositionForReverseSubwoofer = false;
     private boolean manuallyClimbing = false;
     private boolean fullEject = false;
+    private boolean wantGoalCentric = false;
+
+    public boolean getIsGoalCentric() {
+        return wantGoalCentric;
+    }
+
+    public void setIsGoalCentric(boolean wantGoalCentric) {
+        this.wantGoalCentric = wantGoalCentric;
+    }
 
     public boolean getFullEject() {
         return fullEject;

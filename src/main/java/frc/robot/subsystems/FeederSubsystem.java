@@ -27,11 +27,11 @@ public class FeederSubsystem extends SubsystemBase {
   private DigitalInput beamBreakTwo = new DigitalInput(FeederConstants.beamBreakTwoID);
   private DigitalInput beamBreakThree = new DigitalInput(FeederConstants.beamBreakThreeID);
 
-  boolean armP =false;
-  boolean llP = false;
-  boolean shooterP = false;
+  // boolean armP =false;
+  // boolean llP = false;
+  // boolean shooterP = false;
 
-  ArrayList<String> events = new ArrayList<>();
+  // ArrayList<String> events = new ArrayList<>();
 
   /* Instantiate the StateHandler to get useful data on the robot's current state. */
   private StateHandler stateHandler = StateHandler.getInstance();
@@ -104,18 +104,18 @@ public class FeederSubsystem extends SubsystemBase {
     /**
      * Checks the conditions that 
      */
-    if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER && !armP){
-      events.add("ARM READY");
-      armP = true;
-    }
-    if (stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT && !shooterP){
-      events.add("SHOOTER READY");
-      shooterP = true;
-    }
-    if (stateHandler.getIsCenteredToTag() && (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound) && !llP){
-      events.add("LL CENTERED and WITHIN DISTANCE");
-      llP = true;
-    }
+    // if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER && !armP){
+    //   events.add("ARM READY");
+    //   armP = true;
+    // }
+    // if (stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT && !shooterP){
+    //   events.add("SHOOTER READY");
+    //   shooterP = true;
+    // }
+    // if (stateHandler.getIsCenteredToTag() && (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound) && !llP){
+    //   events.add("LL CENTERED and WITHIN DISTANCE");
+    //   llP = true;
+    // }
 
 
     FeederSpeeds desiredFeederSpeed = StateHandler.getInstance().getDesiredFeederSpeed();
@@ -142,13 +142,7 @@ public class FeederSubsystem extends SubsystemBase {
       /* CONDITION: ready to sore (center to tag = true on default) */
       desiredFeederSpeed = FeederSpeeds.INWARD;
 
-      System.out.println(events);
-
-      llP = false;
-      armP = false;
-      shooterP = false;
-
-      events.clear();
+  
     }
 
     /*

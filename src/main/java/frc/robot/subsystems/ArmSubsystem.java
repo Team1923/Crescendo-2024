@@ -160,7 +160,7 @@ public class ArmSubsystem extends SubsystemBase {
    *         that is specified by the desired state.
    */
   public boolean isAtArmState(double desiredSetpoint) {
-    return getArmPositionRads() > desiredSetpoint  && getArmPositionRads() < desiredSetpoint + ArmConstants.armPositionAllowableOffset;
+    return Math.abs(getArmPositionRads() - desiredSetpoint) < ArmConstants.armPositionAllowableOffset; 
   }
 
   /**

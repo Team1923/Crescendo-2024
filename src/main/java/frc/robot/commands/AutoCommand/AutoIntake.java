@@ -31,7 +31,8 @@ public class AutoIntake extends Command {
   public void execute() {
     if (stateHandler.getBBOneCovered()){
       hasPickedGP = true;
-    }
+   }
+
   }
 
   // Called once the command ends or is interrupted.

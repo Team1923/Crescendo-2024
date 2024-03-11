@@ -14,7 +14,8 @@ public class AutoInstantiator {
 	public PathPlannerAuto fiveSub;
 	public PathPlannerAuto sixSub;
 
-	public PathPlannerAuto fiveMid; 	
+	public PathPlannerAuto fiveMid; 
+	public PathPlannerAuto threeMid;	
 
 	// public PathPlannerAuto fourFar;
 
@@ -45,6 +46,7 @@ public class AutoInstantiator {
 		
 		twoTest = new PathPlannerAuto("2Test");
 		fourTest = new PathPlannerAuto("4Test");
+		threeMid = new PathPlannerAuto("3GPMid");
 
 	}
 
@@ -91,6 +93,10 @@ public class AutoInstantiator {
 
 	public PathPlannerAuto getFourTest() {
 		return fourTest;
+	}
+
+	public PathPlannerAuto getMidThree(){
+		return threeMid;
 	}
 
 

@@ -108,6 +108,6 @@ public class Telemetry {
             //SmartDashboard.putData("Module " + i, m_moduleMechanisms[i]);
         }
 
-        SmartDashboard.putNumber("YAW" ,state.Pose.getRotation().getDegrees());
+        // SmartDashboard.putNumber("YAW" ,state.Pose.getRotation().getDegrees());
     }
 }

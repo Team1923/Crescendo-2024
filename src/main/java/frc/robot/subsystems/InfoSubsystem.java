@@ -124,27 +124,27 @@ public class InfoSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
     SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
 
-    /* RELEVANT INTAKE STATES */
-    SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());
-    SmartDashboard.putString("DESIRED INTAKE POS", stateHandler.getDesiredIntakeState().toString());
-    SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
+    // /* RELEVANT INTAKE STATES */
+    // SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());
+    // SmartDashboard.putString("DESIRED INTAKE POS", stateHandler.getDesiredIntakeState().toString());
+    // SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
 
-    /* RELEVANT ARM STATES */
-    SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
-    SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
+    // /* RELEVANT ARM STATES */
+    // SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
+    // SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
 
-    // /* RELEVANT SHOOTER STATES */
-    SmartDashboard.putString("DESIRED SHOOTER STATE", stateHandler.getDesiredShootingSpeed().toString());
-    SmartDashboard.putString("CURRENT SHOOTER STATE", stateHandler.getCurrentShootingSpeed().toString());
+    // // /* RELEVANT SHOOTER STATES */
+    // SmartDashboard.putString("DESIRED SHOOTER STATE", stateHandler.getDesiredShootingSpeed().toString());
+    // SmartDashboard.putString("CURRENT SHOOTER STATE", stateHandler.getCurrentShootingSpeed().toString());
 
-    /* RELEVANT FEEDER STATES */
-    SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
+    // /* RELEVANT FEEDER STATES */
+    // SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
 
     /*POSRPM OFFSET */
-    if (stateHandler.isPosRPMTuning()){
-        SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
-        SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
-    }
+    // if (stateHandler.isPosRPMTuning()){
+    //     SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
+    //     SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
+    // }
 
     
     

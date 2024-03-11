@@ -17,7 +17,8 @@ public class AutoChooser {
 		MID_5_GP,
 		// FAR_4_GP,
 		TWO_TEST,
-		FOUR_TEST;
+		FOUR_TEST,
+		MID_THREE;
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -45,6 +46,8 @@ public class AutoChooser {
 
 		chooser.addOption("2 Gamepiece GC Test", AutoMode.TWO_TEST);
 		chooser.addOption("4 Gamepiece GC Test", AutoMode.FOUR_TEST);
+
+		chooser.addOption("Mid 3", AutoMode.MID_THREE);
 
 
 		auto.add(chooser);
@@ -77,6 +80,8 @@ public class AutoChooser {
 
 			case MID_5_GP:
 				return autoInstantiator.getFiveMid();
+			case MID_THREE:
+				return autoInstantiator.getMidThree();
 
 			default:
 				return null;

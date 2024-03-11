@@ -67,12 +67,12 @@ public final class Constants {
 
         static final class Operator{
             public static final int triangleButton = 4;
-            public static final int squareButton = 3;
-            public static final int circleButton = 2;
-            public static final int crossButton = 1;
+            public static final int squareButton = 1; //1 for PS5, 3 for PS4
+            public static final int circleButton = 3; //3 for PS5, 2 for PS4
+            public static final int crossButton = 2; // 2 for PS5, 1 for PS4
 
-            public static final int littleRightButton = 8;
-            public static final int littleLeftButton = 7;
+            public static final int littleRightButton = 10; //10 for PS5, 8 for PS4
+            public static final int littleLeftButton = 9; //9 for PS5, 7 for PS4
 
             public static final int operatorLeftBumper = 5;
             public static final int operatorRightBumper = 6;
