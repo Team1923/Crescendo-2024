@@ -30,7 +30,7 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -40,16 +40,9 @@
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "NonAutoDeployIntake"
-                      }
-                    }
-                  ]
+                  "name": "NonAutoDeployIntake"
                 }
               }
             ]
@@ -69,7 +62,7 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -79,16 +72,9 @@
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "NonAutoDeployIntake"
-                      }
-                    }
-                  ]
+                  "name": "NonAutoDeployIntake"
                 }
               }
             ]
@@ -108,7 +94,7 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -118,16 +104,9 @@
                 }
               },
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "NonAutoDeployIntake"
-                      }
-                    }
-                  ]
+                  "name": "NonAutoDeployIntake"
                 }
               }
             ]
@@ -157,22 +136,9 @@
                 }
               },
               {
-                "type": "parallel",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "AmpTo1NonAuto"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "NonAutoDeployIntake"
-                      }
-                    }
-                  ]
+                  "name": "NonAutoDeployIntake"
                 }
               }
             ]
