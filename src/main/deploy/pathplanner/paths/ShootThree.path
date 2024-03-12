@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.979121393427972,
-        "y": 3.9957372599930387
+        "x": 7.213749071016661,
+        "y": 4.350440149954375
       },
       "isLocked": false,
       "linkedName": "EndOfThreeIntake"
@@ -20,8 +20,8 @@
         "y": 4.5203388554925255
       },
       "prevControl": {
-        "x": 5.832052747438828,
-        "y": 4.223892040376674
+        "x": 6.018579078824824,
+        "y": 4.7272340285421315
       },
       "nextControl": null,
       "isLocked": false,
