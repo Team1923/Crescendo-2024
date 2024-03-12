@@ -3,43 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9402975333728447,
-        "y": 2.5244299099709315
+        "x": 5.633649540447229,
+        "y": 1.4650126059511381
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.964526359608275,
-        "y": 2.519263469082494
+        "x": 6.772641911024564,
+        "y": 2.6690308704691494
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "EndOfShotTwo"
     },
     {
       "anchor": {
-        "x": 1.9402975333728447,
-        "y": 2.324779631040744
+        "x": 7.846727156417276,
+        "y": 3.852620908945522
       },
       "prevControl": {
-        "x": 1.960072531256174,
-        "y": 2.502101383832398
+        "x": 7.321116026491313,
+        "y": 3.204856113415931
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfPreload4SourceSide"
+      "linkedName": "EndOfThreeIntake"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -42.92019920453832,
+    "rotation": 47.64197161055986,
     "rotateFast": false
   },
   "reversed": false,

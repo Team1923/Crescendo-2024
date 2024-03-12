@@ -3,43 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9402975333728447,
-        "y": 2.5244299099709315
+        "x": 7.846727156417276,
+        "y": 3.852620908945522
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.964526359608275,
-        "y": 2.519263469082494
+        "x": 6.979121393427972,
+        "y": 3.9957372599930387
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "EndOfThreeIntake"
     },
     {
       "anchor": {
-        "x": 1.9402975333728447,
-        "y": 2.324779631040744
+        "x": 4.585455883874731,
+        "y": 4.5203388554925255
       },
       "prevControl": {
-        "x": 1.960072531256174,
-        "y": 2.502101383832398
+        "x": 5.832052747438828,
+        "y": 4.223892040376674
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfPreload4SourceSide"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 5.5,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -42.92019920453832,
+    "rotation": -11.590091944236512,
     "rotateFast": false
   },
   "reversed": false,
