@@ -17,6 +17,7 @@ public class AutoChooser {
 		SUBWOOFER_5_GP_NO_GC,
 		SUBWOOFER_6_GP,
 		MID_5_GP,
+		FOUR_SOURCE,
 		// FAR_4_GP,
 		TWO_TEST,
 		FOUR_TEST,
@@ -54,6 +55,7 @@ public class AutoChooser {
 
 		chooser.addOption("Mid 3", AutoMode.MID_THREE);
 
+		chooser.addOption("Four Souce", AutoMode.FOUR_SOURCE);
 
 		auto.add(chooser);
 	}
@@ -90,6 +92,8 @@ public class AutoChooser {
 				return autoInstantiator.getFiveMid();
 			case MID_THREE:
 				return autoInstantiator.getMidThree();
+			case FOUR_SOURCE:
+				return autoInstantiator.getFourSource();
 
 			default:
 				return null;
