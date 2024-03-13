@@ -194,10 +194,6 @@ public class ShooterSubsystem extends SubsystemBase {
       }
 
     } 
-    
-      if(stateHandler.getWantPunt()){
-        desiredShooterSpeed = ShooterSpeeds.PUNT_SHOT.getRPMValue().getRPM();
-       }
 
 
     /* Set the desired velocity of the shooter wheels. */
