@@ -47,22 +47,34 @@ public class PositionRPMData {
         // speakerPositionRPMMap.put(126.3, new PositionRPMObject(-0.35, 3300));
 
 
-        /*BEST FIT */
-        // speakerPositionRPMMap.put(52.3, new PositionRPMObject(-0.629, 3000));
-        // speakerPositionRPMMap.put(56.6, new PositionRPMObject(-0.613, 3000));
-        // speakerPositionRPMMap.put(78.7, new PositionRPMObject(-0.537, 3000));
-        // speakerPositionRPMMap.put(92.1, new PositionRPMObject(-0.49, 3000));
-        // speakerPositionRPMMap.put(103.6, new PositionRPMObject(-0.451, 3000));
-        // speakerPositionRPMMap.put(105.1, new PositionRPMObject(-0.445, 3000));
-        // speakerPositionRPMMap.put(137.0, new PositionRPMObject(-0.335, 4000));
-        // speakerPositionRPMMap.put(149.25, new PositionRPMObject(-0.292, 4000));
-        // speakerPositionRPMMap.put(153.1, new PositionRPMObject(-0.279, 4000));
-        // speakerPositionRPMMap.put(159.4, new PositionRPMObject(-0.257, 4000));
-        // speakerPositionRPMMap.put(181.5, new PositionRPMObject(-0.180, 4200));
-        // speakerPositionRPMMap.put(198.2, new PositionRPMObject(-0.122, 4200));
-        // speakerPositionRPMMap.put(222.7, new PositionRPMObject(-0.037, 4200));
-        // speakerPositionRPMMap.put(231.6, new PositionRPMObject(-0.006, 4500));
-        // speakerPositionRPMMap.put(235.9, new PositionRPMObject(0, 4500));
+        /*New Data */
+        speakerPositionRPMMap.put(52.43, new PositionRPMObject(-0.65, 2500));
+        speakerPositionRPMMap.put(59.95, new PositionRPMObject(-0.61, 2500));
+        speakerPositionRPMMap.put(68.55, new PositionRPMObject(-0.57, 2500));
+        speakerPositionRPMMap.put(75.78, new PositionRPMObject(-0.49, 2700));
+        speakerPositionRPMMap.put(84.53, new PositionRPMObject(-0.45, 2700));
+        speakerPositionRPMMap.put(92.3, new PositionRPMObject(-0.41, 2700));
+        speakerPositionRPMMap.put(98.9, new PositionRPMObject(-0.39, 2800));
+        speakerPositionRPMMap.put(106.54, new PositionRPMObject(-0.37, 2800));
+        speakerPositionRPMMap.put(113.13, new PositionRPMObject(-0.33, 2800));
+        speakerPositionRPMMap.put(120.5, new PositionRPMObject(-0.31, 2900));
+        speakerPositionRPMMap.put(127.1, new PositionRPMObject(-0.3, 3100));
+        speakerPositionRPMMap.put(132.47, new PositionRPMObject(-0.28, 3200));
+        speakerPositionRPMMap.put(145.9, new PositionRPMObject(-0.23, 3400));
+        speakerPositionRPMMap.put(151.7, new PositionRPMObject(-0.225, 3450));
+        speakerPositionRPMMap.put(157.4, new PositionRPMObject(-0.21, 3500));
+        speakerPositionRPMMap.put(161.87, new PositionRPMObject(-0.2, 3600));
+        speakerPositionRPMMap.put(167.34, new PositionRPMObject(-0.1975, 3600));
+        speakerPositionRPMMap.put(171.8, new PositionRPMObject(-0.19, 3600));
+        speakerPositionRPMMap.put(176.3, new PositionRPMObject(-0.1725, 3675));
+        speakerPositionRPMMap.put(182.6, new PositionRPMObject(-0.1725, 3700));
+        speakerPositionRPMMap.put(186.9 , new PositionRPMObject(-0.155, 4000));
+        speakerPositionRPMMap.put(190.5, new PositionRPMObject(-0.135, 4200));
+        speakerPositionRPMMap.put(194.9, new PositionRPMObject(-0.135, 4200));
+        speakerPositionRPMMap.put(52.43, new PositionRPMObject(-0.115, 4350));
+      
+       
+
 
 
 

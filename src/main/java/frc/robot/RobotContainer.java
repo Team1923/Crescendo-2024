@@ -133,11 +133,11 @@ public class RobotContainer {
 
     /* Operator Button Bindings */
     //TODO: add buttons and IDs to constants
-    // operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
+    operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
     operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
-    operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToPunt());
+    operatorPS4Controller.povRight().whileTrue(new SetArmToPunt());
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());

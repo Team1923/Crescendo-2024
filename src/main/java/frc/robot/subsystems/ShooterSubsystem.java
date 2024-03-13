@@ -199,7 +199,7 @@ public class ShooterSubsystem extends SubsystemBase {
     /* Set the desired velocity of the shooter wheels. */
 
      if(desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT){
-      setVelocities(0, desiredShooterSpeed);
+      setVelocities(0, desiredShooterSpeed); // change this to desiredShooterSpped, 0 to test shot
     }
     else{
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
