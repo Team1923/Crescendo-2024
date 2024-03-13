@@ -134,7 +134,7 @@ public final class Constants {
 
         /* Motion Magic Velocity Constants */
         public static final double shooterKS = 0.25;
-        public static final double shooterKV = 0.12; //0.12
+        public static final double shooterKV = 0.115; //0.12
         public static final double shooterKP = 0.2;
         public static final double shooterKA = 0;
         public static final double shooterKI = 0;

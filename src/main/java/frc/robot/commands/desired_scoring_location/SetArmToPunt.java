@@ -7,22 +7,21 @@ package frc.robot.commands.desired_scoring_location;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
 
-public class SetArmToSubwoofer extends Command {
-  private StateHandler stateHandler = StateHandler.getInstance();
-
-  /** Creates a new SetArmToSubwoofer. */
-  public SetArmToSubwoofer() {
+public class SetArmToPunt extends Command {
+  StateHandler stateHandler = StateHandler.getInstance();
+  /** Creates a new SetArmToPunt. */
+  public SetArmToPunt() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stateHandler.setScoreInSubwoofer(true);
+    stateHandler.setWantPunt(true);
     stateHandler.setScoreInAmp(false);
+    stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInTrap(false);
     stateHandler.setScoreInReverseSubwoofer(false);
-    stateHandler.setWantPunt(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,11 +30,13 @@ public class SetArmToSubwoofer extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getScoreInSubwoofer() == false;
+    return stateHandler.getWantPunt() == false;
   }
 }

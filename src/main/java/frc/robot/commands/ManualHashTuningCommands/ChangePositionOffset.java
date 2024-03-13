@@ -31,7 +31,7 @@ public class ChangePositionOffset extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (delay.get() > 0.2){
+    if (delay.get() > 0.05){
       StateHandler.getInstance().setPositionOffset(StateHandler.getInstance().getPositionOffset() + offset);
       delay.reset();
       delay.start();

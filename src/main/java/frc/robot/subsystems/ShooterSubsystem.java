@@ -165,8 +165,8 @@ public class ShooterSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Raw RPS TOP SHOOTER", shooterTop.getVelocity().getValueAsDouble());
     // SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER", shooterBottom.getVelocity().getValueAsDouble());
 
-    // SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
-    // SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
+    SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
+    SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
     checkCurrentLimits();
 
@@ -192,12 +192,18 @@ public class ShooterSubsystem extends SubsystemBase {
       else if (stateHandler.getHasValidTrapTag()) {
         desiredShooterSpeed = rpmData.getTrapDesiredShooterRPM(stateHandler.getDistanceToTrapTag());
       }
+
     } 
+    
+      if(stateHandler.getWantPunt()){
+        desiredShooterSpeed = ShooterSpeeds.PUNT_SHOT.getRPMValue().getRPM();
+       }
 
 
     /* Set the desired velocity of the shooter wheels. */
-    if(desiredShooterSpeedState == ShooterSpeeds.SHOOT){
-      setVelocities(desiredShooterSpeed, desiredShooterSpeed);
+
+     if(desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT){
+      setVelocities(0, desiredShooterSpeed);
     }
     else{
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);

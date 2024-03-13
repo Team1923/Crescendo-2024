@@ -28,6 +28,7 @@ import frc.robot.commands.Climb.ClimbCommandGroup;
 import frc.robot.commands.ManualHashTuningCommands.ChangePositionOffset;
 import frc.robot.commands.ManualHashTuningCommands.ChangeRPMOffset;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
+import frc.robot.commands.desired_scoring_location.SetArmToPunt;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToReverseSubwoofer;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
@@ -121,21 +122,22 @@ public class RobotContainer {
     driverXboxController.rightTrigger().whileTrue(new ScoreGamePieceNoRanged());
 
     /* manual hashmap tuning */
-    // operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(100));
-    // operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-100));
+    operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(25));
+    operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-25));
 
-    // driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.02));
-    // driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.02));
+    driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.0025));
+    driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.0025));
 
 
 
 
     /* Operator Button Bindings */
     //TODO: add buttons and IDs to constants
-    operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
+    // operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
     operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
+    operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToPunt());
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());

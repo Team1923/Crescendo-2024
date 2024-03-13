@@ -119,10 +119,10 @@ public class InfoSubsystem extends SubsystemBase {
 
     /* DEBUG PRINTOUTS - TODO: DISABLE WHEN IN MATCH! */
     /* BEAM BREAK VALUES */
-    SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());
-    SmartDashboard.putBoolean("BB TWO COVERED", stateHandler.getBBTwoCovered());
-    SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
-    SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
+    // SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());
+    // SmartDashboard.putBoolean("BB TWO COVERED", stateHandler.getBBTwoCovered());
+    // SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
+    // SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
 
     // /* RELEVANT INTAKE STATES */
     // SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());
@@ -141,10 +141,10 @@ public class InfoSubsystem extends SubsystemBase {
     // SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
 
     /*POSRPM OFFSET */
-    // if (stateHandler.isPosRPMTuning()){
-    //     SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
-    //     SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
-    // }
+    if (stateHandler.isPosRPMTuning()){
+        SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
+        SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
+    }
 
     
     

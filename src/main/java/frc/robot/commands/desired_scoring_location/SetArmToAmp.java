@@ -25,6 +25,7 @@ public class SetArmToAmp extends Command {
     stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInTrap(false);
     stateHandler.setScoreInReverseSubwoofer(false);
+    stateHandler.setWantPunt(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

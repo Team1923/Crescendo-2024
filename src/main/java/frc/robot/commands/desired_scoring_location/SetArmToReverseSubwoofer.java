@@ -21,6 +21,7 @@ public class SetArmToReverseSubwoofer extends Command {
     stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInAmp(false);
     stateHandler.setScoreInTrap(false);
+    stateHandler.setWantPunt(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

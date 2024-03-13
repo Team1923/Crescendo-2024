@@ -48,6 +48,15 @@ public class StateHandler {
     private boolean manuallyClimbing = false;
     private boolean fullEject = false;
     private boolean wantGoalCentric = false;
+    private boolean wantPunt = false;
+
+    public boolean getWantPunt() {
+        return wantPunt;
+    }
+
+    public void setWantPunt(boolean wantPunt) {
+        this.wantPunt = wantPunt;
+    }
 
     public boolean getIsGoalCentric() {
         return wantGoalCentric;
@@ -70,7 +79,7 @@ public class StateHandler {
 
     private double RPMOffset = 0;
 
-    private boolean posRPMTuning = false;
+    private boolean posRPMTuning = true;
     
 
    

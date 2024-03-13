@@ -145,6 +145,10 @@ public class FeederSubsystem extends SubsystemBase {
   
     }
 
+    else if(stateHandler.getCurrentArmState() == ArmStates.PUNT){
+      desiredFeederSpeed = FeederSpeeds.INWARD;
+    }
+
     /*
      * Subwoofer shot
      */

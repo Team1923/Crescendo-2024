@@ -25,7 +25,7 @@ public class SetArmToTrap extends Command {
     stateHandler.setScoreInAmp(false);
     stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInReverseSubwoofer(false);
-
+    stateHandler.setWantPunt(false);
 
 
   }
