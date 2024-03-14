@@ -89,9 +89,9 @@ public class PositionRPMData {
         double lowerBound = LimeLightConstants.speakerLerpLowerBound;
         double upperBound = LimeLightConstants.speakerLerpUpperBound;
 
-        if (distance <= lowerBound) {
+        if (distance < lowerBound) {
             return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
-        } else if (distance >= upperBound) {
+        } else if (distance > upperBound) {
             return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
         }
 
@@ -109,7 +109,8 @@ public class PositionRPMData {
             (speakerPositionRPMMap.get(lowerBound).getArmPosition());
         double deltaDistanceBounds = upperBound - lowerBound;
 
-        return (speakerPositionRPMMap.get(lowerBound).getArmPosition()) + ((deltaDistance * deltaPositionValues) / deltaDistanceBounds);
+        return (speakerPositionRPMMap.get(lowerBound).getArmPosition()) + 
+            ((deltaDistance * deltaPositionValues) / deltaDistanceBounds);
      }
 
      /**
@@ -121,9 +122,9 @@ public class PositionRPMData {
         double lowerBound = LimeLightConstants.speakerLerpLowerBound;
         double upperBound = LimeLightConstants.speakerLerpUpperBound;
 
-        if (distance <= lowerBound) {
+        if (distance < lowerBound) {
             return ShooterSpeeds.IDLE.getRPMValue().getRPM();
-        } else if (distance >= upperBound) {
+        } else if (distance > upperBound) {
             return ShooterSpeeds.IDLE.getRPMValue().getRPM();
         }
 
@@ -153,9 +154,9 @@ public class PositionRPMData {
         double lowerBound = LimeLightConstants.trapLerpLowerBound;
         double upperBound = LimeLightConstants.trapLerpUpperBound;
 
-        if (distance <= lowerBound) {
+        if (distance < lowerBound) {
             return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
-        } else if (distance >= upperBound) {
+        } else if (distance > upperBound) {
             return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
         }
 
@@ -185,9 +186,9 @@ public class PositionRPMData {
         double lowerBound = LimeLightConstants.trapLerpLowerBound;
         double upperBound = LimeLightConstants.trapLerpUpperBound;
 
-        if (distance <= lowerBound) {
+        if (distance < lowerBound) {
             return ShooterSpeeds.IDLE.getRPMValue().getRPM();
-        } else if (distance >= upperBound) {
+        } else if (distance > upperBound) {
             return ShooterSpeeds.IDLE.getRPMValue().getRPM();
         }
 
@@ -211,7 +212,19 @@ public class PositionRPMData {
 
      public static void main(String[] args) {
         PositionRPMData thing = PositionRPMData.getInstance();
-        System.out.println(thing.getSpeakerDesiredArmPosition(-10000));
+        // for (double i = 150; i < 200; i+= 0.1) {
+        //     String printString = "ARM POSITION AT " + i + ": ";
+        //     if (thing.getSpeakerDesiredArmPosition(i) == 0) {
+        //         printString += "INVALID DISTANCE: SENDING TO IDLE!";
+        //     } else {
+        //         printString += thing.getSpeakerDesiredArmPosition(i);
+        //     }
+
+        //     System.out.println(printString);
+        // }
+
+
+        
 
     
      }
