@@ -36,8 +36,6 @@ public class LEDSubsystem extends SubsystemBase {
 
   StateHandler stateHandler = StateHandler.getInstance();
 
-  
-
   private int LEDCount = Constants.LEDConstants.LEDCount;
   Timer flashTimer = new Timer();
 
@@ -46,25 +44,28 @@ public class LEDSubsystem extends SubsystemBase {
   private Animations currentAnimation = Animations.OFF;
 
   private CANdle candle = new CANdle(Constants.LEDConstants.CANdleID);
-  public enum Colors{
-    RED(new int[]{255,0,0}),
-    GREEN(new int[]{0,255,0}),
-    BLUE(new int[]{0,70,255}),
-    PURPLE(new int[]{90,0,255}),
-    PINK(new int[]{255,40,200}),
-    ORANGE(new int[]{255,28,0}),
-    YELLOW(new int[]{255,120,0}),
-    WHITE(new int[]{255,255,255}),
-    RAINBOW(new int[]{0,0,0}),
-    OFF(new int[]{0,0,0}),
-    TEST(new int[]{0,0,0});
+
+  public enum Colors {
+    RED(new int[] { 255, 0, 0 }),
+    GREEN(new int[] { 0, 255, 0 }),
+    BLUE(new int[] { 0, 70, 255 }),
+    PURPLE(new int[] { 90, 0, 255 }),
+    PINK(new int[] { 255, 40, 200 }),
+    ORANGE(new int[] { 255, 28, 0 }),
+    YELLOW(new int[] { 255, 120, 0 }),
+    WHITE(new int[] { 255, 255, 255 }),
+    RAINBOW(new int[] { 0, 0, 0 }),
+    OFF(new int[] { 0, 0, 0 }),
+    TEST(new int[] { 0, 0, 0 });
+
     public int[] RGB;
+
     private Colors(int[] c) {
       RGB = c;
     }
   }
 
-  public enum Animations{
+  public enum Animations {
     HEARTBEAT,
     OFF,
     SOLID,
@@ -72,14 +73,12 @@ public class LEDSubsystem extends SubsystemBase {
     FIRE,
     LARSON,
     RAINBOW;
+
     public Animation anim;
 
   }
 
-
-  
   public LEDSubsystem() {
-
 
     CANdleConfiguration config = new CANdleConfiguration();
 
@@ -87,8 +86,6 @@ public class LEDSubsystem extends SubsystemBase {
     config.v5Enabled = true;
     config.brightnessScalar = 1;
     candle.configAllSettings(config);
-
-
 
     // waitTimer.start();
   }
@@ -101,43 +98,40 @@ public class LEDSubsystem extends SubsystemBase {
     endAnimation();
     candle.clearAnimation(0);
 
+    // trying useing animation slot 0 alwasy, maybe overrunning?
 
-    //trying useing animation slot 0 alwasy, maybe overrunning?
-
-    switch(a){
+    switch (a) {
       case SOLID:
-        candle.setLEDs(r, g, b, 0,0,LEDCount);
+        candle.setLEDs(r, g, b, 0, 0, LEDCount);
         // candle.animate(new SingleFadeAnimation(r,g , b,0,0, LEDCount),0);
         break;
       case RAINBOW:
-        candle.animate(new RainbowAnimation(),0);
+        candle.animate(new RainbowAnimation(), 0);
         break;
       case HEARTBEAT:
-        candle.animate(new SingleFadeAnimation(r, g, b, 0, 0.7, LEDCount),0);
+        candle.animate(new SingleFadeAnimation(r, g, b, 0, 0.7, LEDCount), 0);
         break;
       case FLASHING:
-        candle.animate(new StrobeAnimation(r, g, b, 0, 0.3, LEDCount, 0),0);
+        candle.animate(new StrobeAnimation(r, g, b, 0, 0.3, LEDCount, 0), 0);
         break;
       case FIRE:
         candle.animate(new FireAnimation(1, 0.3, -1, 1, 1, false, 0));
         break;
-      case LARSON: 
-        candle.animate(new LarsonAnimation(r, g, b, 0, 0.5,LEDCount,BounceMode.Front, 4), 0);
+      case LARSON:
+        candle.animate(new LarsonAnimation(r, g, b, 0, 0.5, LEDCount, BounceMode.Front, 4), 0);
         break;
       default:
-        candle.animate(new SingleFadeAnimation(0, 0, 0),0);
+        candle.animate(new SingleFadeAnimation(0, 0, 0), 0);
         break;
     }
-    
-    
-    
+
   }
 
-  public void endAnimation(){
+  public void endAnimation() {
     candle.animate(null);
   }
 
-  public void off(){
+  public void off() {
     candle.setLEDs(0, 0, 0);
   }
 
@@ -150,119 +144,110 @@ public class LEDSubsystem extends SubsystemBase {
 
     boolean hasNote = stateHandler.getBBThreeCovered();
 
+    // No Code
 
-    //No Code
+    // Has Code
+    // Button Coast
+    // button Zero
 
-    
-    
-    //Has Code
-    //Button Coast
-    //button Zero
+    // No Code/Comms
 
-    //No Code/Comms
-
-    //intake related'
-    if (flashTimer.hasElapsed(2)){
+    // intake related'
+    if (flashTimer.hasElapsed(2)) {
       flashTimer.stop();
       flashTimer.reset();
     }
-    
 
-      //regular                          
-    if((flashTimer.get()<2) &&(stateHandler.getBBOneCovered() 
-    || (stateHandler.getDesiredArmState() == ArmStates.BABY_BIRD && stateHandler.getBBFourCovered()))){ //baby bird
+    // regular
+    if ((flashTimer.get() < 2) && (stateHandler.getBBOneCovered()
+        || (stateHandler.getDesiredArmState() == ArmStates.BABY_BIRD && stateHandler.getBBFourCovered()))) { // baby
+                                                                                                             // bird
 
       desiredColor = Colors.WHITE;
       desiredAnimation = Animations.FLASHING;
 
-      if (flashTimer.get() == 0){
+      if (flashTimer.get() == 0) {
         flashTimer.start();
       }
-    }
-    else if (stateHandler.getManuallyClimbing()){
-        desiredColor = Colors.PINK;
-        desiredAnimation = Animations.HEARTBEAT;
-    }
-    else if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED){ //doesn't always go
+    } else if (stateHandler.getManuallyClimbing()) {
+      desiredColor = Colors.PINK;
+      desiredAnimation = Animations.HEARTBEAT;
+    } else if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED) { // doesn't always go
       desiredColor = Colors.ORANGE;
       desiredAnimation = Animations.SOLID;
     }
 
-    else if (hasNote){
+    else if (hasNote) {
 
-      //for amp
-      if (stateHandler.getScoreInAmp()){
+      // for amp
+      if (stateHandler.getScoreInAmp()) {
         desiredColor = Colors.ORANGE;
-        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.OUTWARD){
+        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.OUTWARD) {
           desiredAnimation = Animations.SOLID;
-        }
-        else{
+        } else {
           desiredAnimation = Animations.HEARTBEAT;
         }
       }
 
-      //for subwoofer 
-      else if (stateHandler.getScoreInSubwoofer()){
-      
+      // for subwoofer
+      else if (stateHandler.getScoreInSubwoofer()) {
+
         desiredColor = Colors.BLUE;
-        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
+        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
+            && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT) {
           desiredAnimation = Animations.SOLID;
-        }
-        else{
+        } else {
           desiredAnimation = Animations.HEARTBEAT;
         }
       }
-      //for reverse subwoofer
-      else if (stateHandler.getScoreInReverseSubwoofer()){
-
+      // for reverse subwoofer
+      else if (stateHandler.getScoreInReverseSubwoofer()) {
 
         desiredColor = Colors.PURPLE;
-        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
+        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
+            && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT) {
           desiredAnimation = Animations.SOLID;
-        }
-        else{
+        } else {
           desiredAnimation = Animations.HEARTBEAT;
         }
 
-        
       }
       // for trap
-      else if (stateHandler.getScoreInTrap()){
+      else if (stateHandler.getScoreInTrap()) {
         desiredColor = Colors.OFF;
-        
-        if (stateHandler.getHasValidTrapTag()){
-          if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
-          desiredAnimation = Animations.RAINBOW;
-          desiredColor = Colors.RAINBOW;
+
+        if (stateHandler.getHasValidTrapTag()) {
+          if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
+              && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT) {
+            desiredAnimation = Animations.RAINBOW;
+            desiredColor = Colors.RAINBOW;
+          } else {
+            desiredAnimation = Animations.SOLID;
           }
-          else{
-              desiredAnimation = Animations.SOLID;
-          }
-        }
-        else{
+        } else {
           desiredAnimation = Animations.HEARTBEAT;
         }
       }
-      //implied ranged
-      else{
+      // implied ranged
+      else {
         desiredColor = Colors.GREEN;
-        if (stateHandler.getHasValidSpeakerTag() && (stateHandler.getDistanceToSpeakerTag()<LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag()>LimeLightConstants.speakerLerpLowerBound)){
-          if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT){
-              desiredColor = Colors.RAINBOW;
-              desiredAnimation = Animations.RAINBOW;
-          }
-          else{
+        if (stateHandler.getHasValidSpeakerTag()
+            && (stateHandler.getDistanceToSpeakerTag() < LimeLightConstants.speakerLerpUpperBound
+                && stateHandler.getDistanceToSpeakerTag() > LimeLightConstants.speakerLerpLowerBound)) {
+          if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
+              && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT) {
+            desiredColor = Colors.RAINBOW;
+            desiredAnimation = Animations.RAINBOW;
+          } else {
             desiredAnimation = Animations.RAINBOW;
             desiredColor = Colors.RAINBOW;
           }
-        }
-        else{
+        } else {
           desiredAnimation = Animations.HEARTBEAT;
         }
-        
+
       }
-    }
-    else{
+    } else {
       desiredColor = Colors.RED;
       desiredAnimation = Animations.FIRE;
     }
@@ -275,11 +260,11 @@ public class LEDSubsystem extends SubsystemBase {
 
     // SmartDashboard.putNumber("WaitTimer", waitTimer.get());
 
-   
-
-    if (/*waitTimer.hasElapsed(0.5) &&*/ (desiredColor != null && desiredAnimation != null) && (currentAnimation != desiredAnimation || currentColor != desiredColor)){
+    if (/* waitTimer.hasElapsed(0.5) && */ (desiredColor != null && desiredAnimation != null)
+        && (currentAnimation != desiredAnimation || currentColor != desiredColor)) {
       apply(desiredColor, desiredAnimation);
-      // System.out.println("Applied " +desiredColor.name()+ " "+desiredAnimation.name());
+      // System.out.println("Applied " +desiredColor.name()+ "
+      // "+desiredAnimation.name());
       currentColor = desiredColor;
       currentAnimation = desiredAnimation;
       // waitTimer.restart();
