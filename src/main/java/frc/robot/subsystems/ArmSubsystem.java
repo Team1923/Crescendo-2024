@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.CurrentConstants;
+import frc.robot.Constants.LimeLightConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -219,7 +220,8 @@ public class ArmSubsystem extends SubsystemBase {
         armSetpoint = ArmStates.REVERSE_SUBWOOFER.getArmPosition().getAngularSetpoint();
       }
       // distance to speaker condition
-      else if (stateHandler.getHasValidSpeakerTag()) {
+      else if (stateHandler.getHasValidSpeakerTag()
+      && stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound) {
         armSetpoint = positionData.getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
       }
       else{
