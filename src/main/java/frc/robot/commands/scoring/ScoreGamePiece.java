@@ -23,10 +23,6 @@ public class ScoreGamePiece extends Command {
       stateHandler.setDesiredArmState(ArmStates.TRAP);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
     }
-    else if(stateHandler.getWantPunt()){
-      stateHandler.setDesiredArmState(ArmStates.PUNT);
-      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.PUNT_SHOT);
-    }
     else {
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);

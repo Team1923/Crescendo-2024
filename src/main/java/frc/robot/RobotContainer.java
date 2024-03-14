@@ -37,6 +37,7 @@ import frc.robot.commands.intake.BabyBird;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.FullEjectCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
+import frc.robot.commands.intake.PuntShot;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.commands.scoring.ScoreGamePieceNoRanged;
@@ -137,7 +138,7 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
-    operatorPS4Controller.povRight().whileTrue(new SetArmToPunt());
+    operatorPS4Controller.povRight().whileTrue(new PuntShot());
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());

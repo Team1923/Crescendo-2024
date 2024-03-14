@@ -25,6 +25,8 @@ public class ArmSubsystem extends SubsystemBase {
   /* Motor Instantiations */
   private TalonFX armPrimary = new TalonFX(ArmConstants.armMotorPrimaryID, "rio");
   private TalonFX armFollower = new TalonFX(ArmConstants.armMotorFollowerID, "rio");
+  private double maxArmAngle = -1000;
+  private double minArmAngle = 1000;
 
   /* Motion Magic Voltage Object - Used to command the arm's position. */
   private MotionMagicVoltage motionMagicVoltage;
@@ -251,6 +253,22 @@ public class ArmSubsystem extends SubsystemBase {
     if (isAtArmState(armSetpoint)) {
       stateHandler.setCurrentArmState(desiredArmState);
     }
+
+    if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getDesiredArmState() == ArmStates.SPEAKER){
+      if(getArmPositionRads() < minArmAngle){
+        minArmAngle = getArmPositionRads();
+      }
+      else if(getArmPositionRads() > maxArmAngle){
+        maxArmAngle = getArmPositionRads();
+      }
+    }
+    else if( minArmAngle != 1000 && maxArmAngle != -1000){
+      System.out.println("Min Arm Angle When At Setpoint" +  minArmAngle);
+      System.out.println("Max Arm Angle At Setpoint" + maxArmAngle);
+      minArmAngle = 1000;
+      maxArmAngle =-1000;
+    }
+
 
   }
 }

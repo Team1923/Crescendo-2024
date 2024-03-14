@@ -8,27 +8,49 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.3273513861842545,
-        "y": 1.4388240952407834
+        "x": 7.32452999347804,
+        "y": 1.1894705024564445
       },
       "isLocked": false,
       "linkedName": "EndOfOneShot"
     },
     {
       "anchor": {
-        "x": 8.115797773262214,
-        "y": 2.392299668858597
+        "x": 7.831517420754557,
+        "y": 2.486188345298306
       },
       "prevControl": {
-        "x": 7.255377520014299,
-        "y": 1.74441610457295
+        "x": 8.16667357013166,
+        "y": 1.7986885517042586
+      },
+      "nextControl": {
+        "x": 7.451276850297169,
+        "y": 3.266169002646794
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.954039181237508,
+        "y": 2.681183509635428
+      },
+      "prevControl": {
+        "x": 6.9832884558880775,
+        "y": 2.9054279486231174
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "EndOfTwoIntake"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 45.0,
+      "rotateFast": true
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -38,7 +60,7 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 2.0,
     "rotation": 29.45123690701384,
     "rotateFast": false
   },

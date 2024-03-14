@@ -149,6 +149,11 @@ public class ShooterSubsystem extends SubsystemBase {
         && Math.abs((getBottomRPM() - (desiredSetpoint))) < ShooterConstants.shooterSpeedThreshold;
   }
 
+  public boolean isAtShooterSpeed(double desiredSetpoint1, double desiredSetPoint2){
+      return Math.abs(getBottomRPM() - desiredSetPoint2) < ShooterConstants.shooterSpeedThreshold 
+      && Math.abs(getTopRPM() - desiredSetpoint1) < ShooterConstants.shooterSpeedThreshold;
+  }
+
   /**
    * Checks the current limit for the speaker motors and prints out a commment if exceeded.
    */
@@ -199,7 +204,7 @@ public class ShooterSubsystem extends SubsystemBase {
     /* Set the desired velocity of the shooter wheels. */
 
      if(desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT){
-      setVelocities(0, desiredShooterSpeed); // change this to desiredShooterSpped, 0 to test shot
+      setVelocities(desiredShooterSpeed, 2000); // change this to desiredShooterSpped, 0 to test shot
     }
     else{
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
@@ -207,9 +212,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
    //If we want to shoot at subwoofer, we shoot instantly when we are at 2000 rpm to save time
-     if(isAtShooterSpeed(desiredShooterSpeed)){
+     if(isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT){
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     }
+    else if(isAtShooterSpeed(desiredShooterSpeed, 2000)){
+      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    }
+
 
   }
 }
