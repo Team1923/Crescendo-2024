@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.Timer;
+
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
@@ -32,6 +34,8 @@ public class ShooterSubsystem extends SubsystemBase {
    * shooting from range.
    */
   PositionRPMData rpmData = PositionRPMData.getInstance();
+
+  edu.wpi.first.wpilibj.Timer puntTimer = new edu.wpi.first.wpilibj.Timer();
 
   /*
    * Declare MotionMagicVoltage object to command the shooter at a specific
@@ -105,6 +109,16 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setVelocities(double velocityP, double velocityF) {
     shooterTop.setControl(motionMagicVelVoltage.withVelocity((velocityP) * ShooterConstants.shooterRPMToRPS));
     shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF) * ShooterConstants.shooterRPMToRPS));
+  }
+
+  /**
+   * Sets the shooter wheels to spin at a particular percent output.
+   * @param pTop the percent output of the top wheels
+   * @param pBottom the percent output of the bottom wheels
+   */
+  public void setShooterPOut(double pTop, double pBottom) {
+    shooterTop.set(pTop);
+    shooterBottom.set(pBottom);
   }
 
   /**
@@ -214,17 +228,15 @@ public class ShooterSubsystem extends SubsystemBase {
     /* Set the desired velocity of the shooter wheels. */
 
     if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
-      setVelocities(desiredShooterSpeed, 2000); // change this to desiredShooterSpped, 0 to test shot
+      setShooterPOut(desiredShooterSpeed, desiredShooterSpeed); //adjust as needed
     } else {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
     }
 
-    // If we want to shoot at subwoofer, we shoot instantly when we are at 2000 rpm
-    // to save time
     if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    } else if (isAtShooterSpeed(desiredShooterSpeed, 2000)) {
-      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
+      
     }
 
   }

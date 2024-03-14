@@ -44,7 +44,7 @@ public class StateVariables {
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(0)),
         BABY_BIRD(new RPMValue(-1000)),
-        PUNT_SHOT(new RPMValue(6000)),
+        PUNT_SHOT(new RPMValue(0.1)), // this is a percent output value
         SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
         
         private RPMValue rpmValue;

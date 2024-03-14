@@ -21,7 +21,6 @@ public class PuntShot extends Command {
   @Override
   public void initialize() {
     stateHandler.setDesiredArmState(ArmStates.PUNT);
-    stateHandler.setDesiredFeederSpeed(FeederSpeeds.OUTWARD);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.PUNT_SHOT);
   }
 
