@@ -216,25 +216,24 @@ public class ArmSubsystem extends SubsystemBase {
         armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint() + (stateHandler.isPosRPMTuning() ? stateHandler.getPositionOffset() : 0);
       }
       //reverse subwoofer
-      else if(stateHandler.getScoreInReverseSubwoofer()){
+      else if(stateHandler.getScoreInReverseSubwoofer()) {
         armSetpoint = ArmStates.REVERSE_SUBWOOFER.getArmPosition().getAngularSetpoint();
       }
       // distance to speaker condition
-      else if (stateHandler.getHasValidSpeakerTag()
-      && stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound) {
+      else if (stateHandler.getHasValidSpeakerTag()) {
         armSetpoint = positionData.getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
       }
-      else{
+      else {
         //condition for when when we lose tag
         armSetpoint = getArmPositionRads();
       }
     }
     //trap score (NOT IMPLEMENTED YET)
-    else if (desiredArmState == ArmStates.TRAP){
-      if (stateHandler.getHasValidTrapTag()){
+    else if (desiredArmState == ArmStates.TRAP) {
+      if (stateHandler.getHasValidTrapTag()) {
         armSetpoint = positionData.getTrapDesiredArmPosition(stateHandler.getDistanceToTrapTag());
       }
-      else{
+      else {
         armSetpoint = getArmPositionRads();
 
       }
@@ -244,7 +243,7 @@ public class ArmSubsystem extends SubsystemBase {
     /*
      * Set the arm position to whatever is the desired arm position.
      */
-    if (!stateHandler.getManuallyClimbing()){
+    if (!stateHandler.getManuallyClimbing()) {
           setArmPosition(armSetpoint);
 
     }
@@ -256,15 +255,15 @@ public class ArmSubsystem extends SubsystemBase {
       stateHandler.setCurrentArmState(desiredArmState);
     }
 
-    if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getDesiredArmState() == ArmStates.SPEAKER){
-      if(getArmPositionRads() < minArmAngle){
+    if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getDesiredArmState() == ArmStates.SPEAKER) {
+      if(getArmPositionRads() < minArmAngle) {
         minArmAngle = getArmPositionRads();
       }
-      else if(getArmPositionRads() > maxArmAngle){
+      else if(getArmPositionRads() > maxArmAngle) {
         maxArmAngle = getArmPositionRads();
       }
     }
-    else if( minArmAngle != 1000 && maxArmAngle != -1000){
+    else if( minArmAngle != 1000 && maxArmAngle != -1000) {
       System.out.println("Min Arm Angle When At Setpoint" +  minArmAngle);
       System.out.println("Max Arm Angle At Setpoint" + maxArmAngle);
       minArmAngle = 1000;

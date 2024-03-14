@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CurrentConstants;
-import frc.robot.Constants.LimeLightConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -28,16 +27,24 @@ public class ShooterSubsystem extends SubsystemBase {
   /* Initialize StateHandler to get important data about the robot. */
   private StateHandler stateHandler = StateHandler.getInstance();
 
-  /* Helper class used to get the RPM the shooter needs to operate at when shooting from range. */
+  /*
+   * Helper class used to get the RPM the shooter needs to operate at when
+   * shooting from range.
+   */
   PositionRPMData rpmData = PositionRPMData.getInstance();
 
-  /* Declare MotionMagicVoltage object to command the shooter at a specific velocity. */
+  /*
+   * Declare MotionMagicVoltage object to command the shooter at a specific
+   * velocity.
+   */
   private final MotionMagicVelocityVoltage motionMagicVelVoltage;
-
 
   /* Construct a new ShooterSubsystem to apply motor configurations. */
   public ShooterSubsystem() {
-    /* Create a new TalonFXConfiguration. Will be used to set relevant constants for the shooter. */
+    /*
+     * Create a new TalonFXConfiguration. Will be used to set relevant constants for
+     * the shooter.
+     */
     var shooterFXConfig = new TalonFXConfiguration();
 
     /* Setup shooter motors to operate in BRAKE mode. */
@@ -58,8 +65,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /* Get the MotionMagic configuration to specify acceleration and jerk. */
     var shooterMotionMagicConfig = shooterFXConfig.MotionMagic;
-    shooterMotionMagicConfig.MotionMagicAcceleration = ShooterConstants.maxShooterAccel; //TODO: Tune
-    shooterMotionMagicConfig.MotionMagicJerk = ShooterConstants.maxShooterJerk; //TODO: Tune
+    shooterMotionMagicConfig.MotionMagicAcceleration = ShooterConstants.maxShooterAccel; // TODO: Tune
+    shooterMotionMagicConfig.MotionMagicJerk = ShooterConstants.maxShooterJerk; // TODO: Tune
 
     /* Apply configuration to each of the shooter motors. */
     shooterTop.getConfigurator().apply(shooterFXConfig, 0.05);
@@ -71,11 +78,10 @@ public class ShooterSubsystem extends SubsystemBase {
     setShooterCurrentLimits();
   }
 
-
   /**
    * Setting the current limits for the shooter motor.
    */
-  public void setShooterCurrentLimits(){
+  public void setShooterCurrentLimits() {
     var currentLimitsConfigs = new CurrentLimitsConfigs();
     var currentConfigsTop = shooterTop.getConfigurator();
     var currentConfigsBottom = shooterBottom.getConfigurator();
@@ -98,16 +104,12 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelocities(double velocityP, double velocityF) {
     shooterTop.setControl(motionMagicVelVoltage.withVelocity((velocityP) * ShooterConstants.shooterRPMToRPS));
-    // if (velocityF == 0) {
-    //   shooterBottom.setControl(motionMagicVelVoltage.withVelocity(velocityF * ShooterConstants.shooterRPMToRPS));
-    // } else {
-    //   shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF - 400) * ShooterConstants.shooterRPMToRPS));
-    // }
     shooterBottom.setControl(motionMagicVelVoltage.withVelocity((velocityF) * ShooterConstants.shooterRPMToRPS));
   }
 
   /**
-   * Method to get the digital input reading of BB4.   * 
+   * Method to get the digital input reading of BB4. *
+   * 
    * @return the boolean value representing the digital input reading.
    */
   public boolean getBeamBreakFour() {
@@ -142,24 +144,27 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /**
    * Method to determine if the current shooter RPM is the commanded shooter RPM.
+   * 
    * @param desiredSetpoint the commanded velocity setpoint to check/analyze.
-   * @return a boolean to determine if the shooter's velocity is within range of the commanded velocity.
+   * @return a boolean to determine if the shooter's velocity is within range of
+   *         the commanded velocity.
    */
   public boolean isAtShooterSpeed(double desiredSetpoint) {
     return Math.abs(getTopRPM() - desiredSetpoint) < ShooterConstants.shooterSpeedThreshold
         && Math.abs((getBottomRPM() - (desiredSetpoint))) < ShooterConstants.shooterSpeedThreshold;
   }
 
-  public boolean isAtShooterSpeed(double desiredSetpoint1, double desiredSetPoint2){
-      return Math.abs(getBottomRPM() - desiredSetPoint2) < ShooterConstants.shooterSpeedThreshold 
-      && Math.abs(getTopRPM() - desiredSetpoint1) < ShooterConstants.shooterSpeedThreshold;
+  public boolean isAtShooterSpeed(double desiredSetpoint1, double desiredSetPoint2) {
+    return Math.abs(getBottomRPM() - desiredSetPoint2) < ShooterConstants.shooterSpeedThreshold
+        && Math.abs(getTopRPM() - desiredSetpoint1) < ShooterConstants.shooterSpeedThreshold;
   }
 
   /**
-   * Checks the current limit for the speaker motors and prints out a commment if exceeded.
+   * Checks the current limit for the speaker motors and prints out a commment if
+   * exceeded.
    */
-  public void checkCurrentLimits(){
-    if (Math.abs(shooterTop.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
+  public void checkCurrentLimits() {
+    if (Math.abs(shooterTop.getStatorCurrent().getValueAsDouble()) > (10 + CurrentConstants.kStatorCurrentLimit)) {
       SmartDashboard.putNumber("Over Stator on shooter", shooterTop.getStatorCurrent().getValueAsDouble());
     }
   }
@@ -168,8 +173,10 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     stateHandler.setBBFourCovered(getBeamBreakFour());
 
-    // SmartDashboard.putNumber("Raw RPS TOP SHOOTER", shooterTop.getVelocity().getValueAsDouble());
-    // SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER", shooterBottom.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw RPS TOP SHOOTER",
+    // shooterTop.getVelocity().getValueAsDouble());
+    // SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER",
+    // shooterBottom.getVelocity().getValueAsDouble());
 
     SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
     SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
@@ -179,16 +186,19 @@ public class ShooterSubsystem extends SubsystemBase {
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
     double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
 
-
-    if(stateHandler.getFullEject()){
-      desiredShooterSpeed = -1* ShooterSpeeds.BABY_BIRD.getRPMValue().getRPM();
+    if (stateHandler.getFullEject()) {
+      desiredShooterSpeed = -1 * ShooterSpeeds.BABY_BIRD.getRPMValue().getRPM();
     }
 
     if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
-      /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
-    
+      /*
+       * If at subwoofer, then the desired shot speed is the preset for the subwoofer
+       * shot.
+       */
+
       if (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()) {
-        desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM() + (stateHandler.isPosRPMTuning() ? stateHandler.getRPMOffset(): 0);
+        desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM()
+            + (stateHandler.isPosRPMTuning() ? stateHandler.getRPMOffset() : 0);
       }
       /* If we have a valid speaker tag, then get positional data. */
       else if (stateHandler.getHasValidSpeakerTag()) {
@@ -199,27 +209,23 @@ public class ShooterSubsystem extends SubsystemBase {
         desiredShooterSpeed = rpmData.getTrapDesiredShooterRPM(stateHandler.getDistanceToTrapTag());
       }
 
-    } 
-
+    }
 
     /* Set the desired velocity of the shooter wheels. */
 
-     if(desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT){
+    if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
       setVelocities(desiredShooterSpeed, 2000); // change this to desiredShooterSpped, 0 to test shot
-    }
-    else{
+    } else {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
     }
 
-
-   //If we want to shoot at subwoofer, we shoot instantly when we are at 2000 rpm to save time
-     if(isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT){
+    // If we want to shoot at subwoofer, we shoot instantly when we are at 2000 rpm
+    // to save time
+    if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT) {
+      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    } else if (isAtShooterSpeed(desiredShooterSpeed, 2000)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     }
-    else if(isAtShooterSpeed(desiredShooterSpeed, 2000)){
-      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    }
-
 
   }
 }
