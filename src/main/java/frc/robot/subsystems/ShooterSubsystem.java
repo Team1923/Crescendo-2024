@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CurrentConstants;
+import frc.robot.Constants.LimeLightConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -190,7 +191,8 @@ public class ShooterSubsystem extends SubsystemBase {
         desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM() + (stateHandler.isPosRPMTuning() ? stateHandler.getRPMOffset(): 0);
       }
       /* If we have a valid speaker tag, then get positional data. */
-      else if (stateHandler.getHasValidSpeakerTag()) {
+      else if (stateHandler.getHasValidSpeakerTag() 
+      && stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound) {
         desiredShooterSpeed = rpmData.getSpeakerDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
       }
       /* If we have a valid speaker tag, then get positional data. */
