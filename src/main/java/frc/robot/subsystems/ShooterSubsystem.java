@@ -229,6 +229,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
       setShooterPOut(desiredShooterSpeed, desiredShooterSpeed); //adjust as needed
+      puntTimer.start();
     } else {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
     }
@@ -236,7 +237,12 @@ public class ShooterSubsystem extends SubsystemBase {
     if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
-      
+      puntTimer.start();
+      if (puntTimer.get() > 0.3) {
+        stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+        puntTimer.stop();
+        puntTimer.reset();
+      }
     }
 
   }
