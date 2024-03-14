@@ -237,7 +237,6 @@ public class ShooterSubsystem extends SubsystemBase {
     if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
-      puntTimer.start();
       if (puntTimer.get() > 0.3) {
         stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
         puntTimer.stop();
