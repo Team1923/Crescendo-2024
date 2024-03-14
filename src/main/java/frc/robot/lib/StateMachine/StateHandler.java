@@ -45,6 +45,7 @@ public class StateHandler {
     private boolean scoreInAmp = false;
     private boolean scoreInTrap = false;
     private boolean wantToPositionForReverseSubwoofer = false;
+    private boolean wantToPunt = false;
     private boolean manuallyClimbing = false;
     private boolean fullEject = false;
     private boolean wantGoalCentric = false;
@@ -561,6 +562,22 @@ public class StateHandler {
      */
     public void setManuallyClimbing(boolean manuallyClimbing) {
         this.manuallyClimbing = manuallyClimbing;
+    }
+
+    /**
+     * Method to retrieve whether or not the arm/shooter is in PUNT
+     * @return a boolean representation of the above.
+     */
+    public boolean getWantPunt() {
+        return wantToPunt;
+    }
+
+    /**
+     * Method to set the desired shooting/arm state to PUNT
+     * @param p whether or not punting is desired.
+     */
+    public void setWantPunt(boolean p) {
+        this.wantToPunt = p;
     }
 
 

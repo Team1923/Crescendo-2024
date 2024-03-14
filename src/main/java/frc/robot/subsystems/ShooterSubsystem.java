@@ -191,8 +191,7 @@ public class ShooterSubsystem extends SubsystemBase {
         desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM() + (stateHandler.isPosRPMTuning() ? stateHandler.getRPMOffset(): 0);
       }
       /* If we have a valid speaker tag, then get positional data. */
-      else if (stateHandler.getHasValidSpeakerTag() 
-      && stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound) {
+      else if (stateHandler.getHasValidSpeakerTag()) {
         desiredShooterSpeed = rpmData.getSpeakerDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag());
       }
       /* If we have a valid speaker tag, then get positional data. */

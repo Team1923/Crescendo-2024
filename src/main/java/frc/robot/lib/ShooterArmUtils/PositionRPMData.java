@@ -3,6 +3,10 @@ package frc.robot.lib.ShooterArmUtils;
 import java.util.HashMap;
 
 import frc.robot.Constants.LimeLightConstants;
+import frc.robot.lib.StateMachine.StateVariables;
+import frc.robot.lib.StateMachine.StateVariables.ArmPosition;
+import frc.robot.lib.StateMachine.StateVariables.ArmStates;
+import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
 
 public class PositionRPMData {
     private static PositionRPMData positionRPMData;
@@ -74,14 +78,6 @@ public class PositionRPMData {
         speakerPositionRPMMap.put(194.9, new PositionRPMObject(-0.13, 4200));
         speakerPositionRPMMap.put(197.7, new PositionRPMObject(-0.115, 4350));
       
-       
-
-
-
-
-
-
-        // trapPositionRPMMap.put(null, null);
      }
 
      /**
@@ -94,9 +90,9 @@ public class PositionRPMData {
         double upperBound = LimeLightConstants.speakerLerpUpperBound;
 
         if (distance <= lowerBound) {
-            return speakerPositionRPMMap.get(lowerBound).getArmPosition();
+            return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
         } else if (distance >= upperBound) {
-            return speakerPositionRPMMap.get(upperBound).getArmPosition();
+            return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
         }
 
         Double[] distanceValues = (Double[]) speakerPositionRPMMap.keySet().toArray(new Double[speakerPositionRPMMap.size()]);
@@ -126,9 +122,9 @@ public class PositionRPMData {
         double upperBound = LimeLightConstants.speakerLerpUpperBound;
 
         if (distance <= lowerBound) {
-            return speakerPositionRPMMap.get(lowerBound).getShooterRPM();
+            return ShooterSpeeds.IDLE.getRPMValue().getRPM();
         } else if (distance >= upperBound) {
-            return speakerPositionRPMMap.get(upperBound).getShooterRPM();
+            return ShooterSpeeds.IDLE.getRPMValue().getRPM();
         }
 
         Double[] distanceValues = (Double[]) speakerPositionRPMMap.keySet().toArray(new Double[speakerPositionRPMMap.size()]);
@@ -158,9 +154,9 @@ public class PositionRPMData {
         double upperBound = LimeLightConstants.trapLerpUpperBound;
 
         if (distance <= lowerBound) {
-            return trapPositionRPMMap.get(lowerBound).getArmPosition();
+            return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
         } else if (distance >= upperBound) {
-            return trapPositionRPMMap.get(upperBound).getArmPosition();
+            return ArmStates.STOWED.getArmPosition().getAngularSetpoint();
         }
 
         Double[] distanceValues = (Double[]) trapPositionRPMMap.keySet().toArray(new Double[trapPositionRPMMap.size()]);
@@ -190,9 +186,9 @@ public class PositionRPMData {
         double upperBound = LimeLightConstants.trapLerpUpperBound;
 
         if (distance <= lowerBound) {
-            return trapPositionRPMMap.get(lowerBound).getShooterRPM();
+            return ShooterSpeeds.IDLE.getRPMValue().getRPM();
         } else if (distance >= upperBound) {
-            return trapPositionRPMMap.get(upperBound).getShooterRPM();
+            return ShooterSpeeds.IDLE.getRPMValue().getRPM();
         }
 
         Double[] distanceValues = (Double[]) trapPositionRPMMap.keySet().toArray(new Double[trapPositionRPMMap.size()]);
@@ -213,7 +209,10 @@ public class PositionRPMData {
      }
 
 
-    //  public static void main(String[] args) {
-    //     System.out.println(PositionRPMData.getInstance().getDesiredShooterRPM(200.0));
-    //  }
+     public static void main(String[] args) {
+        PositionRPMData thing = PositionRPMData.getInstance();
+        System.out.println(thing.getSpeakerDesiredArmPosition(-10000));
+
+    
+     }
 }
