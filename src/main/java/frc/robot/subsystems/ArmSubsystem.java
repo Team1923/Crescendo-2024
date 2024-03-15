@@ -256,10 +256,10 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getDesiredArmState() == ArmStates.SPEAKER) {
-      if(getArmPositionRads() < minArmAngle) {
+      if(Math.abs(getArmPositionRads()) < Math.abs(minArmAngle)) {
         minArmAngle = getArmPositionRads();
       }
-      else if(getArmPositionRads() > maxArmAngle) {
+      else if(Math.abs(getArmPositionRads()) > Math.abs(maxArmAngle)) {
         maxArmAngle = getArmPositionRads();
       }
     }

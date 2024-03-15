@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.954039181237508,
-        "y": 2.681183509635428
+        "x": 2.96,
+        "y": 3.01
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.193558040322732,
-        "y": 1.8719535776363725
+        "x": 2.231579732156802,
+        "y": 2.638505663399969
       },
       "isLocked": false,
-      "linkedName": "EndOfTwoIntake"
+      "linkedName": "4SourceMidDiscLink"
     },
     {
       "anchor": {
-        "x": 5.618322305528223,
-        "y": 1.1309719531553086
+        "x": 2.9600727879361703,
+        "y": 3.0083757061924064
       },
       "prevControl": {
-        "x": 6.944289423020653,
-        "y": 2.739682058936565
+        "x": 3.666640447744072,
+        "y": 2.4693447079884407
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfShotTwo"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],

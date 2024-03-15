@@ -3,65 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.618322305528223,
-        "y": 1.1309719531553086
+        "x": 3.0,
+        "y": 2.89
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.523697439329868,
-        "y": 2.522638504743009
-      },
-      "isLocked": false,
-      "linkedName": "EndOfShotTwo"
-    },
-    {
-      "anchor": {
-        "x": 7.8217676625377015,
-        "y": 3.909653044959297
-      },
-      "prevControl": {
-        "x": 7.8217676625377015,
-        "y": 3.4514144087670604
-      },
-      "nextControl": {
-        "x": 7.8217676625377015,
-        "y": 4.311291018303822
+        "x": 4.693713025402981,
+        "y": 1.748208642823675
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.749294258683531,
-        "y": 4.7676317680426346
+        "x": 7.2723207735679,
+        "y": 2.2071134115648885
       },
       "prevControl": {
-        "x": 7.548774432465731,
-        "y": 4.9723766905966125
+        "x": 5.757206616454049,
+        "y": 1.4641247383648277
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfThreeIntake"
+      "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1,
-      "rotationDegrees": 25.602187551441723,
-      "rotateFast": true
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.2,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 2.0,
-    "rotation": -18.924644416051216,
+    "rotation": 15.154068050312722,
     "rotateFast": false
   },
   "reversed": false,

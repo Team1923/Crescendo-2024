@@ -227,8 +227,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /* Set the desired velocity of the shooter wheels. */
 
-    if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
-      setShooterPOut(desiredShooterSpeed, desiredShooterSpeed); //adjust as needed
+    if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT && stateHandler.getWantPunt()) {
+      setShooterPOut(0.85, 0.2); //adjust as needed
       puntTimer.start();
     } else {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
@@ -237,12 +237,16 @@ public class ShooterSubsystem extends SubsystemBase {
     if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
-      if (puntTimer.get() > 0.3) {
+      if (puntTimer.get() > 1) {
         stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-        puntTimer.stop();
-        puntTimer.reset();
       }
     }
+    if (!stateHandler.getWantPunt()) {
+      puntTimer.stop();
+      puntTimer.reset();
+    }
+
+    SmartDashboard.putNumber("punt timer", puntTimer.get());
 
   }
 }

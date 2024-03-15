@@ -13,7 +13,7 @@ import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
 public class AutoScoreCommand extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
-  boolean canShoot;
+  
   /** Creates a new SpeakerPositionCommand. */
   public AutoScoreCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -26,9 +26,8 @@ public class AutoScoreCommand extends Command {
       stateHandler.setDesiredArmState(ArmStates.AMP);
     } else {
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
-      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
     }
-    canShoot = false;
+    
  
   }
 
@@ -39,10 +38,13 @@ public class AutoScoreCommand extends Command {
       stateHandler.setDesiredFeederSpeed(FeederSpeeds.OUTWARD);
     }
 
+    if (!stateHandler.getBBFourCovered()){
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
 
-    if(stateHandler.getBBThreeCovered()){
-      canShoot = true;
     }
+
+
+   
   }
 
   // Called once the command ends or is interrupted.
@@ -58,7 +60,7 @@ public class AutoScoreCommand extends Command {
   public boolean isFinished() {
     //when you let go of trigger, automatically ends
   
-      return canShoot && !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+      return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
     
     
   }

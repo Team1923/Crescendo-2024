@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.308929173677826,
-      "y": 1.5794608311306904
+      "x": 1.481379644214479,
+      "y": 1.4786931437216908
     },
     "rotation": 0
   },
@@ -20,11 +20,11 @@
         {
           "type": "named",
           "data": {
-            "name": "NonAutoScoreCommandGroup"
+            "name": "ScoreCommandGroup"
           }
         },
         {
-          "type": "race",
+          "type": "deadline",
           "data": {
             "commands": [
               {
@@ -36,7 +36,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "NonAutoDeployIntake"
+                  "name": "DeployIntake"
                 }
               }
             ]
@@ -51,11 +51,11 @@
         {
           "type": "named",
           "data": {
-            "name": "NonAutoScoreCommandGroup"
+            "name": "ScoreCommandGroup"
           }
         },
         {
-          "type": "race",
+          "type": "deadline",
           "data": {
             "commands": [
               {
@@ -63,57 +63,20 @@
                 "data": {
                   "pathName": "OnetoTwo"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "NonAutoDeployIntake"
-                }
               }
             ]
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "ShootTwo"
-          }
-        },
-        {
           "type": "named",
           "data": {
-            "name": "NonAutoScoreCommandGroup"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "TwotoThree"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "NonAutoDeployIntake"
-                }
-              }
-            ]
+            "name": "ScoreCommandGroup"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ShootThree"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "NonAutoScoreCommandGroup"
+            "pathName": "TwotoThree"
           }
         }
       ]

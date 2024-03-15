@@ -20,6 +20,7 @@ public class PuntShot extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    stateHandler.setWantPunt(true);
     stateHandler.setDesiredArmState(ArmStates.PUNT);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.PUNT_SHOT);
   }
@@ -34,6 +35,7 @@ public class PuntShot extends Command {
     stateHandler.setDesiredArmState(ArmStates.STOWED);
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
+    stateHandler.setWantPunt(false);
   }
 
   // Returns true when the command should end.
