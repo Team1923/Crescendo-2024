@@ -1,5 +1,7 @@
 package frc.robot.commands.desired_scoring_location;
 
+import com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder;
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -26,6 +28,7 @@ public class SetArmToAmp extends Command {
     stateHandler.setScoreInTrap(false);
     stateHandler.setScoreInReverseSubwoofer(false);
     stateHandler.setWantPunt(false);
+    stateHandler.setWantUnguardable(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

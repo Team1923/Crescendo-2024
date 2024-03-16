@@ -7,6 +7,7 @@ public class StateVariables {
     public static enum ArmStates {
         STOWED(new ArmPosition(0)),
         REVERSE_SUBWOOFER(new ArmPosition(-1.96)),
+        UNGUARDABLE(new ArmPosition(-1.96)),
         AMP(new ArmPosition(-1.96)), 
         SPEAKER(new ArmPosition(-0.77)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.77)
         TRAP(new ArmPosition(-0.9)), //TODO: FIND
@@ -44,6 +45,7 @@ public class StateVariables {
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(0)),
         BABY_BIRD(new RPMValue(-1000)),
+        UNGUARDABLE_SHOT(new RPMValue(1900)),
         PUNT_SHOT(new RPMValue(1)), // this is a percent output value
         SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
         

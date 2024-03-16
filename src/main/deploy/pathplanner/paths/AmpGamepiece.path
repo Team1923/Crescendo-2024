@@ -20,12 +20,12 @@
         "y": 6.420090788899527
       },
       "prevControl": {
-        "x": 1.893791299920177,
-        "y": 5.993505384458153
+        "x": 2.085968466524333,
+        "y": 5.929340980243628
       },
       "nextControl": {
-        "x": 2.5401208637175103,
-        "y": 6.7241388044029655
+        "x": 2.414474344332836,
+        "y": 6.799889839489058
       },
       "isLocked": false,
       "linkedName": null
@@ -38,6 +38,22 @@
       "prevControl": {
         "x": 2.61028579037215,
         "y": 6.958021893251764
+      },
+      "nextControl": {
+        "x": 3.3820999835731866,
+        "y": 7.121740055445923
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.1858830709675616,
+        "y": 6.220709087380908
+      },
+      "prevControl": {
+        "x": 3.385970364768422,
+        "y": 6.237814512046714
       },
       "nextControl": null,
       "isLocked": false,
@@ -73,11 +89,11 @@
   },
   "goalEndState": {
     "velocity": 1.0,
-    "rotation": 33.02386755579669,
+    "rotation": 21.61477894278621,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "5PieceSubwoofer",
+  "folder": null,
   "previewStartingState": {
     "rotation": 6.519801751656926,
     "velocity": 1.0

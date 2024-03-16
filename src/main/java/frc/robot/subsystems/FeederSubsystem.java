@@ -10,6 +10,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CurrentConstants;
@@ -29,6 +30,7 @@ public class FeederSubsystem extends SubsystemBase {
    */
   private DigitalInput beamBreakTwo = new DigitalInput(FeederConstants.beamBreakTwoID);
   private DigitalInput beamBreakThree = new DigitalInput(FeederConstants.beamBreakThreeID);
+  private Timer timer = new Timer();
 
   // boolean armP =false;
   // boolean llP = false;
@@ -154,15 +156,25 @@ public class FeederSubsystem extends SubsystemBase {
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
         && (stateHandler.getIsCenteredToTag()) &&
         (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound
-            && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)) {
+            && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)
+            && stateHandler.getOperatorInputTimingGood()) {
+              
+                desiredFeederSpeed = FeederSpeeds.INWARD;
+
       /* CONDITION: ready to sore (center to tag = true on default) */
-      desiredFeederSpeed = FeederSpeeds.INWARD;
+      
 
     }
 
     // punt shot
     else if (stateHandler.getCurrentArmState() == ArmStates.PUNT &&
         stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.PUNT_SHOT) {
+      desiredFeederSpeed = FeederSpeeds.INWARD;
+    }
+
+    //unguardable shot
+    else if(stateHandler.getCurrentArmState() == ArmStates.UNGUARDABLE &&
+    stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.UNGUARDABLE_SHOT){
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 

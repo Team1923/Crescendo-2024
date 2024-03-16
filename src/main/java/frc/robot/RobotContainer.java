@@ -33,6 +33,7 @@ import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToReverseSubwoofer;
 import frc.robot.commands.desired_scoring_location.SetArmToSubwoofer;
 import frc.robot.commands.desired_scoring_location.SetArmToTrap;
+import frc.robot.commands.desired_scoring_location.SetArmToUnguardable;
 import frc.robot.commands.intake.BabyBird;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.FullEjectCommand;
@@ -138,7 +139,7 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
-    operatorPS4Controller.povRight().whileTrue(new PuntShot());
+    operatorPS4Controller.button(Constants.ControllerConstants.Operator.operatorRightTrigger).whileTrue(new PuntShot());
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());
@@ -150,6 +151,7 @@ public class RobotContainer {
     //FULLEJECT 
     operatorPS4Controller.button(ControllerConstants.Operator.littleLeftButton).whileTrue(new FullEjectCommand());
     operatorPS4Controller.povLeft().whileTrue(new BabyBird());
+    operatorPS4Controller.povRight().onTrue(new SetArmToUnguardable());
 
   }
 

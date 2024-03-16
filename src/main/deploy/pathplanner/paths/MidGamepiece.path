@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6045885083223164,
-        "y": 4.607496850321336
+        "x": 0.913211835296785,
+        "y": 4.90226840258472
       },
       "isLocked": false,
       "linkedName": "EndofPodium2"
@@ -35,19 +35,7 @@
       "rotateFast": false
     }
   ],
-  "constraintZones": [
-    {
-      "name": "Intake_Drop",
-      "minWaypointRelativePos": 0.0,
-      "maxWaypointRelativePos": 0.15,
-      "constraints": {
-        "maxVelocity": 0.5,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.5,
@@ -57,11 +45,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.5434251690775518,
+    "rotation": 5.54,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "5PieceSubwoofer",
+  "folder": null,
   "previewStartingState": {
     "rotation": 0,
     "velocity": 1.5

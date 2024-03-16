@@ -46,10 +46,30 @@ public class StateHandler {
     private boolean scoreInTrap = false;
     private boolean wantToPositionForReverseSubwoofer = false;
     private boolean wantToPunt = false;
+    private boolean wantUnguardable = false;
+    private boolean operatorInputTimingGood = false;
+
+
+    public boolean getOperatorInputTimingGood() {
+        return operatorInputTimingGood;
+    }
+
+    public void setOperatorInputTimingGood(boolean operatorInputTimingGood) {
+        this.operatorInputTimingGood = operatorInputTimingGood;
+    }
+
     private boolean manuallyClimbing = false;
     private boolean fullEject = false;
     private boolean wantGoalCentric = false;
     
+
+    public boolean getWantUnguardable() {
+        return wantUnguardable;
+    }
+
+    public void setWantUnguardable(boolean wantUnguardable) {
+        this.wantUnguardable = wantUnguardable;
+    }
 
 
     public boolean getIsGoalCentric() {

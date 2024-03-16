@@ -4,31 +4,26 @@
 
 package frc.robot.commands.desired_scoring_location;
 
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
 
-public class SetArmToRanged extends Command {
-  private StateHandler stateHandler = StateHandler.getInstance();
-
-  /** Creates a new SetArmToRanged. */
-  public SetArmToRanged() {
+public class SetArmToUnguardable extends Command {
+  StateHandler stateHandler = StateHandler.getInstance();
+  /** Creates a new SetArmToUnguardable. */
+  public SetArmToUnguardable() {
     // Use addRequirements() here to declare subsystem dependencies.
-
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    stateHandler.setWantUnguardable(true);
     stateHandler.setScoreInAmp(false);
     stateHandler.setScoreInSubwoofer(false);
     stateHandler.setScoreInTrap(false);
     stateHandler.setScoreInReverseSubwoofer(false);
     stateHandler.setWantPunt(false);
-    stateHandler.setWantUnguardable(false);
-    
-
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +37,6 @@ public class SetArmToRanged extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getScoreInTrap() || stateHandler.getScoreInReverseSubwoofer();
+    return stateHandler.getWantUnguardable() == false;
   }
 }

@@ -70,13 +70,21 @@ public class PositionRPMData {
         speakerPositionRPMMap.put(156.4, new PositionRPMObject(-0.215, 3500));
         speakerPositionRPMMap.put(161.7, new PositionRPMObject(-0.2, 3650));
         speakerPositionRPMMap.put(167.6, new PositionRPMObject(-0.1975, 3650));
-        speakerPositionRPMMap.put(172.1, new PositionRPMObject(-0.1875, 3700));
-        speakerPositionRPMMap.put(176.3, new PositionRPMObject(-0.17, 3750));
-        speakerPositionRPMMap.put(182.6, new PositionRPMObject(-0.165, 3825));
-        speakerPositionRPMMap.put(186.6 , new PositionRPMObject(-0.155, 4000));
-        speakerPositionRPMMap.put(190.4, new PositionRPMObject(-0.135, 4200));
-        speakerPositionRPMMap.put(194.9, new PositionRPMObject(-0.13, 4200));
-        speakerPositionRPMMap.put(197.7, new PositionRPMObject(-0.115, 4350));
+        // speakerPositionRPMMap.put(172.1, new PositionRPMObject(-0.1875, 3700));
+        // speakerPositionRPMMap.put(176.3, new PositionRPMObject(-0.17, 3750));
+        // speakerPositionRPMMap.put(182.6, new PositionRPMObject(-0.165, 3825));
+        // speakerPositionRPMMap.put(186.6 , new PositionRPMObject(-0.155, 4000));
+        // speakerPositionRPMMap.put(190.4, new PositionRPMObject(-0.135, 4200));
+        // speakerPositionRPMMap.put(194.9, new PositionRPMObject(-0.13, 4200));
+        // speakerPositionRPMMap.put(197.7, new PositionRPMObject(-0.115, 4350));
+
+         speakerPositionRPMMap.put(172.1, new PositionRPMObject(-0.1875 - 0.035, 3700));
+        speakerPositionRPMMap.put(176.3, new PositionRPMObject(-0.17  - 0.035, 3750));
+        speakerPositionRPMMap.put(182.6, new PositionRPMObject(-0.165  - 0.035, 3825));
+        speakerPositionRPMMap.put(186.6 , new PositionRPMObject(-0.155  - 0.035, 4000));
+        speakerPositionRPMMap.put(190.4, new PositionRPMObject(-0.135 -0.035, 4200));
+        speakerPositionRPMMap.put(194.9, new PositionRPMObject(-0.13 -0.035, 4200));
+        speakerPositionRPMMap.put(197.7, new PositionRPMObject(-0.115 -0.035, 4350));
       
      }
 

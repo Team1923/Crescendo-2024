@@ -4,6 +4,7 @@
 
 package frc.robot.commands.AutoCommand;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
@@ -13,6 +14,7 @@ import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
 public class AutoScoreCommand extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
+  private Timer inputTimer = new Timer();
   
   /** Creates a new SpeakerPositionCommand. */
   public AutoScoreCommand() {
@@ -27,7 +29,7 @@ public class AutoScoreCommand extends Command {
     } else {
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
     }
-    
+    inputTimer.start();
  
   }
 
@@ -43,6 +45,11 @@ public class AutoScoreCommand extends Command {
 
     }
 
+    
+    if (inputTimer.get() > 0.7) {
+      stateHandler.setOperatorInputTimingGood(true);
+    }
+
 
    
   }
@@ -53,6 +60,9 @@ public class AutoScoreCommand extends Command {
     stateHandler.setDesiredArmState(ArmStates.STOWED);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
+    inputTimer.stop();
+    inputTimer.reset();
+    stateHandler.setOperatorInputTimingGood(false);
   }
 
   // Returns true when the command should end.

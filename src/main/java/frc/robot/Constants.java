@@ -76,6 +76,7 @@ public final class Constants {
 
             public static final int operatorLeftBumper = 5;
             public static final int operatorRightBumper = 6;
+            public static final int operatorRightTrigger = 8;
         }
         
     }

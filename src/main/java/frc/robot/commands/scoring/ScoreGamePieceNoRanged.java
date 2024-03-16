@@ -22,7 +22,10 @@ public class ScoreGamePieceNoRanged extends Command {
     } else if (stateHandler.getScoreInTrap()){
       stateHandler.setDesiredArmState(ArmStates.TRAP);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
-    } 
+    } else if(stateHandler.getWantUnguardable()){
+      stateHandler.setDesiredArmState(ArmStates.UNGUARDABLE);
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.UNGUARDABLE_SHOT);
+    }
     else if (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()){
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
