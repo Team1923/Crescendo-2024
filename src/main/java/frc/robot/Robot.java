@@ -12,6 +12,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -29,6 +30,7 @@ import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Limelight.LimelightInterface;
+import frc.robot.lib.StateMachine.StateHandler;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -40,6 +42,8 @@ public class Robot extends TimedRobot {
 
   private DigitalInput outsideButton = new DigitalInput(ButtonConstants.outsideButton);
   private DigitalInput insideButton = new DigitalInput(ButtonConstants.insideButton);
+
+  // private Timer bb1Timer = new Timer();
 
 
 
@@ -102,6 +106,12 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.initializeAuto(selector);
     LimelightInterface.getInstance().aprilTagFieldLayout.setOrigin(OriginPosition.kBlueAllianceWallRightSide);
+    // bb1Timer.start();
+    // if(bb1Timer.get() > 0.3 && StateHandler.getInstance().getBBOneCovered()){
+    //   StateHandler.getInstance().setNoBB1One(true);
+    //   bb1Timer.stop()
+    //   bb1Timer.reset();
+    // }
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

@@ -107,7 +107,7 @@ public class InfoSubsystem extends SubsystemBase {
     seeTrapTag.setBoolean(stateHandler.getHasValidTrapTag());
     manualClimbing.setBoolean(stateHandler.getManuallyClimbing());
 
-    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered()){
+    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered()){ // add condition for non functional bb1 
       xboxController.getHID().setRumble(RumbleType.kBothRumble, 0.2);
       ps4Controller.getHID().setRumble(RumbleType.kBothRumble, 0.4);
     } else{

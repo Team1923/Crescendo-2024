@@ -48,8 +48,24 @@ public class StateHandler {
     private boolean wantToPunt = false;
     private boolean wantUnguardable = false;
     private boolean operatorInputTimingGood = false;
+    private boolean manuallyClimbing = false;
+    private boolean fullEject = false;
+    private boolean wantGoalCentric = false;
 
+        /*PosRPM tuning values */
+    private double positionOffset = 0;
 
+    private double RPMOffset = 0;
+
+    private boolean posRPMTuning = false;
+
+    /* BEAM BREAK Values */
+    private boolean bbOneCovered = false;
+    private boolean bbTwoCovered = false;
+    private boolean bbThreeCovered = false;
+    private boolean bbFourCovered = false;
+
+   
     public boolean getOperatorInputTimingGood() {
         return operatorInputTimingGood;
     }
@@ -57,11 +73,6 @@ public class StateHandler {
     public void setOperatorInputTimingGood(boolean operatorInputTimingGood) {
         this.operatorInputTimingGood = operatorInputTimingGood;
     }
-
-    private boolean manuallyClimbing = false;
-    private boolean fullEject = false;
-    private boolean wantGoalCentric = false;
-    
 
     public boolean getWantUnguardable() {
         return wantUnguardable;
@@ -88,21 +99,6 @@ public class StateHandler {
         this.fullEject = fullEject;
     }
 
-    /*PosRPM tuning values */
-    private double positionOffset = 0;
-
-    private double RPMOffset = 0;
-
-    private boolean posRPMTuning = false;
-    
-
-   
-
-    /* BEAM BREAK Values */
-    private boolean bbOneCovered = false;
-    private boolean bbTwoCovered = false;
-    private boolean bbThreeCovered = false;
-    private boolean bbFourCovered = false;
 
     /**
      * Method to set the desired arm state.
