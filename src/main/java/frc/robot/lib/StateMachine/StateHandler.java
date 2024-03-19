@@ -606,7 +606,7 @@ public class StateHandler {
         this.fullEject = fullEject;
     }
 
-     public boolean isAutoOverride() {
+     public boolean getAutoOverride() {
         return autoOverride;
     }
 

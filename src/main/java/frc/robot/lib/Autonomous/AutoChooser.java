@@ -13,14 +13,10 @@ public class AutoChooser {
 		SUBWOOFER_3_GP,
 		SUBWOOFER_4_GP,
 		SUBWOOFER_5_GP,
-		SUBWOOFER_5_GP_NO_AUTO,
-		SUBWOOFER_5_GP_NO_GC,
 		SUBWOOFER_6_GP,
 		MID_5_GP,
 		FOUR_SOURCE,
 		// FAR_4_GP,
-		TWO_TEST,
-		FOUR_TEST,
 		MID_THREE;
 	}
 
@@ -43,15 +39,12 @@ public class AutoChooser {
 		chooser.addOption("5 Gamepiece from Subwoofer", AutoMode.SUBWOOFER_5_GP);
 		chooser.addOption("6 Gamepiece from Subwoofer", AutoMode.SUBWOOFER_6_GP);
 
-		chooser.addOption("5 Gamepiece from Subwoofer No Auto", AutoMode.SUBWOOFER_5_GP_NO_AUTO);
-		chooser.addOption("5 Gamepiece from Subwoofer no Goal Centric", AutoMode.SUBWOOFER_5_GP_NO_GC);
+		
 
 		chooser.addOption("5 Gamepiece Mid Rush", AutoMode.MID_5_GP);
 		
 		// chooser.addOption("4 Gamepiece from Far Side", AutoMode.FAR_4_GP);
 
-		chooser.addOption("2 Gamepiece GC Test", AutoMode.TWO_TEST);
-		chooser.addOption("4 Gamepiece GC Test", AutoMode.FOUR_TEST);
 
 		chooser.addOption("Mid 3", AutoMode.MID_THREE);
 
@@ -73,20 +66,12 @@ public class AutoChooser {
 				return autoInstantiator.getFiveSub();
 			case SUBWOOFER_6_GP:
 				return autoInstantiator.getSixSub();
-			case SUBWOOFER_5_GP_NO_AUTO:
-				return autoInstantiator.getFiveSubNoAutoCommands();
-			case SUBWOOFER_5_GP_NO_GC:
-				return autoInstantiator.getFiveSubNoGoalCentric();
+	
 			// case FAR_4_GP:
 			// 	return autoInstantiator.getFourFar();
 			
 			case STRAIGHT_4_METERS_AUTO:
 				return autoInstantiator.getStraight4MetersAuto();
-
-			case TWO_TEST:
-				return autoInstantiator.getTwoTest();
-			case FOUR_TEST:
-				return autoInstantiator.getFourTest();
 
 			case MID_5_GP:
 				return autoInstantiator.getFiveMid();

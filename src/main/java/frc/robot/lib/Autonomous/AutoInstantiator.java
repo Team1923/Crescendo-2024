@@ -14,8 +14,6 @@ public class AutoInstantiator {
 	public PathPlannerAuto fiveSub;
 	public PathPlannerAuto sixSub;
 
-	public PathPlannerAuto fiveSubNoGoalCentric;
-	public PathPlannerAuto fiveSubNoAutoCommands;
 
 	public PathPlannerAuto fiveMid; 
 	public PathPlannerAuto threeMid;	
@@ -44,15 +42,12 @@ public class AutoInstantiator {
 		fiveSub = new PathPlannerAuto("5GPSub");
 		sixSub = new PathPlannerAuto("6GPSub");
 
-		fiveSubNoAutoCommands = new PathPlannerAuto("5GPSubNonAuto");
-		fiveSubNoGoalCentric = new PathPlannerAuto("5GPSubNoGoalCentric");
+		
 
 		fiveMid = new PathPlannerAuto("5GPMid");
 
 		// fourFar = new PathPlannerAuto("4GPFar");
 		
-		twoTest = new PathPlannerAuto("2Test");
-		fourTest = new PathPlannerAuto("4Test");
 		threeMid = new PathPlannerAuto("3GPMid");
 
 		fourSource = new PathPlannerAuto("4SourceSide");
@@ -84,13 +79,6 @@ public class AutoInstantiator {
 		return sixSub;
 	}
 
-	public PathPlannerAuto getFiveSubNoAutoCommands(){
-		return fiveSubNoAutoCommands;
-	}
-
-	public PathPlannerAuto getFiveSubNoGoalCentric(){
-		return fiveSubNoGoalCentric;
-	}
 
 
 	public PathPlannerAuto getFiveMid(){
@@ -108,13 +96,6 @@ public class AutoInstantiator {
 	// }
 
 
-	public PathPlannerAuto getTwoTest() {
-		return twoTest;
-	}
-
-	public PathPlannerAuto getFourTest() {
-		return fourTest;
-	}
 
 	public PathPlannerAuto getMidThree(){
 		return threeMid;
