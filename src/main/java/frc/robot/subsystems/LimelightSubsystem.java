@@ -37,11 +37,21 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     //Update Limelight data 
-    stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
+    if (!stateHandler.getAutoOverride()) {
+      stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
+    } else {
+      stateHandler.setDistanceToSpeakerTag(150);
+    }
+    
     stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());
     stateHandler.setLimelightHasTag(limelight.hasValidTag());
     stateHandler.setAprilTagID(limelight.getID());
-    stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
+    if (!stateHandler.getAutoOverride()) {
+      stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
+    } else {
+      stateHandler.setHasValidSpeakerTag(true);
+    }
+    
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
     stateHandler.setHasValidTrapTag(limelight.hasTrapTag());
     stateHandler.setIsCenteredToTag(Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag());

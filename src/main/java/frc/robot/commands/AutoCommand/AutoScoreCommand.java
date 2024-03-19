@@ -15,6 +15,7 @@ public class AutoScoreCommand extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
   private Timer inputTimer = new Timer();
+  private Timer shotTimer = new Timer();
   
   /** Creates a new SpeakerPositionCommand. */
   public AutoScoreCommand() {
@@ -30,6 +31,7 @@ public class AutoScoreCommand extends Command {
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
     }
     inputTimer.start();
+    shotTimer.start();
  
   }
 
@@ -50,6 +52,10 @@ public class AutoScoreCommand extends Command {
       stateHandler.setOperatorInputTimingGood(true);
     }
 
+    if(shotTimer.get() > 1.5){
+      stateHandler.setAutoOverride(true);
+    }
+
 
    
   }
@@ -62,7 +68,11 @@ public class AutoScoreCommand extends Command {
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
     inputTimer.stop();
     inputTimer.reset();
+    shotTimer.stop();
+    shotTimer.reset();
     stateHandler.setOperatorInputTimingGood(false);
+    stateHandler.setAutoOverride(false);
+    stateHandler.setIsCenteredToTag(false);
   }
 
   // Returns true when the command should end.
