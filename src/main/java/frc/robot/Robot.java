@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
   private DigitalInput outsideButton = new DigitalInput(ButtonConstants.outsideButton);
   private DigitalInput insideButton = new DigitalInput(ButtonConstants.insideButton);
 
-  // private Timer bb1Timer = new Timer();
+  private Timer bb1Timer = new Timer();
 
 
 
@@ -111,12 +111,14 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.initializeAuto(selector);
     LimelightInterface.getInstance().aprilTagFieldLayout.setOrigin(OriginPosition.kBlueAllianceWallRightSide);
-    // bb1Timer.start();
-    // if(bb1Timer.get() > 0.3 && StateHandler.getInstance().getBBOneCovered()){
-    //   StateHandler.getInstance().setNoBB1One(true);
-    //   bb1Timer.stop()
-    //   bb1Timer.reset();
-    // }
+    if(StateHandler.getInstance().getBBOneCovered()){
+      bb1Timer.start();
+    }
+    if(bb1Timer.get() > 0.3 && StateHandler.getInstance().getBBOneCovered()){
+      StateHandler.getInstance().setNoBB1(true);
+      bb1Timer.stop();
+      bb1Timer.reset();
+    }
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -130,6 +132,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousExit() {
     StateHandler.getInstance().setAutoOverride(false);
+    bb1Timer.stop();
+    bb1Timer.reset();
   }
 
   @Override

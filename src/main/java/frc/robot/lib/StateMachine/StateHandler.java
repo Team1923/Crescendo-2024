@@ -69,10 +69,20 @@ public class StateHandler {
     private boolean fullEject = false;
     private boolean operatorInputTimingGood = false;
     private boolean autoOverride = false;
+    private boolean noBB1 = false;
+    
 
 
 
     
+    public boolean getNoBB1() {
+        return noBB1;
+    }
+
+    public void setNoBB1(boolean noBB1) {
+        this.noBB1 = noBB1;
+    }
+
     /**
      * Method to set the desired arm state.
      * 
