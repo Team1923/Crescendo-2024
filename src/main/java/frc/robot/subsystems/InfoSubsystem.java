@@ -94,6 +94,13 @@ public class InfoSubsystem extends SubsystemBase {
   private SuppliedValueWidget<String> desiredShooterSpeeds = stateDashboard.addString("Desired Shooter Speeds", () -> stateHandler.getDesiredShootingSpeed().toString()).withPosition(3, 1);
   private SuppliedValueWidget<String> currentFeederSpeed = stateDashboard.addString("Current Feeder Speed", () -> stateHandler.getCurrentFeederSpeed().toString()).withPosition(4, 0);
   private SuppliedValueWidget<String> desiredFeederSpeed = stateDashboard.addString("Desired Feeder Speed", () -> stateHandler.getDesiredFeederSpeed().toString()).withPosition(4, 1);
+
+  private SuppliedValueWidget<Boolean> bb1 = stateDashboard.addBoolean("BB ONE COVERED", () -> stateHandler.getBBOneCovered()).withPosition(0, 2);
+  private SuppliedValueWidget<Boolean> bb2 = stateDashboard.addBoolean("BB TWO COVERED", () -> stateHandler.getBBTwoCovered()).withPosition(1, 2);;
+  private SuppliedValueWidget<Boolean> bb3 = stateDashboard.addBoolean("BB THREE COVERED", () -> stateHandler.getBBThreeCovered()).withPosition(2, 2);;
+  private SuppliedValueWidget<Boolean> bb4 = stateDashboard.addBoolean("BB FOUR COVERED", () -> stateHandler.getBBFourCovered()).withPosition(3, 2);;
+  private SuppliedValueWidget<Boolean> bb1Dead = stateDashboard.addBoolean("BB ONE DEAD", () -> stateHandler.getBB1Dead()).withPosition(0, 3);;
+
   
   
 
@@ -107,7 +114,7 @@ public class InfoSubsystem extends SubsystemBase {
     seeTrapTag.setBoolean(stateHandler.getHasValidTrapTag());
     manualClimbing.setBoolean(stateHandler.getManuallyClimbing());
 
-    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered() && !stateHandler.getNoBB1()){ // add condition for non functional bb1 
+    if(DriverStation.isTeleop() && stateHandler.getBBOneCovered() && !stateHandler.getBB1Dead()){ // add condition for non functional bb1 
       xboxController.getHID().setRumble(RumbleType.kBothRumble, 0.2);
       ps4Controller.getHID().setRumble(RumbleType.kBothRumble, 0.4);
     } else{
@@ -119,10 +126,10 @@ public class InfoSubsystem extends SubsystemBase {
 
     /* DEBUG PRINTOUTS - TODO: DISABLE WHEN IN MATCH! */
     /* BEAM BREAK VALUES */
-    SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());
-    SmartDashboard.putBoolean("BB TWO COVERED", stateHandler.getBBTwoCovered());
-    SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
-    SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
+    // SmartDashboard.putBoolean("BB ONE COVERED", stateHandler.getBBOneCovered());
+    // SmartDashboard.putBoolean("BB TWO COVERED", stateHandler.getBBTwoCovered());
+    // SmartDashboard.putBoolean("BB THREE COVERED", stateHandler.getBBThreeCovered());
+    // SmartDashboard.putBoolean("BB FOUR COVERED", stateHandler.getBBFourCovered());
 
     // /* RELEVANT INTAKE STATES */
     // SmartDashboard.putString("CURRENT INTAKE ROLLER", stateHandler.getCurrentIntakeRollerSpeed().toString());

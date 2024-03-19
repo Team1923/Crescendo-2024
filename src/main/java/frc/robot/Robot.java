@@ -111,8 +111,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.initializeAuto(selector);
     LimelightInterface.getInstance().aprilTagFieldLayout.setOrigin(OriginPosition.kBlueAllianceWallRightSide);
-    if(StateHandler.getInstance().getBBOneCovered()){
-      StateHandler.getInstance().setNoBB1(true);
+    
+    if (stateHandler.getBBOneCovered()){
+      stateHandler.setBB1Dead(true);
     }
 
     if (m_autonomousCommand != null) {
@@ -126,7 +127,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousExit() {
-    StateHandler.getInstance().setAutoOverride(false);
+    stateHandler.setAutoOverride(false);
+   
   }
 
   @Override

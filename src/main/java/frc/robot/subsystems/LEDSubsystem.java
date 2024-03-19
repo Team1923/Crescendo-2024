@@ -159,7 +159,7 @@ public class LEDSubsystem extends SubsystemBase {
     }
 
     // regular
-    if ((flashTimer.get() < 2) && ((stateHandler.getBBOneCovered() && !stateHandler.getNoBB1())
+    if ((flashTimer.get() < 2) && ((stateHandler.getBBOneCovered() && !stateHandler.getBB1Dead())
         || (stateHandler.getDesiredArmState() == ArmStates.BABY_BIRD && stateHandler.getBBFourCovered()))) { // baby
                                                                                                              // bird
 

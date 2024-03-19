@@ -69,19 +69,13 @@ public class StateHandler {
     private boolean fullEject = false;
     private boolean operatorInputTimingGood = false;
     private boolean autoOverride = false;
-    private boolean noBB1 = false;
+    private boolean pooPooPeePeeBB1Died = false;
     
 
 
 
     
-    public boolean getNoBB1() {
-        return noBB1;
-    }
-
-    public void setNoBB1(boolean noBB1) {
-        this.noBB1 = noBB1;
-    }
+    
 
     /**
      * Method to set the desired arm state.
@@ -620,6 +614,14 @@ public class StateHandler {
         this.autoOverride = autoOverride;
     }
 
+    public boolean getBB1Dead() {
+        return pooPooPeePeeBB1Died;
+    }
+
+    public void setBB1Dead(boolean noBB1) {
+        this.pooPooPeePeeBB1Died = noBB1;
+    }
+
 
     //HASHMAP TUNING
 
@@ -643,6 +645,9 @@ public class StateHandler {
      public boolean isPosRPMTuning() {
         return posRPMTuning;
     }
+
+
+
 
     
 
