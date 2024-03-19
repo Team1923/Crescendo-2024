@@ -33,6 +33,8 @@ public class StateHandler {
     private FeederSpeeds currentFeederSpeed = FeederSpeeds.OFF;
 
     /* Extra variables needed to handle additional states. */
+
+    /* Limelight */
     private boolean limelightHasTag = false;
     private double aprilTagID = 0;
     private boolean hasValidSpeakerTag = false;
@@ -41,22 +43,19 @@ public class StateHandler {
     private double distanceToSpeakerTag = 0;
     private double distanceToTrapTag = 0;
     private boolean centeredToTag = false;
+    private boolean wantGoalCentric = false;
+
+    /* Desired scoring */
     private boolean wantToPositionForSubwoofer = false;
     private boolean scoreInAmp = false;
     private boolean scoreInTrap = false;
     private boolean wantToPositionForReverseSubwoofer = false;
     private boolean wantToPunt = false;
     private boolean wantUnguardable = false;
-    private boolean operatorInputTimingGood = false;
-    private boolean manuallyClimbing = false;
-    private boolean fullEject = false;
-    private boolean wantGoalCentric = false;
 
         /*PosRPM tuning values */
     private double positionOffset = 0;
-
     private double RPMOffset = 0;
-
     private boolean posRPMTuning = false;
 
     /* BEAM BREAK Values */
@@ -65,41 +64,15 @@ public class StateHandler {
     private boolean bbThreeCovered = false;
     private boolean bbFourCovered = false;
 
-   
-    public boolean getOperatorInputTimingGood() {
-        return operatorInputTimingGood;
-    }
-
-    public void setOperatorInputTimingGood(boolean operatorInputTimingGood) {
-        this.operatorInputTimingGood = operatorInputTimingGood;
-    }
-
-    public boolean getWantUnguardable() {
-        return wantUnguardable;
-    }
-
-    public void setWantUnguardable(boolean wantUnguardable) {
-        this.wantUnguardable = wantUnguardable;
-    }
+    /*Misc */
+    private boolean manuallyClimbing = false;
+    private boolean fullEject = false;
+    private boolean operatorInputTimingGood = false;
+    private boolean autoOverride = false;
 
 
-    public boolean getIsGoalCentric() {
-        return wantGoalCentric;
-    }
 
-    public void setIsGoalCentric(boolean wantGoalCentric) {
-        this.wantGoalCentric = wantGoalCentric;
-    }
-
-    public boolean getFullEject() {
-        return fullEject;
-    }
-
-    public void setFullEject(boolean fullEject) {
-        this.fullEject = fullEject;
-    }
-
-
+    
     /**
      * Method to set the desired arm state.
      * 
@@ -596,6 +569,47 @@ public class StateHandler {
         this.wantToPunt = p;
     }
 
+    public boolean getOperatorInputTimingGood() {
+        return operatorInputTimingGood;
+    }
+
+    public void setOperatorInputTimingGood(boolean operatorInputTimingGood) {
+        this.operatorInputTimingGood = operatorInputTimingGood;
+    }
+
+    public boolean getWantUnguardable() {
+        return wantUnguardable;
+    }
+
+    public void setWantUnguardable(boolean wantUnguardable) {
+        this.wantUnguardable = wantUnguardable;
+    }
+
+
+    public boolean getIsGoalCentric() {
+        return wantGoalCentric;
+    }
+
+    public void setIsGoalCentric(boolean wantGoalCentric) {
+        this.wantGoalCentric = wantGoalCentric;
+    }
+
+    public boolean getFullEject() {
+        return fullEject;
+    }
+
+    public void setFullEject(boolean fullEject) {
+        this.fullEject = fullEject;
+    }
+
+     public boolean isAutoOverride() {
+        return autoOverride;
+    }
+
+    public void setAutoOverride(boolean autoOverride) {
+        this.autoOverride = autoOverride;
+    }
+
 
     //HASHMAP TUNING
 
@@ -619,5 +633,7 @@ public class StateHandler {
      public boolean isPosRPMTuning() {
         return posRPMTuning;
     }
+
+    
 
 }

@@ -12,7 +12,7 @@
         "y": 5.512745253414342
       },
       "isLocked": false,
-      "linkedName": "EndOfMid"
+      "linkedName": "SubMid"
     },
     {
       "anchor": {
@@ -57,7 +57,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "SubAmp"
     }
   ],
   "rotationTargets": [
@@ -67,20 +67,26 @@
       "rotateFast": false
     }
   ],
-  "constraintZones": [
+  "constraintZones": [],
+  "eventMarkers": [
     {
-      "name": "intake_drop",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.05,
-      "constraints": {
-        "maxVelocity": 0.5,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
+      "name": "intake",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
       }
     }
   ],
-  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.5,
     "maxAcceleration": 3.0,
@@ -88,12 +94,12 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 1.0,
+    "velocity": 0.0,
     "rotation": 21.61477894278621,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "5PieceSub",
   "previewStartingState": {
     "rotation": 6.519801751656926,
     "velocity": 1.0

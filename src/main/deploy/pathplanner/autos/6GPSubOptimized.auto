@@ -14,13 +14,19 @@
         {
           "type": "named",
           "data": {
+            "name": "autoOverride"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "wantSubwoofer"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "NonAutoScoreGamePiece"
+            "name": "ScoreGamePiece"
           }
         },
         {
@@ -30,7 +36,7 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -38,31 +44,25 @@
                 "data": {
                   "pathName": "PodiumGamepiece"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "NonAutoDeployIntake"
-                }
               }
             ]
           }
         },
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "NonAutoScoreCommandGroup"
+                  "name": "ScoreGamePiece"
                 }
               }
             ]
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -70,84 +70,105 @@
                 "data": {
                   "pathName": "MidGamepiece"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "NonAutoDeployIntake"
-                }
               }
             ]
           }
         },
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "NonAutoScoreCommandGroup"
+                  "name": "ScoreGamePiece"
                 }
               }
             ]
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "AmpGamepiece"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "NonAutoDeployIntake"
+                  "pathName": "SubAmpAnd1"
                 }
               }
             ]
           }
         },
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "NonAutoScoreCommandGroup"
+                  "name": "ScoreCommandGroup"
                 }
               }
             ]
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "AmpTo1NonAuto"
+                  "pathName": "Sub1to2Optimized"
                 }
               },
               {
-                "type": "named",
+                "type": "race",
                 "data": {
-                  "name": "NonAutoDeployIntake"
+                  "commands": [
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "DeployIntake"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "ScoreGamePiece"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 3.7
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "NonAutoScoreCommandGroup"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreCommandGroup"
+                }
+              }
+            ]
           }
         }
       ]

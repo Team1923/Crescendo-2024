@@ -3,55 +3,61 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.768306670516475,
-        "y": 5.180510418000893
+        "x": 2.617715262049867,
+        "y": 3.0666493276198623
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8181662926392415,
-        "y": 4.480588696997131
+        "x": 3.3170512494871156,
+        "y": 2.496336531134601
       },
       "isLocked": false,
-      "linkedName": "EndOfPreload"
+      "linkedName": "SourcePreload"
     },
     {
       "anchor": {
-        "x": 2.62197994481459,
-        "y": 4.128036518181299
+        "x": 8.04444625748169,
+        "y": 0.7866938892706536
       },
       "prevControl": {
-        "x": 2.63367409925703,
-        "y": 3.8473768115627407
+        "x": 7.411832515972726,
+        "y": 1.006428166702488
       },
       "nextControl": {
-        "x": 2.597151409825845,
-        "y": 4.723921357911172
+        "x": 8.621173769769628,
+        "y": 0.5863713308555141
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.1776020760018726,
-        "y": 5.192204572443334
+        "x": 3.0,
+        "y": 2.89
       },
       "prevControl": {
-        "x": 2.3985468425114758,
-        "y": 5.070939949257157
+        "x": 3.3047643794935286,
+        "y": 2.506309143981871
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfPodium"
+      "linkedName": "Source5"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.3,
+      "rotationDegrees": -12.668910961957083,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Deploy",
+      "name": "intake",
       "waypointRelativePos": 0,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
@@ -66,18 +72,18 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.5,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0.5,
-    "rotation": -8.203226519965066,
+    "velocity": 2.0,
+    "rotation": -19.855214369321114,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "TestAutos",
+  "folder": "4PieceSource",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

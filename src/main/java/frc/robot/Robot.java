@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.fasterxml.jackson.core.sym.Name;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants.ButtonConstants;
 import frc.robot.Constants.FeederConstants;
 import frc.robot.commands.AutoCommand.AutoIntake;
@@ -37,6 +39,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  StateHandler stateHandler = StateHandler.getInstance();
+
   /* Chooser Initialization */
   public AutoChooser selector;
 
@@ -54,10 +58,11 @@ public class Robot extends TimedRobot {
     NamedCommands.registerCommand("wantSubwoofer", new AutoSetArmToSubwoofer());
     NamedCommands.registerCommand("wantRange", new AutoSetArmToRanged());
 
-    NamedCommands.registerCommand("NonAutoDeployIntake", new DeployIntakeCommand());
-    NamedCommands.registerCommand("NonAutoScoreGamePiece", new ScoreGamePiece());
-    NamedCommands.registerCommand("NonAutoWantSubwoofer", new SetArmToSubwoofer());
-    NamedCommands.registerCommand("NonAutoWantRange", new SetArmToRanged());
+
+
+
+    NamedCommands.registerCommand("autoOverride", new InstantCommand(() -> stateHandler.setAutoOverride(true)));
+
 
     CameraServer.startAutomaticCapture();
 
@@ -124,6 +129,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousExit() {
+    StateHandler.getInstance().setAutoOverride(false);
   }
 
   @Override
@@ -131,6 +137,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+        StateHandler.getInstance().setAutoOverride(false);
+
   }
 
   @Override

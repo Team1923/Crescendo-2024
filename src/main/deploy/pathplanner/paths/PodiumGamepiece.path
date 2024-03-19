@@ -25,24 +25,30 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndofPodium2"
+      "linkedName": "SubPodium"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
+  "constraintZones": [],
+  "eventMarkers": [
     {
-      "name": "intake drop",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.05,
-      "constraints": {
-        "maxVelocity": 0.5,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
+      "name": "intake",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
       }
     }
   ],
-  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 2.85,
     "maxAcceleration": 3.0,
@@ -55,7 +61,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "5PieceSubwoofer",
+  "folder": "5PieceSub",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

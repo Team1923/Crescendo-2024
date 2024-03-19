@@ -20,12 +20,12 @@
         "y": 3.0666493276198623
       },
       "prevControl": {
-        "x": 2.6374902599331964,
-        "y": 3.243971080411516
+        "x": 2.379705757984981,
+        "y": 2.7637574248044356
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "EndOfPreload4SourceSide"
+      "linkedName": "SourcePreload"
     }
   ],
   "rotationTargets": [],
@@ -33,7 +33,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.2,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

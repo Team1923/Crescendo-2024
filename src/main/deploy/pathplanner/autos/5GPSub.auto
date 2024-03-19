@@ -38,12 +38,6 @@
                 "data": {
                   "pathName": "PodiumGamepiece"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "DeployIntake"
-                }
               }
             ]
           }
@@ -69,12 +63,6 @@
                 "type": "path",
                 "data": {
                   "pathName": "MidGamepiece"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "DeployIntake"
                 }
               }
             ]
@@ -102,12 +90,6 @@
                 "data": {
                   "pathName": "AmpGamepiece"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "DeployIntake"
-                }
               }
             ]
           }
@@ -133,12 +115,6 @@
                 "type": "path",
                 "data": {
                   "pathName": "AmpTo1"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "DeployIntake"
                 }
               }
             ]

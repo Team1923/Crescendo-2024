@@ -14,44 +14,20 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Preload"
+            "pathName": "SourcePreload"
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "ScoreCommandGroup"
-          }
-        },
-        {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "PreloadTo1"
-                }
-              },
               {
                 "type": "named",
                 "data": {
-                  "name": "DeployIntake"
+                  "name": "ScoreCommandGroup"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "ShootOne"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ScoreCommandGroup"
           }
         },
         {
@@ -61,22 +37,62 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "OnetoTwo"
+                  "pathName": "SourcePreloadTo5"
                 }
               }
             ]
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "ScoreCommandGroup"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreCommandGroup"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "TwotoThree"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Source5to3"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreCommandGroup"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Source5to4"
+                }
+              }
+            ]
           }
         }
       ]
