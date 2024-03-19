@@ -187,6 +187,8 @@ public final class Constants {
         public static final double armMaxGravityConstant = 0.050 * 12; // 2 volts max ff 
 
         public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
+
+        public static final double armPositionChange = 0;
     }
 
     public static final class LEDConstants{

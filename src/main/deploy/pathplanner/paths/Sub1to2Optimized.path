@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.105777623823435,
-        "y": 3.0096849922658473
+        "x": 5.143463182789417,
+        "y": 6.569779302183426
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.738162797295636,
-        "y": 0.8548910678420494
+        "x": 6.525341895191636,
+        "y": 6.698598504187022
       },
       "isLocked": false,
-      "linkedName": "EndOf4"
+      "linkedName": "SubOp1"
     },
     {
       "anchor": {
-        "x": 7.860377261410728,
-        "y": 0.95
+        "x": 8.153148175055266,
+        "y": 5.773442417070284
       },
       "prevControl": {
-        "x": 8.279783072708305,
-        "y": 1.930735866212769
+        "x": 7.427076309216811,
+        "y": 5.691466561249813
       },
       "nextControl": {
-        "x": 7.579317184311971,
-        "y": 0.2927709136445382
+        "x": 8.457715067915565,
+        "y": 5.80782900174806
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.452523826588308,
-        "y": 1.616095443317848
+        "x": 5.143463182789417,
+        "y": 6.394116753996703
       },
       "prevControl": {
-        "x": 6.220860145001316,
-        "y": 1.0773969622118975
+        "x": 7.403654636125248,
+        "y": 6.604911811820769
       },
       "nextControl": null,
       "isLocked": false,
@@ -49,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "deploy",
-      "waypointRelativePos": 0.4,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -66,18 +66,18 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.5,
-    "maxAcceleration": 4.5,
+    "maxVelocity": 5.2,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -30.735487701920157,
+    "rotation": 10.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "5PieceFar",
+  "folder": "6PieceSubOptimzied",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
