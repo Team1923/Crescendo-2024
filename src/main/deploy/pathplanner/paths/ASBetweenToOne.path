@@ -8,40 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.089157995830823,
-        "y": 6.291937854816297
-      },
-      "isLocked": false,
-      "linkedName": "AmpPreload"
-    },
-    {
-      "anchor": {
-        "x": 7.850675657326158,
-        "y": 6.979596091267655
-      },
-      "prevControl": {
-        "x": 7.6376179544811915,
-        "y": 6.617817496641283
-      },
-      "nextControl": {
-        "x": 8.151955080536824,
-        "y": 7.4911779062575174
+        "x": 5.149013631360596,
+        "y": 6.568163192930159
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.2724195385497685,
-        "y": 6.979596091267655
+        "x": 7.798238131067457,
+        "y": 7.272600853377808
       },
       "prevControl": {
-        "x": 5.110371208163799,
-        "y": 7.316487029200474
+        "x": 7.019460193008436,
+        "y": 7.076363495494286
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "AmpFirst"
+      "linkedName": "AmpFirstIntake"
     }
   ],
   "rotationTargets": [],

@@ -30,6 +30,12 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "ASShootOne"
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "ScoreCommandGroup"
@@ -42,6 +48,12 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "ASShootTwo"
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "ScoreCommandGroup"
@@ -51,6 +63,12 @@
           "type": "path",
           "data": {
             "pathName": "ASTwoToThree"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASShootThree"
           }
         },
         {

@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.660529119800378,
+        "y": 4.175801898773608
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.990877947164699,
+        "y": 4.157569774259046
+      },
+      "isLocked": false,
+      "linkedName": "AmpThirdIntake"
+    },
+    {
+      "anchor": {
+        "x": 4.033183409134114,
+        "y": 4.957847098084133
+      },
+      "prevControl": {
+        "x": 5.7532956166541265,
+        "y": 4.196534889925125
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.2,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -4.948484924827448,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "AmpSideMidLine",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

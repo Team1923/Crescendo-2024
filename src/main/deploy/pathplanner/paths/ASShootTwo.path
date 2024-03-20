@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.67263008739854,
+        "y": 6.089005212601621
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.698542532305191,
+        "y": 6.203641712314873
+      },
+      "isLocked": false,
+      "linkedName": "AmpSecondIntake"
+    },
+    {
+      "anchor": {
+        "x": 3.9856669430319993,
+        "y": 6.408148064723802
+      },
+      "prevControl": {
+        "x": 5.381271536127978,
+        "y": 6.28738040809415
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "AmpSecondShot"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.2,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 26.151300256146882,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "AmpSideMidLine",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
