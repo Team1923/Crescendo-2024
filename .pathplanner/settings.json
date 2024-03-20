@@ -8,7 +8,8 @@
     "5PieceSub",
     "6Piece",
     "6PieceSubOptimzied",
-    "AmpSideMidLine"
+    "AmpSideMidLine",
+    "MidLineShove"
   ],
   "autoFolders": [
     "SmallerPaths"

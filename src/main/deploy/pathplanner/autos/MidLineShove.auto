@@ -1,0 +1,62 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.38,
+      "y": 1.5
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MLSScorePreload"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreCommandGroup"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MLSFirstMidLine"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MLSSecondMidLine"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MLSThirdMidLine"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MLSFourthLine"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.382440686177669,
+        "y": 1.5041469110716001
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.3824406861776612,
+        "y": 1.0041469110716001
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.8402083980093886,
+        "y": 2.9669622950357013
+      },
+      "prevControl": {
+        "x": 3.313501890892667,
+        "y": 2.010398733760431
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "MidlineScorePreload"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.2,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 1.0,
+    "rotation": -43.94920477687326,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "MidLineShove",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
