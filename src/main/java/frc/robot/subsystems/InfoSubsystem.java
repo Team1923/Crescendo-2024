@@ -136,9 +136,9 @@ public class InfoSubsystem extends SubsystemBase {
     // SmartDashboard.putString("DESIRED INTAKE POS", stateHandler.getDesiredIntakeState().toString());
     // SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
 
-    // /* RELEVANT ARM STATES */
-    // SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
-    // SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
+    /* RELEVANT ARM STATES */
+    SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
+    SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
 
     // // /* RELEVANT SHOOTER STATES */
     // SmartDashboard.putString("DESIRED SHOOTER STATE", stateHandler.getDesiredShootingSpeed().toString());

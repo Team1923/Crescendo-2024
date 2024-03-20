@@ -165,7 +165,7 @@ public final class Constants {
 
         /* Motion Magic Constants */
         public static final double armKS = 0;
-        public static final double armkP = 1;
+        public static final double armkP = 1.2;
         public static final double armkI = 0.005;
         public static final double armkD = 0;
         public static final double maxArmVel = 100;
@@ -179,11 +179,11 @@ public final class Constants {
         public static final double armRadsToRots = armGearRatio / (2 * Math.PI);
 
         /* kG - gravity constant for motion of arm */
-        public static final double armMaxGravityConstant = 0.050 * 12; // 2 volts max ff 
+        public static final double armMaxGravityConstant = 0.03 * 12; // 2 volts max ff 
 
-        public static final double armPositionAllowableOffset = 0.05; // allowed radians offset
+        public static final double armPositionAllowableOffset = 0.03; // allowed radians offset
 
-        public static final double armPositionChange = 0;
+        public static final double armPositionChange = -0.044;
     }
 
     public static final class LEDConstants{

@@ -210,6 +210,8 @@ public class ArmSubsystem extends SubsystemBase {
     ArmStates desiredArmState = stateHandler.getDesiredArmState();
     double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
+    
+
     if (desiredArmState == ArmStates.SPEAKER) {
       // subwoofer condition
       if (stateHandler.getScoreInSubwoofer()) {
