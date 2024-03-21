@@ -24,6 +24,9 @@ public class AutoInstantiator {
 	public PathPlannerAuto twoTest;
 	public PathPlannerAuto fourTest;
 
+	public PathPlannerAuto fourAmpSide;
+	public PathPlannerAuto midLineShove;
+
 	public static synchronized AutoInstantiator getInstance() {
 		if (autoInstantiator == null) {
 			autoInstantiator = new AutoInstantiator();
@@ -52,6 +55,17 @@ public class AutoInstantiator {
 
 		fourSource = new PathPlannerAuto("4SourceSide");
 
+		fourAmpSide = new PathPlannerAuto("4AmpSide");
+		midLineShove = new PathPlannerAuto("MidLineShove");
+
+	}
+
+	public PathPlannerAuto getFourAmpSide() {
+		return fourAmpSide;
+	}
+
+	public PathPlannerAuto getMidLineShove() {
+		return midLineShove;
 	}
 
 	public PathPlannerAuto getStraight4MetersAuto(){

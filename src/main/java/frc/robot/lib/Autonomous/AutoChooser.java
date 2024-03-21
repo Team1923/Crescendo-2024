@@ -16,6 +16,8 @@ public class AutoChooser {
 		SUBWOOFER_6_GP,
 		MID_5_GP,
 		FOUR_SOURCE,
+		FOUR_AMP,
+		MID_LINE_SHOVE,
 		// FAR_4_GP,
 		MID_THREE;
 	}
@@ -38,6 +40,8 @@ public class AutoChooser {
 		chooser.addOption("4 Gamepiece from Subwoofer", AutoMode.SUBWOOFER_4_GP);
 		chooser.addOption("5 Gamepiece from Subwoofer", AutoMode.SUBWOOFER_5_GP);
 		chooser.addOption("6 Gamepiece from Subwoofer", AutoMode.SUBWOOFER_6_GP);
+		chooser.addOption("4 Gamepiece from Amp", AutoMode.FOUR_AMP);
+		chooser.addOption("MidLine Shove", AutoMode.MID_LINE_SHOVE);
 
 		
 
@@ -66,6 +70,10 @@ public class AutoChooser {
 				return autoInstantiator.getFiveSub();
 			case SUBWOOFER_6_GP:
 				return autoInstantiator.getSixSub();
+			case FOUR_AMP:
+				return autoInstantiator.getFourAmpSide();
+			case MID_LINE_SHOVE:
+				return autoInstantiator.getMidLineShove();
 	
 			// case FAR_4_GP:
 			// 	return autoInstantiator.getFourFar();
