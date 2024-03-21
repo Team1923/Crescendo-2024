@@ -44,7 +44,7 @@ public final class Constants {
         public static final double speakerLerpUpperBound = 197.7;
 
         //TODO: TUNE
-        public static final double trapHeightFromFloor = 0; 
+        public static final double trapHeightFromFloor = 52.75; //rough calculations
         public static final double trapLerpLowerBound = 0;
         public static final double trapLerpUpperBound = 0;
         
