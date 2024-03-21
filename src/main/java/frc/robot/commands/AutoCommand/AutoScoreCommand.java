@@ -8,6 +8,7 @@ import com.ctre.phoenix6.Utils;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.lib.SimUtils.SimulationSubsystem;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
@@ -30,7 +31,7 @@ public class AutoScoreCommand extends Command {
   public void initialize() {
 
     if (Utils.isSimulation()){
-      SimulationSubsystem.getInstance().shoot();
+      SimulationSubsystem.getInstance().setShooting(true);
     }
 
     if (stateHandler.getScoreInAmp()) {
@@ -56,7 +57,7 @@ public class AutoScoreCommand extends Command {
     }
 
     
-    if (inputTimer.get() > 0.7) {
+    if (inputTimer.get() > Constants.ArmConstants.armSettleTime) {
       stateHandler.setOperatorInputTimingGood(true);
     }
 
@@ -81,7 +82,13 @@ public class AutoScoreCommand extends Command {
     stateHandler.setOperatorInputTimingGood(false);
     stateHandler.setAutoOverride(false);
     stateHandler.setIsCenteredToTag(false);
+
+    if (Utils.isSimulation()){
+      SimulationSubsystem.getInstance().setShooting(false);
+    }
   }
+
+
 
   // Returns true when the command should end.
   @Override

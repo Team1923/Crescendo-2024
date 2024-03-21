@@ -7,6 +7,7 @@ package frc.robot.lib.SimUtils;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import com.ctre.phoenix6.Utils;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -15,6 +16,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
+import frc.robot.lib.StateMachine.StateVariables.IntakeStates;
 
 public class SimulationSubsystem extends SubsystemBase {
 
@@ -40,13 +43,22 @@ public class SimulationSubsystem extends SubsystemBase {
     private static final double bb3OnTime = 0.2;
   }
 
+  private class ShootTimes{
+    private static final double bb2OffTime = 0.04;
+    private static final double bb3OffTime = 0.2;
+    private static final double bb4OffTime = 0.3;
+  }
+
+
 
 
   private ArrayList<Translation2d> notePoses;
 
   private boolean isCollecting = false;
-  private boolean isShooting = false;
   private Timer collectionTimer;
+
+  private boolean isShooting = false;
+  private Timer shootTimer;
 
 
 
@@ -71,6 +83,8 @@ public class SimulationSubsystem extends SubsystemBase {
    currentPose = new Pose2d();
 
    collectionTimer = new Timer();
+
+   shootTimer = new Timer();
 
    stateHandler.setBBTwoCovered(true);
 
@@ -97,8 +111,12 @@ public class SimulationSubsystem extends SubsystemBase {
     currentPose = robotPose;
   }
 
-  public void shoot(){
-    isShooting = true;
+  public void setShooting(boolean shooting){
+    isShooting = shooting;
+  }
+
+  public void setCollecting(boolean collecting){
+    isCollecting = collecting;
   }
 
 
@@ -107,7 +125,8 @@ public class SimulationSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
 
-    if (isCollecting){
+    if (Utils.isSimulation()){
+      if (isCollecting){
       if (collectionTimer.get()==0){
         collectionTimer.start();
         stateHandler.setBBOneCovered(true);
@@ -124,22 +143,36 @@ public class SimulationSubsystem extends SubsystemBase {
       if (collectionTimer.get()>IntakeTimes.bb3OnTime){
         stateHandler.setBBThreeCovered(true);
 
-        isCollecting = false;
         collectionTimer.stop();
         collectionTimer.reset();
       }
 
     }
     else if (isShooting){
-      stateHandler.setBBThreeCovered(false);
-      stateHandler.setBBTwoCovered(false);
 
-      isShooting = false;
+      if (shootTimer.get() == 0){
+        shootTimer.start();
+        stateHandler.setBBFourCovered(true);
+      }
+
+      if (shootTimer.get() > ShootTimes.bb2OffTime){
+        stateHandler.setBBTwoCovered(false);
+      }
+
+      if (shootTimer.get() > ShootTimes.bb3OffTime){
+        stateHandler.setBBThreeCovered(false);
+      }
+
+      if (shootTimer.get() > ShootTimes.bb4OffTime){
+        stateHandler.setBBFourCovered(false);
+      }
+
     }
     else{
       for (int i = notePoses.size()-1; i >=0; i--){
         Translation2d notePos = notePoses.get(i);
-        if (notePos != null && notePos.getDistance(currentPose.getTranslation())< collectionDist){
+        if (stateHandler.getDesiredIntakeState() == IntakeStates.DEPLOYED && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.INTAKE
+            && notePos.getDistance(currentPose.getTranslation())< collectionDist){
 
           isCollecting = true;
 
@@ -153,6 +186,11 @@ public class SimulationSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("isCollecting", isCollecting);
 
     SmartDashboard.putString("sim pose", currentPose.toString());
+    }
+
+    SmartDashboard.putString("SIM SUBSYSTEM RUNNING", "!!!!!!");
+
+    
 
   }
 }

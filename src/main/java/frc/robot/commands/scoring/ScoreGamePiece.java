@@ -2,6 +2,7 @@ package frc.robot.commands.scoring;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
@@ -42,7 +43,7 @@ public class ScoreGamePiece extends Command {
   @Override
   public void execute() {
 
-    if (inputTimer.get() > 0.7) {
+    if (inputTimer.get() > Constants.ArmConstants.armSettleTime) {
       stateHandler.setOperatorInputTimingGood(true);
     }
 

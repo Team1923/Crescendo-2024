@@ -18,6 +18,7 @@ public class AutoChooser {
 		FOUR_SOURCE,
 		FOUR_AMP,
 		MID_LINE_SHOVE,
+		SUB_6_OPTIMIZED;
 		// FAR_4_GP,
 		// MID_THREE;
 	}
@@ -43,6 +44,7 @@ public class AutoChooser {
 		chooser.addOption("4 Gamepiece from Amp Side", AutoMode.FOUR_AMP);
 		chooser.addOption("MidLine Shove", AutoMode.MID_LINE_SHOVE);
 
+		chooser.addOption("6 Gamepiece from Sub OPTIMIZED", AutoMode.SUB_6_OPTIMIZED);
 		
 
 		// chooser.addOption("5 Gamepiece Mid Rush", AutoMode.MID_5_GP);
@@ -80,6 +82,9 @@ public class AutoChooser {
 			
 			case STRAIGHT_4_METERS_AUTO:
 				return autoInstantiator.getStraight4MetersAuto();
+			
+			case SUB_6_OPTIMIZED:
+				return autoInstantiator.get6Optimized();
 
 			// case MID_5_GP:
 			// 	return autoInstantiator.getFiveMid();

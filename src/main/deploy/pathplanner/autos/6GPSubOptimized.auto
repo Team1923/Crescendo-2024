@@ -49,6 +49,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "autoOverride"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -75,6 +81,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "autoOverride"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -88,6 +100,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "autoOverride"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -95,32 +113,6 @@
                 "type": "path",
                 "data": {
                   "pathName": "SubAmpAnd1"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScoreCommandGroup"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Sub1to2Optimized"
                 }
               },
               {
@@ -153,6 +145,32 @@
                       }
                     }
                   ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreCommandGroup"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Sub1to2Optimized"
                 }
               }
             ]
