@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.Utils;
 import com.fasterxml.jackson.core.sym.Name;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
@@ -32,6 +33,7 @@ import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Limelight.LimelightInterface;
+import frc.robot.lib.SimUtils.SimulationSubsystem;
 import frc.robot.lib.StateMachine.StateHandler;
 
 public class Robot extends TimedRobot {
@@ -40,6 +42,8 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   StateHandler stateHandler = StateHandler.getInstance();
+
+  SimulationSubsystem sim;
 
   /* Chooser Initialization */
   public AutoChooser selector;
@@ -70,13 +74,18 @@ public class Robot extends TimedRobot {
 
     m_robotContainer = new RobotContainer();
     this.selector = new AutoChooser();   
+
+
+    if (Utils.isSimulation()){
+      sim = new SimulationSubsystem();
+    }
+
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-
-
+    sim.updatePose(m_robotContainer.drivetrain.getState().Pose);
     
   }
 
@@ -119,6 +128,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+
   }
 
   @Override
