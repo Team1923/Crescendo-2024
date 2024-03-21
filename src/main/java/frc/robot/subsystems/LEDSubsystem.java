@@ -218,13 +218,24 @@ public class LEDSubsystem extends SubsystemBase {
 
         if (stateHandler.getHasValidTrapTag()) {
           if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
-              && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT) {
+              && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.TRAP) {
             desiredAnimation = Animations.RAINBOW;
             desiredColor = Colors.RAINBOW;
           } else {
             desiredAnimation = Animations.SOLID;
           }
         } else {
+          desiredAnimation = Animations.HEARTBEAT;
+        }
+      }
+
+      else if(stateHandler.getWantUnguardable()){
+        desiredColor = Colors.YELLOW;
+        if(stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
+        && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.UNGUARDABLE_SHOT){
+          desiredAnimation = Animations.SOLID;
+        }
+        else{
           desiredAnimation = Animations.HEARTBEAT;
         }
       }

@@ -21,7 +21,7 @@ public class ScoreGamePieceNoRanged extends Command {
       stateHandler.setDesiredArmState(ArmStates.AMP);
     } else if (stateHandler.getScoreInTrap()){
       stateHandler.setDesiredArmState(ArmStates.TRAP);
-      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.TRAP);
     } else if(stateHandler.getWantUnguardable()){
       stateHandler.setDesiredArmState(ArmStates.UNGUARDABLE);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.UNGUARDABLE_SHOT);
