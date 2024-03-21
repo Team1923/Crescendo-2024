@@ -1,6 +1,7 @@
 package frc.robot.lib.StateMachine;
 
 
+import edu.wpi.first.math.geometry.Pose2d;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
@@ -53,7 +54,7 @@ public class StateHandler {
     private boolean wantToPunt = false;
     private boolean wantUnguardable = false;
 
-        /*PosRPM tuning values */
+    /* PosRPM tuning values */
     private double positionOffset = 0;
     private double RPMOffset = 0;
     private boolean posRPMTuning = false;
@@ -64,18 +65,13 @@ public class StateHandler {
     private boolean bbThreeCovered = false;
     private boolean bbFourCovered = false;
 
-    /*Misc */
+    /* Misc */
     private boolean manuallyClimbing = false;
     private boolean fullEject = false;
     private boolean operatorInputTimingGood = false;
     private boolean autoOverride = false;
     private boolean pooPooPeePeeBB1Died = false;
-    
-    
-
-
-
-    
+    private Pose2d robotPose = new Pose2d();
     
 
     /**
@@ -648,8 +644,13 @@ public class StateHandler {
     }
 
 
+    public Pose2d getRobotPose() {
+        return robotPose;
+    }
 
-
+    public void setRobotPose(Pose2d robotPose) {
+        this.robotPose = robotPose;
+    }
     
 
 }

@@ -28,6 +28,7 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.generated.TunerConstants;
+import frc.robot.lib.StateMachine.StateHandler;
 
 /**
  * Class that extends the Phoenix SwerveDrivetrain class and implements
@@ -192,5 +193,10 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     //getting from the pigeon used to generate CommandSwerveDriveTrain
     public void zeroGyro(){
         this.getPigeon2().setYaw(0);
+    }
+
+    @Override
+    public void periodic() {
+        StateHandler.getInstance().setRobotPose(this.m_odometry.getEstimatedPosition());
     }
 }

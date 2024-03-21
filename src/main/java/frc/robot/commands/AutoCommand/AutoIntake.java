@@ -26,7 +26,7 @@ public class AutoIntake extends Command {
     stateHandler.setDesiredIntakeState(IntakeStates.DEPLOYED);
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.INTAKE);
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.INWARD);
-    hasPickedGP =false;
+    hasPickedGP = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

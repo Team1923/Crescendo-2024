@@ -1,5 +1,9 @@
 package frc.robot.subsystems;
 
+import org.opencv.core.Point;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LimeLightConstants;
@@ -18,10 +22,28 @@ public class LimelightSubsystem extends SubsystemBase {
    * This method returns the distance to the closest speaker tag using math provided by Limelight docs.
    * @return The distance from limelight to tag in inches.
    */
-  public double calculateDistanceToSpeakerTag(){
+  public double calculateDistanceToSpeakerTag() {
     double tagOffsetAngleVertical = limelight.getYAngleOffset();
     double angleToGoal = (LimeLightConstants.limelightMountAngle + tagOffsetAngleVertical) * (Math.PI / 180);
     return (LimeLightConstants.speakerHeightFromFloor - LimeLightConstants.limelightHeight) / Math.tan(angleToGoal);
+  }
+
+  /**
+   * Returns the PP estimated distance based on swerve pose estimation.
+   * @return Distance from robot to speaker in inches.
+   */
+  public double calculateDistanceToCoveredTag() {
+    Point robotPos = new Point(stateHandler.getRobotPose().getX(), stateHandler.getRobotPose().getY());
+    Point blueSpeakerPos = new Point(0.9, 5.5);
+    Point redSpeakerPos = new Point(15.6, 5.6);
+    Point deltaPos;
+    if (DriverStation.getAlliance().get() == Alliance.Blue) {
+      deltaPos = new Point(robotPos.x - blueSpeakerPos.x, robotPos.y - blueSpeakerPos.y);
+    } else {
+      deltaPos = new Point(redSpeakerPos.x - robotPos.x, redSpeakerPos.y - robotPos.y);
+    }
+
+    return Math.hypot(deltaPos.x, deltaPos.y);
   }
 
   /**
@@ -40,7 +62,7 @@ public class LimelightSubsystem extends SubsystemBase {
     if (!stateHandler.getAutoOverride()) {
       stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
     } else {
-      stateHandler.setDistanceToSpeakerTag(150); // change this to pose estimatin stuff
+      stateHandler.setDistanceToSpeakerTag(calculateDistanceToCoveredTag());
     }
     
     stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());

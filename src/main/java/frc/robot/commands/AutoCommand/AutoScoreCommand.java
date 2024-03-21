@@ -93,10 +93,6 @@ public class AutoScoreCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //when you let go of trigger, automatically ends
-  
-      return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
-    
-    
+      return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();  
   }
 }
