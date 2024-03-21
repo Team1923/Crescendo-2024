@@ -103,13 +103,13 @@ public class RobotContainer {
     //getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
-    driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+    driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.zeroGyro()));
 
-    // driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> driverXboxController.getLeftY(), () -> driverXboxController.getLeftX()));
+    driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {
-      drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
+      drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(0)));
     }
     drivetrain.registerTelemetry(logger::telemeterize);
 

@@ -18,9 +18,21 @@ import frc.robot.lib.StateMachine.StateHandler;
 
 public class SimulationSubsystem extends SubsystemBase {
 
-  private static final double collectionDist = 0.5; //meters
+  private static SimulationSubsystem simSub = new SimulationSubsystem();
+
+
+  private static final double collectionDist = 0.75; //meters
+
+
 
   StateHandler stateHandler = StateHandler.getInstance();
+
+  public static synchronized SimulationSubsystem getInstance(){
+      if (simSub == null){
+        simSub = new SimulationSubsystem();
+      }
+      return simSub;
+  }
 
   private class IntakeTimes{
     private static final double bb1OffTime = 0.1;
@@ -33,6 +45,7 @@ public class SimulationSubsystem extends SubsystemBase {
   private ArrayList<Translation2d> notePoses;
 
   private boolean isCollecting = false;
+  private boolean isShooting = false;
   private Timer collectionTimer;
 
 
@@ -51,6 +64,21 @@ public class SimulationSubsystem extends SubsystemBase {
 
   /** Creates a new SimulationSubsystem. */
   public SimulationSubsystem() {
+
+    populateNotes();
+    
+
+   currentPose = new Pose2d();
+
+   collectionTimer = new Timer();
+
+   stateHandler.setBBTwoCovered(true);
+
+   stateHandler.setBBThreeCovered(true);
+
+  }
+
+  public void populateNotes(){
     notePoses = new ArrayList<>();
 
     notePoses.add(new Translation2d(2.89, 4.10)); //podiumLoc
@@ -63,15 +91,14 @@ public class SimulationSubsystem extends SubsystemBase {
     notePoses.add(new Translation2d(8.28, 2.44)); //4Loc
     notePoses.add(new Translation2d(8.28,0.76)); //5Loc
 
-
-   currentPose = new Pose2d();
-
-   collectionTimer = new Timer();
-
   }
 
   public void updatePose(Pose2d robotPose){
     currentPose = robotPose;
+  }
+
+  public void shoot(){
+    isShooting = true;
   }
 
 
@@ -102,6 +129,12 @@ public class SimulationSubsystem extends SubsystemBase {
         collectionTimer.reset();
       }
 
+    }
+    else if (isShooting){
+      stateHandler.setBBThreeCovered(false);
+      stateHandler.setBBTwoCovered(false);
+
+      isShooting = false;
     }
     else{
       for (int i = notePoses.size()-1; i >=0; i--){

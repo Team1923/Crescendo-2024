@@ -4,8 +4,11 @@
 
 package frc.robot.commands.AutoCommand;
 
+import com.ctre.phoenix6.Utils;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.lib.SimUtils.SimulationSubsystem;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
@@ -25,6 +28,11 @@ public class AutoScoreCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    if (Utils.isSimulation()){
+      SimulationSubsystem.getInstance().shoot();
+    }
+
     if (stateHandler.getScoreInAmp()) {
       stateHandler.setDesiredArmState(ArmStates.AMP);
     } else {

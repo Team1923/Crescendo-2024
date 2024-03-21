@@ -1,6 +1,6 @@
 {
-  "robotWidth": 0.787,
-  "robotLength": 0.787,
+  "robotWidth": 0.79,
+  "robotLength": 0.79,
   "holonomicMode": true,
   "pathFolders": [
     "4PieceSource",

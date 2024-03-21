@@ -111,7 +111,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
             //Apply the new current limit configuration.
             currentConfigurator.apply(customCurrentLimitConfigs);
-        }
+         }
     }
 
     private void configurePathPlanner() {

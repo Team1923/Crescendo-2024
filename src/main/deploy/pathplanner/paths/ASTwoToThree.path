@@ -8,32 +8,54 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.629123314850403,
-        "y": 7.121016065931502
+        "x": 7.189484378968758,
+        "y": 6.487717261148808
       },
       "isLocked": false,
       "linkedName": "AmpSecondShot"
     },
     {
       "anchor": {
-        "x": 7.660529119800378,
-        "y": 4.175801898773608
+        "x": 7.995028847200551,
+        "y": 4.453717478863529
       },
       "prevControl": {
-        "x": 7.849608192620763,
-        "y": 4.881620642184061
+        "x": 7.679523930476432,
+        "y": 5.098153053448964
+      },
+      "nextControl": {
+        "x": 8.31053376392467,
+        "y": 3.8092819042780945
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.03,
+        "y": 4.96
+      },
+      "prevControl": {
+        "x": 5.262890525781052,
+        "y": 3.9032620922384704
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "AmpThirdIntake"
+      "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": -51.44953470384226,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "sequential",
         "data": {
@@ -57,7 +79,7 @@
   },
   "goalEndState": {
     "velocity": 1.0,
-    "rotation": -23.17621614868064,
+    "rotation": -13.867819009338684,
     "rotateFast": false
   },
   "reversed": false,

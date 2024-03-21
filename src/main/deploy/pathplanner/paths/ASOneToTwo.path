@@ -8,32 +8,54 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.770099587368986,
-        "y": 6.081058910545494
+        "x": 6.900830944519032,
+        "y": 6.219202438404877
       },
       "isLocked": false,
       "linkedName": "AmpFirstShot"
     },
     {
       "anchor": {
-        "x": 7.67263008739854,
-        "y": 6.089005212601621
+        "x": 8.035306070612142,
+        "y": 5.8499945571319705
       },
       "prevControl": {
-        "x": 5.7968591000075085,
-        "y": 6.283346752228097
+        "x": 6.185829354505411,
+        "y": 6.29034615620498
+      },
+      "nextControl": {
+        "x": 8.176276352552707,
+        "y": 5.816430204288981
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.9856669430319993,
+        "y": 6.408148064723802
+      },
+      "prevControl": {
+        "x": 5.355276459965996,
+        "y": 6.698268334825399
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "AmpSecondIntake"
+      "linkedName": "AmpSecondShot"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": -4.763641690725947,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "sequential",
         "data": {
@@ -57,7 +79,7 @@
   },
   "goalEndState": {
     "velocity": 1.0,
-    "rotation": -13.393038938584626,
+    "rotation": 12.829381373033902,
     "rotateFast": false
   },
   "reversed": false,

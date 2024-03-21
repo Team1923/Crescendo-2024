@@ -69,12 +69,12 @@ public class Align90 extends Command {
   public void execute() {
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
-    double rotValue = rotationController.calculate(swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? 90 : -90);
+    double rotValue = rotationController.calculate(swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : 90);
 
     // SmartDashboard.putNumber("ROT VAL", rotValue);
 
-      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(RobotContainer.getSwerveJoystickInput()[0] * translationValue * SwerveConstants.maxSpeed, 
-      RobotContainer.getSwerveJoystickInput()[1] * strafeValue  * SwerveConstants.maxSpeed, 
+      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
+      strafeValue  * SwerveConstants.maxSpeed, 
       rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
     
       swerve.setControl(drive.withSpeeds(chassisSpeeds));

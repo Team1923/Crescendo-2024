@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import java.util.Timer;
 
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
@@ -185,7 +186,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    stateHandler.setBBFourCovered(getBeamBreakFour());
+    if (!Utils.isSimulation()){
+          stateHandler.setBBFourCovered(getBeamBreakFour());
+    }
 
     // SmartDashboard.putNumber("Raw RPS TOP SHOOTER",
     // shooterTop.getVelocity().getValueAsDouble());

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import java.util.ArrayList;
 import java.util.Queue;
 
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -109,8 +110,12 @@ public class FeederSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    stateHandler.setBBTwoCovered(getBeamBreakTwo());
-    stateHandler.setBBThreeCovered(getBeamBreakThree());
+
+    if (!Utils.isSimulation()){
+      stateHandler.setBBTwoCovered(getBeamBreakTwo());
+      stateHandler.setBBThreeCovered(getBeamBreakThree());
+    }
+    
 
     checkCurrentLimits();
 

@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
@@ -228,7 +229,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    stateHandler.setBBOneCovered(getBeamBreakOne());
+
+      if (!Utils.isSimulation()){
+        stateHandler.setBBOneCovered(getBeamBreakOne());
+      }
+
 
     // SmartDashboard.putNumber("Raw Postion INTAKE Primary ",
     // intakeArmPrimary.getPosition().getValueAsDouble());

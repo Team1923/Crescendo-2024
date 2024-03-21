@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
 
 
     if (Utils.isSimulation()){
-      sim = new SimulationSubsystem();
+      sim = sim.getInstance();
     }
 
   }
@@ -85,7 +85,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    sim.updatePose(m_robotContainer.drivetrain.getState().Pose);
+
+    if (Utils.isSimulation()){
+          sim.updatePose(m_robotContainer.drivetrain.getState().Pose);
+    }
     
   }
 
@@ -127,6 +130,10 @@ public class Robot extends TimedRobot {
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
+    }
+
+    if(Utils.isSimulation()){
+      SimulationSubsystem.getInstance().populateNotes();
     }
 
 

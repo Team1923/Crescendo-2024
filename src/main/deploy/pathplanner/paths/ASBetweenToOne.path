@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9718964900892764,
-        "y": 6.250383940582696
+        "x": 1.8930295003447148,
+        "y": 6.08494502703291
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.149013631360596,
-        "y": 6.568163192930159
+        "x": 3.0701466416160343,
+        "y": 6.402724279380373
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "AmpPreload"
     },
     {
       "anchor": {
@@ -23,9 +23,25 @@
         "x": 7.019460193008436,
         "y": 7.076363495494286
       },
+      "nextControl": {
+        "x": 8.577016069126477,
+        "y": 7.46883821126133
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.8506604811951766,
+        "y": 6.360349242711064
+      },
+      "prevControl": {
+        "x": 4.760472517444189,
+        "y": 6.5530719935642665
+      },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "AmpFirstIntake"
+      "linkedName": "AmpFirstShot"
     }
   ],
   "rotationTargets": [],
@@ -33,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "intake",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.6,
       "command": {
         "type": "sequential",
         "data": {
@@ -57,7 +73,7 @@
   },
   "goalEndState": {
     "velocity": 1.0,
-    "rotation": 35.608716255871215,
+    "rotation": 15.17182964276033,
     "rotateFast": false
   },
   "reversed": false,
