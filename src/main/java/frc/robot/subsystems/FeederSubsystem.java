@@ -162,8 +162,14 @@ public class FeederSubsystem extends SubsystemBase {
                 desiredFeederSpeed = FeederSpeeds.INWARD;
 
       /* CONDITION: ready to sore (center to tag = true on default) */
-      
+    }
 
+    else if(stateHandler.getCurrentArmState() == ArmStates.TRAP
+    && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.TRAP
+    && (stateHandler.getIsCenteredToTag()) && (stateHandler.getDistanceToTrapTag() <= LimeLightConstants.trapLerpUpperBound 
+    && stateHandler.getDistanceToTrapTag() >= LimeLightConstants.trapLerpLowerBound)
+    && stateHandler.getOperatorInputTimingGood()){
+      desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 
     // punt shot

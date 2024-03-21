@@ -46,6 +46,7 @@ public class StateVariables {
         IDLE(new RPMValue(0)),
         BABY_BIRD(new RPMValue(-1000)),
         UNGUARDABLE_SHOT(new RPMValue(1900)),
+        TRAP(new RPMValue(1000)),
         PUNT_SHOT(new RPMValue(1)), // this is a percent output value
         SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
         

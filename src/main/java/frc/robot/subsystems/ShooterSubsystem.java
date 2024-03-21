@@ -233,16 +233,23 @@ public class ShooterSubsystem extends SubsystemBase {
     } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT && stateHandler.getWantUnguardable()){
       setVelocities(desiredShooterSpeed - 715, desiredShooterSpeed);
     }
+    else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && stateHandler.getScoreInTrap()){
+      setVelocities(desiredShooterSpeed, desiredShooterSpeed - 500);
+    }
     else {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
     }
+
 
     if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT 
     && desiredShooterSpeedState != ShooterSpeeds.UNGUARDABLE_SHOT) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT && isAtShooterSpeed(desiredShooterSpeed - 715, desiredShooterSpeed )){
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
+    } else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && isAtShooterSpeed(desiredShooterSpeed, desiredShooterSpeed - 500)){
+      stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
+    }
+     else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
       if (puntTimer.get() > 0.5) {
         stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
       }

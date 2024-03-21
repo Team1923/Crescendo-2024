@@ -124,11 +124,11 @@ public class RobotContainer {
     driverXboxController.rightTrigger().whileTrue(new ScoreGamePieceNoRanged());
 
     /* manual hashmap tuning */
-    operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(25));
-    operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-25));
+    // operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(25));
+    // operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-25));
 
-    driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.0025));
-    driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.0025));
+    // driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.0025));
+    // driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.0025));
 
 
 
@@ -140,6 +140,7 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.operatorRightTrigger).whileTrue(new PuntShot());
+    operatorPS4Controller.povUp().onTrue(new SetArmToTrap());
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());

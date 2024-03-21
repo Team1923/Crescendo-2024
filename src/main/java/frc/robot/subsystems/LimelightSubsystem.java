@@ -40,7 +40,7 @@ public class LimelightSubsystem extends SubsystemBase {
     if (!stateHandler.getAutoOverride()) {
       stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
     } else {
-      stateHandler.setDistanceToSpeakerTag(150);
+      stateHandler.setDistanceToSpeakerTag(150); // change this to pose estimatin stuff
     }
     
     stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());
