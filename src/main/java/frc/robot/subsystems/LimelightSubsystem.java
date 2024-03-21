@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import org.opencv.core.Point;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -43,7 +44,7 @@ public class LimelightSubsystem extends SubsystemBase {
       deltaPos = new Point(redSpeakerPos.x - robotPos.x, redSpeakerPos.y - robotPos.y);
     }
 
-    return Math.hypot(deltaPos.x, deltaPos.y);
+    return Units.metersToInches(Math.hypot(deltaPos.x, deltaPos.y));
   }
 
   /**
