@@ -215,7 +215,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   /**
-   * Sets the Stator Current limit for the intake motors.
+   * Checks the Stator Current limit for the intake motors.
    */
   public void checkCurrentLimits(){
     if (Math.abs(intakeArmPrimary.getStatorCurrent().getValueAsDouble())>(10+CurrentConstants.kStatorCurrentLimit)){
@@ -229,91 +229,58 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    if (!Utils.isSimulation()){
+      stateHandler.setBBOneCovered(getBeamBreakOne());
+    }
 
-      if (!Utils.isSimulation()){
-        stateHandler.setBBOneCovered(getBeamBreakOne());
-      }
-
-
-    // SmartDashboard.putNumber("Raw Postion INTAKE Primary ",
-    // intakeArmPrimary.getPosition().getValueAsDouble());
-    // SmartDashboard.putNumber("Raw Intake Position Follower",
-    // intakeArmFollower.getPosition().getValueAsDouble());
-
-    // SmartDashboard.putNumber("Intake Position Radians",
-    // getIntakeArmPositionRads());
-
-    checkCurrentLimits();
-
+    /* Pull the desired intake state from StateHandler */
     IntakeStates desiredIntakeState = stateHandler.getDesiredIntakeState();
     IntakeRollerSpeeds desiredRollerSpeedState = stateHandler.getDesiredIntakeRollerSpeed();
 
+    /* Get the corresponding numerical values */
     double intakeSetpoint = desiredIntakeState.getIntakePosition().getAngularSetpoint();
     double rollerSpeed = desiredRollerSpeedState.getPercentOutputValue().getPercentOut();
 
-    /**
-     * TO FULL EJECT IN CASE OF AN ERROR
-     */
+    /* CASE #1: running full emergency eject */
     if(stateHandler.getFullEject()){
       rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
     }
     
-    /*
-     * EDGE CASE: Eject speed can only be run when the intake is actually in its
-     * deployed position.
-     */
+    /* CASE #2: can only run intake rollers when eject conditions are satisfied */
     if (stateHandler.getCurrentIntakeState() != IntakeStates.DEPLOYED
         && desiredIntakeState == IntakeStates.DEPLOYED
         && desiredRollerSpeedState == IntakeRollerSpeeds.EJECT) {
       rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
     }
 
-    /*
-     * Edge case: prevent operator from bringing up intake until completition of
-     * intake command
-     */
+    /* CASE #3: prevent operator from bringing up intake until completition of intake command */
     if (stateHandler.getBBOneCovered() 
       && stateHandler.getDesiredIntakeRollerSpeed() != IntakeRollerSpeeds.EJECT) {
       bb1Crossed = true;
     }
 
+    /* Boolean value changes based on BB3 and !BB1 */
     if (stateHandler.getBBThreeCovered() && !stateHandler.getBBOneCovered()) {
       bb1Crossed = false;
     }
 
-    // //having 2 gamepiece test 
-    // if (stateHandler.getBBThreeCovered() && stateHandler.getBBOneCovered()){
-    //   stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.EJECT);
-    // }
-    // else if (stateHandler.getBBThreeCovered() && !stateHandler.getBBOneCovered()){
-    //   stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.OFF);
-    // }
-
+    /* CASE #4: Leave the intake down if a game piece is within the robot */
     if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
         && !stateHandler.getBBThreeCovered() && bb1Crossed) {
       rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
       intakeSetpoint = IntakeStates.DEPLOYED.getIntakePosition().getAngularSetpoint();
     } 
-    // else if (stateHandler.getDesiredIntakeState() == IntakeStates.STOWED
-    //     && !bb1Crossed) {
-    //   rollerSpeed = IntakeRollerSpeeds.OFF.getPercentOutputValue().getPercentOut();
-    //   intakeSetpoint = IntakeStates.STOWED.getIntakePosition().getAngularSetpoint();
-    //   stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
-    // }
 
+    /* Set the desired intake position + setpoints accordingly. */
     setIntakePosition(intakeSetpoint);
     setRollerWheelSpeed(rollerSpeed, rollerSpeed);
 
+    /* Update the current state once the desired state has been reached. */
     if (isAtIntakeState(desiredIntakeState)) {
       stateHandler.setCurrentIntakeState(desiredIntakeState);
     }
 
     stateHandler.setCurrentIntakeRollerSpeed(desiredRollerSpeedState);
 
-    // check the stator current to know whether or not we are hardstop.
-    // if (current == BAD) {
-    // stopIntakeArmMotors();
-    // stateHandler.setCurrentArmState(desiredIntakeState);
-    // }
   }
 }

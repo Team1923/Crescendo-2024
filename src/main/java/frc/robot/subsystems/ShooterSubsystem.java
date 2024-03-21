@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import java.util.Timer;
 
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -38,10 +37,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   edu.wpi.first.wpilibj.Timer puntTimer = new edu.wpi.first.wpilibj.Timer();
 
-  /*
-   * Declare MotionMagicVoltage object to command the shooter at a specific
-   * velocity.
-   */
+  /* Declare MotionMagicVoltage object to command the shooter at a specific velocity. */
   private final MotionMagicVelocityVoltage motionMagicVelVoltage;
 
   /* Construct a new ShooterSubsystem to apply motor configurations. */
@@ -169,6 +165,13 @@ public class ShooterSubsystem extends SubsystemBase {
         && Math.abs((getBottomRPM() - (desiredSetpoint))) < ShooterConstants.shooterSpeedThreshold;
   }
 
+  /**
+   * Method to determine if the current shooter RPM is the commanded shooter RPM.
+   * 
+   * @param desiredSetpoint1 the top shooter wheel RPM setpoint
+   * @param desiredSetPoint2 the bottom shooter wheel RPM setpoint
+   * @return a boolean to determine if the shooter's velocity is within range of the commanded velocity
+   */
   public boolean isAtShooterSpeed(double desiredSetpoint1, double desiredSetPoint2) {
     return Math.abs(getBottomRPM() - desiredSetPoint2) < ShooterConstants.shooterSpeedThreshold
         && Math.abs(getTopRPM() - desiredSetpoint1) < ShooterConstants.shooterSpeedThreshold;
@@ -186,20 +189,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (!Utils.isSimulation()){
-          stateHandler.setBBFourCovered(getBeamBreakFour());
+    if (!Utils.isSimulation()) {
+      stateHandler.setBBFourCovered(getBeamBreakFour());
     }
-
-    // SmartDashboard.putNumber("Raw RPS TOP SHOOTER",
-    // shooterTop.getVelocity().getValueAsDouble());
-    // SmartDashboard.putNumber("Raw RPS BOTTOM SHOOTER",
-    // shooterBottom.getVelocity().getValueAsDouble());
 
     SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
     SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
-    checkCurrentLimits();
-
+    /* Pull the desired shooter state + numerical value from the State Handler */
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
     double desiredShooterSpeed = desiredShooterSpeedState.getRPMValue().getRPM();
 
@@ -208,11 +205,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     if (desiredShooterSpeedState == ShooterSpeeds.SHOOT) {
-      /*
-       * If at subwoofer, then the desired shot speed is the preset for the subwoofer
-       * shot.
-       */
-
+      /* If at subwoofer, then the desired shot speed is the preset for the subwoofer shot. */
       if (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()) {
         desiredShooterSpeed = ShooterSpeeds.SHOOT.getRPMValue().getRPM()
             + (stateHandler.isPosRPMTuning() ? stateHandler.getRPMOffset() : 0);
@@ -225,11 +218,9 @@ public class ShooterSubsystem extends SubsystemBase {
       else if (stateHandler.getHasValidTrapTag()) {
         desiredShooterSpeed = rpmData.getTrapDesiredShooterRPM(stateHandler.getDistanceToTrapTag());
       }
-
     }
 
     /* Set the desired velocity of the shooter wheels. */
-
     if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT && stateHandler.getWantPunt()) {
       setShooterPOut(0.85, 0.4); //adjust as needed
       puntTimer.start();
@@ -243,26 +234,26 @@ public class ShooterSubsystem extends SubsystemBase {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
     }
 
-
+    /* If tree to determine if the shooter is at the current shooter speed. */
     if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT 
-    && desiredShooterSpeedState != ShooterSpeeds.UNGUARDABLE_SHOT) {
+      && desiredShooterSpeedState != ShooterSpeeds.UNGUARDABLE_SHOT && desiredShooterSpeedState != ShooterSpeeds.TRAP) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT && isAtShooterSpeed(desiredShooterSpeed - 715, desiredShooterSpeed )){
+    } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT 
+      && isAtShooterSpeed(desiredShooterSpeed - 715, desiredShooterSpeed )) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    } else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && isAtShooterSpeed(desiredShooterSpeed, desiredShooterSpeed - 500)){
+    } else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && isAtShooterSpeed(desiredShooterSpeed, desiredShooterSpeed - 500)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    }
-     else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
+    } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
       if (puntTimer.get() > 0.5) {
         stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
       }
     }
+
+    /* Reset the punt timer */
     if (!stateHandler.getWantPunt()) {
       puntTimer.stop();
       puntTimer.reset();
     }
-
-    SmartDashboard.putNumber("punt timer", puntTimer.get());
 
   }
 }

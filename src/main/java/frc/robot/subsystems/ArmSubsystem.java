@@ -194,8 +194,6 @@ public class ArmSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
     // SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
 
-    checkCurrentLimits();
-
     /* Begin by pulling the desires arm state from State Handler */
     ArmStates desiredArmState = stateHandler.getDesiredArmState();
 
@@ -253,7 +251,7 @@ public class ArmSubsystem extends SubsystemBase {
         maxArmAngle = getArmPositionRads();
       }
     }
-    
+
     else if( minArmAngle != 1000 && maxArmAngle != -1000) {
       System.out.println("Min Arm Angle When At Setpoint" +  minArmAngle);
       System.out.println("Max Arm Angle At Setpoint" + maxArmAngle);
