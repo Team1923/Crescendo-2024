@@ -194,70 +194,57 @@ public class ArmSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
     // SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
 
-    SmartDashboard.putNumber("Arm Position Radians", getArmPositionRads());
-
-    // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
-    // SmartDashboard.putNumber("Arm Voltage Primary", armPrimary.getMotorVoltage().getValueAsDouble());
-
-    /*
-     * By default, whatever the desired position is, we will go to the desired
-     * position as commanded.
-     * EXCEPTION: shooting. If this is the case, then we will need to modify
-     * out arm position to be variable.
-    */
-
     checkCurrentLimits();
 
+    /* Begin by pulling the desires arm state from State Handler */
     ArmStates desiredArmState = stateHandler.getDesiredArmState();
+
+    /* Get the corresponding angular setpoint (the actual numerical value) */
     double armSetpoint = desiredArmState.getArmPosition().getAngularSetpoint();
 
-    
-
+    /* CASE #1: Scoring into the SPEAKER */
     if (desiredArmState == ArmStates.SPEAKER) {
-      // subwoofer condition
+      /* Scoring into the subwoofer - use the default preset value */
       if (stateHandler.getScoreInSubwoofer()) {
         armSetpoint = ArmStates.SPEAKER.getArmPosition().getAngularSetpoint() + (stateHandler.isPosRPMTuning() ? stateHandler.getPositionOffset() : 0);
       }
-      //reverse subwoofer
+      /* Scoring into the subwoofer (reverse) - use the default preset value */
       else if(stateHandler.getScoreInReverseSubwoofer()) {
         armSetpoint = ArmStates.REVERSE_SUBWOOFER.getArmPosition().getAngularSetpoint();
       }
-      // distance to speaker condition
+      /* Scoring from ranged - use data from HashMap to get the arm position. */
       else if (stateHandler.getHasValidSpeakerTag()) {
         armSetpoint = positionData.getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
       }
+      /* If the tag is lost in view, preserve the arm position. */
       else {
-        //condition for when when we lose tag
         armSetpoint = getArmPositionRads();
       }
     }
-    //trap score (NOT IMPLEMENTED YET)
+
+    /* CASE #2: Scoring into the TRAP */
     else if (desiredArmState == ArmStates.TRAP) {
+      /* Need to pull the arm position from the HashMap */
       if (stateHandler.getHasValidTrapTag()) {
         armSetpoint = positionData.getTrapDesiredArmPosition(stateHandler.getDistanceToTrapTag());
       }
+      /* Preserve the arm position if the trap tag is lost. */
       else {
         armSetpoint = getArmPositionRads();
-
       }
     }
    
-
-    /*
-     * Set the arm position to whatever is the desired arm position.
-     */
+    /* Set the arm condition - NOTE: do not do this when manually climbing! */
     if (!stateHandler.getManuallyClimbing()) {
           setArmPosition(armSetpoint);
-
     }
 
-    /*
-     * Update the arm's position based on the desired setpoint.
-     */
+    /* Update the arm's position based on the desired setpoint. */
     if (isAtArmState(armSetpoint)) {
       stateHandler.setCurrentArmState(desiredArmState);
     }
 
+    /* Some interesting logic for quick hashmap tuning */
     if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getDesiredArmState() == ArmStates.SPEAKER) {
       if(Math.abs(getArmPositionRads()) < Math.abs(minArmAngle)) {
         minArmAngle = getArmPositionRads();
@@ -266,6 +253,7 @@ public class ArmSubsystem extends SubsystemBase {
         maxArmAngle = getArmPositionRads();
       }
     }
+    
     else if( minArmAngle != 1000 && maxArmAngle != -1000) {
       System.out.println("Min Arm Angle When At Setpoint" +  minArmAngle);
       System.out.println("Max Arm Angle At Setpoint" + maxArmAngle);
