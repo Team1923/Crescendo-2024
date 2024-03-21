@@ -60,9 +60,7 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     /* NOTE: inAutoOverride AND having a valid tag = optimized auto */
-    if (stateHandler.getAutoOverride() && limelight.hasValidTag()) {
-      stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
-    } else if (stateHandler.getAutoOverride() && !limelight.hasValidTag()) {
+    if (stateHandler.getAutoOverride() && !limelight.hasValidTag()) {
       stateHandler.setDistanceToSpeakerTag(calculateDistanceToCoveredTag());
     } else {
       stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
