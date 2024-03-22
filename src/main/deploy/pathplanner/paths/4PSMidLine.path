@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.429446655189607,
-        "y": 4.317897510795023
+        "x": 2.4824175203905963,
+        "y": 4.335059596045118
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.546671417416909,
-        "y": 3.1253998156144465
+        "x": 2.599642282617898,
+        "y": 3.1425619008645422
       },
       "isLocked": false,
       "linkedName": "4PSPodium"
@@ -48,12 +48,12 @@
     },
     {
       "anchor": {
-        "x": 4.0226701333032295,
-        "y": 4.813341376682754
+        "x": 3.7879830713365132,
+        "y": 4.8667279325299395
       },
       "prevControl": {
-        "x": 4.354925728369976,
-        "y": 4.7933288412873125
+        "x": 4.120238666403264,
+        "y": 4.846715397134498
       },
       "nextControl": null,
       "isLocked": false,
@@ -68,7 +68,25 @@
     }
   ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Deploy Intake",
+      "waypointRelativePos": 1.4,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.2,
     "maxAcceleration": 4.0,

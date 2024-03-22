@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.0226701333032295,
-        "y": 4.813341376682754
+        "x": 3.7879830713365132,
+        "y": 4.8667279325299395
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.105484882266061,
-        "y": 3.7228066585762805
+        "x": 4.8707978202993445,
+        "y": 3.7761932144234662
       },
       "isLocked": false,
       "linkedName": "4PSMidLine"
     },
     {
       "anchor": {
-        "x": 7.9551036463184035,
-        "y": 5.6642007450681575
+        "x": 7.938951095494784,
+        "y": 5.749595480672443
       },
       "prevControl": {
-        "x": 7.303637763525527,
-        "y": 4.983848331122589
+        "x": 7.50811582133226,
+        "y": 4.911939125033709
       },
       "nextControl": {
-        "x": 8.606569529111265,
-        "y": 6.344553159013726
+        "x": 8.335282434453758,
+        "y": 6.52016716996397
       },
       "isLocked": false,
       "linkedName": null
@@ -44,9 +44,33 @@
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 15.420485513547172,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Deploy Intake",
+      "waypointRelativePos": 0.45,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.2,
     "maxAcceleration": 4.0,
