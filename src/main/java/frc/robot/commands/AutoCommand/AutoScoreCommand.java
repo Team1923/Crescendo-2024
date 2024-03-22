@@ -30,9 +30,7 @@ public class AutoScoreCommand extends Command {
   @Override
   public void initialize() {
 
-    if (Utils.isSimulation()){
-      SimulationSubsystem.getInstance().setShooting(true);
-    }
+   
 
     if (stateHandler.getScoreInAmp()) {
       stateHandler.setDesiredArmState(ArmStates.AMP);
@@ -83,9 +81,6 @@ public class AutoScoreCommand extends Command {
     stateHandler.setAutoOverride(false);
     stateHandler.setIsCenteredToTag(false);
 
-    if (Utils.isSimulation()){
-      SimulationSubsystem.getInstance().setShooting(false);
-    }
   }
 
 

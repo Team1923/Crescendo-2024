@@ -134,6 +134,8 @@ public class Robot extends TimedRobot {
 
     if(Utils.isSimulation()){
       SimulationSubsystem.getInstance().populateNotes();
+      stateHandler.setBBThreeCovered(true);
+      stateHandler.setBBTwoCovered(true);
     }
 
 

@@ -100,12 +100,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "autoOverride"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -120,13 +114,19 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "parallel",
+                      "type": "sequential",
                       "data": {
                         "commands": [
                           {
                             "type": "named",
                             "data": {
                               "name": "DeployIntake"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "autoOverride"
                             }
                           },
                           {

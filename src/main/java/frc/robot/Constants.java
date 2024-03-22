@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import org.opencv.core.Point;
+
 import frc.robot.generated.TunerConstants;
 
 /**
@@ -200,6 +202,11 @@ public final class Constants {
         public static final int insideButton = 5;
         public static final int outsideButton = 6;
 
+    }
+
+    public static final class FieldConstants{
+        public static Point blueSpeakerPos = new Point(-0.038099999999999995, 5.547867999999999);
+        public static Point redSpeakerPos = new Point(16.579342, 5.547867999999999);
     }
 
 }

@@ -45,6 +45,15 @@ public class StateHandler {
     private double distanceToTrapTag = 0;
     private boolean centeredToTag = false;
     private boolean wantGoalCentric = false;
+    private double xAngleOffset = 0;
+
+    public double getxAngleOffset() {
+        return xAngleOffset;
+    }
+
+    public void setxAngleOffset(double xAngleOffset) {
+        this.xAngleOffset = xAngleOffset;
+    }
 
     /* Desired scoring */
     private boolean wantToPositionForSubwoofer = false;

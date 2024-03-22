@@ -7,6 +7,7 @@ package frc.robot.commands.swerve;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.math.MathUtil;
@@ -29,7 +30,6 @@ public class GoalCentricCommand extends Command {
   private CommandSwerveDrivetrain swerve;
   private SwerveRequest.ApplyChassisSpeeds drive = new SwerveRequest.ApplyChassisSpeeds()
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
-  private LimelightInterface limelight = LimelightInterface.getInstance();
   private StateHandler stateHandler = StateHandler.getInstance();
 
   /* Fancy double stuff for input + output to swerve. */
@@ -72,8 +72,8 @@ public class GoalCentricCommand extends Command {
     }
     else if(Math.abs(rotationSup.getAsDouble()) > 0.5){
       rotValue = rotationSup.getAsDouble();
-    } else if(limelight.hasSpeakerTag()){
-      rotValue = rotationController.calculate(limelight.getXAngleOffset(), 0); 
+    } else if(stateHandler.getHasValidSpeakerTag()){
+      rotValue = rotationController.calculate(stateHandler.getxAngleOffset(), 0); 
     } else{
       rotValue = 0;
     }

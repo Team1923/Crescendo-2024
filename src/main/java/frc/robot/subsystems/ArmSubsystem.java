@@ -245,22 +245,22 @@ public class ArmSubsystem extends SubsystemBase {
       stateHandler.setCurrentArmState(desiredArmState);
     }
 
-    /* Some interesting logic for quick hashmap tuning */
-    if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getDesiredArmState() == ArmStates.SPEAKER) {
-      if(Math.abs(getArmPositionRads()) < Math.abs(minArmAngle)) {
-        minArmAngle = getArmPositionRads();
-      }
-      else if(Math.abs(getArmPositionRads()) > Math.abs(maxArmAngle)) {
-        maxArmAngle = getArmPositionRads();
-      }
-    }
+    // /* Some interesting logic for detecting if arm ia at position */
+    // if(stateHandler.getCurrentArmState() == ArmStates.SPEAKER && stateHandler.getDesiredArmState() == ArmStates.SPEAKER) {
+    //   if(Math.abs(getArmPositionRads()) < Math.abs(minArmAngle)) {
+    //     minArmAngle = getArmPositionRads();
+    //   }
+    //   else if(Math.abs(getArmPositionRads()) > Math.abs(maxArmAngle)) {
+    //     maxArmAngle = getArmPositionRads();
+    //   }
+    // }
 
-    else if( minArmAngle != 1000 && maxArmAngle != -1000) {
-      System.out.println("Min Arm Angle When At Setpoint" +  minArmAngle);
-      System.out.println("Max Arm Angle At Setpoint" + maxArmAngle);
-      minArmAngle = 1000;
-      maxArmAngle =-1000;
-    }
+    // else if( minArmAngle != 1000 && maxArmAngle != -1000) {
+    //   System.out.println("Min Arm Angle When At Setpoint" +  minArmAngle);
+    //   System.out.println("Max Arm Angle At Setpoint" + maxArmAngle);
+    //   minArmAngle = 1000;
+    //   maxArmAngle =-1000;
+    // }
 
 
   }

@@ -46,14 +46,17 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency,
             SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
-        setSwerveDriveCustomCurrentLimits();
-        if(!currentLimitsActivated) {
-            try {
-                throw new Exception("Swerve Current Limits Not Active!");
-            } catch (Exception e) {
-                return;
+        if (!Utils.isSimulation()){
+            setSwerveDriveCustomCurrentLimits();
+            if(!currentLimitsActivated) {
+                try {
+                    throw new Exception("Swerve Current Limits Not Active!");
+                } catch (Exception e) {
+                    return;
+                }
             }
         }
+        
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -62,14 +65,17 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules) {
         super(driveTrainConstants, modules);
-        setSwerveDriveCustomCurrentLimits();
-        if(!currentLimitsActivated) {
-            try {
-                throw new Exception("Swerve Current Limits Not Active!");
-            } catch (Exception e) {
-                return;
+        if (!Utils.isSimulation()){
+            setSwerveDriveCustomCurrentLimits();
+            if(!currentLimitsActivated) {
+                try {
+                    throw new Exception("Swerve Current Limits Not Active!");
+                } catch (Exception e) {
+                    return;
+                }
             }
         }
+        
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();

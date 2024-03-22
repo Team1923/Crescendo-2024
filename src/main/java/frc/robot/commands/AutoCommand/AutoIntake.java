@@ -45,9 +45,6 @@ public class AutoIntake extends Command {
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
     stateHandler.setDesiredIntakeRollerSpeed(IntakeRollerSpeeds.OFF);
 
-    if (Utils.isSimulation()){
-      SimulationSubsystem.getInstance().setCollecting(false);
-    }
   }
 
   // Returns true when the command should end.
