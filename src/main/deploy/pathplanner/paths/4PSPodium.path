@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.2659285364867028,
+        "y": 5.592286263276231
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.5715205458188697,
+        "y": 4.751700392289674
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.429446655189607,
+        "y": 4.317897510795023
+      },
+      "prevControl": {
+        "x": 1.844866837881824,
+        "y": 4.432806282279231
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "4PSPodium"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.2,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -22.5694892178119,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "4PieceSubAlternate",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

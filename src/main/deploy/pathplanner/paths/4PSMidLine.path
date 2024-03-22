@@ -1,0 +1,87 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.429446655189607,
+        "y": 4.317897510795023
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.546671417416909,
+        "y": 3.1253998156144465
+      },
+      "isLocked": false,
+      "linkedName": "4PSPodium"
+    },
+    {
+      "anchor": {
+        "x": 3.6612568086247284,
+        "y": 3.0239712979425963
+      },
+      "prevControl": {
+        "x": 3.1034593458075808,
+        "y": 2.8284185410963416
+      },
+      "nextControl": {
+        "x": 5.379757456450022,
+        "y": 3.62644363194544
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.881407633185637,
+        "y": 4.135884392139155
+      },
+      "prevControl": {
+        "x": 7.867366939305637,
+        "y": 4.1547537782575565
+      },
+      "nextControl": {
+        "x": 7.895448327065639,
+        "y": 4.117015006020753
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.0226701333032295,
+        "y": 4.813341376682754
+      },
+      "prevControl": {
+        "x": 4.354925728369976,
+        "y": 4.7933288412873125
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "4PSMidLine"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1,
+      "rotationDegrees": 13.588171956258343,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.2,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 1.0,
+    "rotation": -12.920919879190807,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "4PieceSubAlternate",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

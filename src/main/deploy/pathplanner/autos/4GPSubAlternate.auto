@@ -1,0 +1,73 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.27,
+      "y": 5.59
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "wantSubwoofer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "wantRange"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4PSPodium"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4PSMidLine"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4PSThird"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
