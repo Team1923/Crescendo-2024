@@ -72,7 +72,16 @@ public class StateHandler {
     private boolean autoOverride = false;
     private boolean pooPooPeePeeBB1Died = false;
     private Pose2d robotPose = new Pose2d();
+    private double coveredSpeakerTagDistance = 0;
     
+
+    public double getCoveredSpeakerTagDistance() {
+        return coveredSpeakerTagDistance;
+    }
+
+    public void setCoveredSpeakerTagDistance(double coveredSpeakerTagDistance) {
+        this.coveredSpeakerTagDistance = coveredSpeakerTagDistance;
+    }
 
     /**
      * Method to set the desired arm state.

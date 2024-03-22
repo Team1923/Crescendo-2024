@@ -119,9 +119,9 @@ public class FeederSubsystem extends SubsystemBase {
     /* CASE #3: RANGED SHOOTING */
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-        && (stateHandler.getIsCenteredToTag()) &&
+        && ((stateHandler.getIsCenteredToTag() &&
         (stateHandler.getDistanceToSpeakerTag() <= LimeLightConstants.speakerLerpUpperBound
-        && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)
+        && stateHandler.getDistanceToSpeakerTag() >= LimeLightConstants.speakerLerpLowerBound)) || stateHandler.getAutoOverride())
         && stateHandler.getOperatorInputTimingGood()) {
           desiredFeederSpeed = FeederSpeeds.INWARD;
     }

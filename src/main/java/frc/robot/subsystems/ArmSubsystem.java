@@ -7,6 +7,7 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
@@ -213,6 +214,8 @@ public class ArmSubsystem extends SubsystemBase {
       /* Scoring from ranged - use data from HashMap to get the arm position. */
       else if (stateHandler.getHasValidSpeakerTag()) {
         armSetpoint = positionData.getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag());
+      } else if (DriverStation.isAutonomousEnabled() && !stateHandler.getHasValidSpeakerTag()) {
+          armSetpoint = positionData.getSpeakerDesiredArmPosition(stateHandler.getCoveredSpeakerTagDistance());
       }
       /* If the tag is lost in view, preserve the arm position. */
       else {

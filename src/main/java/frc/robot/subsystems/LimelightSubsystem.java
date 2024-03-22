@@ -39,7 +39,7 @@ public class LimelightSubsystem extends SubsystemBase {
     Point redSpeakerPos = new Point(15.6, 5.6);
     Point deltaPos;
     if (DriverStation.getAlliance().get() == Alliance.Blue) {
-      deltaPos = new Point(robotPos.x - blueSpeakerPos.x, robotPos.y - blueSpeakerPos.y);
+      deltaPos = new Point( robotPos.x - blueSpeakerPos.x ,  robotPos.y - blueSpeakerPos.y);
     } else {
       deltaPos = new Point(redSpeakerPos.x - robotPos.x, redSpeakerPos.y - robotPos.y);
     }
@@ -60,8 +60,8 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     /* NOTE: inAutoOverride AND having a valid tag = optimized auto */
-    if (stateHandler.getAutoOverride() && !limelight.hasValidTag()) {
-      stateHandler.setDistanceToSpeakerTag(calculateDistanceToCoveredTag());
+    if (DriverStation.isAutonomousEnabled() && !limelight.hasValidTag()) {
+      stateHandler.setCoveredSpeakerTagDistance(calculateDistanceToCoveredTag());
     } else {
       stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
     }
@@ -69,18 +69,17 @@ public class LimelightSubsystem extends SubsystemBase {
     stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());
     stateHandler.setLimelightHasTag(limelight.hasValidTag());
     stateHandler.setAprilTagID(limelight.getID());
-    if (!stateHandler.getAutoOverride()) {
-      stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
-    } else {
-      stateHandler.setHasValidSpeakerTag(true);
-    }
+    stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
+
     
     stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
     stateHandler.setHasValidTrapTag(limelight.hasTrapTag());
-    stateHandler.setIsCenteredToTag(Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag());
+    stateHandler.setIsCenteredToTag(!stateHandler.getAutoOverride() ? Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag() : true);
 
     SmartDashboard.putNumber("Distance to Speaker April Tag", stateHandler.getDistanceToSpeakerTag());
     SmartDashboard.putNumber("Distance to Trap April Tag", stateHandler.getDistanceToTrapTag());
+
+    SmartDashboard.putNumber("Covered Distance", this.calculateDistanceToCoveredTag());
 
     // SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
     // SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
@@ -90,7 +89,7 @@ public class LimelightSubsystem extends SubsystemBase {
     // //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
     SmartDashboard.putNumber("X Angle Offset", limelight.getXAngleOffset());
     // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
-
+      SmartDashboard.putBoolean("Centered to tag", stateHandler.getIsCenteredToTag());
 
   }
 

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.8506604811951766,
-        "y": 6.360349242711064
+        "x": 3.775903487920552,
+        "y": 6.453803573090732
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.900830944519032,
-        "y": 6.219202438404877
+        "x": 6.826073951244408,
+        "y": 6.312656768784545
       },
       "isLocked": false,
       "linkedName": "AmpFirstShot"
     },
     {
       "anchor": {
-        "x": 8.035306070612142,
-        "y": 5.8499945571319705
+        "x": 7.7457939476659785,
+        "y": 5.718099102569101
       },
       "prevControl": {
-        "x": 6.185829354505411,
-        "y": 6.29034615620498
+        "x": 7.774930758379706,
+        "y": 5.572415049000463
       },
       "nextControl": {
-        "x": 8.176276352552707,
-        "y": 5.816430204288981
+        "x": 7.7024168182857675,
+        "y": 5.934984749470158
       },
       "isLocked": false,
       "linkedName": null
@@ -55,7 +55,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.15,
       "command": {
         "type": "sequential",
         "data": {

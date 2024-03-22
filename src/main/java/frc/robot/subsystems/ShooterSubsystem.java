@@ -10,6 +10,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CurrentConstants;
@@ -217,6 +218,9 @@ public class ShooterSubsystem extends SubsystemBase {
       /* If we have a valid speaker tag, then get positional data. */
       else if (stateHandler.getHasValidTrapTag()) {
         desiredShooterSpeed = rpmData.getTrapDesiredShooterRPM(stateHandler.getDistanceToTrapTag());
+      }
+      else if (DriverStation.isAutonomousEnabled() && !stateHandler.getHasValidSpeakerTag()) {
+        desiredShooterSpeed = rpmData.getSpeakerDesiredShooterRPM(stateHandler.getCoveredSpeakerTagDistance());
       }
     }
 

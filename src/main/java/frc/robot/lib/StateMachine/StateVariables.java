@@ -117,7 +117,7 @@ public class StateVariables {
      * TODO: Need to be changed
      */
     public static enum IntakeStates {
-        DEPLOYED(new IntakePosition(2.05)),
+        DEPLOYED(new IntakePosition(2.00)),
         STOWED(new IntakePosition(0));
 
         private IntakePosition intakePosition;

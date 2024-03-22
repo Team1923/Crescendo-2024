@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6961154385271735,
-        "y": 6.313509534426476
+        "x": 3.775903487920552,
+        "y": 6.453803573090732
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.8732325797984934,
-        "y": 6.631288786773939
+        "x": 4.953020629191872,
+        "y": 6.771582825438195
       },
       "isLocked": false,
       "linkedName": "AmpPreload"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 3.8506604811951766,
-        "y": 6.360349242711064
+        "x": 3.775903487920552,
+        "y": 6.453803573090732
       },
       "prevControl": {
-        "x": 4.760472517444189,
-        "y": 6.5530719935642665
+        "x": 4.685715524169565,
+        "y": 6.6465263239439345
       },
       "nextControl": null,
       "isLocked": false,
@@ -49,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "intake",
-      "waypointRelativePos": 0.6,
+      "waypointRelativePos": 0.2,
       "command": {
         "type": "sequential",
         "data": {
@@ -73,7 +73,7 @@
   },
   "goalEndState": {
     "velocity": 1.0,
-    "rotation": 15.17182964276033,
+    "rotation": 11.191425776051613,
     "rotateFast": false
   },
   "reversed": false,

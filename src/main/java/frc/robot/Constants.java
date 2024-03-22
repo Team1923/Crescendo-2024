@@ -49,7 +49,7 @@ public final class Constants {
         public static final double trapLerpUpperBound = 0;
         
 
-        public static final double xAngleThreshold = 2.5;
+        public static final double xAngleThreshold = 3;
         
     }
 
@@ -183,7 +183,7 @@ public final class Constants {
 
         public static final double armPositionAllowableOffset = 0.03; // allowed radians offset
 
-        public static final double armPositionChange = -0.044;
+        public static final double armPositionChange = -0.015;
 
 
         public static final double armSettleTime = 0.7;

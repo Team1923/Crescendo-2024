@@ -38,9 +38,9 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier rotationSup;
 
   /* PID Things */
-  private final double kPTarget = 0.0027;
-  private final double kI = 0.000002;
-  private final double kD = 0.0002;
+  private final double kPTarget = 0.0025;
+  private final double kI = 0.000000;
+  private final double kD = 0.0001;
   private PIDController rotationController;
 
   /** Creates a new GoalCentricCommand. */
