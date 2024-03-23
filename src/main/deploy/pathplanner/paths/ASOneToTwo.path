@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.826073951244408,
-        "y": 6.312656768784545
+        "x": 4.7759034879205515,
+        "y": 6.453803573090732
       },
       "isLocked": false,
       "linkedName": "AmpFirstShot"
     },
     {
       "anchor": {
-        "x": 7.7457939476659785,
-        "y": 5.718099102569101
+        "x": 7.722970112606892,
+        "y": 6.080218729543151
       },
       "prevControl": {
-        "x": 7.774930758379706,
-        "y": 5.572415049000463
+        "x": 7.148550217538176,
+        "y": 6.229544884451006
       },
       "nextControl": {
-        "x": 7.7024168182857675,
-        "y": 5.934984749470158
+        "x": 8.297390007675615,
+        "y": 5.930892574635295
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +36,8 @@
         "y": 6.408148064723802
       },
       "prevControl": {
-        "x": 5.355276459965996,
-        "y": 6.698268334825399
+        "x": 4.379013887667326,
+        "y": 7.020021089712088
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,15 +47,15 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1,
-      "rotationDegrees": -4.763641690725947,
+      "rotationDegrees": -25.67681568183827,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0.15,
+      "name": "Intake",
+      "waypointRelativePos": 0.25,
       "command": {
         "type": "sequential",
         "data": {
@@ -72,18 +72,21 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.2,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.8,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 1.0,
-    "rotation": 12.829381373033902,
+    "velocity": 0.0,
+    "rotation": 12.94824779252535,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "AmpSideMidLine",
-  "previewStartingState": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
   "useDefaultConstraints": false
 }

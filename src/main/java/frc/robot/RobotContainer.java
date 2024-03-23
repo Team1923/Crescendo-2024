@@ -43,11 +43,13 @@ import frc.robot.commands.intake.PuntShot;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.commands.scoring.ScoreGamePieceNoRanged;
-import frc.robot.commands.scoring.WantBlow;
 import frc.robot.commands.swerve.Align90;
 import frc.robot.commands.swerve.AlignAmp;
+import frc.robot.commands.swerve.AlignCommandGroup;
+import frc.robot.commands.swerve.AlignHeading;
 import frc.robot.commands.swerve.FaceAndAlignToAmp;
 import frc.robot.commands.swerve.GoalCentricCommand;
+import frc.robot.commands.swerve.LockHeadingToTrap;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
 import frc.robot.lib.Autonomous.AutoChooser;
@@ -107,7 +109,8 @@ public class RobotContainer {
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.zeroGyro()));
 
-    driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
+    // driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
+    driverXboxController.rightStick().whileTrue(new AlignHeading(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {
@@ -143,9 +146,9 @@ public class RobotContainer {
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.operatorRightTrigger).whileTrue(new PuntShot());
     operatorPS4Controller.povUp().onTrue(new SetArmToTrap());
-    operatorPS4Controller.povDown().whileTrue(new WantBlow());
     
-
+    
+    
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());
     operatorPS4Controller.button(ControllerConstants.Operator.operatorLeftBumper).whileTrue(new IntakeEjectCommand());

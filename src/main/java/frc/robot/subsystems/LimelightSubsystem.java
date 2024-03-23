@@ -53,7 +53,7 @@ public class LimelightSubsystem extends SubsystemBase {
     Point blueSpeakerPos = FieldConstants.blueSpeakerPos;
     Point redSpeakerPos = FieldConstants.redSpeakerPos;
     Point deltaPos;
-    if (DriverStation.getAlliance().get() == Alliance.Blue) {
+    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue) {
       deltaPos = new Point( robotPos.x - blueSpeakerPos.x ,  robotPos.y - blueSpeakerPos.y);
     } else {
       deltaPos = new Point(redSpeakerPos.x - robotPos.x, redSpeakerPos.y - robotPos.y);
@@ -162,7 +162,7 @@ public class LimelightSubsystem extends SubsystemBase {
       stateHandler.setIsCenteredToTag(!stateHandler.getAutoOverride() ? Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag() : true);
 
 
-      stateHandler.setCurrentTagPose(LimelightInterface.getInstance().getAprilTagPose());
+      stateHandler.setCurrentTagPose(limelight.getAprilTagPose());
 
     }
 
@@ -183,11 +183,13 @@ public class LimelightSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
       SmartDashboard.putBoolean("Centered to tag", stateHandler.getIsCenteredToTag());
 
+      SmartDashboard.putNumber("calc trap heading", getSeenTrapHeading());
+      
+
   }
 
 
   public static double getSeenTrapHeading(){
-
     //trap tags are 11 through 16
     if (!(StateHandler.getInstance().getAprilTagID()>=11)){
       return -1;
@@ -201,9 +203,9 @@ public class LimelightSubsystem extends SubsystemBase {
 
     double rawHeading = Math.toDegrees(tagRotation.getZ());
 
-    System.out.println(rawHeading);
+    // System.out.println(rawHeading);
 
-    if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
       return Math.IEEEremainder(180+rawHeading, 360);
     }
     else{

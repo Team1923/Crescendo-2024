@@ -43,6 +43,6 @@ public class SetArmToTrap extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getScoreInTrap() ==false;
+    return stateHandler.getScoreInTrap() == false;
   }
 }

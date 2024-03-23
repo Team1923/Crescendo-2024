@@ -36,6 +36,8 @@ public class StateHandler {
 
     /* Extra variables needed to handle additional states. */
 
+    private double blowPower = 0;
+
     /* Limelight */
     private boolean limelightHasTag = false;
     private int aprilTagID = 0;
@@ -64,7 +66,7 @@ public class StateHandler {
     private boolean wantToPunt = false;
     private boolean wantUnguardable = false;
     private boolean wantFrontAmp = false;
-    private boolean wantToBlow = false;
+    
 
 
 
@@ -89,12 +91,12 @@ public class StateHandler {
     private Pose3d currentTagPose = new Pose3d();
 
     
-    public boolean getWantToBlow() {
-        return wantToBlow;
+    public double getBlowPower() {
+        return blowPower;
     }
 
-    public void setWantToBlow(boolean wantToBlow) {
-        this.wantToBlow = wantToBlow;
+    public void setBlowPower(double blowPower) {
+        this.blowPower = blowPower;
     }
 
 

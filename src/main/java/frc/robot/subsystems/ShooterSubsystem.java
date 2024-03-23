@@ -273,12 +273,8 @@ public class ShooterSubsystem extends SubsystemBase {
       }
     }
 
-  if(stateHandler.getWantToBlow()){
-    setBlowerPercentOut(1);
-  }
-  else{
-    setBlowerPercentOut(0);
-  }
+    setBlowerPercentOut(stateHandler.getBlowPower());
+    
 
     /* Reset the punt timer */
     if (!stateHandler.getWantPunt()) {

@@ -27,7 +27,7 @@ public class TrapAlignGroup extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new LockHeadingToTrap(swerve, translation, strafe, LimelightSubsystem.getSeenTrapHeading()),
+      // new LockHeadingToTrap(swerve, translation, strafe, LimelightSubsystem.getSeenTrapHeading()),
       new MoveInLineWithTrap(swerve, translation, LimelightSubsystem.getSeenTrapHeading()),
       AutoBuilder.pathfindToPose(getFinalPose(), 
         new PathConstraints(1.0, 1.0, Units.degreesToRadians(540), Units.degreesToRadians(720)),

@@ -4,13 +4,14 @@
   "holonomicMode": true,
   "pathFolders": [
     "4PieceSource",
+    "4PieceSubAlternate",
     "5PieceMid",
     "5PieceSub",
     "6Piece",
     "6PieceSubOptimzied",
     "AmpSideMidLine",
     "MidLineShove",
-    "4PieceSubAlternate"
+    "AmpTrap"
   ],
   "autoFolders": [
     "SmallerPaths"

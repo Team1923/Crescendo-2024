@@ -28,7 +28,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 
 
 /* TODO: cross check with existing code to get state handler integration going */
-public class LockHeadingToTrap extends Command {
+public class AlignHeading extends Command {
   
   /* Swerve + Limelight Initialization */
   private CommandSwerveDrivetrain swerve;
@@ -51,7 +51,7 @@ public class LockHeadingToTrap extends Command {
 
 
   /** Creates a new GoalCentricCommand. */
-  public LockHeadingToTrap(CommandSwerveDrivetrain swerve, DoubleSupplier t, DoubleSupplier s) {
+  public AlignHeading(CommandSwerveDrivetrain swerve, DoubleSupplier t, DoubleSupplier s) {
     this.swerve = swerve;
     this.translationSup = t;
     this.strafeSup = s;
@@ -68,27 +68,26 @@ public class LockHeadingToTrap extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    desiredHeading = LimelightSubsystem.getSeenTrapHeading();
+    if (stateHandler.getWantFrontAmp() || stateHandler.getScoreInAmp()) {
+        desiredHeading = -90;
+    } else if (stateHandler.getScoreInTrap()) {
+        desiredHeading = LimelightSubsystem.getSeenTrapHeading();
+    }
+   
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
     double rotValue = (desiredHeading == -1) ?  0 : rotationController.calculate(swerve.getGyroYaw().getDegrees(), desiredHeading);
 
-    SmartDashboard.putNumber("trap heading", desiredHeading);
-    SmartDashboard.putNumber("rot value", rotValue);
+    ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
+    strafeValue  * SwerveConstants.maxSpeed, 
+    rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
 
-      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
-      strafeValue  * SwerveConstants.maxSpeed, 
-      rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
-    
-      swerve.setControl(drive.withSpeeds(chassisSpeeds));
-    
-    
+    swerve.setControl(drive.withSpeeds(chassisSpeeds));
   }
 
 
@@ -100,6 +99,6 @@ public class LockHeadingToTrap extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(swerve.getGyroYaw().getDegrees()- desiredHeading ) < Constants.SwerveConstants.headingOffsetThreshold);
+    return false;
   }
 }

@@ -12,6 +12,12 @@ public class SetArmToFrontAmp extends Command {
   /** Creates a new SetArmToFrontAmp. */
   public SetArmToFrontAmp() {
     // Use addRequirements() here to declare subsystem dependencies.
+
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
     stateHandler.setScoreInAmp(false);
     stateHandler.setWantFrontAmp(true);
     stateHandler.setScoreInSubwoofer(false);
@@ -21,9 +27,6 @@ public class SetArmToFrontAmp extends Command {
     stateHandler.setWantUnguardable(false);
   }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

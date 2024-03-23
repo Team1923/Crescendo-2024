@@ -145,7 +145,7 @@ public final class Constants {
         public static final int shooterMotorPrimaryID = 17; //top
         public static final int shooterMotorFollowerID = 18; //bottom 
 
-        public static final int blowerMotorID = 0;
+        public static final int blowerMotorID = 30;
 
         public static final double shooterRPSToRPM = 60;
         public static final double shooterRPMToRPS = 1 / shooterRPSToRPM;

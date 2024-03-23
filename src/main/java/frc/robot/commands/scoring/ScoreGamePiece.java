@@ -1,5 +1,7 @@
 package frc.robot.commands.scoring;
 
+import com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -12,6 +14,7 @@ public class ScoreGamePiece extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
   private Timer inputTimer = new Timer();
+  private Timer trapTimer = new Timer();
  
   /** Creates a new SpeakerPositionCommand. */
   public ScoreGamePiece() {
@@ -26,6 +29,7 @@ public class ScoreGamePiece extends Command {
     } else if (stateHandler.getScoreInTrap()){
       stateHandler.setDesiredArmState(ArmStates.TRAP);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.TRAP);
+      stateHandler.setBlowPower(1);
     }
       else if(stateHandler.getWantUnguardable()){
         stateHandler.setDesiredArmState(ArmStates.UNGUARDABLE);
@@ -52,6 +56,10 @@ public class ScoreGamePiece extends Command {
     if (stateHandler.getCurrentArmState() == ArmStates.AMP) {
       stateHandler.setDesiredFeederSpeed(FeederSpeeds.OUTWARD);
     }
+
+    if(!stateHandler.getBBThreeCovered()){
+      trapTimer.start();
+    }
     
   }
 
@@ -62,8 +70,11 @@ public class ScoreGamePiece extends Command {
     stateHandler.setDesiredArmState(ArmStates.STOWED);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
+    stateHandler.setBlowPower(0);
     inputTimer.stop();
     inputTimer.reset();
+    trapTimer.stop();
+    trapTimer.reset();
     stateHandler.setOperatorInputTimingGood(false);
   }
   
@@ -75,7 +86,10 @@ public class ScoreGamePiece extends Command {
     //when you let go of trigger, automatically ends
     if (stateHandler.getScoreInAmp()) {
       return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered();
-    } else {
+    } else if(stateHandler.getScoreInTrap()){
+      return trapTimer.get() > 7 && !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+    }
+    else {
       return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
     }
     

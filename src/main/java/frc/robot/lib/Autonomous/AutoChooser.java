@@ -18,6 +18,7 @@ public class AutoChooser {
 		FOUR_SOURCE,
 		FOUR_AMP,
 		MID_LINE_SHOVE,
+		FOUR_AMP_TRAP,
 		SUB_6_OPTIMIZED;
 		// FAR_4_GP,
 		// MID_THREE;
@@ -45,6 +46,7 @@ public class AutoChooser {
 		chooser.addOption("MidLine Shove", AutoMode.MID_LINE_SHOVE);
 
 		chooser.addOption("6 Gamepiece from Sub OPTIMIZED", AutoMode.SUB_6_OPTIMIZED);
+		chooser.addOption("4 Amp Side TRap", AutoMode.FOUR_AMP_TRAP);
 		
 
 		// chooser.addOption("5 Gamepiece Mid Rush", AutoMode.MID_5_GP);
@@ -76,6 +78,8 @@ public class AutoChooser {
 				return autoInstantiator.getFourAmpSide();
 			case MID_LINE_SHOVE:
 				return autoInstantiator.getMidLineShove();
+			case FOUR_AMP_TRAP:
+				return autoInstantiator.getFourAmpTrap();
 	
 			// case FAR_4_GP:
 			// 	return autoInstantiator.getFourFar();

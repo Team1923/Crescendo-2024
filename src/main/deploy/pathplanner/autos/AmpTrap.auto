@@ -2,37 +2,19 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6436963361948017,
-      "y": 4.436079431165074
+      "x": 1.490257266228818,
+      "y": 7.393954787909576
     },
-    "rotation": -60.832386620422255
+    "rotation": 0.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "wantSubwoofer"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ScoreGamePiece"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "wantRange"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "4PSPodium"
+            "pathName": "ASPreloadToBetween"
           }
         },
         {
@@ -44,7 +26,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "4PSMidLine"
+            "pathName": "ASBetweenToOne"
           }
         },
         {
@@ -56,13 +38,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "4PSThird"
+            "pathName": "ASOnetoTwo"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TrapASTwoToThree"
           }
         }
       ]

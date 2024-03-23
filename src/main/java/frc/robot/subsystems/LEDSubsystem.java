@@ -219,16 +219,11 @@ public class LEDSubsystem extends SubsystemBase {
         desiredColor = Colors.PUKE_GREEN;
 
         if (stateHandler.getHasValidTrapTag()) {
-          if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
-              && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.TRAP) {
             desiredAnimation = Animations.RAINBOW;
             desiredColor = Colors.RAINBOW;
           } else {
             desiredAnimation = Animations.SOLID;
           }
-        } else {
-          desiredAnimation = Animations.HEARTBEAT;
-        }
       }
 
       else if(stateHandler.getWantUnguardable()){

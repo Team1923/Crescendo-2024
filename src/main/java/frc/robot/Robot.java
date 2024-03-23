@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
     NamedCommands.registerCommand("ScoreGamePiece", new AutoScoreCommand());
     NamedCommands.registerCommand("wantSubwoofer", new AutoSetArmToSubwoofer());
     NamedCommands.registerCommand("wantRange", new AutoSetArmToRanged());
+   
 
     // for (AprilTag p : LimelightInterface.getInstance().getAprilTagList()){
     //   System.out.println("ID: " + p.ID + " head: " + Math.toDegrees(p.pose.getRotation().getZ()));
