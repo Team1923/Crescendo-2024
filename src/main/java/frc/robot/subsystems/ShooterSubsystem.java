@@ -82,6 +82,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterBottom.setControl(new Follower(ShooterConstants.shooterMotorPrimaryID, false));
 
     setShooterCurrentLimits();
+
+    blowerSRX.configFactoryDefault();
   }
 
   /**
@@ -236,7 +238,7 @@ public class ShooterSubsystem extends SubsystemBase {
       if(stateHandler.getHasValidTrapTag()){
         desiredShooterSpeed = rpmData.getTrapDesiredShooterRPM(stateHandler.getDistanceToTrapTag());
       }
-      else{
+      else {
         desiredShooterSpeed = ShooterSpeeds.TRAP.getRPMValue().getRPM();
       }
     }
