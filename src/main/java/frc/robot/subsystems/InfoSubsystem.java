@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.LimeLightConstants;
+import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
@@ -107,6 +108,14 @@ public class InfoSubsystem extends SubsystemBase {
   private SuppliedValueWidget<Boolean> bb4 = stateDashboard.addBoolean("BB FOUR COVERED", () -> stateHandler.getBBFourCovered()).withPosition(3, 2);;
   private SuppliedValueWidget<Boolean> bb1Dead = stateDashboard.addBoolean("BB ONE DEAD", () -> stateHandler.getBB1Dead()).withPosition(0, 3);;
 
+  private SuppliedValueWidget<Boolean> centeredToTag = stateDashboard.addBoolean("Centered To Tag", () -> stateHandler.getIsCenteredToTag()).withPosition(4, 3);
+
+  private SuppliedValueWidget<Double> positionData = stateDashboard.addDouble("Arm Data (Speaker)", () -> PositionRPMData.getInstance().getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag())).withPosition(6, 3);
+    private SuppliedValueWidget<Double> rpmData = stateDashboard.addDouble("RPM Data (Speaker)", () -> PositionRPMData.getInstance().getSpeakerDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag())).withPosition(7, 3);
+
+
+
+
   
   
 
@@ -144,8 +153,8 @@ public class InfoSubsystem extends SubsystemBase {
     // SmartDashboard.putString("CURRENT INTAKE POS", stateHandler.getCurrentIntakeState().toString());
 
     /* RELEVANT ARM STATES */
-    SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
-    SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
+    // SmartDashboard.putString("DESIRED ARM STATE", stateHandler.getDesiredArmState().toString());
+    // SmartDashboard.putString("CURRENT ARM STATE", stateHandler.getCurrentArmState().toString());
 
     // // /* RELEVANT SHOOTER STATES */
     // SmartDashboard.putString("DESIRED SHOOTER STATE", stateHandler.getDesiredShootingSpeed().toString());
@@ -154,11 +163,14 @@ public class InfoSubsystem extends SubsystemBase {
     // /* RELEVANT FEEDER STATES */
     // SmartDashboard.putString("CURRENT FEEDER DIRECTION", stateHandler.getCurrentFeederSpeed().toString());
 
+
     /*POSRPM OFFSET */
     if (stateHandler.isPosRPMTuning()){
         SmartDashboard.putNumber("RPM OFFSET", stateHandler.getRPMOffset());
         SmartDashboard.putNumber("POSITION OFFSET", stateHandler.getPositionOffset());
     }
+
+    SmartDashboard.putBoolean("AUTO OVERRIDE", stateHandler.getAutoOverride());
 
     
     
