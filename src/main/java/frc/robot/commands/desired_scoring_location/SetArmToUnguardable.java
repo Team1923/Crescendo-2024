@@ -24,6 +24,7 @@ public class SetArmToUnguardable extends Command {
     stateHandler.setScoreInTrap(false);
     stateHandler.setScoreInReverseSubwoofer(false);
     stateHandler.setWantPunt(false);
+    stateHandler.setWantFrontAmp(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

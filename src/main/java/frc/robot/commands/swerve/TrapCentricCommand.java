@@ -7,12 +7,17 @@ package frc.robot.commands.swerve;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -26,7 +31,6 @@ public class TrapCentricCommand extends Command {
   private CommandSwerveDrivetrain swerve;
   private SwerveRequest.ApplyChassisSpeeds drive = new SwerveRequest.ApplyChassisSpeeds()
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
-  private LimelightInterface limelight = LimelightInterface.getInstance();
   private StateHandler stateHandler = StateHandler.getInstance();
 
   /* Fancy double stuff for input + output to swerve. */
@@ -35,7 +39,6 @@ public class TrapCentricCommand extends Command {
   private DoubleSupplier rotationSup;
 
   /* PID Things */
-  private final double kPTarget = 0.005;
   private PIDController rotationController;
 
   /** Creates a new GoalCentricCommand. */
@@ -44,48 +47,57 @@ public class TrapCentricCommand extends Command {
     this.translationSup = t;
     this.strafeSup = s;
     this.rotationSup = r;
-    rotationController = new PIDController(kPTarget, 0, 0);
+
+    rotationController = new PIDController(Constants.SwerveConstants.headingKP, Constants.SwerveConstants.headingKI, Constants.SwerveConstants.headingKD);
     addRequirements(this.swerve);
   }
+
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    stateHandler.setIsGoalCentric(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
     double rotValue = 0;
-    if(Math.abs(rotationSup.getAsDouble()) > 0.5){
+    if  (!stateHandler.getScoreInTrap()){      //babyproofing from misclick
+      rotValue = MathUtil.applyDeadband(rotationSup.getAsDouble(), 0.1);
+    }
+    else if(Math.abs(rotationSup.getAsDouble()) > 0.5){
       rotValue = rotationSup.getAsDouble();
-    } else if(limelight.hasTrapTag()){
-      rotValue = rotationController.calculate(limelight.getXAngleOffset(), 0); 
+    } else if(stateHandler.getHasValidSpeakerTag()){
+      rotValue = rotationController.calculate(stateHandler.getxAngleOffset(), 0); 
     } else{
       rotValue = 0;
     }
 
-    SmartDashboard.putNumber("ROT VAL", rotValue);
+    // SmartDashboard.putNumber("ROT VAL", rotValue);
 
-    ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
-    strafeValue  * SwerveConstants.maxSpeed, 
-    rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
+      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
+      strafeValue  * SwerveConstants.maxSpeed, 
+      rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
     
-    swerve.setControl(drive.withSpeeds(chassisSpeeds));
+      swerve.setControl(drive.withSpeeds(chassisSpeeds));
+    
+
+    
   }
 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    stateHandler.setIsGoalCentric(false);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !stateHandler.getScoreInTrap();
+    return false;//stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getReverseSubwoofer();
   }
 }

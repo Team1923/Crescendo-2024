@@ -230,6 +230,9 @@ public class ArmSubsystem extends SubsystemBase {
         armSetpoint = positionData.getTrapDesiredArmPosition(stateHandler.getDistanceToTrapTag());
       }
       /* Preserve the arm position if the trap tag is lost. */
+      else if(!stateHandler.getHasValidTrapTag()){
+        armSetpoint = ArmStates.TRAP.getArmPosition().getAngularSetpoint();
+      }
       else {
         armSetpoint = getArmPositionRads();
       }

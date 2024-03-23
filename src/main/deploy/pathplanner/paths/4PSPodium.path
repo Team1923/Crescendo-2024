@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.2659285364867028,
-        "y": 5.592286263276231
+        "x": 0.6436963361948017,
+        "y": 4.436079431165074
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5715205458188697,
-        "y": 4.751700392289674
+        "x": 2.151526290630221,
+        "y": 4.341384796345459
       },
       "isLocked": false,
       "linkedName": null
@@ -28,7 +28,13 @@
       "linkedName": "4PSPodium"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0,
+      "rotationDegrees": -60.046391832198516,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {

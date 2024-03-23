@@ -13,6 +13,7 @@ public class StateVariables {
         TRAP(new ArmPosition(-0.9)), //TODO: FIND
         BABY_BIRD(new ArmPosition(-0.7)), //TODO: FIND
         PUNT(new ArmPosition(0)),
+        FRONT_AMP(new ArmPosition(-0.77)),
         CLIMB(new ArmPosition(-1.35));
 
         private ArmPosition armPosition;
@@ -45,10 +46,11 @@ public class StateVariables {
     public static enum ShooterSpeeds {
         IDLE(new RPMValue(0)),
         BABY_BIRD(new RPMValue(-1000)),
+        FRONT_AMP_SHOT(new RPMValue(450)),
         UNGUARDABLE_SHOT(new RPMValue(1900)),
-        TRAP(new RPMValue(1000)),
+        TRAP(new RPMValue(1150)),
         PUNT_SHOT(new RPMValue(1)), // this is a percent output value
-        SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT
+        SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT (2000)
         
         private RPMValue rpmValue;
 

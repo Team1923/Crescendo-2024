@@ -63,6 +63,10 @@ public class StateHandler {
     private boolean wantToPositionForReverseSubwoofer = false;
     private boolean wantToPunt = false;
     private boolean wantUnguardable = false;
+    private boolean wantFrontAmp = false;
+    private boolean wantToBlow = false;
+
+
 
     /* PosRPM tuning values */
     private double positionOffset = 0;
@@ -84,6 +88,23 @@ public class StateHandler {
     private Pose2d robotPose = new Pose2d();
     private Pose3d currentTagPose = new Pose3d();
 
+    
+    public boolean getWantToBlow() {
+        return wantToBlow;
+    }
+
+    public void setWantToBlow(boolean wantToBlow) {
+        this.wantToBlow = wantToBlow;
+    }
+
+
+    public boolean getWantFrontAmp() {
+        return wantFrontAmp;
+    }
+
+    public void setWantFrontAmp(boolean wantFrontAmp) {
+        this.wantFrontAmp = wantFrontAmp;
+    }
     
     public Pose3d getCurrentTagPose() {
         return currentTagPose;

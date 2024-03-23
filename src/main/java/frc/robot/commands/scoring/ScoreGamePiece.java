@@ -12,6 +12,7 @@ public class ScoreGamePiece extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
   private Timer inputTimer = new Timer();
+ 
   /** Creates a new SpeakerPositionCommand. */
   public ScoreGamePiece() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,6 +37,7 @@ public class ScoreGamePiece extends Command {
     }
 
     inputTimer.start();
+    
  
   }
 
@@ -50,6 +52,7 @@ public class ScoreGamePiece extends Command {
     if (stateHandler.getCurrentArmState() == ArmStates.AMP) {
       stateHandler.setDesiredFeederSpeed(FeederSpeeds.OUTWARD);
     }
+    
   }
 
 

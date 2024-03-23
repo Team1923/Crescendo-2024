@@ -38,7 +38,7 @@ public class Align90 extends Command {
   private DoubleSupplier translationSup;
   private DoubleSupplier strafeSup;
 
-  double tolerance = 2;
+  double tolerance = 3;
 
   /* PID Things */
  
@@ -67,7 +67,7 @@ public class Align90 extends Command {
   public void execute() {
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
-    double rotValue = rotationController.calculate(swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : 90);
+    double rotValue = rotationController.calculate(swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : -90);
 
     // SmartDashboard.putNumber("ROT VAL", rotValue);
 
@@ -91,6 +91,6 @@ public class Align90 extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(((DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : 90)-swerve.getGyroYaw().getDegrees()) < tolerance);
+    return (Math.abs(((DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : -90)-swerve.getGyroYaw().getDegrees()) < tolerance);
   }
 }

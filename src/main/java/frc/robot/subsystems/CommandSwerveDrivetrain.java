@@ -204,5 +204,6 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     @Override
     public void periodic() {
         StateHandler.getInstance().setRobotPose(this.m_odometry.getEstimatedPosition());
+        SmartDashboard.putNumber("Heading",getGyroYaw().getDegrees());
     }
 }

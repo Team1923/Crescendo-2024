@@ -168,18 +168,18 @@ public class LimelightSubsystem extends SubsystemBase {
 
 
 
-    SmartDashboard.putNumber("Distance to Speaker April Tag", stateHandler.getDistanceToSpeakerTag());
-    SmartDashboard.putNumber("Distance to Trap April Tag", stateHandler.getDistanceToTrapTag());
+   // SmartDashboard.putNumber("Distance to Speaker April Tag", stateHandler.getDistanceToSpeakerTag());
+   // SmartDashboard.putNumber("Distance to Trap April Tag", stateHandler.getDistanceToTrapTag());
 
     SmartDashboard.putNumber("Covered Distance", this.calculateDistanceToCoveredSpeakerTag());
 
-    SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
-    SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
+    //SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
+    //SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
     // SmartDashboard.putNumber("Predicted Angle of Arm", rpmData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag()));
     // SmartDashboard.putNumber("Predicted RPM of the Tag", rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag()));
     //SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
     //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
-    SmartDashboard.putNumber("X Angle Offset", stateHandler.getxAngleOffset());
+    //SmartDashboard.putNumber("X Angle Offset", stateHandler.getxAngleOffset());
     // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
       SmartDashboard.putBoolean("Centered to tag", stateHandler.getIsCenteredToTag());
 

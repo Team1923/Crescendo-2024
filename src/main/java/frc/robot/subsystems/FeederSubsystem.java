@@ -8,6 +8,7 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -129,10 +130,17 @@ public class FeederSubsystem extends SubsystemBase {
     /* CASE #4: TRAP SHOOTING */
     else if(stateHandler.getCurrentArmState() == ArmStates.TRAP
     && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.TRAP
-    && (stateHandler.getIsCenteredToTag()) && (stateHandler.getDistanceToTrapTag() <= LimeLightConstants.trapLerpUpperBound 
-    && stateHandler.getDistanceToTrapTag() >= LimeLightConstants.trapLerpLowerBound)
+
     && stateHandler.getOperatorInputTimingGood()) {
-      desiredFeederSpeed = FeederSpeeds.INWARD;
+      if(stateHandler.getHasValidTrapTag()) {
+        if((stateHandler.getIsCenteredToTag()) && (stateHandler.getDistanceToTrapTag() <= LimeLightConstants.trapLerpUpperBound 
+            && stateHandler.getDistanceToTrapTag() >= LimeLightConstants.trapLerpLowerBound)) {
+              desiredFeederSpeed = FeederSpeeds.INWARD;
+            }
+      }
+      else{
+        desiredFeederSpeed = FeederSpeeds.INWARD;
+      }
     }
 
     /* CASE #5: Punt Shot */
@@ -151,6 +159,13 @@ public class FeederSubsystem extends SubsystemBase {
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
         && (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer())) {
+      desiredFeederSpeed = FeederSpeeds.INWARD;
+    }
+
+    /* Case #8: Front Amp Shot */
+    else if(stateHandler.getCurrentArmState() == ArmStates.FRONT_AMP
+    && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.FRONT_AMP_SHOT
+    && stateHandler.getWantFrontAmp()){
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 

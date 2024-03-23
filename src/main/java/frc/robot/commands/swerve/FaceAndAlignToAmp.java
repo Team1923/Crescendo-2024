@@ -23,7 +23,7 @@ public class FaceAndAlignToAmp extends SequentialCommandGroup {
   private final double tolerance = 1; //degree
 
   /** Creates a new PosAndAllignAmp. */
-  public FaceAndAlignToAmp(CommandSwerveDrivetrain s, DoubleSupplier transSup, DoubleSupplier strafeSup, DoubleSupplier rotSup) {
+  public FaceAndAlignToAmp(CommandSwerveDrivetrain s, DoubleSupplier transSup, DoubleSupplier strafeSup) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(

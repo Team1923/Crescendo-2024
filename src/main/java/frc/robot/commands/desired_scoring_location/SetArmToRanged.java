@@ -26,6 +26,7 @@ public class SetArmToRanged extends Command {
     stateHandler.setScoreInReverseSubwoofer(false);
     stateHandler.setWantPunt(false);
     stateHandler.setWantUnguardable(false);
+    stateHandler.setWantFrontAmp(false);
     
 
 
@@ -42,6 +43,6 @@ public class SetArmToRanged extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getScoreInTrap() || stateHandler.getScoreInReverseSubwoofer();
+    return stateHandler.getWantFrontAmp() || stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getScoreInTrap() || stateHandler.getScoreInReverseSubwoofer();
   }
 }

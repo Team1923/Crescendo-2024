@@ -28,6 +28,7 @@ import frc.robot.commands.Climb.ClimbCommandGroup;
 import frc.robot.commands.ManualHashTuningCommands.ChangePositionOffset;
 import frc.robot.commands.ManualHashTuningCommands.ChangeRPMOffset;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
+import frc.robot.commands.desired_scoring_location.SetArmToFrontAmp;
 import frc.robot.commands.desired_scoring_location.SetArmToPunt;
 import frc.robot.commands.desired_scoring_location.SetArmToRanged;
 import frc.robot.commands.desired_scoring_location.SetArmToReverseSubwoofer;
@@ -136,11 +137,12 @@ public class RobotContainer {
     /* Operator Button Bindings */
     //TODO: add buttons and IDs to constants
     operatorPS4Controller.button(ControllerConstants.Operator.triangleButton).onTrue(new SetArmToRanged());
-    operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToAmp());
+    operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToFrontAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.operatorRightTrigger).whileTrue(new PuntShot());
     operatorPS4Controller.povUp().onTrue(new SetArmToTrap());
+    
 
     //TODO: add intake commands here!
     operatorPS4Controller.button(ControllerConstants.Operator.operatorRightBumper).whileTrue(new DeployIntakeCommand());

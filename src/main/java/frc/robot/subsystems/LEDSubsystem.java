@@ -54,6 +54,7 @@ public class LEDSubsystem extends SubsystemBase {
     ORANGE(new int[] { 255, 28, 0 }),
     YELLOW(new int[] { 255, 120, 0 }),
     WHITE(new int[] { 255, 255, 255 }),
+    PUKE_GREEN(new int[] {160,176, 12}),
     RAINBOW(new int[] { 0, 0, 0 }),
     OFF(new int[] { 0, 0, 0 }),
     TEST(new int[] { 0, 0, 0 });
@@ -180,9 +181,10 @@ public class LEDSubsystem extends SubsystemBase {
     else if (hasNote) {
 
       // for amp
-      if (stateHandler.getScoreInAmp()) {
+      if (stateHandler.getScoreInAmp() || stateHandler.getWantFrontAmp()) {
         desiredColor = Colors.ORANGE;
-        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.OUTWARD) {
+        if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.OUTWARD 
+        || stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD ) {
           desiredAnimation = Animations.SOLID;
         } else {
           desiredAnimation = Animations.HEARTBEAT;
@@ -214,7 +216,7 @@ public class LEDSubsystem extends SubsystemBase {
       }
       // for trap
       else if (stateHandler.getScoreInTrap()) {
-        desiredColor = Colors.OFF;
+        desiredColor = Colors.PUKE_GREEN;
 
         if (stateHandler.getHasValidTrapTag()) {
           if (stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD
@@ -263,11 +265,11 @@ public class LEDSubsystem extends SubsystemBase {
       desiredAnimation = Animations.FIRE;
     }
 
-    SmartDashboard.putString("CurrentAnim", currentAnimation.name());
-    SmartDashboard.putString("CurrentColor", currentColor.name());
+    // SmartDashboard.putString("CurrentAnim", currentAnimation.name());
+    // SmartDashboard.putString("CurrentColor", currentColor.name());
 
-    SmartDashboard.putString("desiredAnim", desiredAnimation.name());
-    SmartDashboard.putString("desiredColor", desiredColor.name());
+    // SmartDashboard.putString("desiredAnim", desiredAnimation.name());
+    // SmartDashboard.putString("desiredColor", desiredColor.name());
 
     // SmartDashboard.putNumber("WaitTimer", waitTimer.get());
 

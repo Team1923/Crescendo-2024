@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -29,6 +31,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   /* Initialize StateHandler to get important data about the robot. */
   private StateHandler stateHandler = StateHandler.getInstance();
+
+  private TalonSRX blowerSRX = new TalonSRX(ShooterConstants.blowerMotorID);
 
   /*
    * Helper class used to get the RPM the shooter needs to operate at when
@@ -117,6 +121,10 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setShooterPOut(double pTop, double pBottom) {
     shooterTop.set(pTop);
     shooterBottom.set(pBottom);
+  }
+
+  public void setBlowerPercentOut(double blowPercent){
+    blowerSRX.set(ControlMode.PercentOutput, blowPercent);
   }
 
   /**
@@ -224,6 +232,15 @@ public class ShooterSubsystem extends SubsystemBase {
       }
     }
 
+    if(desiredShooterSpeedState == ShooterSpeeds.TRAP){
+      if(stateHandler.getHasValidTrapTag()){
+        desiredShooterSpeed = rpmData.getTrapDesiredShooterRPM(stateHandler.getDistanceToTrapTag());
+      }
+      else{
+        desiredShooterSpeed = ShooterSpeeds.TRAP.getRPMValue().getRPM();
+      }
+    }
+
     /* Set the desired velocity of the shooter wheels. */
     if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT && stateHandler.getWantPunt()) {
       setShooterPOut(0.85, 0.4); //adjust as needed
@@ -232,7 +249,7 @@ public class ShooterSubsystem extends SubsystemBase {
       setVelocities(desiredShooterSpeed - 715, desiredShooterSpeed);
     }
     else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && stateHandler.getScoreInTrap()){
-      setVelocities(desiredShooterSpeed, desiredShooterSpeed - 500);
+      setVelocities(desiredShooterSpeed - 500, desiredShooterSpeed);
     }
     else {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
@@ -245,13 +262,21 @@ public class ShooterSubsystem extends SubsystemBase {
     } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT 
       && isAtShooterSpeed(desiredShooterSpeed - 715, desiredShooterSpeed )) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    } else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && isAtShooterSpeed(desiredShooterSpeed, desiredShooterSpeed - 500)) {
+    } else if(desiredShooterSpeedState == ShooterSpeeds.TRAP 
+    && isAtShooterSpeed(desiredShooterSpeed  - 500, desiredShooterSpeed)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
       if (puntTimer.get() > 0.5) {
         stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
       }
     }
+
+  if(stateHandler.getWantToBlow()){
+    setBlowerPercentOut(1);
+  }
+  else{
+    setBlowerPercentOut(0);
+  }
 
     /* Reset the punt timer */
     if (!stateHandler.getWantPunt()) {

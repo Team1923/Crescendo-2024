@@ -32,11 +32,11 @@ public final class Constants {
 
         public static final double headingOffsetThreshold = 2;
 
-        public static final double headingKP = 0.0025;
+        public static final double headingKP = 0.0035;
         public static final double headingKI = 0.000000;
         public static final double headingKD = 0.0001;
 
-        public static final double translationKP = 0.0000;
+        public static final double translationKP = 0.03;
         public static final double translationKI = 0.000000;
         public static final double translationKD = 0.0000;
 
@@ -144,6 +144,8 @@ public final class Constants {
         /* Motor IDs */
         public static final int shooterMotorPrimaryID = 17; //top
         public static final int shooterMotorFollowerID = 18; //bottom 
+
+        public static final int blowerMotorID = 0;
 
         public static final double shooterRPSToRPM = 60;
         public static final double shooterRPMToRPS = 1 / shooterRPSToRPM;

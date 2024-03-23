@@ -72,10 +72,10 @@ public class AlignAmp extends Command {
         double translationVal = MathUtil.applyDeadband(translationController.calculate(StateHandler.getInstance().getxAngleOffset(), 0), 0.01);
 
         
-        double rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : 90);
+        double rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : -90);
 
 
-      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationVal * SwerveConstants.maxSpeed, 
+      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(-translationVal * SwerveConstants.maxSpeed, 
      strafeSup.getAsDouble()  * SwerveConstants.maxSpeed, 
       rotationVal * SwerveConstants.maxAngularRate, s_Swerve.getGyroYaw()); 
     

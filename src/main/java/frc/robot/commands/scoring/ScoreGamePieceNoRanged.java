@@ -1,5 +1,8 @@
 package frc.robot.commands.scoring;
 
+
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
@@ -9,6 +12,7 @@ import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
 public class ScoreGamePieceNoRanged extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
+  private Timer frontAmpTimer = new Timer();
   /** Creates a new SpeakerPositionCommand. */
   public ScoreGamePieceNoRanged() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,6 +29,9 @@ public class ScoreGamePieceNoRanged extends Command {
     } else if(stateHandler.getWantUnguardable()){
       stateHandler.setDesiredArmState(ArmStates.UNGUARDABLE);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.UNGUARDABLE_SHOT);
+    } else if(stateHandler.getWantFrontAmp()){
+      stateHandler.setDesiredArmState(ArmStates.FRONT_AMP);
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.FRONT_AMP_SHOT);
     }
     else if (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()){
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
@@ -39,6 +46,9 @@ public class ScoreGamePieceNoRanged extends Command {
     if (stateHandler.getCurrentArmState() == ArmStates.AMP) {
       stateHandler.setDesiredFeederSpeed(FeederSpeeds.OUTWARD);
     }
+    if(!stateHandler.getBBThreeCovered()){
+      frontAmpTimer.start();
+    }
   }
 
 
@@ -48,6 +58,8 @@ public class ScoreGamePieceNoRanged extends Command {
     stateHandler.setDesiredArmState(ArmStates.STOWED);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
+    frontAmpTimer.stop();
+    frontAmpTimer.reset();
   }
   
 
@@ -61,7 +73,10 @@ public class ScoreGamePieceNoRanged extends Command {
     // }
     if (stateHandler.getScoreInAmp()) {
       return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered();
-    } else {
+    } else if(stateHandler.getWantFrontAmp()){
+      return frontAmpTimer.get() > 5 && !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+    }
+    else {
       return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
     }
     
