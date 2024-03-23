@@ -4,13 +4,13 @@
 
 package frc.robot.commands.swerve;
 
+import java.sql.Driver;
+import java.util.concurrent.locks.Lock;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
-import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -18,14 +18,17 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.LimelightSubsystem;
 
 
 /* TODO: cross check with existing code to get state handler integration going */
-public class GoalCentricCommand extends Command {
+public class LockHeadingToTrap extends Command {
   
   /* Swerve + Limelight Initialization */
   private CommandSwerveDrivetrain swerve;
@@ -36,45 +39,48 @@ public class GoalCentricCommand extends Command {
   /* Fancy double stuff for input + output to swerve. */
   private DoubleSupplier translationSup;
   private DoubleSupplier strafeSup;
-  private DoubleSupplier rotationSup;
+
+  double tolerance = 2;
 
   /* PID Things */
+ 
   private PIDController rotationController;
 
+  double desiredHeading;
+
+
+
   /** Creates a new GoalCentricCommand. */
-  public GoalCentricCommand(CommandSwerveDrivetrain swerve, DoubleSupplier t, DoubleSupplier s, DoubleSupplier r) {
+  public LockHeadingToTrap(CommandSwerveDrivetrain swerve, DoubleSupplier t, DoubleSupplier s, double desiredHeading) {
     this.swerve = swerve;
     this.translationSup = t;
     this.strafeSup = s;
-    this.rotationSup = r;
 
-    rotationController = new PIDController(Constants.SwerveConstants.headingKP, Constants.SwerveConstants.headingKI, Constants.SwerveConstants.headingKD);
+    this.desiredHeading = desiredHeading;
+
+    rotationController = new PIDController(SwerveConstants.headingKP, SwerveConstants.headingKI, SwerveConstants.headingKD);
+
+    rotationController.enableContinuousInput(-180, 180);
     addRequirements(this.swerve);
   }
-
+  
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stateHandler.setIsGoalCentric(true);
+  
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    
+
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
-    double rotValue = 0;
-    if  (stateHandler.getScoreInAmp() || stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer() || stateHandler.getScoreInTrap()){      //babyproofing from misclick
-      rotValue = MathUtil.applyDeadband(rotationSup.getAsDouble(), 0.1);
-    }
-    else if(Math.abs(rotationSup.getAsDouble()) > 0.5){
-      rotValue = rotationSup.getAsDouble();
-    } else if(stateHandler.getHasValidSpeakerTag()){
-      rotValue = rotationController.calculate(stateHandler.getxAngleOffset(), 0); 
-    } else{
-      rotValue = 0;
-    }
+    double rotValue = (desiredHeading == -1) ?  0 : rotationController.calculate(swerve.getGyroYaw().getDegrees(), desiredHeading);
 
     // SmartDashboard.putNumber("ROT VAL", rotValue);
 
@@ -84,6 +90,7 @@ public class GoalCentricCommand extends Command {
     
       swerve.setControl(drive.withSpeeds(chassisSpeeds));
     
+    
 
     
   }
@@ -92,12 +99,11 @@ public class GoalCentricCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    stateHandler.setIsGoalCentric(false);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;//stateHandler.getWantToPositionForSubwoofer() || stateHandler.getScoreInAmp() || stateHandler.getReverseSubwoofer();
+    return (Math.abs(swerve.getGyroYaw().getDegrees()- desiredHeading ) < Constants.SwerveConstants.headingOffsetThreshold);
   }
 }

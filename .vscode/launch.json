@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "LimelightSubsystem",
+      "request": "launch",
+      "mainClass": "frc.robot.subsystems.LimelightSubsystem",
+      "projectName": "Crescendo-2024"
+    },
+    {
+      "type": "java",
       "name": "PositionRPMData",
       "request": "launch",
       "mainClass": "frc.robot.lib.ShooterArmUtils.PositionRPMData",

@@ -6,6 +6,8 @@ package frc.robot.lib.SimUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.opencv.core.Point;
@@ -13,13 +15,20 @@ import org.opencv.core.Point;
 import com.ctre.phoenix6.Utils;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
+import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.FieldConstants;
+import frc.robot.Constants.LimeLightConstants;
+import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
@@ -66,6 +75,10 @@ public class SimulationSubsystem extends SubsystemBase {
   private Timer collectionTimer;
 
   private Timer shootTimer;
+
+  Integer[] list = {4 ,7, 11, 12, 13, 14, 15, 16};
+
+  private List<Integer> filteredIDs = Arrays.asList(list);
 
 
 
@@ -124,24 +137,108 @@ public class SimulationSubsystem extends SubsystemBase {
     isCollecting = collecting;
   }
 
-  public double simLLAngle(){
 
-    Point speaker = (DriverStation.getAlliance().get() == DriverStation.Alliance.Red) ? FieldConstants.redSpeakerPos : FieldConstants.blueSpeakerPos;
+  public int getSeenTagID(){
+    Pose2d currPose = stateHandler.getRobotPose();
 
-    double xDist = speaker.x - currentPose.getX();
-    double yDist =currentPose.getY() -  speaker.y;
+    int closestID = -1;
+    double closestDistance = Integer.MAX_VALUE;
 
-    double robotToSpeaker = Math.toDegrees(Math.atan(yDist/xDist));
+    AprilTag seven = LimelightInterface.getInstance().getAprilTagList().get(6);
 
-    double headingOffset = currentPose.getRotation().getDegrees();
 
-    double angle = (robotToSpeaker+headingOffset)%360;
+    if (!filteredIDs.contains(seven.ID)){
+        System.out.println("failed on ID");
 
-    return (Math.abs(angle)<30) ? angle : 100;
+      }
+
+      double angle = simLLAngleToPoint(seven.pose);
+      System.out.println(angle);
+      if (angle == 100){
+        System.out.println("Failed on angle");
+      }
+
+      double dist = seven.pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(),seven.pose.getZ()));
+
+      closestID = seven.ID;
+
+      
+      if (dist < closestDistance){
+        closestID = seven.ID;
+        closestDistance = dist;
+      }
+
+    // for (AprilTag a : LimelightInterface.getInstance().getAprilTagList()){
+
+    //   if (!filteredIDs.contains(a.ID)){
+    //     continue;
+    //   }
+
+     
+    //   double angle = simLLAngleToPoint(a.pose);
+
+    //   if (angle == 100){
+    //     continue;
+    //   }
+
+      
+
+    //   double dist = a.pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(),a.pose.getZ()));
+
+      
+    //   if (dist < closestDistance){
+    //     closestID = a.ID;
+    //     closestDistance = dist;
+    //   }
+    // }
+
+    return closestID;
+  }
+
+  public double simLLAngleToPoint(Pose3d aPose){
+
+
+    double theta = 0;
+
+
+    Rotation3d tagRotation = aPose.getRotation();
+
+    double rawHeading = Math.toDegrees(tagRotation.getZ());
+
+    if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+       theta = rawHeading;
+    }
+    else{
+
+      double calcedHeading = 180 + rawHeading;
+
+      if (calcedHeading>180){
+        calcedHeading = calcedHeading-360;
+      }
+
+      theta = 180 - calcedHeading; // because limelight is on the back
+    }
+
+    System.out.println(theta);
+
+    return (Math.abs(currentPose.getRotation().getDegrees()-theta) < 30) ? currentPose.getRotation().getDegrees()-theta : 100;
+
     
+    
+  }
+
+  
+
+  public double getDistFromRobotToPose(Pose3d pose){
+    Pose2d currPose = stateHandler.getRobotPose();
+
+    double dist = pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(), pose.getZ()));
 
 
-  } 
+    return Units.metersToInches(dist);
+  }
+
+
 
 
 

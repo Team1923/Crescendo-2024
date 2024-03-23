@@ -8,10 +8,14 @@ import com.ctre.phoenix6.Utils;
 import com.fasterxml.jackson.core.sym.Name;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathPlannerTrajectory.State;
+import com.pathplanner.lib.pathfinding.Pathfinding;
 
+import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Quaternion;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -57,10 +61,17 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+
+
+
     NamedCommands.registerCommand("DeployIntake", new AutoIntake());
     NamedCommands.registerCommand("ScoreGamePiece", new AutoScoreCommand());
     NamedCommands.registerCommand("wantSubwoofer", new AutoSetArmToSubwoofer());
     NamedCommands.registerCommand("wantRange", new AutoSetArmToRanged());
+
+    // for (AprilTag p : LimelightInterface.getInstance().getAprilTagList()){
+    //   System.out.println("ID: " + p.ID + " head: " + Math.toDegrees(p.pose.getRotation().getZ()));
+    // }
 
 
 

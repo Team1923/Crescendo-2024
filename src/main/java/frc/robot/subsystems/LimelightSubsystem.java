@@ -1,11 +1,20 @@
 package frc.robot.subsystems;
 
+import java.sql.Driver;
+import java.util.ArrayList;
+
 import org.opencv.core.Point;
 
 import com.ctre.phoenix6.Utils;
-
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 import com.ctre.phoenix6.Utils;
 
+import edu.wpi.first.apriltag.AprilTag;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Quaternion;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -67,67 +76,149 @@ public class LimelightSubsystem extends SubsystemBase {
   public void periodic() {
 
     if (Utils.isSimulation()){
-      
-      stateHandler.setxAngleOffset(SimulationSubsystem.getInstance().simLLAngle() == 100 ? 0 : SimulationSubsystem.getInstance().simLLAngle());
-      SmartDashboard.putNumber("Sim ll offset", stateHandler.getxAngleOffset());
+
+      SimulationSubsystem sim = SimulationSubsystem.getInstance();
+
+      stateHandler.setAprilTagID(sim.getSeenTagID());
+
+      if (stateHandler.getAprilTagID() != -1){
+
+        stateHandler.setLimelightHasTag(true);
+
+          Pose3d currentTag = LimelightInterface.getInstance().getAprilTagPose(stateHandler.getAprilTagID());
+          stateHandler.setxAngleOffset(sim.simLLAngleToPoint(currentTag));
+
+          if (stateHandler.getAprilTagID() == 4 || stateHandler.getAprilTagID() == 7){
+            stateHandler.setHasValidSpeakerTag(true);
+            stateHandler.setDistanceToSpeakerTag(sim.getDistFromRobotToPose(currentTag));
+
+            stateHandler.setHasValidAmpTag(false);
+            stateHandler.setHasValidTrapTag(false);
+          }
+          else if (stateHandler.getAprilTagID()>=11){
+            stateHandler.setHasValidTrapTag(true);
+            stateHandler.setDistanceToTrapTag(sim.getDistFromRobotToPose(currentTag));
+
+            stateHandler.setHasValidSpeakerTag(false);
+            stateHandler.setHasValidTrapTag(false);
+          }
+          else if (stateHandler.getAprilTagID() == 5 || stateHandler.getAprilTagID() == 6){
+
+            stateHandler.setHasValidAmpTag(true);
+
+
+            stateHandler.setHasValidSpeakerTag(false);
+            stateHandler.setHasValidTrapTag(false);
+          }
+
+          stateHandler.setCurrentTagPose(currentTag);
+
+
+      }
+      else{
+
+        stateHandler.setAprilTagID(-1);
+
+        stateHandler.setLimelightHasTag(false);
+        stateHandler.setHasValidAmpTag(false);
+        stateHandler.setHasValidSpeakerTag(false);
+        stateHandler.setHasValidTrapTag(false);
+        stateHandler.setIsCenteredToTag(false);
+
+        stateHandler.setCurrentTagPose(null);
+
+      }
+
+
+
+
+      stateHandler.setIsCenteredToTag(stateHandler.getxAngleOffset()!= 100 && Math.abs(stateHandler.getxAngleOffset()) <= LimeLightConstants.xAngleThreshold+1);
+
+
+
     }
     else{
+      stateHandler.setLimelightHasTag(limelight.hasValidTag());
+
+      stateHandler.setAprilTagID((int)limelight.getID());
       stateHandler.setxAngleOffset(limelight.getXAngleOffset());
 
-    }
-
-    if (Utils.isSimulation()){
-      stateHandler.setDistanceToSpeakerTag(calculateDistanceToCoveredSpeakerTag());
-    }
-    /* NOTE: inAutoOverride AND having a valid tag = optimized auto */
-    else if (DriverStation.isAutonomousEnabled() && !limelight.hasValidTag()) {
+      /* NOTE: inAutoOverride AND having a valid tag = optimized auto */
+      if (DriverStation.isAutonomousEnabled() && !limelight.hasValidTag()) {
       stateHandler.setCoveredSpeakerTagDistance(calculateDistanceToCoveredSpeakerTag());
-    } else {
+      }
+      else {
       stateHandler.setDistanceToSpeakerTag(calculateDistanceToSpeakerTag());
-    }
-    
-    stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());
-    stateHandler.setLimelightHasTag(limelight.hasValidTag());
-    stateHandler.setAprilTagID(limelight.getID());
+      }
 
-    if (Utils.isSimulation()){
-      stateHandler.setHasValidSpeakerTag(SimulationSubsystem.getInstance().simLLAngle() != 100);
-    }
-    else{
-        stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
+      stateHandler.setDistanceToTrapTag(calculateDistanceToTrapTag());
 
-    }
+      stateHandler.setHasValidSpeakerTag(limelight.hasSpeakerTag());
 
-    
-    stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
-    stateHandler.setHasValidTrapTag(limelight.hasTrapTag());
 
-    if (Utils.isSimulation()){
-      stateHandler.setIsCenteredToTag(stateHandler.getxAngleOffset()!= 100 && Math.abs(stateHandler.getxAngleOffset()) <= LimeLightConstants.xAngleThreshold+1);
-    }
-    else{
+      stateHandler.setHasValidAmpTag(limelight.hasAmpTag());
+      stateHandler.setHasValidTrapTag(limelight.hasTrapTag());
+
       stateHandler.setIsCenteredToTag(!stateHandler.getAutoOverride() ? Math.abs(limelight.getXAngleOffset()) <= LimeLightConstants.xAngleThreshold && limelight.hasValidTag() : true);
 
+
+      stateHandler.setCurrentTagPose(LimelightInterface.getInstance().getAprilTagPose());
+
     }
 
-    
+
 
     SmartDashboard.putNumber("Distance to Speaker April Tag", stateHandler.getDistanceToSpeakerTag());
     SmartDashboard.putNumber("Distance to Trap April Tag", stateHandler.getDistanceToTrapTag());
 
     SmartDashboard.putNumber("Covered Distance", this.calculateDistanceToCoveredSpeakerTag());
 
-    // SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
-    // SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
+    SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
+    SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
     // SmartDashboard.putNumber("Predicted Angle of Arm", rpmData.getDesiredArmPosition(stateHandler.getDistanceToSpeakerTag()));
     // SmartDashboard.putNumber("Predicted RPM of the Tag", rpmData.getDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag()));
-    // //SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
-    // //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
-    SmartDashboard.putNumber("X Angle Offset", limelight.getXAngleOffset());
+    //SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
+    //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
+    SmartDashboard.putNumber("X Angle Offset", stateHandler.getxAngleOffset());
     // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
       SmartDashboard.putBoolean("Centered to tag", stateHandler.getIsCenteredToTag());
 
   }
+
+
+  public static double getSeenTrapHeading(){
+
+    //trap tags are 11 through 16
+    if (!(StateHandler.getInstance().getAprilTagID()>=11)){
+      return -1;
+    }
+
+    Pose3d currentTagPose = StateHandler.getInstance().getCurrentTagPose();
+
+
+
+    Rotation3d tagRotation = currentTagPose.getRotation();
+
+    double rawHeading = Math.toDegrees(tagRotation.getZ());
+
+    if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+      return rawHeading;
+    }
+    else{
+
+      double calcedHeading = 180 + rawHeading;
+
+      if (calcedHeading>180){
+        calcedHeading = calcedHeading-360;
+      }
+
+      return 180 - calcedHeading;
+    }
+    
+
+  }
+
+
 
 
 }

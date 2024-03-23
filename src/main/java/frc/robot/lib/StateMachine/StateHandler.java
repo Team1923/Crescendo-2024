@@ -2,6 +2,7 @@ package frc.robot.lib.StateMachine;
 
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
@@ -37,7 +38,7 @@ public class StateHandler {
 
     /* Limelight */
     private boolean limelightHasTag = false;
-    private double aprilTagID = 0;
+    private int aprilTagID = 0;
     private boolean hasValidSpeakerTag = false;
     private boolean hasValidTrapTag = false;
     private boolean hasValidAmpTag = false;
@@ -81,6 +82,17 @@ public class StateHandler {
     private boolean autoOverride = false;
     private boolean pooPooPeePeeBB1Died = false;
     private Pose2d robotPose = new Pose2d();
+    private Pose3d currentTagPose = new Pose3d();
+
+    
+    public Pose3d getCurrentTagPose() {
+        return currentTagPose;
+    }
+
+    public void setCurrentTagPose(Pose3d currentTagPose) {
+        this.currentTagPose = currentTagPose;
+    }
+
     private double coveredSpeakerTagDistance = 0;
     
 
@@ -296,7 +308,7 @@ public class StateHandler {
      * 
      * @param aprilTagID The double value that sets the Tag ID.
      */
-    public void setAprilTagID(double aprilTagID) {
+    public void setAprilTagID(int aprilTagID) {
         this.aprilTagID = aprilTagID;
     }
 
@@ -305,7 +317,7 @@ public class StateHandler {
      * 
      * @return The double value of the TAG ID
      */
-    public double getAprilTagID() {
+    public int getAprilTagID() {
         return aprilTagID;
     }
 

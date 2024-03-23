@@ -6,6 +6,7 @@ package frc.robot.commands.swerve;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.LimeLightConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -29,7 +30,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class AlignAmp extends Command {
+public class MoveInLineWithTrap extends Command {
 
    private SwerveRequest.ApplyChassisSpeeds drive = new SwerveRequest.ApplyChassisSpeeds()
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
@@ -37,22 +38,31 @@ public class AlignAmp extends Command {
     // private final double kP = 0.002; // TODO: TUNE
     // private final double rotationDeadband = 0.001; // TODO: tune
 
+
     PIDController rotationController = new PIDController(SwerveConstants.headingKP, SwerveConstants.headingKI, SwerveConstants.headingKD);
     PIDController translationController = new PIDController(SwerveConstants.translationKP, SwerveConstants.translationKI, SwerveConstants.translationKD);
+    
 
+    LimelightInterface limelight = LimelightInterface.getInstance();
 
     private SlewRateLimiter rotateLimiter;
 
 
     private CommandSwerveDrivetrain s_Swerve;
     private DoubleSupplier strafeSup;
+
+    private double desiredHeading;
     
 
-    public AlignAmp(CommandSwerveDrivetrain s, DoubleSupplier strafeS){
+    public MoveInLineWithTrap(CommandSwerveDrivetrain s, DoubleSupplier strafeS, double desiredHeading){
         this.s_Swerve = s;
         this.strafeSup = strafeS;
 
+        this.desiredHeading = desiredHeading;
+
         rotationController.enableContinuousInput(-180, 180);
+
+        addRequirements(s_Swerve);
 
 
 
@@ -69,14 +79,13 @@ public class AlignAmp extends Command {
 
         
 
-        double translationVal = MathUtil.applyDeadband(translationController.calculate(StateHandler.getInstance().getxAngleOffset(), 0), 0.01);
+        double translationVal = MathUtil.applyDeadband(translationController.calculate(limelight.getXAngleOffset(), 0), 0.01);
 
         
-        double rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), (DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : 90);
+        double rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getDegrees(), desiredHeading);
 
 
-      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationVal * SwerveConstants.maxSpeed, 
-     strafeSup.getAsDouble()  * SwerveConstants.maxSpeed, 
+      ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromRobotRelativeSpeeds(strafeSup.getAsDouble()  * SwerveConstants.maxSpeed, translationVal * SwerveConstants.maxSpeed, 
       rotationVal * SwerveConstants.maxAngularRate, s_Swerve.getGyroYaw()); 
     
       s_Swerve.setControl(drive.withSpeeds(chassisSpeeds));
@@ -89,6 +98,6 @@ public class AlignAmp extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return (Math.abs(StateHandler.getInstance().getxAngleOffset()) < LimeLightConstants.xAngleThreshold);
     }
 }

@@ -34,9 +34,5 @@ public class FaceAndAlignToAmp extends SequentialCommandGroup {
     );
   }
 
-
-  public boolean isFacingAmp(){
-    return ll.hasAmpTag() && (Math.abs(ll.getXAngleOffset()) < tolerance);
-  }
   
 }

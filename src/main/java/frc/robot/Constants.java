@@ -28,6 +28,19 @@ public final class Constants {
     public static final class SwerveConstants {
         public static final double maxSpeed = TunerConstants.kSpeedAt12VoltsMps;
         public static final double maxAngularRate = (1.5 * Math.PI) * 8;
+
+
+        public static final double headingOffsetThreshold = 2;
+
+        public static final double headingKP = 0.0025;
+        public static final double headingKI = 0.000000;
+        public static final double headingKD = 0.0001;
+
+        public static final double translationKP = 0.0000;
+        public static final double translationKI = 0.000000;
+        public static final double translationKD = 0.0000;
+
+
     }
 
     public static final class LimeLightConstants {

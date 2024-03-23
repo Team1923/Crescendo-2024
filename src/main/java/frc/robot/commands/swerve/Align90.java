@@ -41,9 +41,7 @@ public class Align90 extends Command {
   double tolerance = 2;
 
   /* PID Things */
-  private final double kPTarget = 0.0027;
-  private final double kI = 0.000002;
-  private final double kD = 0.0002;
+ 
   private PIDController rotationController;
 
   /** Creates a new GoalCentricCommand. */
@@ -52,7 +50,7 @@ public class Align90 extends Command {
     this.translationSup = t;
     this.strafeSup = s;
 
-    rotationController = new PIDController(kPTarget, kI, kD);
+    rotationController = new PIDController(SwerveConstants.headingKP, SwerveConstants.headingKI, SwerveConstants.headingKD);
 
     rotationController.enableContinuousInput(-180, 180);
     addRequirements(this.swerve);
@@ -93,6 +91,6 @@ public class Align90 extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (Math.abs(((DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : 90)-swerve.getGyroYaw().getDegrees()) < tolerance);
   }
 }
