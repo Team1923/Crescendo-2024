@@ -200,7 +200,7 @@ public final class Constants {
 
         public static final double armPositionAllowableOffset = 0.03; // allowed radians offset
 
-        public static final double armPositionChange = -0.015;
+        public static final double armPositionChange = 0; //TODO: Tune at Lehigh!!!!
 
 
         public static final double armSettleTime = 0.7;

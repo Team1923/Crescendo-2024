@@ -30,8 +30,6 @@ public class AutoScoreCommand extends Command {
   @Override
   public void initialize() {
 
-   
-
     if (stateHandler.getScoreInAmp()) {
       stateHandler.setDesiredArmState(ArmStates.AMP);
     } else {
