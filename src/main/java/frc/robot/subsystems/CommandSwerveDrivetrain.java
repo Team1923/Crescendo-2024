@@ -40,6 +40,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     private Notifier m_simNotifier = null;
     private double m_lastSimTime;
     private boolean currentLimitsActivated = false;
+    StateHandler stateHandler = StateHandler.getInstance();
 
     private final SwerveRequest.ApplyChassisSpeeds AutoRequest = new SwerveRequest.ApplyChassisSpeeds();
 
@@ -203,7 +204,8 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     @Override
     public void periodic() {
-        StateHandler.getInstance().setRobotPose(this.m_odometry.getEstimatedPosition());
+        stateHandler.setRobotPose(this.m_odometry.getEstimatedPosition());
+        stateHandler.setCurrentRobotHeading(getGyroYaw().getDegrees());
         SmartDashboard.putNumber("Heading",getGyroYaw().getDegrees());
     }
 }

@@ -71,7 +71,8 @@ public class AlignHeading extends Command {
     if (stateHandler.getWantFrontAmp() || stateHandler.getScoreInAmp()) {
         desiredHeading = -90;
     } else if (stateHandler.getScoreInTrap()) {
-        desiredHeading = LimelightSubsystem.getSeenTrapHeading();
+        desiredHeading = LimelightSubsystem.roundToClosestHeading(stateHandler.getCurrentRobotHeading());
+        //desiredHeading = LimelightSubsystem.roundToClosestHeading2(stateHandler.getCurrentRobotHeading());
     }
    
   }

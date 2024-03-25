@@ -31,6 +31,9 @@ public class LimelightSubsystem extends SubsystemBase {
   LimelightInterface limelight = LimelightInterface.getInstance();
   StateHandler stateHandler = StateHandler.getInstance();
   PositionRPMData rpmData = PositionRPMData.getInstance();
+  static double[] headings = {0,120,-120};
+
+
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {}
 
@@ -188,6 +191,39 @@ public class LimelightSubsystem extends SubsystemBase {
 
   }
 
+
+  public static double roundToClosestHeading(double ang){
+    double remainder = ang % 360;
+
+    if(remainder > 180){
+      remainder -= 360;
+    }
+    else if(remainder < -180){
+      remainder += 360;
+    }
+
+    if(remainder >= -60 && remainder < 60){
+      return 0;
+    }
+    else if(remainder >= 60 && remainder < 180){
+      return 120;
+    }
+    else{
+      return -120;
+    }
+  }
+
+  // public static double roundToClosestHeading2(double ang){
+  //   double minDifference = Math.abs(headings[0] - ang);
+  //   int index = 0;
+  //   for(int i = 0; i< headings.length; i++){
+  //       if(Math.abs(headings[i] - ang) < minDifference){
+  //         index = i;
+  //         minDifference = Math.abs(headings[i] - ang);
+  //       }
+  //   }
+  //   return headings[index];
+  // }
 
   public static double getSeenTrapHeading(){
     //trap tags are 11 through 16

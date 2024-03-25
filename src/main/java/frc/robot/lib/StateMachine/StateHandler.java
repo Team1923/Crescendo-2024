@@ -50,14 +50,6 @@ public class StateHandler {
     private boolean wantGoalCentric = false;
     private double xAngleOffset = 0;
 
-    public double getxAngleOffset() {
-        return xAngleOffset;
-    }
-
-    public void setxAngleOffset(double xAngleOffset) {
-        this.xAngleOffset = xAngleOffset;
-    }
-
     /* Desired scoring */
     private boolean wantToPositionForSubwoofer = false;
     private boolean scoreInAmp = false;
@@ -89,8 +81,25 @@ public class StateHandler {
     private boolean pooPooPeePeeBB1Died = false;
     private Pose2d robotPose = new Pose2d();
     private Pose3d currentTagPose = new Pose3d();
+    private double currentRobotHeading = 0;
+
+    public double getCurrentRobotHeading(){
+        return currentRobotHeading;
+    }
+
+    public void setCurrentRobotHeading(double heading){
+        this.currentRobotHeading = heading;
+    }
 
     
+    public double getxAngleOffset() {
+        return xAngleOffset;
+    }
+
+    public void setxAngleOffset(double xAngleOffset) {
+        this.xAngleOffset = xAngleOffset;
+    }
+
     public double getBlowPower() {
         return blowPower;
     }

@@ -18,6 +18,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.4
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "ScoreCommandGroup"
@@ -27,6 +33,12 @@
           "type": "path",
           "data": {
             "pathName": "ASBetweenToOne"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.4
           }
         },
         {
@@ -42,6 +54,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.4
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "ScoreCommandGroup"
@@ -51,6 +69,12 @@
           "type": "path",
           "data": {
             "pathName": "ASTwoToThree"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.4
           }
         },
         {

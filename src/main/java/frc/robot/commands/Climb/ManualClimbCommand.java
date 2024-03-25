@@ -34,8 +34,12 @@ public class ManualClimbCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (stateHandler.getManuallyClimbing()){
+    double armPosition = stateHandler.getCurrentArmState().getArmPosition().getAngularSetpoint();
+    if (stateHandler.getManuallyClimbing() && Math.abs(input.getAsDouble()) > 0.1){
           armSubsystem.setPercentOut(input.getAsDouble());
+    }
+    else{
+      armSubsystem.setArmPosition(armPosition);
     }
     SmartDashboard.putNumber("Joystick Input", input.getAsDouble());
   }

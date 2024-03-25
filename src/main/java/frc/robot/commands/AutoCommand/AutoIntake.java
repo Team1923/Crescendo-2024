@@ -50,6 +50,7 @@ public class AutoIntake extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return hasPickedGP && stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+    // return hasPickedGP && stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+    return hasPickedGP && stateHandler.getBBThreeCovered();
   }
 }

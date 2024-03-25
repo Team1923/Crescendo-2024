@@ -32,10 +32,11 @@ public class AutoScoreCommand extends Command {
 
     if (stateHandler.getScoreInAmp()) {
       stateHandler.setDesiredArmState(ArmStates.AMP);
-    } else {
-      stateHandler.setDesiredArmState(ArmStates.SPEAKER);
-    }
-    inputTimer.start();
+    } 
+    // else {
+    //   stateHandler.setDesiredArmState(ArmStates.SPEAKER);
+    // }
+    // inputTimer.start();
     shotTimer.start();
  
   }
@@ -49,7 +50,8 @@ public class AutoScoreCommand extends Command {
 
     if (!stateHandler.getBBFourCovered()){
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
-
+      stateHandler.setDesiredArmState(ArmStates.SPEAKER);
+      inputTimer.start();
     }
 
     
