@@ -34,9 +34,9 @@ public class ManualClimbCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double armPosition = stateHandler.getCurrentArmState().getArmPosition().getAngularSetpoint();
+    double armPosition = armSubsystem.getArmPositionRads();
     if (stateHandler.getManuallyClimbing() && Math.abs(input.getAsDouble()) > 0.1){
-          armSubsystem.setPercentOut(input.getAsDouble());
+      armSubsystem.setPercentOut(input.getAsDouble());  
     }
     else{
       armSubsystem.setArmPosition(armPosition);
