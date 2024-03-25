@@ -32,6 +32,7 @@ public class ScoreGamePieceNoRanged extends Command {
     } else if(stateHandler.getWantFrontAmp()){
       stateHandler.setDesiredArmState(ArmStates.FRONT_AMP);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.FRONT_AMP_SHOT);
+      // stateHandler.setBlowPower(0.3);
     }
     else if (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()){
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
@@ -58,6 +59,7 @@ public class ScoreGamePieceNoRanged extends Command {
     stateHandler.setDesiredArmState(ArmStates.STOWED);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
+    // stateHandler.setBlowPower(0);
     frontAmpTimer.stop();
     frontAmpTimer.reset();
   }
