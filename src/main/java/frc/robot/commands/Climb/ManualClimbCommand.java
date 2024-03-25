@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.subsystems.ArmSubsystem;
 
 public class ManualClimbCommand extends Command {
@@ -16,6 +17,7 @@ public class ManualClimbCommand extends Command {
   ArmSubsystem armSubsystem;
   DoubleSupplier input;
   StateHandler stateHandler = StateHandler.getInstance();
+  double armPosition = ArmStates.CLIMB.getArmPosition().getAngularSetpoint();
 
   /** Creates a new ManualClimbCommand. */
   public ManualClimbCommand(ArmSubsystem arm, DoubleSupplier input) {
@@ -34,9 +36,9 @@ public class ManualClimbCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double armPosition = stateHandler.getCurrentArmState().getArmPosition().getAngularSetpoint();
     if (stateHandler.getManuallyClimbing() && Math.abs(input.getAsDouble()) > 0.1){
           armSubsystem.setPercentOut(input.getAsDouble());
+          armPosition = armSubsystem.getArmPositionRads();
     }
     else{
       armSubsystem.setArmPosition(armPosition);
