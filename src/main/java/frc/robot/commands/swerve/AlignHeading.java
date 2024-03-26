@@ -69,7 +69,7 @@ public class AlignHeading extends Command {
   @Override
   public void initialize() {
     if (stateHandler.getWantFrontAmp() || stateHandler.getScoreInAmp()) {
-        desiredHeading = -90;
+        desiredHeading = DriverStation.getAlliance().get() == Alliance.Blue ? -90 : 90;
     } else if (stateHandler.getScoreInTrap()) {
         desiredHeading = LimelightSubsystem.roundToClosestHeading(stateHandler.getCurrentRobotHeading());
         //desiredHeading = LimelightSubsystem.roundToClosestHeading2(stateHandler.getCurrentRobotHeading());

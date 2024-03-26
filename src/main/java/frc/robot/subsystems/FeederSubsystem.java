@@ -151,7 +151,8 @@ public class FeederSubsystem extends SubsystemBase {
 
     /* Case #6: Ungaurdable Shot */
     else if (stateHandler.getCurrentArmState() == ArmStates.UNGUARDABLE &&
-        stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.UNGUARDABLE_SHOT) {
+        stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.UNGUARDABLE_SHOT
+        && stateHandler.getOperatorInputTimingGood()) {
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 

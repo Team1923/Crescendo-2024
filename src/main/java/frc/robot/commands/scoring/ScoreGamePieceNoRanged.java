@@ -13,6 +13,7 @@ public class ScoreGamePieceNoRanged extends Command {
   
   StateHandler stateHandler = StateHandler.getInstance();
   private Timer frontAmpTimer = new Timer();
+  private Timer inputTimer = new Timer();
   /** Creates a new SpeakerPositionCommand. */
   public ScoreGamePieceNoRanged() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,15 +30,17 @@ public class ScoreGamePieceNoRanged extends Command {
     } else if(stateHandler.getWantUnguardable()){
       stateHandler.setDesiredArmState(ArmStates.UNGUARDABLE);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.UNGUARDABLE_SHOT);
+      stateHandler.setBlowPower(1);
     } else if(stateHandler.getWantFrontAmp()){
       stateHandler.setDesiredArmState(ArmStates.FRONT_AMP);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.FRONT_AMP_SHOT);
-      // stateHandler.setBlowPower(0.3);
+      stateHandler.setBlowPower(1);
     }
     else if (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer()){
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
     }
+    inputTimer.start();
  
   }
 
@@ -50,6 +53,10 @@ public class ScoreGamePieceNoRanged extends Command {
     if(!stateHandler.getBBThreeCovered()){
       frontAmpTimer.start();
     }
+
+    if(inputTimer.get() > 1){
+      stateHandler.setOperatorInputTimingGood(true);
+    }
   }
 
 
@@ -59,9 +66,12 @@ public class ScoreGamePieceNoRanged extends Command {
     stateHandler.setDesiredArmState(ArmStates.STOWED);
     stateHandler.setDesiredShootingSpeed(ShooterSpeeds.IDLE);
     stateHandler.setDesiredFeederSpeed(FeederSpeeds.OFF);
-    // stateHandler.setBlowPower(0);
+    stateHandler.setBlowPower(0);
     frontAmpTimer.stop();
     frontAmpTimer.reset();
+    inputTimer.stop();
+    inputTimer.reset();
+    stateHandler.setOperatorInputTimingGood(false);
   }
   
 

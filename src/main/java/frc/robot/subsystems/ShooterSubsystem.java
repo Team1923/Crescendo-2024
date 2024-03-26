@@ -245,7 +245,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /* Set the desired velocity of the shooter wheels. */
     if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT && stateHandler.getWantPunt()) {
-      setShooterPOut(0.85, 0.4); //adjust as needed
+      setShooterPOut(0.6, 0.6); //adjust as needed
       puntTimer.start();
     } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT && stateHandler.getWantUnguardable()){
       setVelocities(desiredShooterSpeed - 715, desiredShooterSpeed);
