@@ -192,7 +192,7 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
 
-  public static double roundToClosestHeading(double ang){
+  public static double roundToClosestTrapHeading(double ang){
     double remainder = ang % 360;
 
     if(remainder > 180){
@@ -210,6 +210,24 @@ public class LimelightSubsystem extends SubsystemBase {
     }
     else{
       return -120;
+    }
+  }
+
+  public static double roundToClosestClimbHeading(double ang){
+    double remainder = ang % 360;
+    if(remainder > 180){
+      remainder -= 360;
+    }
+    else if(remainder < -180){
+      remainder += 360;
+    }
+
+    if(remainder >= -120 && remainder < 0){
+      return -60;
+    } else if(remainder >= 0 && remainder < 120){
+      return 60;
+    } else {
+      return -180;
     }
   }
 

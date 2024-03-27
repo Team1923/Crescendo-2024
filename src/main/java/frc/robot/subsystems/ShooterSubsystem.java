@@ -244,10 +244,14 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     /* Set the desired velocity of the shooter wheels. */
-    if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT && stateHandler.getWantPunt()) {
+    if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT_HIGH && stateHandler.getWantPunt()) {
       setShooterPOut(0.6, 0.6); //adjust as needed
       puntTimer.start();
-    } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT && stateHandler.getWantUnguardable()){
+    } else if(desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT_LOW && stateHandler.getWantPunt()){
+      setShooterPOut(0.85, 0.4);
+      puntTimer.start();
+    }
+      else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT && stateHandler.getWantUnguardable()){
       setVelocities(desiredShooterSpeed - 715, desiredShooterSpeed);
     }
     else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && stateHandler.getScoreInTrap()){
@@ -258,8 +262,9 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     /* If tree to determine if the shooter is at the current shooter speed. */
-    if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT 
-      && desiredShooterSpeedState != ShooterSpeeds.UNGUARDABLE_SHOT && desiredShooterSpeedState != ShooterSpeeds.TRAP) {
+    if (isAtShooterSpeed(desiredShooterSpeed) && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT_LOW 
+      && desiredShooterSpeedState != ShooterSpeeds.PUNT_SHOT_HIGH && desiredShooterSpeedState != ShooterSpeeds.UNGUARDABLE_SHOT 
+      && desiredShooterSpeedState != ShooterSpeeds.TRAP) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if(desiredShooterSpeedState == ShooterSpeeds.UNGUARDABLE_SHOT 
       && isAtShooterSpeed(desiredShooterSpeed - 715, desiredShooterSpeed )) {
@@ -267,7 +272,7 @@ public class ShooterSubsystem extends SubsystemBase {
     } else if(desiredShooterSpeedState == ShooterSpeeds.TRAP 
     && isAtShooterSpeed(desiredShooterSpeed  - 500, desiredShooterSpeed)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
-    } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT) {
+    } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT_HIGH || desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT_LOW) {
       if (puntTimer.get() > 0.5) {
         stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
       }

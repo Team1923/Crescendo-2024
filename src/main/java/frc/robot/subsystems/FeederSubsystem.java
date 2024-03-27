@@ -144,10 +144,15 @@ public class FeederSubsystem extends SubsystemBase {
     }
 
     /* CASE #5: Punt Shot */
-    else if (stateHandler.getCurrentArmState() == ArmStates.PUNT &&
-        stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.PUNT_SHOT) {
+    else if (stateHandler.getCurrentArmState() == ArmStates.PUNT_HIGH &&
+        stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.PUNT_SHOT_HIGH) {
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
+
+    else if(stateHandler.getCurrentArmState() == ArmStates.PUNT_LOW &&
+        stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.PUNT_SHOT_LOW){
+          desiredFeederSpeed = FeederSpeeds.INWARD;
+        }
 
     /* Case #6: Ungaurdable Shot */
     else if (stateHandler.getCurrentArmState() == ArmStates.UNGUARDABLE &&

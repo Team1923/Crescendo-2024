@@ -71,8 +71,10 @@ public class AlignHeading extends Command {
     if (stateHandler.getWantFrontAmp() || stateHandler.getScoreInAmp()) {
         desiredHeading = DriverStation.getAlliance().get() == Alliance.Blue ? -90 : 90;
     } else if (stateHandler.getScoreInTrap()) {
-        desiredHeading = LimelightSubsystem.roundToClosestHeading(stateHandler.getCurrentRobotHeading());
+        desiredHeading = LimelightSubsystem.roundToClosestTrapHeading(stateHandler.getCurrentRobotHeading());
         //desiredHeading = LimelightSubsystem.roundToClosestHeading2(stateHandler.getCurrentRobotHeading());
+    } else if(stateHandler.getManuallyClimbing()){
+      desiredHeading = LimelightSubsystem.roundToClosestClimbHeading(stateHandler.getCurrentRobotHeading());
     }
    
   }
@@ -84,9 +86,11 @@ public class AlignHeading extends Command {
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
     double rotValue = (desiredHeading == -1) ?  0 : rotationController.calculate(swerve.getGyroYaw().getDegrees(), desiredHeading);
 
-    ChassisSpeeds chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
+    ChassisSpeeds chassisSpeeds = DriverStation.getAlliance().get() == Alliance.Blue ? ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
     strafeValue  * SwerveConstants.maxSpeed, 
-    rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()); 
+    rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()) : ChassisSpeeds.fromFieldRelativeSpeeds(-1 * translationValue * SwerveConstants.maxSpeed, 
+     -1* strafeValue  * SwerveConstants.maxSpeed, 
+    rotValue * SwerveConstants.maxAngularRate, swerve.getGyroYaw()) ; 
 
     swerve.setControl(drive.withSpeeds(chassisSpeeds));
   }

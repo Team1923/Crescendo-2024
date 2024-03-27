@@ -12,7 +12,8 @@ public class StateVariables {
         SPEAKER(new ArmPosition(-0.77)), //THIS IS A DEFAULT VALUE FOR SUBWOOFER SHOOTING - (-0.77)
         TRAP(new ArmPosition(-0.9)), //TODO: FIND
         BABY_BIRD(new ArmPosition(-0.7)), //TODO: FIND
-        PUNT(new ArmPosition(-0.72)),
+        PUNT_HIGH(new ArmPosition(-0.72)),
+        PUNT_LOW(new ArmPosition(0)),
         FRONT_AMP(new ArmPosition(-0.77)),
         CLIMB(new ArmPosition(-1.35));
 
@@ -49,7 +50,8 @@ public class StateVariables {
         FRONT_AMP_SHOT(new RPMValue(415)),
         UNGUARDABLE_SHOT(new RPMValue(1905)),
         TRAP(new RPMValue(1050)),
-        PUNT_SHOT(new RPMValue(1)), // this is a percent output value
+        PUNT_SHOT_HIGH(new RPMValue(1)), // this is a percent out
+        PUNT_SHOT_LOW(new RPMValue(1)), // this is a percent output value
         SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT (2000)
         
         private RPMValue rpmValue;

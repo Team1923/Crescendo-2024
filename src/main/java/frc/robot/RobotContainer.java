@@ -39,7 +39,7 @@ import frc.robot.commands.intake.BabyBird;
 import frc.robot.commands.intake.DeployIntakeCommand;
 import frc.robot.commands.intake.FullEjectCommand;
 import frc.robot.commands.intake.IntakeEjectCommand;
-import frc.robot.commands.intake.PuntShot;
+import frc.robot.commands.intake.PuntShotLow;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.commands.scoring.ScoreGamePieceNoRanged;
@@ -144,7 +144,8 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.squareButton).onTrue(new SetArmToFrontAmp());
     operatorPS4Controller.button(ControllerConstants.Operator.crossButton).onTrue(new SetArmToSubwoofer());
     operatorPS4Controller.button(Constants.ControllerConstants.Operator.circleButton).onTrue(new SetArmToReverseSubwoofer());
-    operatorPS4Controller.button(Constants.ControllerConstants.Operator.operatorRightTrigger).whileTrue(new PuntShot());
+    operatorPS4Controller.button(Constants.ControllerConstants.Operator.operatorRightTrigger).whileTrue(new PuntShotLow());
+    //find what left trigger is on operator controller and use that for high punt
     operatorPS4Controller.povUp().onTrue(new SetArmToTrap());
     
     

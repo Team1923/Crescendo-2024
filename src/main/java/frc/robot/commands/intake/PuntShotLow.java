@@ -10,10 +10,10 @@ import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
 
-public class PuntShot extends Command {
+public class PuntShotLow extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
   /** Creates a new PuntShot. */
-  public PuntShot() {
+  public PuntShotLow() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -21,8 +21,8 @@ public class PuntShot extends Command {
   @Override
   public void initialize() {
     stateHandler.setWantPunt(true);
-    stateHandler.setDesiredArmState(ArmStates.PUNT);
-    stateHandler.setDesiredShootingSpeed(ShooterSpeeds.PUNT_SHOT);
+    stateHandler.setDesiredArmState(ArmStates.PUNT_LOW);
+    stateHandler.setDesiredShootingSpeed(ShooterSpeeds.PUNT_SHOT_LOW);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -243,7 +243,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     /* CASE #1: running full emergency eject */
     if(stateHandler.getFullEject()){
-      rollerSpeed = -IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
+      rollerSpeed = IntakeRollerSpeeds.INTAKE.getPercentOutputValue().getPercentOut();
     }
     
     /* CASE #2: can only run intake rollers when eject conditions are satisfied */
