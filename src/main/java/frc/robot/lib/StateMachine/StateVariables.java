@@ -156,7 +156,7 @@ public class StateVariables {
      */
     public static enum FeederSpeeds {
         OFF(new PercentOutputValue(0)),
-        INWARD(new PercentOutputValue(0.25)),
+        INWARD(new PercentOutputValue(0.85)),
         OUTWARD(new PercentOutputValue(-0.8)),
         FORWARD(new PercentOutputValue(0.1)),
         BACKING(new PercentOutputValue(-0.1));

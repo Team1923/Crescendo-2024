@@ -60,6 +60,8 @@ public class ScoreGamePiece extends Command {
     if(!stateHandler.getBBThreeCovered()){
       trapTimer.start();
     }
+
+    
     
   }
 

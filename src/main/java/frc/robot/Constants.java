@@ -91,6 +91,7 @@ public final class Constants {
 
             public static final int operatorLeftBumper = 5;
             public static final int operatorRightBumper = 6;
+            public static final int operatorLeftTrigger = 7;
             public static final int operatorRightTrigger = 8;
         }
         
@@ -203,7 +204,7 @@ public final class Constants {
         public static final double armPositionChange = 0; //TODO: Tune at Lehigh!!!!
 
 
-        public static final double armSettleTime = 0.7;
+        public static final double armSettleTime = 0.8;
     }
 
     public static final class LEDConstants{
