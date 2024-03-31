@@ -58,6 +58,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
                 }
             }
         }
+
         
         configurePathPlanner();
         if (Utils.isSimulation()) {
@@ -125,6 +126,10 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
             //Apply the new current limit configuration.
             currentConfigurator.apply(customCurrentLimitConfigs);
             currentConfigurator.apply(torqueCurrentLimits);
+
+            // System.out.println(module.getDriveMotor().getConfigurator().);
+            // System.out.println("did something");
+
          }
     }
 

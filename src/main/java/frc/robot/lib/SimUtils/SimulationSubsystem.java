@@ -148,14 +148,14 @@ public class SimulationSubsystem extends SubsystemBase {
 
 
     if (!filteredIDs.contains(seven.ID)){
-        System.out.println("failed on ID");
+        // System.out.println("failed on ID");
 
       }
 
       double angle = simLLAngleToPoint(seven.pose);
-      System.out.println(angle);
+      // System.out.println(angle);
       if (angle == 100){
-        System.out.println("Failed on angle");
+        // System.out.println("Failed on angle");
       }
 
       double dist = seven.pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(),seven.pose.getZ()));
@@ -205,7 +205,7 @@ public class SimulationSubsystem extends SubsystemBase {
 
     double rawHeading = Math.toDegrees(tagRotation.getZ());
 
-    if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
        theta = rawHeading;
     }
     else{
@@ -219,7 +219,7 @@ public class SimulationSubsystem extends SubsystemBase {
       theta = 180 - calcedHeading; // because limelight is on the back
     }
 
-    System.out.println(theta);
+    // System.out.println(theta);
 
     return (Math.abs(currentPose.getRotation().getDegrees()-theta) < 30) ? currentPose.getRotation().getDegrees()-theta : 100;
 
