@@ -1,9 +1,7 @@
 package frc.robot.commands.AutoCommand;
 
-import com.ctre.phoenix6.Utils;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.lib.SimUtils.SimulationSubsystem;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;

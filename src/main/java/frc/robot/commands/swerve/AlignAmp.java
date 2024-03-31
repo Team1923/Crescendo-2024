@@ -4,17 +4,14 @@
 
 package frc.robot.commands.swerve;
 
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
+
 import frc.robot.Constants.SwerveConstants;
-import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import javax.swing.GroupLayout.Alignment;
+
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
@@ -22,11 +19,9 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class AlignAmp extends Command {

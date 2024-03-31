@@ -4,11 +4,8 @@
 
 package frc.robot.commands.AutoCommand;
 
-import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import frc.robot.commands.scoring.ScoreGamePiece;
 import frc.robot.commands.swerve.GoalCentricCommand;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
