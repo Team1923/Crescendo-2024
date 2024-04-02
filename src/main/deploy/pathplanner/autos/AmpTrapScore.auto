@@ -1,0 +1,79 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.490257266228818,
+      "y": 7.393954787909576
+    },
+    "rotation": 0.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASPreloadToBetween"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.4
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASBetweenToOne"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.4
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASOneToTwo"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.4
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TrapASTwoToThree"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
