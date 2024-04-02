@@ -28,6 +28,7 @@ import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
+import frc.robot.commands.swerve.AlignHeading;
 import frc.robot.generated.TunerConstants;
 import frc.robot.lib.StateMachine.StateHandler;
 
@@ -137,6 +138,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
         /*Have to do this here, because this needs to happen AFTER swerve subsystem is instantiated but BEFORE the autobuilder */
         NamedCommands.registerCommand("ScoreCommandGroup", new AutoScoreCommandGroup(this));
+        NamedCommands.registerCommand("AlignHeading", new AlignHeading(this, () -> 0, () -> 0));
         NamedCommands.registerCommand("NonAutoScoreCommandGroup", new GCScoreCommandGroup(this, () -> 0, () -> 0, () -> 0));
 
 

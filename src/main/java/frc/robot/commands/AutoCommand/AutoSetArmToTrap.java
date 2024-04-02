@@ -7,24 +7,20 @@ package frc.robot.commands.AutoCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;
 
-public class AutoSetArmToRanged extends Command {
+public class AutoSetArmToTrap extends Command {
   private StateHandler stateHandler = StateHandler.getInstance();
 
-  /** Creates a new SetArmToRanged. */
-  public AutoSetArmToRanged() {
+  /** Creates a new SetArmToSubwoofer. */
+  public AutoSetArmToTrap() {
     // Use addRequirements() here to declare subsystem dependencies.
-
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    stateHandler.setScoreInAmp(false);
     stateHandler.setScoreInSubwoofer(false);
-    stateHandler.setScoreInTrap(false);
-
-
+    stateHandler.setScoreInAmp(false);
+    stateHandler.setScoreInTrap(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

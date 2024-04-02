@@ -70,6 +70,31 @@
           "data": {
             "pathName": "TrapASTwoToThree"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "wantTrap"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlignHeading"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreGamePiece"
+                }
+              }
+            ]
+          }
         }
       ]
     }

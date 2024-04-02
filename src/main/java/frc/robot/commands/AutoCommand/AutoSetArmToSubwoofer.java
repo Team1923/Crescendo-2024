@@ -20,6 +20,7 @@ public class AutoSetArmToSubwoofer extends Command {
   public void initialize() {
     stateHandler.setScoreInSubwoofer(true);
     stateHandler.setScoreInAmp(false);
+    stateHandler.setScoreInTrap(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

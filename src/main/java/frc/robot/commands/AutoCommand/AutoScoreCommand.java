@@ -46,7 +46,13 @@ public class AutoScoreCommand extends Command {
       stateHandler.setDesiredFeederSpeed(FeederSpeeds.OUTWARD);
     }
 
-    if (!stateHandler.getBBFourCovered()){
+    if(!stateHandler.getBBFourCovered() && stateHandler.getScoreInTrap()){
+      stateHandler.setDesiredArmState(ArmStates.TRAP);
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.TRAP);
+      inputTimer.start();
+    }
+
+    if (!stateHandler.getBBFourCovered() && !stateHandler.getScoreInTrap()){
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
       inputTimer.start();
