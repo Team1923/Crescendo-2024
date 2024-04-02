@@ -4,7 +4,6 @@
 
 package frc.robot.commands.intake;
 
-import com.pathplanner.lib.path.PathPlannerTrajectory.State;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.StateMachine.StateHandler;

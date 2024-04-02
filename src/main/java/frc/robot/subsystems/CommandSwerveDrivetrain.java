@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.TorqueCurrentConfigs;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrain;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
@@ -57,6 +58,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
                 }
             }
         }
+
         
         configurePathPlanner();
         if (Utils.isSimulation()) {
@@ -96,6 +98,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         currentLimitsActivated = true;
         //Create a current configuration to use for the drive motor of each swerve module.
         var customCurrentLimitConfigs = new CurrentLimitsConfigs();
+        var torqueCurrentLimits = new TorqueCurrentConfigs();
 
         //Iterate through each module.
         for (var module : Modules) {
@@ -104,11 +107,14 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
             //Refresh the current configuration, since the stator current limit has already been set.
             currentConfigurator.refresh(customCurrentLimitConfigs);
+            currentConfigurator.refresh(torqueCurrentLimits);
 
             //Set all of the parameters related to the supply current.  The values should come from Constants.
 
             customCurrentLimitConfigs.StatorCurrentLimit = TunerConstants.kSwerveDriveStatorCurrentLimit;
             customCurrentLimitConfigs.StatorCurrentLimitEnable = TunerConstants.kSwerveStatorCurrentLimitEnable;
+            torqueCurrentLimits.PeakForwardTorqueCurrent = 60;
+            torqueCurrentLimits.PeakReverseTorqueCurrent = -60;
 
             // customCurrentLimitConfigs.SupplyCurrentLimit = SwerveConstants.kSwerveDriveSupplyCurrentLimit;
             // customCurrentLimitConfigs.SupplyCurrentLimitEnable = SwerveConstants.kSwerveDriveSupplyCurrentLimitEnable;
@@ -119,6 +125,11 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
             //Apply the new current limit configuration.
             currentConfigurator.apply(customCurrentLimitConfigs);
+            currentConfigurator.apply(torqueCurrentLimits);
+
+            // System.out.println(module.getDriveMotor().getConfigurator().);
+            // System.out.println("did something");
+
          }
     }
 
