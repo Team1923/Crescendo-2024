@@ -93,25 +93,25 @@ public class InfoSubsystem extends SubsystemBase {
 
   private SuppliedValueWidget<String> currentArmPosition = stateDashboard.addString("Current Arm Position", () -> stateHandler.getCurrentArmState().toString()).withPosition(0, 0);
   private SuppliedValueWidget<String> desiredArmPosition = stateDashboard.addString("Desired Arm Position", () -> stateHandler.getDesiredArmState().toString()).withPosition(0, 1);
-  private SuppliedValueWidget<String> currentIntakeWheelSpeeds = stateDashboard.addString("Current Intake Wheel Speeds", () -> stateHandler.getCurrentIntakeRollerSpeed().toString()).withPosition(1, 0);
-  private SuppliedValueWidget<String> desiredIntakeWheelSpeeds = stateDashboard.addString("Desired Intake Wheel Speeds", () -> stateHandler.getDesiredIntakeRollerSpeed().toString()).withPosition(1, 1);
-  private SuppliedValueWidget<String> currentIntakePosition = stateDashboard.addString("Current Intake Position", () -> stateHandler.getCurrentIntakeState().toString()).withPosition(2, 0);
-  private SuppliedValueWidget<String> desiredIntakePosition = stateDashboard.addString("Desired Intake Position", () -> stateHandler.getDesiredIntakeState().toString()).withPosition(2, 1);
+  // private SuppliedValueWidget<String> currentIntakeWheelSpeeds = stateDashboard.addString("Current Intake Wheel Speeds", () -> stateHandler.getCurrentIntakeRollerSpeed().toString()).withPosition(1, 0);
+  // private SuppliedValueWidget<String> desiredIntakeWheelSpeeds = stateDashboard.addString("Desired Intake Wheel Speeds", () -> stateHandler.getDesiredIntakeRollerSpeed().toString()).withPosition(1, 1);
+  // private SuppliedValueWidget<String> currentIntakePosition = stateDashboard.addString("Current Intake Position", () -> stateHandler.getCurrentIntakeState().toString()).withPosition(2, 0);
+  // private SuppliedValueWidget<String> desiredIntakePosition = stateDashboard.addString("Desired Intake Position", () -> stateHandler.getDesiredIntakeState().toString()).withPosition(2, 1);
   private SuppliedValueWidget<String> currentShooterSpeeds = stateDashboard.addString("Current Shooter Speed", () -> stateHandler.getCurrentShootingSpeed().toString()).withPosition(3, 0);
   private SuppliedValueWidget<String> desiredShooterSpeeds = stateDashboard.addString("Desired Shooter Speeds", () -> stateHandler.getDesiredShootingSpeed().toString()).withPosition(3, 1);
-  private SuppliedValueWidget<String> currentFeederSpeed = stateDashboard.addString("Current Feeder Speed", () -> stateHandler.getCurrentFeederSpeed().toString()).withPosition(4, 0);
-  private SuppliedValueWidget<String> desiredFeederSpeed = stateDashboard.addString("Desired Feeder Speed", () -> stateHandler.getDesiredFeederSpeed().toString()).withPosition(4, 1);
+  // private SuppliedValueWidget<String> currentFeederSpeed = stateDashboard.addString("Current Feeder Speed", () -> stateHandler.getCurrentFeederSpeed().toString()).withPosition(4, 0);
+  // private SuppliedValueWidget<String> desiredFeederSpeed = stateDashboard.addString("Desired Feeder Speed", () -> stateHandler.getDesiredFeederSpeed().toString()).withPosition(4, 1);
 
-  private SuppliedValueWidget<Boolean> bb1 = stateDashboard.addBoolean("BB ONE COVERED", () -> stateHandler.getBBOneCovered()).withPosition(0, 2);
-  private SuppliedValueWidget<Boolean> bb2 = stateDashboard.addBoolean("BB TWO COVERED", () -> stateHandler.getBBTwoCovered()).withPosition(1, 2);;
-  private SuppliedValueWidget<Boolean> bb3 = stateDashboard.addBoolean("BB THREE COVERED", () -> stateHandler.getBBThreeCovered()).withPosition(2, 2);;
-  private SuppliedValueWidget<Boolean> bb4 = stateDashboard.addBoolean("BB FOUR COVERED", () -> stateHandler.getBBFourCovered()).withPosition(3, 2);;
-  private SuppliedValueWidget<Boolean> bb1Dead = stateDashboard.addBoolean("BB ONE DEAD", () -> stateHandler.getBB1Dead()).withPosition(0, 3);;
+  // private SuppliedValueWidget<Boolean> bb1 = stateDashboard.addBoolean("BB ONE COVERED", () -> stateHandler.getBBOneCovered()).withPosition(0, 2);
+  // private SuppliedValueWidget<Boolean> bb2 = stateDashboard.addBoolean("BB TWO COVERED", () -> stateHandler.getBBTwoCovered()).withPosition(1, 2);;
+  // private SuppliedValueWidget<Boolean> bb3 = stateDashboard.addBoolean("BB THREE COVERED", () -> stateHandler.getBBThreeCovered()).withPosition(2, 2);;
+  // private SuppliedValueWidget<Boolean> bb4 = stateDashboard.addBoolean("BB FOUR COVERED", () -> stateHandler.getBBFourCovered()).withPosition(3, 2);;
+  // private SuppliedValueWidget<Boolean> bb1Dead = stateDashboard.addBoolean("BB ONE DEAD", () -> stateHandler.getBB1Dead()).withPosition(0, 3);;
 
-  private SuppliedValueWidget<Boolean> centeredToTag = stateDashboard.addBoolean("Centered To Tag", () -> stateHandler.getIsCenteredToTag()).withPosition(4, 3);
+  // private SuppliedValueWidget<Boolean> centeredToTag = stateDashboard.addBoolean("Centered To Tag", () -> stateHandler.getIsCenteredToTag()).withPosition(4, 3);
 
-  private SuppliedValueWidget<Double> positionData = stateDashboard.addDouble("Arm Data (Speaker)", () -> PositionRPMData.getInstance().getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag())).withPosition(6, 3);
-    private SuppliedValueWidget<Double> rpmData = stateDashboard.addDouble("RPM Data (Speaker)", () -> PositionRPMData.getInstance().getSpeakerDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag())).withPosition(7, 3);
+  // private SuppliedValueWidget<Double> positionData = stateDashboard.addDouble("Arm Data (Speaker)", () -> PositionRPMData.getInstance().getSpeakerDesiredArmPosition(stateHandler.getDistanceToSpeakerTag())).withPosition(6, 3);
+  //   private SuppliedValueWidget<Double> rpmData = stateDashboard.addDouble("RPM Data (Speaker)", () -> PositionRPMData.getInstance().getSpeakerDesiredShooterRPM(stateHandler.getDistanceToSpeakerTag())).withPosition(7, 3);
 
 
 

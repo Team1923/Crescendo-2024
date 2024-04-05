@@ -14,6 +14,7 @@ public class ScoreGamePiece extends Command {
   StateHandler stateHandler = StateHandler.getInstance();
   private Timer inputTimer = new Timer();
   private Timer trapTimer = new Timer();
+  private Timer trapTimer2 = new Timer();
  
   /** Creates a new SpeakerPositionCommand. */
   public ScoreGamePiece() {
@@ -47,9 +48,19 @@ public class ScoreGamePiece extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if (inputTimer.get() > Constants.ArmConstants.armSettleTime) {
+ 
+    if (inputTimer.get() > Constants.ArmConstants.armSettleTime && !stateHandler.getScoreInTrap()) {
       stateHandler.setOperatorInputTimingGood(true);
+    }
+
+    if(stateHandler.getCurrentArmState() == ArmStates.TRAP){
+      trapTimer2.start();
+    }
+
+    if(stateHandler.getScoreInTrap()){
+      if(inputTimer.get() > Constants.ArmConstants.armSettleTime && trapTimer2.get() > 0.5){
+        stateHandler.setOperatorInputTimingGood(true);
+      }
     }
 
     if (stateHandler.getCurrentArmState() == ArmStates.AMP) {
@@ -76,6 +87,8 @@ public class ScoreGamePiece extends Command {
     inputTimer.reset();
     trapTimer.stop();
     trapTimer.reset();
+    trapTimer2.stop();
+    trapTimer2.reset();
     stateHandler.setOperatorInputTimingGood(false);
   }
   
@@ -88,7 +101,7 @@ public class ScoreGamePiece extends Command {
     if (stateHandler.getScoreInAmp()) {
       return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered();
     } else if(stateHandler.getScoreInTrap()){
-      return trapTimer.get() > 7 && !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
+      return  trapTimer.get() > 7 && !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
     }
     else {
       return !stateHandler.getBBTwoCovered() && !stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();

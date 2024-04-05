@@ -174,7 +174,7 @@ public class LimelightSubsystem extends SubsystemBase {
    // SmartDashboard.putNumber("Distance to Speaker April Tag", stateHandler.getDistanceToSpeakerTag());
    // SmartDashboard.putNumber("Distance to Trap April Tag", stateHandler.getDistanceToTrapTag());
 
-    SmartDashboard.putNumber("Covered Distance", this.calculateDistanceToCoveredSpeakerTag());
+    // SmartDashboard.putNumber("Covered Distance", this.calculateDistanceToCoveredSpeakerTag());
 
     //SmartDashboard.putBoolean("Has Valid April Tag", stateHandler.getLimelightHasTag());
     //SmartDashboard.putNumber("April Tag ID", stateHandler.getAprilTagID());
@@ -184,9 +184,9 @@ public class LimelightSubsystem extends SubsystemBase {
     //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
     //SmartDashboard.putNumber("X Angle Offset", stateHandler.getxAngleOffset());
     // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
-      SmartDashboard.putBoolean("Centered to tag", stateHandler.getIsCenteredToTag());
+      // SmartDashboard.putBoolean("Centered to tag", stateHandler.getIsCenteredToTag());
 
-      SmartDashboard.putNumber("calc trap heading", getSeenTrapHeading());
+      // SmartDashboard.putNumber("calc trap heading", getSeenTrapHeading());
       
 
   }

@@ -50,7 +50,7 @@ public class PositionRPMData {
         speakerPositionRPMMap.put(151.5, new PositionRPMObject(-0.240 + ArmConstants.armPositionChange, 3500));
         speakerPositionRPMMap.put(156.4, new PositionRPMObject(-0.230 + ArmConstants.armPositionChange, 3500));
         speakerPositionRPMMap.put(161.7, new PositionRPMObject(-0.215 + ArmConstants.armPositionChange, 3650));
-        speakerPositionRPMMap.put(167.6, new PositionRPMObject(-0.2125 + ArmConstants.armPositionChange, 3650));
+        speakerPositionRPMMap.put(167.6, new PositionRPMObject(-0.2125 + ArmConstants.armPositionChange, 3700));
         speakerPositionRPMMap.put(172.1, new PositionRPMObject(-0.2025 + ArmConstants.armPositionChange, 3700));
         speakerPositionRPMMap.put(176.3, new PositionRPMObject(-0.188 + 1.2*ArmConstants.armPositionChange, 3750));
         speakerPositionRPMMap.put(179.3, new PositionRPMObject(-0.1775 + 1.2*ArmConstants.armPositionChange, 3800));

@@ -22,12 +22,6 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.4
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "ScoreCommandGroup"
@@ -54,12 +48,6 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.4
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "ScoreCommandGroup"
@@ -85,12 +73,6 @@
           "type": "sequential",
           "data": {
             "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.4
-                }
-              },
               {
                 "type": "named",
                 "data": {

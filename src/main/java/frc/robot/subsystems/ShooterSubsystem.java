@@ -204,8 +204,8 @@ public class ShooterSubsystem extends SubsystemBase {
       stateHandler.setBBFourCovered(getBeamBreakFour());
     }
 
-    SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
-    SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
+    // SmartDashboard.putNumber("RPM TOP SHOOTER", getTopRPM());
+    // SmartDashboard.putNumber("RPM BOTTOM SHOOTER", getBottomRPM());
 
     /* Pull the desired shooter state + numerical value from the State Handler */
     ShooterSpeeds desiredShooterSpeedState = stateHandler.getDesiredShootingSpeed();
@@ -255,7 +255,7 @@ public class ShooterSubsystem extends SubsystemBase {
       setVelocities(desiredShooterSpeed - 715, desiredShooterSpeed);
     }
     else if(desiredShooterSpeedState == ShooterSpeeds.TRAP && stateHandler.getScoreInTrap()){
-      setVelocities(desiredShooterSpeed - 500, desiredShooterSpeed);
+      setVelocities(desiredShooterSpeed - 350, desiredShooterSpeed);
     }
     else {
       setVelocities(desiredShooterSpeed, desiredShooterSpeed);
@@ -270,7 +270,7 @@ public class ShooterSubsystem extends SubsystemBase {
       && isAtShooterSpeed(desiredShooterSpeed - 715, desiredShooterSpeed )) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if(desiredShooterSpeedState == ShooterSpeeds.TRAP 
-    && isAtShooterSpeed(desiredShooterSpeed  - 500, desiredShooterSpeed)) {
+    && isAtShooterSpeed(desiredShooterSpeed  - 350, desiredShooterSpeed)) {
       stateHandler.setCurrentShootingSpeed(desiredShooterSpeedState);
     } else if (desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT_HIGH || desiredShooterSpeedState == ShooterSpeeds.PUNT_SHOT_LOW) {
       if (puntTimer.get() > 0.5) {

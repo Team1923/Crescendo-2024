@@ -48,6 +48,8 @@ public class Robot extends TimedRobot {
 
   StateHandler stateHandler = StateHandler.getInstance();
 
+
+
   SimulationSubsystem sim;
 
   /* Chooser Initialization */
@@ -83,6 +85,7 @@ public class Robot extends TimedRobot {
 
 
     CameraServer.startAutomaticCapture();
+   
 
 
 
@@ -103,6 +106,8 @@ public class Robot extends TimedRobot {
     if (Utils.isSimulation()){
           sim.updatePose(m_robotContainer.drivetrain.getState().Pose);
     }
+
+
     
   }
 
