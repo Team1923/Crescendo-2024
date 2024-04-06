@@ -188,7 +188,11 @@ public class FeederSubsystem extends SubsystemBase {
         && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
       if (stateHandler.getBBFourCovered()) {
         desiredFeederSpeed = FeederSpeeds.BACKING;
-      } else if (!stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() != ArmStates.AMP) {
+      } 
+      else if(!stateHandler.getBBThreeCovered() && stateHandler.getBBTwoCovered()){
+        desiredFeederSpeed = FeederSpeeds.FORWARD;
+      }
+      else if (!stateHandler.getBBFourCovered() && stateHandler.getCurrentArmState() != ArmStates.AMP) {
         desiredFeederSpeed = FeederSpeeds.OFF;
       }
     }

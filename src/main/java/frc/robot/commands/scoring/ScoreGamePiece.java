@@ -40,7 +40,10 @@ public class ScoreGamePiece extends Command {
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
     }
 
-    inputTimer.start();
+    if (stateHandler.getScoreInTrap()){
+      inputTimer.start();
+
+    }
     
  
   }
@@ -48,10 +51,16 @@ public class ScoreGamePiece extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
- 
-    if (inputTimer.get() > Constants.ArmConstants.armSettleTime && !stateHandler.getScoreInTrap()) {
+
+    if(stateHandler.getIsCenteredToTag() && !stateHandler.getScoreInTrap()){
+      inputTimer.start();
+    }
+  
+
+    if (inputTimer.get() > Constants.ArmConstants.armSettleTime && !stateHandler.getScoreInTrap() ) {
       stateHandler.setOperatorInputTimingGood(true);
     }
+
 
     if(stateHandler.getCurrentArmState() == ArmStates.TRAP){
       trapTimer2.start();

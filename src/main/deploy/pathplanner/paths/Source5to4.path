@@ -3,25 +3,57 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.0,
-        "y": 2.7831517126448895
+        "x": 3.302430313822473,
+        "y": 3.139491354404182
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.2419210239766585,
-        "y": 1.3863495889535697
+        "x": 4.329502891481382,
+        "y": 0.9979357669451807
       },
       "isLocked": false,
       "linkedName": "Source3"
     },
     {
       "anchor": {
-        "x": 8.190165843746321,
-        "y": 2.3426528804277127
+        "x": 7.927899014626778,
+        "y": 2.360081667811961
       },
       "prevControl": {
-        "x": 7.235751707275773,
-        "y": 0.9944594848539301
+        "x": 7.266857621559076,
+        "y": 2.222592342256557
+      },
+      "nextControl": {
+        "x": 8.58894040769448,
+        "y": 2.4975709933673644
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.64065937359923,
+        "y": 1.7700612508532527
+      },
+      "prevControl": {
+        "x": 6.828325857184171,
+        "y": 1.8758529131907922
+      },
+      "nextControl": {
+        "x": 4.452992890014289,
+        "y": 1.6642695885157133
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.302430313822473,
+        "y": 3.0156599088651213
+      },
+      "prevControl": {
+        "x": 3.703061461136232,
+        "y": 2.68058658565725
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,7 +62,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.35,
+      "waypointRelativePos": 0.8999999999999999,
       "rotationDegrees": 22.165942922962273,
       "rotateFast": false
     }
@@ -39,7 +71,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.4,
+      "waypointRelativePos": 0.6000000000000001,
       "command": {
         "type": "parallel",
         "data": {
@@ -63,7 +95,7 @@
   },
   "goalEndState": {
     "velocity": 2.0,
-    "rotation": 44.39690880561939,
+    "rotation": -43.492564241225004,
     "rotateFast": false
   },
   "reversed": false,

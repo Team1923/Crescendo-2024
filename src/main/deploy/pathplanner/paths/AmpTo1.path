@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 2.8909454969907094,
-        "y": 6.987913292899757
+        "y": 7.007402976651561
       },
       "prevControl": null,
       "nextControl": {
         "x": 3.7463644840064227,
-        "y": 7.192580055270759
+        "y": 7.212069739022564
       },
       "isLocked": false,
       "linkedName": "SubAmp"
@@ -73,9 +73,9 @@
   ],
   "globalConstraints": {
     "maxVelocity": 5.2,
-    "maxAcceleration": 5.0,
-    "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 500.0,
+    "maxAngularAcceleration": 680.0
   },
   "goalEndState": {
     "velocity": 0,

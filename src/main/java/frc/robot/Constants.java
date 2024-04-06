@@ -204,7 +204,7 @@ public final class Constants {
         public static final double armPositionChange = 0; //TODO: Tune at Lehigh!!!!
 
 
-        public static final double armSettleTime = 0.8;
+        public static final double armSettleTime = 0.5;
     }
 
     public static final class LEDConstants{

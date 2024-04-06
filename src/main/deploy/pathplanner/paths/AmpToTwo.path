@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9856669430319993,
-        "y": 6.408148064723802
+        "x": 2.8909454969907094,
+        "y": 7.007402976651561
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.189484378968758,
-        "y": 6.487717261148808
+        "x": 3.8909454969907094,
+        "y": 7.007402976651561
       },
       "isLocked": false,
-      "linkedName": "AmpSecondShot"
+      "linkedName": "SubAmp"
     },
     {
       "anchor": {
-        "x": 8.328530161940536,
-        "y": 4.181132337419954
+        "x": 7.957035825340506,
+        "y": 5.922056777565197
       },
       "prevControl": {
-        "x": 7.923572654485554,
-        "y": 4.773458243846647
+        "x": 8.012696239701997,
+        "y": 6.7316628046414415
       },
       "nextControl": {
-        "x": 8.816571741395478,
-        "y": 3.46728047493362
+        "x": 7.876909595877755,
+        "y": 4.756584349016081
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.03,
-        "y": 4.96
+        "x": 3.965292757559783,
+        "y": 5.288331144541614
       },
       "prevControl": {
-        "x": 5.262890525781052,
-        "y": 3.9032620922384704
+        "x": 5.1817546048579235,
+        "y": 3.5619751097532366
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,23 +46,18 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.2,
-      "rotationDegrees": -61.94570758308669,
+      "waypointRelativePos": 1,
+      "rotationDegrees": -23.83874018317158,
       "rotateFast": true
-    },
-    {
-      "waypointRelativePos": 0.3,
-      "rotationDegrees": -30.716159972505668,
-      "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake",
-      "waypointRelativePos": 0.2,
+      "name": "deploy",
+      "waypointRelativePos": 0.35,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
@@ -78,17 +73,20 @@
   ],
   "globalConstraints": {
     "maxVelocity": 5.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": -13.867819009338684,
+    "velocity": 0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "AmpSideMidLine",
-  "previewStartingState": null,
+  "folder": "5PieceSub",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
   "useDefaultConstraints": false
 }

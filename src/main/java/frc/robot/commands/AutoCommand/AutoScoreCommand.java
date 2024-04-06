@@ -52,7 +52,7 @@ public class AutoScoreCommand extends Command {
       inputTimer.start();
     }
 
-    if (!stateHandler.getBBFourCovered() && !stateHandler.getScoreInTrap()){
+    if (!stateHandler.getBBFourCovered() && !stateHandler.getScoreInTrap() && stateHandler.getIsCenteredToTag()){
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
       inputTimer.start();

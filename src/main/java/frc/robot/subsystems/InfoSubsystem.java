@@ -102,10 +102,10 @@ public class InfoSubsystem extends SubsystemBase {
   // private SuppliedValueWidget<String> currentFeederSpeed = stateDashboard.addString("Current Feeder Speed", () -> stateHandler.getCurrentFeederSpeed().toString()).withPosition(4, 0);
   // private SuppliedValueWidget<String> desiredFeederSpeed = stateDashboard.addString("Desired Feeder Speed", () -> stateHandler.getDesiredFeederSpeed().toString()).withPosition(4, 1);
 
-  // private SuppliedValueWidget<Boolean> bb1 = stateDashboard.addBoolean("BB ONE COVERED", () -> stateHandler.getBBOneCovered()).withPosition(0, 2);
-  // private SuppliedValueWidget<Boolean> bb2 = stateDashboard.addBoolean("BB TWO COVERED", () -> stateHandler.getBBTwoCovered()).withPosition(1, 2);;
-  // private SuppliedValueWidget<Boolean> bb3 = stateDashboard.addBoolean("BB THREE COVERED", () -> stateHandler.getBBThreeCovered()).withPosition(2, 2);;
-  // private SuppliedValueWidget<Boolean> bb4 = stateDashboard.addBoolean("BB FOUR COVERED", () -> stateHandler.getBBFourCovered()).withPosition(3, 2);;
+  private SuppliedValueWidget<Boolean> bb1 = stateDashboard.addBoolean("BB ONE COVERED", () -> stateHandler.getBBOneCovered()).withPosition(0, 2);
+  private SuppliedValueWidget<Boolean> bb2 = stateDashboard.addBoolean("BB TWO COVERED", () -> stateHandler.getBBTwoCovered()).withPosition(1, 2);;
+  private SuppliedValueWidget<Boolean> bb3 = stateDashboard.addBoolean("BB THREE COVERED", () -> stateHandler.getBBThreeCovered()).withPosition(2, 2);;
+  private SuppliedValueWidget<Boolean> bb4 = stateDashboard.addBoolean("BB FOUR COVERED", () -> stateHandler.getBBFourCovered()).withPosition(3, 2);;
   // private SuppliedValueWidget<Boolean> bb1Dead = stateDashboard.addBoolean("BB ONE DEAD", () -> stateHandler.getBB1Dead()).withPosition(0, 3);;
 
   // private SuppliedValueWidget<Boolean> centeredToTag = stateDashboard.addBoolean("Centered To Tag", () -> stateHandler.getIsCenteredToTag()).withPosition(4, 3);
