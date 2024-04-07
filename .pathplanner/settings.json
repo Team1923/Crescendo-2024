@@ -10,10 +10,12 @@
     "6Piece",
     "6PieceSubOptimzied",
     "AmpSideMidLine",
+    "AmpTrap",
     "MidLineShove",
-    "AmpTrap"
+    "CenterLine"
   ],
   "autoFolders": [
+    "CenterAutos",
     "SmallerPaths"
   ],
   "defaultMaxVel": 3.0,
