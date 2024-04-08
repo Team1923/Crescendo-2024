@@ -15,7 +15,8 @@ public class StateVariables {
         PUNT_HIGH(new ArmPosition(-0.72)),
         PUNT_LOW(new ArmPosition(0)),
         FRONT_AMP(new ArmPosition(-0.77)),
-        CLIMB(new ArmPosition(-1.35));
+        CLIMB(new ArmPosition(-1.35)),
+        PRERAISED(new ArmPosition(-0.0)); //try -0.1, since this is lower than our lowest posrpm?
 
         private ArmPosition armPosition;
 

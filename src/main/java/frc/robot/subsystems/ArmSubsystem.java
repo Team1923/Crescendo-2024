@@ -17,6 +17,7 @@ import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
+import frc.robot.lib.StateMachine.StateVariables.IntakeStates;
 
 public class ArmSubsystem extends SubsystemBase {
   /* Helper class instantiations to get useful data from the robot. */
@@ -237,6 +238,10 @@ public class ArmSubsystem extends SubsystemBase {
         armSetpoint = getArmPositionRads();
       }
     }
+    /* CASE #3: pre-raising arm when having a gamepiece */
+    // else if (stateHandler.getBBThreeCovered() && desiredArmState == ArmStates.STOWED && stateHandler.getDesiredIntakeState() == IntakeStates.STOWED){
+    //   armSetpoint = ArmStates.PRERAISED.getArmPosition().getAngularSetpoint();
+    // }
    
     /* Set the arm condition - NOTE: do not do this when manually climbing! */
     if (!stateHandler.getManuallyClimbing()) {
