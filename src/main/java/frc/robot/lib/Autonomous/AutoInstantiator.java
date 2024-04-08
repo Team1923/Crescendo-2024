@@ -31,6 +31,19 @@ public class AutoInstantiator {
 
 	public PathPlannerAuto fourAmpTrap;
 
+	/*
+	 * Different 4 Center Note Autos
+	 */
+
+	 public PathPlannerAuto fourCenterLMR;
+	 public PathPlannerAuto fourCenterLRM;
+	 public PathPlannerAuto fourCenterMRL;
+	 public PathPlannerAuto fourCenterMLR;
+	 public PathPlannerAuto fourCenterRLM;
+	 public PathPlannerAuto fourCenterRML;
+
+
+
 	public static synchronized AutoInstantiator getInstance() {
 		if (autoInstantiator == null) {
 			autoInstantiator = new AutoInstantiator();
@@ -43,20 +56,11 @@ public class AutoInstantiator {
 
 		straight4MetersAuto = new PathPlannerAuto("Auto4Meters");
 
-		// twoSub = new PathPlannerAuto("2GPSub");
-		// threeSub = new PathPlannerAuto("3GPSub");
-		// fourSub = new PathPlannerAuto("4GPSub");
 		fiveSub = new PathPlannerAuto("5GPSub");
-		// sixSub = new PathPlannerAuto("6GPSub");
+
 
 		sixOptimized = new PathPlannerAuto("6GPSubOptimized");
-		
 
-		// fiveMid = new PathPlannerAuto("5GPMid");
-
-		// fourFar = new PathPlannerAuto("4GPFar");
-		
-		// threeMid = new PathPlannerAuto("3GPMid");
 
 		fourSource = new PathPlannerAuto("4SourceSide");
 
@@ -64,6 +68,40 @@ public class AutoInstantiator {
 		midLineShove = new PathPlannerAuto("MidLineShove");
 		fourAmpTrap = new PathPlannerAuto("AmpTrap");
 
+		/*
+		 * Center Autos
+		 */
+	 fourCenterLMR = new PathPlannerAuto("LMR");
+	 fourCenterLRM = new PathPlannerAuto("LRM");
+	 fourCenterMRL = new PathPlannerAuto("MRL");
+	 fourCenterMLR = new PathPlannerAuto("MLR");
+	 fourCenterRLM = new PathPlannerAuto("RLM");
+	 fourCenterRML = new PathPlannerAuto("RML");
+
+	}
+
+	public PathPlannerAuto getFourCenterLMR() {
+		return fourCenterLMR;
+	}
+
+	public PathPlannerAuto getFourCenterLRM() {
+		return fourCenterLRM;
+	}
+
+	public PathPlannerAuto getFourCenterMRL() {
+		return fourCenterMRL;
+	}
+
+	public PathPlannerAuto getFourCenterMLR() {
+		return fourCenterMLR;
+	}
+
+	public PathPlannerAuto getFourCenterRLM() {
+		return fourCenterRLM;
+	}
+
+	public PathPlannerAuto getFourCenterRML() {
+		return fourCenterRML;
 	}
 
 	public PathPlannerAuto getFourAmpTrap() {
