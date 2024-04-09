@@ -2,19 +2,37 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.481379644214479,
-      "y": 1.4786931437216908
+      "x": 0.876790821904625,
+      "y": 4.5380582686631215
     },
-    "rotation": 0
+    "rotation": -60.39554925399506
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "wantSubwoofer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "wantRange"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "SourcePreload"
+            "pathName": "SourcePreloadTo5"
           }
         },
         {
@@ -41,6 +59,18 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Source5to3"
           }
         },
         {

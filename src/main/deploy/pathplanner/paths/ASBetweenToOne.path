@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.067271595053863,
+        "x": 4.04,
         "y": 6.366393140944856
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.244388736325183,
+        "x": 5.21711714127132,
         "y": 6.684172393292319
       },
       "isLocked": false,
-      "linkedName": "AmpPreload"
+      "linkedName": "ASLocShoot"
     },
     {
       "anchor": {
@@ -32,16 +32,16 @@
     },
     {
       "anchor": {
-        "x": 3.775903487920552,
-        "y": 6.453803573090732
+        "x": 4.04,
+        "y": 6.366393140944856
       },
       "prevControl": {
-        "x": 4.685715524169565,
-        "y": 6.646526323943935
+        "x": 4.949812036249012,
+        "y": 6.55911589179806
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "AmpFirstShot"
+      "linkedName": "ASLocShoot"
     }
   ],
   "rotationTargets": [],

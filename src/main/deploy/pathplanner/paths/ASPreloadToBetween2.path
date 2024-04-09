@@ -32,16 +32,16 @@
     },
     {
       "anchor": {
-        "x": 4.067271595053863,
+        "x": 4.04,
         "y": 6.366393140944856
       },
       "prevControl": {
-        "x": 4.067271595053863,
+        "x": 4.04,
         "y": 6.385989985694101
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "AmpPreload"
+      "linkedName": "ASLocShoot"
     }
   ],
   "rotationTargets": [

@@ -34,6 +34,8 @@ public class AutoIntake extends Command {
       hasPickedGP = true;
    }
 
+   
+
   }
 
   // Called once the command ends or is interrupted.
@@ -49,6 +51,6 @@ public class AutoIntake extends Command {
   @Override
   public boolean isFinished() {
     // return hasPickedGP && stateHandler.getBBThreeCovered() && !stateHandler.getBBFourCovered();
-    return hasPickedGP && stateHandler.getBBThreeCovered();
+    return  hasPickedGP && stateHandler.getBBThreeCovered();
   }
 }

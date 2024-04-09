@@ -193,7 +193,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Raw Postion ARM Primary ", armPrimary.getPosition().getValueAsDouble());
     // SmartDashboard.putNumber("Raw Postion ARM Follower ", armFollower.getPosition().getValueAsDouble());
 
     /* Begin by pulling the desires arm state from State Handler */
@@ -239,9 +239,7 @@ public class ArmSubsystem extends SubsystemBase {
       }
     }
     /* CASE #3: pre-raising arm when having a gamepiece */
-    // else if (stateHandler.getBBThreeCovered() && desiredArmState == ArmStates.STOWED && stateHandler.getDesiredIntakeState() == IntakeStates.STOWED){
-    //   armSetpoint = ArmStates.PRERAISED.getArmPosition().getAngularSetpoint();
-    // }
+
    
     /* Set the arm condition - NOTE: do not do this when manually climbing! */
     if (!stateHandler.getManuallyClimbing()) {

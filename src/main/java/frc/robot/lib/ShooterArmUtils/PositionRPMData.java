@@ -32,34 +32,34 @@ public class PositionRPMData {
 
      private void fillMaps() {
         /*New Data */
-        speakerPositionRPMMap.put(52.43, new PositionRPMObject(-0.675 + ArmConstants.armPositionChange, 2500));
-        speakerPositionRPMMap.put(59.95, new PositionRPMObject(-0.625 + ArmConstants.armPositionChange, 2500));
-        speakerPositionRPMMap.put(68.55, new PositionRPMObject(-0.585 + ArmConstants.armPositionChange, 2500));
-        speakerPositionRPMMap.put(75.78, new PositionRPMObject(-0.505 + ArmConstants.armPositionChange, 2700));
-        speakerPositionRPMMap.put(84.53, new PositionRPMObject(-0.465 + ArmConstants.armPositionChange, 2700));
-        speakerPositionRPMMap.put(92.3, new PositionRPMObject(-0.425 + ArmConstants.armPositionChange, 2700));
-        speakerPositionRPMMap.put(98.9, new PositionRPMObject(-0.410 + ArmConstants.armPositionChange, 2800));
-        speakerPositionRPMMap.put(106.54, new PositionRPMObject(-0.385 + ArmConstants.armPositionChange, 2800));
-        speakerPositionRPMMap.put(113.13, new PositionRPMObject(-0.350 + ArmConstants.armPositionChange, 2800));
-        speakerPositionRPMMap.put(120.5, new PositionRPMObject(-0.325 + ArmConstants.armPositionChange, 2900));
-        speakerPositionRPMMap.put(127.1, new PositionRPMObject(-0.3075 + ArmConstants.armPositionChange, 3200));
-        speakerPositionRPMMap.put(132.47, new PositionRPMObject(-0.2925 + ArmConstants.armPositionChange, 3200));
-        speakerPositionRPMMap.put(134.1, new PositionRPMObject(-0.2925 - 0.015 +  ArmConstants.armPositionChange, 3250));
-        speakerPositionRPMMap.put(139.45, new PositionRPMObject(-0.270 - 0.015 + ArmConstants.armPositionChange, 3300));
-        speakerPositionRPMMap.put(145.6, new PositionRPMObject(-0.260 - 0.015 + ArmConstants.armPositionChange, 3500));
-        speakerPositionRPMMap.put(151.5, new PositionRPMObject(-0.240 - 0.015 + ArmConstants.armPositionChange, 3500));
-        speakerPositionRPMMap.put(156.4, new PositionRPMObject(-0.230 - 0.015 + ArmConstants.armPositionChange, 3500));
-        speakerPositionRPMMap.put(161.7, new PositionRPMObject(-0.215 - 0.015 + ArmConstants.armPositionChange, 3650));
-        speakerPositionRPMMap.put(167.6, new PositionRPMObject(-0.2125 - 0.015 + ArmConstants.armPositionChange, 3700));
-        speakerPositionRPMMap.put(172.1, new PositionRPMObject(-0.2025 - 0.015 + ArmConstants.armPositionChange, 3700));
-        speakerPositionRPMMap.put(176.3, new PositionRPMObject(-0.188 -0.015 + 1.2*ArmConstants.armPositionChange, 3750));
-        speakerPositionRPMMap.put(179.3, new PositionRPMObject(-0.1775 - 0.015 + 1.2*ArmConstants.armPositionChange, 3800));
-        speakerPositionRPMMap.put(182.6, new PositionRPMObject(-0.183 - 0.015 + 1.2*ArmConstants.armPositionChange, 3825));
-        speakerPositionRPMMap.put(186.6 , new PositionRPMObject(-0.173 - 0.015 + 1.2*ArmConstants.armPositionChange, 4000));
-        speakerPositionRPMMap.put(190.4, new PositionRPMObject(-0.15  + ArmConstants.armPositionChange, 4200));
-        speakerPositionRPMMap.put(193.6, new PositionRPMObject(-0.1475 + ArmConstants.armPositionChange, 4300));
-        speakerPositionRPMMap.put(194.9, new PositionRPMObject(-0.145 + ArmConstants.armPositionChange, 4300));
-        speakerPositionRPMMap.put(197.7, new PositionRPMObject(-0.130 + ArmConstants.armPositionChange, 4350));
+        speakerPositionRPMMap.put(52.43, new PositionRPMObject(-0.675 + ArmConstants.armPositionChange, 2500 + 500));
+        speakerPositionRPMMap.put(59.95, new PositionRPMObject(-0.625 + ArmConstants.armPositionChange, 2500 + 500));
+        speakerPositionRPMMap.put(68.55, new PositionRPMObject(-0.585 + ArmConstants.armPositionChange, 2500 + 500));
+        speakerPositionRPMMap.put(75.78, new PositionRPMObject(-0.505 + ArmConstants.armPositionChange, 2700 + 500));
+        speakerPositionRPMMap.put(84.53, new PositionRPMObject(-0.465 + ArmConstants.armPositionChange, 2700 + 500));
+        speakerPositionRPMMap.put(92.3, new PositionRPMObject(-0.425 + ArmConstants.armPositionChange, 2700 + 500));
+        speakerPositionRPMMap.put(98.9, new PositionRPMObject(-0.410 + ArmConstants.armPositionChange, 2800 + 500));
+        speakerPositionRPMMap.put(106.54, new PositionRPMObject(-0.385 + ArmConstants.armPositionChange, 2800 + 500));
+        speakerPositionRPMMap.put(113.13, new PositionRPMObject(-0.350 + ArmConstants.armPositionChange, 2800 + 500));
+        speakerPositionRPMMap.put(120.5, new PositionRPMObject(-0.325 + ArmConstants.armPositionChange, 2900 + 500));
+        speakerPositionRPMMap.put(127.1, new PositionRPMObject(-0.3075 + ArmConstants.armPositionChange, 3200 + 500));
+        speakerPositionRPMMap.put(132.47, new PositionRPMObject(-0.2925 + ArmConstants.armPositionChange, 3200 + 500));
+        speakerPositionRPMMap.put(134.1, new PositionRPMObject(-0.2925 +  ArmConstants.armPositionChange, 3250 + 500));
+        speakerPositionRPMMap.put(139.45, new PositionRPMObject(-0.270  + ArmConstants.armPositionChange, 3300 + 500));
+        speakerPositionRPMMap.put(145.6, new PositionRPMObject(-0.260 + ArmConstants.armPositionChange, 3500 + 500));
+        speakerPositionRPMMap.put(151.5, new PositionRPMObject(-0.240 + ArmConstants.armPositionChange, 3500 + 500));
+        speakerPositionRPMMap.put(156.4, new PositionRPMObject(-0.230  + ArmConstants.armPositionChange, 3500 + 500));
+        speakerPositionRPMMap.put(161.7, new PositionRPMObject(-0.215  + ArmConstants.armPositionChange, 3650 + 500));
+        speakerPositionRPMMap.put(167.6, new PositionRPMObject(-0.2125  + ArmConstants.armPositionChange, 3700 + 500));
+        speakerPositionRPMMap.put(172.1, new PositionRPMObject(-0.2025  + ArmConstants.armPositionChange, 3700 + 500));
+        speakerPositionRPMMap.put(176.3, new PositionRPMObject(-0.188  + 1.2*ArmConstants.armPositionChange, 3750 + 500));
+        speakerPositionRPMMap.put(179.3, new PositionRPMObject(-0.1775  + 1.2*ArmConstants.armPositionChange, 3800 + 500));
+        speakerPositionRPMMap.put(182.6, new PositionRPMObject(-0.183  + 1.2*ArmConstants.armPositionChange, 3825 + 500));
+        speakerPositionRPMMap.put(186.6 , new PositionRPMObject(-0.173  + 1.2*ArmConstants.armPositionChange, 4000 + 500));
+        speakerPositionRPMMap.put(190.4, new PositionRPMObject(-0.15  + ArmConstants.armPositionChange, 4200 + 500));
+        speakerPositionRPMMap.put(193.6, new PositionRPMObject(-0.1475 + ArmConstants.armPositionChange, 4300 + 500));
+        speakerPositionRPMMap.put(194.9, new PositionRPMObject(-0.145 + ArmConstants.armPositionChange, 4300 + 500));
+        speakerPositionRPMMap.put(197.7, new PositionRPMObject(-0.130 + ArmConstants.armPositionChange, 4350 + 500));
        
       
      }

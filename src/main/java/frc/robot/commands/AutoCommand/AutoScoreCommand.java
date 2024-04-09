@@ -31,6 +31,10 @@ public class AutoScoreCommand extends Command {
     if (stateHandler.getScoreInAmp()) {
       stateHandler.setDesiredArmState(ArmStates.AMP);
     } 
+    if(stateHandler.getScoreInSubwoofer()){
+      stateHandler.setDesiredArmState(ArmStates.SPEAKER);
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
+    }
     // else {
     //   stateHandler.setDesiredArmState(ArmStates.SPEAKER);
     // }
@@ -52,7 +56,7 @@ public class AutoScoreCommand extends Command {
       inputTimer.start();
     }
 
-    if (!stateHandler.getBBFourCovered() && !stateHandler.getScoreInTrap() && stateHandler.getIsCenteredToTag()){
+    if (!stateHandler.getBBFourCovered() && !stateHandler.getScoreInTrap() && stateHandler.getIsCenteredToTag() && !stateHandler.getScoreInSubwoofer()){
       stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
       stateHandler.setDesiredArmState(ArmStates.SPEAKER);
       inputTimer.start();

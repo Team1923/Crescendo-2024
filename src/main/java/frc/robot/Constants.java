@@ -32,9 +32,9 @@ public final class Constants {
 
         public static final double headingOffsetThreshold = 2;
 
-        public static final double headingKP = 0.0035;
+        public static final double headingKP = 0.003;
         public static final double headingKI = 0.000000;
-        public static final double headingKD = 0.0001;
+        public static final double headingKD = 0.00025;
 
         public static final double translationKP = 0.03;
         public static final double translationKI = 0.000000;
@@ -51,7 +51,7 @@ public final class Constants {
          * Front LL Mount angle -> 20 degrees
          * 
          */
-        public static final double limelightMountAngle = 27.358; // for pivot, measured in degrees
+        public static final double limelightMountAngle = 26.957; // for pivot, measured in degrees
         public static final double limelightHeight = 6.875; // orginally 7 inches on old wheel for pivot, in inches (measured ~10 and 9/16 inches,
                                                               // converted)
         public static final double speakerHeightFromFloor = 56.5;// for tag, measured

@@ -183,7 +183,7 @@ public class LimelightSubsystem extends SubsystemBase {
     //SmartDashboard.putBoolean("Has Valid Speaker April Tag", stateHandler.getHasValidSpeakerTag());
     //SmartDashboard.putBoolean("Has Valid Amp April Tag", stateHandler.getHasValidAmpTag());
     SmartDashboard.putNumber("X Angle Offset", stateHandler.getxAngleOffset());
-    // SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
+    SmartDashboard.putNumber("Y Angle Offset", limelight.getYAngleOffset());
       // SmartDashboard.putBoolean("Centered to tag", stateHandler.getIsCenteredToTag());
 
       // SmartDashboard.putNumber("calc trap heading", getSeenTrapHeading());
