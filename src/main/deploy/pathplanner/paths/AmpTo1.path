@@ -12,7 +12,7 @@
         "y": 7.212069739022564
       },
       "isLocked": false,
-      "linkedName": "SubAmp"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -41,7 +41,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Sub1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [

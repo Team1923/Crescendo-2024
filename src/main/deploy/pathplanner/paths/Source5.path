@@ -3,61 +3,61 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1858830709675616,
-        "y": 5.691466561249813
+        "x": 3.3,
+        "y": 3.14
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.725918835762524,
-        "y": 7.219683970257392
+        "x": 3.853599403560831,
+        "y": 2.4844217589411217
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "SourcePreload"
     },
     {
       "anchor": {
-        "x": 7.837572826142803,
-        "y": 5.940630456759489
+        "x": 8.037162054803257,
+        "y": 0.7357044705216299
       },
       "prevControl": {
-        "x": 8.119189676554585,
-        "y": 5.8236511496653645
+        "x": 7.404548313294294,
+        "y": 0.9554387479534642
       },
       "nextControl": {
-        "x": 7.077452787384207,
-        "y": 6.256372626705367
+        "x": 8.613889567091196,
+        "y": 0.5353819121064903
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.370106238787976,
-        "y": 6.3616200166873265
+        "x": 3.3,
+        "y": 3.14
       },
       "prevControl": {
-        "x": 6.761710617438329,
-        "y": 6.3616200166873265
+        "x": 3.60476437949353,
+        "y": 2.756309143981871
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "NewSourceShoot1"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1,
-      "rotationDegrees": -10.954062643398427,
+      "waypointRelativePos": 1.3,
+      "rotationDegrees": -13.287306028258772,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Deploy",
-      "waypointRelativePos": 0.3,
+      "name": "intake",
+      "waypointRelativePos": 0.65,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
@@ -72,18 +72,18 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.2,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 5.314545669944692,
+    "velocity": 0.0,
+    "rotation": -37.5,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "5PieceSub",
+  "folder": "4PieceSource",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

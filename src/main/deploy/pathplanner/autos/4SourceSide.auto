@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SourcePreloadTo5"
+            "pathName": "Source5"
           }
         },
         {
@@ -55,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Source5to4"
+                  "pathName": "Source4"
                 }
               }
             ]
@@ -70,7 +70,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Source5to3"
+            "pathName": "Source3"
           }
         },
         {

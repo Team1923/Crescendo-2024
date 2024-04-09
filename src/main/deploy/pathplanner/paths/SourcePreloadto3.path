@@ -1,0 +1,126 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.007135188935557,
+        "y": 3.7551506446018847
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.1746589655753716,
+        "y": 2.4625865425465965
+      },
+      "isLocked": false,
+      "linkedName": "PreloadSourceShot"
+    },
+    {
+      "anchor": {
+        "x": 5.86272249467576,
+        "y": 4.217553350812714
+      },
+      "prevControl": {
+        "x": 5.3043427989876335,
+        "y": 3.9527997562492585
+      },
+      "nextControl": {
+        "x": 6.348347679972954,
+        "y": 4.4478106728658195
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.277540743191514,
+        "y": 4.101006107957202
+      },
+      "prevControl": {
+        "x": 8.277540743191514,
+        "y": 3.9723569133487597
+      },
+      "nextControl": {
+        "x": 8.277540743191514,
+        "y": 4.387147449470656
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.582385752171682,
+        "y": 3.9334694463532673
+      },
+      "prevControl": {
+        "x": 6.494623202347988,
+        "y": 4.327521586227284
+      },
+      "nextControl": {
+        "x": 4.836560442351654,
+        "y": 3.611301068755984
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.302430313822473,
+        "y": 3.139491354404182
+      },
+      "prevControl": {
+        "x": 3.8561025053194733,
+        "y": 3.1742880739887482
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Source3"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.3,
+      "rotationDegrees": 0.0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "INTAKE",
+      "waypointRelativePos": 0.85,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "DeployIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0.0,
+    "rotation": -37.5,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "4PieceSource",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}

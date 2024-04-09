@@ -8,54 +8,70 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.560734592496388,
-        "y": 3.0995724035430063
+        "x": 3.7084720272491145,
+        "y": 0.9588816833883668
       },
       "isLocked": false,
       "linkedName": "PreloadSourceShot"
     },
     {
       "anchor": {
-        "x": 8.037162054803257,
-        "y": 0.7357044705216299
+        "x": 7.927899014626778,
+        "y": 2.360081667811961
       },
       "prevControl": {
-        "x": 7.404548313294294,
-        "y": 0.9554387479534642
+        "x": 7.266857621559076,
+        "y": 2.222592342256557
       },
       "nextControl": {
-        "x": 8.613889567091196,
-        "y": 0.5353819121064903
+        "x": 8.58894040769448,
+        "y": 2.4975709933673644
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.3,
+        "x": 5.64065937359923,
+        "y": 1.7700612508532527
+      },
+      "prevControl": {
+        "x": 6.828325857184171,
+        "y": 1.8758529131907922
+      },
+      "nextControl": {
+        "x": 4.452992890014289,
+        "y": 1.6642695885157133
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.302430313822473,
         "y": 3.14
       },
       "prevControl": {
-        "x": 3.60476437949353,
-        "y": 2.756309143981871
+        "x": 3.703061461136232,
+        "y": 2.804926676792129
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "NewSourceShoot1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.3,
-      "rotationDegrees": -8.085900462331868,
+      "waypointRelativePos": 0.8999999999999999,
+      "rotationDegrees": 22.165942922962273,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "intake",
-      "waypointRelativePos": 0.65,
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.6000000000000001,
       "command": {
         "type": "parallel",
         "data": {
