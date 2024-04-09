@@ -16,8 +16,10 @@
   ],
   "autoFolders": [
     "CenterAutos",
-    "SourceAutos",
-    "SmallerPaths"
+    "AmpAutos",
+    "OtherAutos",
+    "SmallerPaths",
+    "SourceAutos"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
