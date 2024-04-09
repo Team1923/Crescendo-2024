@@ -42,6 +42,17 @@ public class AutoInstantiator {
 	 public PathPlannerAuto fourCenterRLM;
 	 public PathPlannerAuto fourCenterRML;
 
+	 /*
+	  * Different 3 Note Source Side
+	  */
+
+	  public PathPlannerAuto threeSource5and4;
+	  public PathPlannerAuto threeSource5and3;
+	  public PathPlannerAuto threeSource4and3;
+	  public PathPlannerAuto threeSource4and5;
+	  public PathPlannerAuto threeSource3and4;
+	  public PathPlannerAuto threeSource3and5;
+
 
 
 	public static synchronized AutoInstantiator getInstance() {
@@ -78,6 +89,40 @@ public class AutoInstantiator {
 	 fourCenterRLM = new PathPlannerAuto("RLM");
 	 fourCenterRML = new PathPlannerAuto("RML");
 
+		/*
+		 * Source Autos
+		 */
+	threeSource5and4 = new PathPlannerAuto("SourceSide5and4");
+	threeSource5and3 = new PathPlannerAuto("SourceSide5and3");
+	threeSource4and3 = new PathPlannerAuto("SourceSide4and3");
+	threeSource4and5 = new PathPlannerAuto("SourceSide4and5");
+	threeSource3and5 = new PathPlannerAuto("SourceSide3and5");
+	threeSource3and4 = new PathPlannerAuto("SourceSide3and4");
+
+	}
+
+	public PathPlannerAuto getThreeSource5and4() {
+		return threeSource5and4;
+	}
+
+	public PathPlannerAuto getThreeSource5and3() {
+		return threeSource5and3;
+	}
+
+	public PathPlannerAuto getThreeSource4and3() {
+		return threeSource4and3;
+	}
+
+	public PathPlannerAuto getThreeSource4and5() {
+		return threeSource4and5;
+	}
+
+	public PathPlannerAuto getThreeSource3and4() {
+		return threeSource3and4;
+	}
+
+	public PathPlannerAuto getThreeSource3and5() {
+		return threeSource3and5;
 	}
 
 	public PathPlannerAuto getFourCenterLMR() {
