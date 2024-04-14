@@ -14,12 +14,14 @@ import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Quaternion;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
@@ -82,61 +84,28 @@ public class LimelightSubsystem extends SubsystemBase {
 
       SimulationSubsystem sim = SimulationSubsystem.getInstance();
 
-      stateHandler.setAprilTagID(sim.getSeenTagID());
+      Point allianceSpeaker = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue ? Constants.FieldConstants.blueSpeakerPos : Constants.FieldConstants.redSpeakerPos;
 
-      if (stateHandler.getAprilTagID() != -1){
 
+      double angle = sim.simLLAngleToSpeaker(stateHandler.getRobotPose());
+
+      if (angle != 100){
+        stateHandler.setAprilTagID(DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue ? 4 : 7);
         stateHandler.setLimelightHasTag(true);
-
-          Pose3d currentTag = LimelightInterface.getInstance().getAprilTagPose(stateHandler.getAprilTagID());
-          stateHandler.setxAngleOffset(sim.simLLAngleToPoint(currentTag));
-
-          if (stateHandler.getAprilTagID() == 4 || stateHandler.getAprilTagID() == 7){
-            stateHandler.setHasValidSpeakerTag(true);
-            stateHandler.setDistanceToSpeakerTag(sim.getDistFromRobotToPose(currentTag));
-
-            stateHandler.setHasValidAmpTag(false);
-            stateHandler.setHasValidTrapTag(false);
-          }
-          else if (stateHandler.getAprilTagID()>=11){
-            stateHandler.setHasValidTrapTag(true);
-            stateHandler.setDistanceToTrapTag(sim.getDistFromRobotToPose(currentTag));
-
-            stateHandler.setHasValidSpeakerTag(false);
-            stateHandler.setHasValidTrapTag(false);
-          }
-          else if (stateHandler.getAprilTagID() == 5 || stateHandler.getAprilTagID() == 6){
-
-            stateHandler.setHasValidAmpTag(true);
-
-
-            stateHandler.setHasValidSpeakerTag(false);
-            stateHandler.setHasValidTrapTag(false);
-          }
-
-          stateHandler.setCurrentTagPose(currentTag);
-
+        stateHandler.setHasValidSpeakerTag(true);
+        stateHandler.setDistanceToSpeakerTag(calculateDistanceToCoveredSpeakerTag());
+        stateHandler.setxAngleOffset(angle);
+        stateHandler.setIsCenteredToTag(Math.abs(angle)<LimeLightConstants.xAngleThreshold);
 
       }
       else{
-
         stateHandler.setAprilTagID(-1);
-
         stateHandler.setLimelightHasTag(false);
-        stateHandler.setHasValidAmpTag(false);
         stateHandler.setHasValidSpeakerTag(false);
-        stateHandler.setHasValidTrapTag(false);
+        stateHandler.setDistanceToSpeakerTag(calculateDistanceToCoveredSpeakerTag());
+        stateHandler.setxAngleOffset(0);
         stateHandler.setIsCenteredToTag(false);
-
-        stateHandler.setCurrentTagPose(null);
-
       }
-
-
-
-
-      stateHandler.setIsCenteredToTag(stateHandler.getxAngleOffset()!= 100 && Math.abs(stateHandler.getxAngleOffset()) <= LimeLightConstants.xAngleThreshold+1);
-
 
 
     }

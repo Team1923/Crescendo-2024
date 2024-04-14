@@ -5,10 +5,13 @@
 package frc.robot.lib.SimUtils;
 
 import java.lang.reflect.Field;
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
+
+import javax.xml.transform.Source;
 
 import org.opencv.core.Point;
 
@@ -23,13 +26,16 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.lib.StateMachine.StateVariables.ArmStates;
 import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeStates;
@@ -60,6 +66,12 @@ public class SimulationSubsystem extends SubsystemBase {
     private static final double bb3OnTime = 0.2;
   }
 
+  private class SourceIntakeTimes{
+    private static final double bb3OnTime = 0.05;
+    private static final double bb2OnTime = 0.1;
+    private static final double bb4OffTime = 0.15;
+  }
+
   private class ShootTimes{
     private static final double bb2OffTime = 0.04;
     private static final double bb3OffTime = 0.2;
@@ -75,6 +87,8 @@ public class SimulationSubsystem extends SubsystemBase {
   private Timer collectionTimer;
 
   private Timer shootTimer;
+
+  private Timer babyBirdTimer;
 
   Integer[] list = {4 ,7, 11, 12, 13, 14, 15, 16};
 
@@ -106,6 +120,8 @@ public class SimulationSubsystem extends SubsystemBase {
 
    shootTimer = new Timer();
 
+   babyBirdTimer = new Timer();
+
    stateHandler.setBBTwoCovered(true);
 
    stateHandler.setBBThreeCovered(true);
@@ -123,111 +139,34 @@ public class SimulationSubsystem extends SubsystemBase {
     notePoses.add(new Translation2d(8.28, 5.78)); //2Loc
     notePoses.add(new Translation2d(8.28, 4.09)); //3Loc
     notePoses.add(new Translation2d(8.28, 2.44)); //4Loc
-    notePoses.add(new Translation2d(8.28,0.76)); //5Loc
+    // notePoses.add(new Translation2d(8.28,0.76)); //5Loc
 
 
   }
 
+  /*
+   * SETTING
+   */
   public void updatePose(Pose2d robotPose){
     currentPose = robotPose;
   }
-
 
   public void setCollecting(boolean collecting){
     isCollecting = collecting;
   }
 
 
-  public int getSeenTagID(){
-    Pose2d currPose = stateHandler.getRobotPose();
-
-    int closestID = -1;
-    double closestDistance = Integer.MAX_VALUE;
-
-    AprilTag seven = LimelightInterface.getInstance().getAprilTagList().get(6);
-
-
-    if (!filteredIDs.contains(seven.ID)){
-        // System.out.println("failed on ID");
-
-      }
-
-      double angle = simLLAngleToPoint(seven.pose);
-      // System.out.println(angle);
-      if (angle == 100){
-        // System.out.println("Failed on angle");
-      }
-
-      double dist = seven.pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(),seven.pose.getZ()));
-
-      closestID = seven.ID;
-
-      
-      if (dist < closestDistance){
-        closestID = seven.ID;
-        closestDistance = dist;
-      }
-
-    // for (AprilTag a : LimelightInterface.getInstance().getAprilTagList()){
-
-    //   if (!filteredIDs.contains(a.ID)){
-    //     continue;
-    //   }
-
-     
-    //   double angle = simLLAngleToPoint(a.pose);
-
-    //   if (angle == 100){
-    //     continue;
-    //   }
-
-      
-
-    //   double dist = a.pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(),a.pose.getZ()));
-
-      
-    //   if (dist < closestDistance){
-    //     closestID = a.ID;
-    //     closestDistance = dist;
-    //   }
-    // }
-
-    return closestID;
-  }
-
-  public double simLLAngleToPoint(Pose3d aPose){
-
-
-    double theta = 0;
-
-
-    Rotation3d tagRotation = aPose.getRotation();
-
-    double rawHeading = Math.toDegrees(tagRotation.getZ());
-
-    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
-       theta = rawHeading;
-    }
-    else{
-
-      double calcedHeading = 180 + rawHeading;
-
-      if (calcedHeading>180){
-        calcedHeading = calcedHeading-360;
-      }
-
-      theta = 180 - calcedHeading; // because limelight is on the back
-    }
-
-    // System.out.println(theta);
-
-    return (Math.abs(currentPose.getRotation().getDegrees()-theta) < 30) ? currentPose.getRotation().getDegrees()-theta : 100;
-
-    
-    
-  }
-
   
+  /*
+   * CALCULATING
+   */
+  public double simLLAngleToSpeaker(Pose2d aPose){
+
+    Point allianceSpeaker = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue ? Constants.FieldConstants.blueSpeakerPos : Constants.FieldConstants.redSpeakerPos;
+
+
+    return aPose.getRotation().getDegrees() - Math.toDegrees((Math.atan((aPose.getY() - allianceSpeaker.y)/(aPose.getX() - allianceSpeaker.x))));
+  }
 
   public double getDistFromRobotToPose(Pose3d pose){
     Pose2d currPose = stateHandler.getRobotPose();
@@ -238,6 +177,34 @@ public class SimulationSubsystem extends SubsystemBase {
     return Units.metersToInches(dist);
   }
 
+  public boolean isInSource(){
+    Pose2d currPose = stateHandler.getRobotPose();
+
+    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue){
+      
+
+      double x = currPose.getX();
+      double y = currPose.getY();
+
+
+
+
+
+      return x>=FieldConstants.blueSourceStart.x 
+          && y<=FieldConstants.blueSourceEnd.y;
+
+    }
+    else{
+
+      double x = currPose.getX();
+      double y = currPose.getY();
+
+      return x<=FieldConstants.redSourceEnd.x 
+          && y<=FieldConstants.redSourceStart.y;
+    }
+
+    
+  }
 
 
 
@@ -252,6 +219,8 @@ public class SimulationSubsystem extends SubsystemBase {
       stateHandler.setCurrentIntakeState(stateHandler.getDesiredIntakeState());
 
       stateHandler.setCurrentShootingSpeed(stateHandler.getDesiredShootingSpeed());
+
+      updatePose(stateHandler.getRobotPose());
 
 
       //Intaking
@@ -293,7 +262,31 @@ public class SimulationSubsystem extends SubsystemBase {
           collectionTimer.reset();
           isCollecting = false;
         }
+      //Source Intaking
+      if (stateHandler.getCurrentArmState() == ArmStates.BABY_BIRD 
+      && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.BABY_BIRD 
+      && isInSource()){
+        if (babyBirdTimer.get() ==0){
+          babyBirdTimer.start();
+          stateHandler.setBBFourCovered(true);
+        }
 
+        if (babyBirdTimer.hasElapsed(SourceIntakeTimes.bb3OnTime)){
+          stateHandler.setBBThreeCovered(true);
+        }
+
+        if (babyBirdTimer.hasElapsed(SourceIntakeTimes.bb2OnTime)){
+          stateHandler.setBBTwoCovered(true);
+        }
+
+        if (babyBirdTimer.hasElapsed(SourceIntakeTimes.bb4OffTime)){
+          stateHandler.setBBFourCovered(false);
+        }
+      }
+      else{
+        babyBirdTimer.stop();
+        babyBirdTimer.reset();
+      }
       //Shooting
       if (stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT && stateHandler.getCurrentFeederSpeed() == FeederSpeeds.INWARD){
 
@@ -332,6 +325,92 @@ public class SimulationSubsystem extends SubsystemBase {
     SmartDashboard.putString("SIM SUBSYSTEM RUNNING", "!!!!!!");
 
     
-
+    SmartDashboard.putBoolean("IS IN SOURCE", isInSource());
   }
 }
+
+
+// public int getSeenTagID(){
+//   Pose2d currPose = stateHandler.getRobotPose();
+
+//   int closestID = -1;
+//   double closestDistance = Integer.MAX_VALUE;
+
+//   AprilTag seven = LimelightInterface.getInstance().getAprilTagList().get(6);
+
+
+//   if (!filteredIDs.contains(seven.ID)){
+//       // System.out.println("failed on ID");
+
+//     }
+
+//     double angle = simLLAngleToPoint(seven.pose);
+//     // System.out.println(angle);
+//     if (angle == 100){
+//       // System.out.println("Failed on angle");
+//     }
+
+//     double dist = seven.pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(),seven.pose.getZ()));
+
+//     closestID = seven.ID;
+
+    
+//     if (dist < closestDistance){
+//       closestID = seven.ID;
+//       closestDistance = dist;
+//     }
+
+  // for (AprilTag a : LimelightInterface.getInstance().getAprilTagList()){
+
+  //   if (!filteredIDs.contains(a.ID)){
+  //     continue;
+  //   }
+
+   
+  //   double angle = simLLAngleToPoint(a.pose);
+
+  //   if (angle == 100){
+  //     continue;
+  //   }
+
+    
+
+  //   double dist = a.pose.getTranslation().getDistance(new Translation3d(currPose.getX(), currPose.getY(),a.pose.getZ()));
+
+    
+  //   if (dist < closestDistance){
+  //     closestID = a.ID;
+  //     closestDistance = dist;
+  //   }
+  // }
+
+//   return closestID;
+// }
+
+// public double simLLAngleToPoint(Pose3d aPose){
+
+    
+
+
+//   double theta = 0;
+
+
+//   Rotation3d tagRotation = aPose.getRotation();
+
+//   double rawHeading = Math.toDegrees(tagRotation.getZ());
+
+//   if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+//     theta = Math.IEEEremainder(180+rawHeading, 360);
+//   }
+//   else{
+
+
+//     theta = Math.IEEEremainder(rawHeading, 360);
+//   }
+
+//   // System.out.println(currentPose.getRotation().getDegrees() - theta);
+//   return (Math.abs(currentPose.getRotation().getDegrees()-theta) < 30) ? currentPose.getRotation().getDegrees()-theta : 100;
+
+  
+  
+// }

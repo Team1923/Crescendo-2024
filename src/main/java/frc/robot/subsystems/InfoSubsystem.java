@@ -93,10 +93,10 @@ public class InfoSubsystem extends SubsystemBase {
 
   private SuppliedValueWidget<String> currentArmPosition = stateDashboard.addString("Current Arm Position", () -> stateHandler.getCurrentArmState().toString()).withPosition(0, 0);
   private SuppliedValueWidget<String> desiredArmPosition = stateDashboard.addString("Desired Arm Position", () -> stateHandler.getDesiredArmState().toString()).withPosition(0, 1);
-  // private SuppliedValueWidget<String> currentIntakeWheelSpeeds = stateDashboard.addString("Current Intake Wheel Speeds", () -> stateHandler.getCurrentIntakeRollerSpeed().toString()).withPosition(1, 0);
-  // private SuppliedValueWidget<String> desiredIntakeWheelSpeeds = stateDashboard.addString("Desired Intake Wheel Speeds", () -> stateHandler.getDesiredIntakeRollerSpeed().toString()).withPosition(1, 1);
-  // private SuppliedValueWidget<String> currentIntakePosition = stateDashboard.addString("Current Intake Position", () -> stateHandler.getCurrentIntakeState().toString()).withPosition(2, 0);
-  // private SuppliedValueWidget<String> desiredIntakePosition = stateDashboard.addString("Desired Intake Position", () -> stateHandler.getDesiredIntakeState().toString()).withPosition(2, 1);
+  private SuppliedValueWidget<String> currentIntakeWheelSpeeds = stateDashboard.addString("Current Intake Wheel Speeds", () -> stateHandler.getCurrentIntakeRollerSpeed().toString()).withPosition(1, 0);
+  private SuppliedValueWidget<String> desiredIntakeWheelSpeeds = stateDashboard.addString("Desired Intake Wheel Speeds", () -> stateHandler.getDesiredIntakeRollerSpeed().toString()).withPosition(1, 1);
+  private SuppliedValueWidget<String> currentIntakePosition = stateDashboard.addString("Current Intake Position", () -> stateHandler.getCurrentIntakeState().toString()).withPosition(2, 0);
+  private SuppliedValueWidget<String> desiredIntakePosition = stateDashboard.addString("Desired Intake Position", () -> stateHandler.getDesiredIntakeState().toString()).withPosition(2, 1);
   private SuppliedValueWidget<String> currentShooterSpeeds = stateDashboard.addString("Current Shooter Speed", () -> stateHandler.getCurrentShootingSpeed().toString()).withPosition(3, 0);
   private SuppliedValueWidget<String> desiredShooterSpeeds = stateDashboard.addString("Desired Shooter Speeds", () -> stateHandler.getDesiredShootingSpeed().toString()).withPosition(3, 1);
   // private SuppliedValueWidget<String> currentFeederSpeed = stateDashboard.addString("Current Feeder Speed", () -> stateHandler.getCurrentFeederSpeed().toString()).withPosition(4, 0);
