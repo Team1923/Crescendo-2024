@@ -51,7 +51,7 @@ public final class Constants {
          * Front LL Mount angle -> 20 degrees
          * 
          */
-        public static final double limelightMountAngle = 26.957; // for pivot, measured in degrees
+        public static final double limelightMountAngle = 26.25; // for pivot, measured in degrees
         public static final double limelightHeight = 6.875; // orginally 7 inches on old wheel for pivot, in inches (measured ~10 and 9/16 inches,
                                                               // converted)
         public static final double speakerHeightFromFloor = 56.5;// for tag, measured
@@ -201,7 +201,7 @@ public final class Constants {
 
         public static final double armPositionAllowableOffset = 0.03; // allowed radians offset
 
-        public static final double armPositionChange = 0; //TODO: Tune at Lehigh!!!!
+        public static final double armPositionChange = 0.01; //TODO: Tune at Lehigh!!!!
 
 
         public static final double armSettleTime = 0.5;

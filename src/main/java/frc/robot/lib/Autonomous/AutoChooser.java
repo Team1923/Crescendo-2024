@@ -17,7 +17,8 @@ public class AutoChooser {
 		SOURCE_4_AND_3,
 		SOURCE_4_AND_5,
 		SOURCE_3_AND_4,
-		SOURCE_3_AND_5;
+		SOURCE_3_AND_5,
+		SOURCE_5_AND_3_SUB;
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -51,6 +52,8 @@ public class AutoChooser {
 		chooser.addOption("3 Source 3 and 5", AutoMode.SOURCE_3_AND_5);
 		chooser.addOption("3 Source 3 and 4", AutoMode.SOURCE_3_AND_4);
 
+		chooser.addOption("3 Source from Sub 5 and 3", AutoMode.SOURCE_5_AND_3_SUB);
+
 
 
 		auto.add(chooser);
@@ -79,6 +82,8 @@ public class AutoChooser {
 				return autoInstantiator.getThreeSource4and3();
 			case SOURCE_4_AND_5:
 				return autoInstantiator.getThreeSource4and5();
+			case SOURCE_5_AND_3_SUB:
+				return autoInstantiator.getThreeSourceSub5and3();
 			default:
 				return null;
 		}

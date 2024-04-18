@@ -53,6 +53,8 @@ public class AutoInstantiator {
 	  public PathPlannerAuto threeSource3and4;
 	  public PathPlannerAuto threeSource3and5;
 
+	  public PathPlannerAuto threeSourceSub5and3;
+
 
 
 	public static synchronized AutoInstantiator getInstance() {
@@ -99,6 +101,12 @@ public class AutoInstantiator {
 	threeSource3and5 = new PathPlannerAuto("SourceSide3and5");
 	threeSource3and4 = new PathPlannerAuto("SourceSide3and4");
 
+	threeSourceSub5and3 = new PathPlannerAuto("SourceSideSub5and3");
+
+	}
+
+	public PathPlannerAuto getThreeSourceSub5and3() {
+		return threeSourceSub5and3;
 	}
 
 	public PathPlannerAuto getThreeSource5and4() {
