@@ -221,8 +221,17 @@ public final class Constants {
     }
 
     public static final class FieldConstants{
-        public static Point blueSpeakerPos = new Point(-0.038099999999999995, 5.547867999999999);
-        public static Point redSpeakerPos = new Point(16.579342, 5.547867999999999);
+        public static final Point blueSpeakerPos = new Point(-0.038099999999999995, 5.547867999999999);
+        public static final Point redSpeakerPos = new Point(16.579342, 5.547867999999999);
+
+        public static final Point blueSourceStart = new Point(14, 0);
+        public static final Point blueSourceEnd = new Point(16.6, 1.7);
+
+        
+
+        public static final Point redSourceStart = new Point(0.135, 1.562);
+        public static final Point redSourceEnd = new Point(1.732, 0.392);
+
     }
 
 }
