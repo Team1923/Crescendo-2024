@@ -18,7 +18,12 @@ public class AutoChooser {
 		SOURCE_4_AND_5,
 		SOURCE_3_AND_4,
 		SOURCE_3_AND_5,
-		SOURCE_5_AND_3_SUB;
+		SOURCE_5_AND_3_SUB,
+		SOURCE_5_AND_4_SUB,
+		SOURCE_4_AND_3_SUB,
+		SOURCE_4_AND_5_SUB,
+		SOURCE_3_AND_4_SUB,
+		SOURCE_3_AND_5_SUB;
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -45,14 +50,23 @@ public class AutoChooser {
 		/*
 		 * Source Autos
 		 */
-		chooser.addOption("3 Source 5 and 4", AutoMode.SOURCE_5_AND_4);
-		chooser.addOption("3 Source 5 and 3", AutoMode.SOURCE_5_AND_3);
-		chooser.addOption("3 Source 4 and 3", AutoMode.SOURCE_4_AND_3);
-		chooser.addOption("3 Source 4 and 5", AutoMode.SOURCE_4_AND_5);
-		chooser.addOption("3 Source 3 and 5", AutoMode.SOURCE_3_AND_5);
-		chooser.addOption("3 Source 3 and 4", AutoMode.SOURCE_3_AND_4);
+		// chooser.addOption("3 Source 5 and 4", AutoMode.SOURCE_5_AND_4);
+		// chooser.addOption("3 Source 5 and 3", AutoMode.SOURCE_5_AND_3);
+		// chooser.addOption("3 Source 4 and 3", AutoMode.SOURCE_4_AND_3);
+		// chooser.addOption("3 Source 4 and 5", AutoMode.SOURCE_4_AND_5);
+		// chooser.addOption("3 Source 3 and 5", AutoMode.SOURCE_3_AND_5);
+		// chooser.addOption("3 Source 3 and 4", AutoMode.SOURCE_3_AND_4);
 
+		/*
+		 * Source Subwoofer Autos
+		 */
 		chooser.addOption("3 Source from Sub 5 and 3", AutoMode.SOURCE_5_AND_3_SUB);
+		chooser.addOption("3 Source from Sub 5 and 4", AutoMode.SOURCE_5_AND_3_SUB);
+		chooser.addOption("3 Source from Sub 4 and 3", AutoMode.SOURCE_5_AND_3_SUB);
+		chooser.addOption("3 Source from Sub 4 and 5", AutoMode.SOURCE_5_AND_3_SUB);
+		chooser.addOption("3 Source from Sub 3 and 4", AutoMode.SOURCE_5_AND_3_SUB);
+		chooser.addOption("3 Source from Sub 3 and 5", AutoMode.SOURCE_5_AND_3_SUB);
+
 
 
 
@@ -84,6 +98,16 @@ public class AutoChooser {
 				return autoInstantiator.getThreeSource4and5();
 			case SOURCE_5_AND_3_SUB:
 				return autoInstantiator.getThreeSourceSub5and3();
+			case SOURCE_5_AND_4_SUB:
+				return autoInstantiator.getThreeSourceSub5and4();
+			case SOURCE_3_AND_4_SUB:
+				return autoInstantiator.getThreeSourceSub3and4();
+			case SOURCE_3_AND_5_SUB:
+				return autoInstantiator.getThreeSourceSub3and5();
+			case SOURCE_4_AND_3_SUB:
+				return autoInstantiator.getThreeSourceSub4and3();
+			case SOURCE_4_AND_5_SUB:
+				return autoInstantiator.getThreeSourceSub4and5();
 			default:
 				return null;
 		}

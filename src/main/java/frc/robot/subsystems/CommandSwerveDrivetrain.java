@@ -171,8 +171,8 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     //getting from the pigeon used to generate CommandSwerveDriveTrain
     public Rotation2d getGyroYaw(){
-        // return Rotation2d.fromDegrees(Math.IEEEremainder(this.getPigeon2().getYaw().getValueAsDouble(),360));
-        return Rotation2d.fromDegrees(Math.IEEEremainder(this.m_odometry.getEstimatedPosition().getRotation().getDegrees(),360));
+        return Rotation2d.fromDegrees(Math.IEEEremainder(this.getPigeon2().getYaw().getValueAsDouble(),360));
+        // return Rotation2d.fromDegrees(Math.IEEEremainder(this.m_odometry.getEstimatedPosition().getRotation().getDegrees(),360));
     }
 
     private void startSimThread() {

@@ -62,7 +62,7 @@ public class LimelightSubsystem extends SubsystemBase {
       deltaPos = new Point(redSpeakerPos.x - robotPos.x, redSpeakerPos.y - robotPos.y);
     }
 
-    return Units.metersToInches(Math.hypot(deltaPos.x, deltaPos.y)) - 5;
+    return Units.metersToInches(Math.hypot(deltaPos.x, deltaPos.y)) - 1.5;
   }
 
   /**

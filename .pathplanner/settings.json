@@ -15,8 +15,9 @@
     "CenterLine"
   ],
   "autoFolders": [
-    "CenterAutos",
     "AmpAutos",
+    "CenterAutos",
+    "SourceAutosSubwoofer",
     "OtherAutos",
     "SmallerPaths",
     "SourceAutos"
