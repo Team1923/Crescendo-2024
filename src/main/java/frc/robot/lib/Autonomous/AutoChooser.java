@@ -61,11 +61,11 @@ public class AutoChooser {
 		 * Source Subwoofer Autos
 		 */
 		chooser.addOption("3 Source from Sub 5 and 3", AutoMode.SOURCE_5_AND_3_SUB);
-		chooser.addOption("3 Source from Sub 5 and 4", AutoMode.SOURCE_5_AND_3_SUB);
-		chooser.addOption("3 Source from Sub 4 and 3", AutoMode.SOURCE_5_AND_3_SUB);
-		chooser.addOption("3 Source from Sub 4 and 5", AutoMode.SOURCE_5_AND_3_SUB);
-		chooser.addOption("3 Source from Sub 3 and 4", AutoMode.SOURCE_5_AND_3_SUB);
-		chooser.addOption("3 Source from Sub 3 and 5", AutoMode.SOURCE_5_AND_3_SUB);
+		chooser.addOption("3 Source from Sub 5 and 4", AutoMode.SOURCE_5_AND_4_SUB);
+		chooser.addOption("3 Source from Sub 4 and 3", AutoMode.SOURCE_4_AND_3_SUB);
+		chooser.addOption("3 Source from Sub 4 and 5", AutoMode.SOURCE_4_AND_5_SUB);
+		chooser.addOption("3 Source from Sub 3 and 4", AutoMode.SOURCE_3_AND_4_SUB);
+		chooser.addOption("3 Source from Sub 3 and 5", AutoMode.SOURCE_3_AND_5_SUB);
 
 
 

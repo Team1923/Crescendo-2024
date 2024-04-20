@@ -58,9 +58,6 @@ public class StateHandler {
     private boolean wantToPunt = false;
     private boolean wantUnguardable = false;
     private boolean wantFrontAmp = false;
-    
-
-
 
     /* PosRPM tuning values */
     private double positionOffset = 0;
@@ -74,6 +71,7 @@ public class StateHandler {
     private boolean bbFourCovered = false;
 
     /* Misc */
+    
     private boolean manuallyClimbing = false;
     private boolean fullEject = false;
     private boolean operatorInputTimingGood = false;
@@ -82,6 +80,7 @@ public class StateHandler {
     private Pose2d robotPose = new Pose2d();
     private Pose3d currentTagPose = new Pose3d();
     private double currentRobotHeading = 0;
+
 
     public double getCurrentRobotHeading(){
         return currentRobotHeading;

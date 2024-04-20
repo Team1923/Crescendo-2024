@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.Climb.ClimbCommandGroup;
+import frc.robot.commands.Defense.ArmToDefense;
 import frc.robot.commands.ManualHashTuningCommands.ChangePositionOffset;
 import frc.robot.commands.ManualHashTuningCommands.ChangeRPMOffset;
 import frc.robot.commands.desired_scoring_location.SetArmToAmp;
@@ -112,7 +113,7 @@ public class RobotContainer {
     //getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
-    driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.zeroGyro()));
+    driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
     // driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
     driverXboxController.rightStick().whileTrue(new AlignHeading(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
@@ -169,6 +170,7 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.littleLeftButton).whileTrue(new FullEjectCommand());
     operatorPS4Controller.povLeft().whileTrue(new BabyBird());
     operatorPS4Controller.povRight().onTrue(new SetArmToUnguardable());
+    operatorPS4Controller.povDown().onTrue(new ArmToDefense());
 
   }
 

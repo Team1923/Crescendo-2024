@@ -15,6 +15,7 @@ public class StateVariables {
         PUNT_HIGH(new ArmPosition(-0.72)),
         PUNT_LOW(new ArmPosition(0)),
         FRONT_AMP(new ArmPosition(-0.77)),
+        DEFENSE(new ArmPosition(-1.35)),
         CLIMB(new ArmPosition(-1.35));
 
         private ArmPosition armPosition;

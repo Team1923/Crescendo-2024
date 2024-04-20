@@ -20,6 +20,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -171,8 +172,8 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     //getting from the pigeon used to generate CommandSwerveDriveTrain
     public Rotation2d getGyroYaw(){
-        return Rotation2d.fromDegrees(Math.IEEEremainder(this.getPigeon2().getYaw().getValueAsDouble(),360));
-        // return Rotation2d.fromDegrees(Math.IEEEremainder(this.m_odometry.getEstimatedPosition().getRotation().getDegrees(),360));
+        // return Rotation2d.fromDegrees(Math.IEEEremainder(this.getPigeon2().getYaw().getValueAsDouble(),360));
+        return Rotation2d.fromDegrees(Math.IEEEremainder(((DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) ? 180 : 0) +this.m_odometry.getEstimatedPosition().getRotation().getDegrees(),360));
     }
 
     private void startSimThread() {
