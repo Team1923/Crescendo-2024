@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.sql.Driver;
+import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import com.ctre.phoenix6.Utils;
@@ -30,8 +32,13 @@ import frc.robot.Constants.SwerveConstants;
 import frc.robot.commands.AutoCommand.AutoScoreCommandGroup;
 import frc.robot.commands.scoring.GCScoreCommandGroup;
 import frc.robot.commands.swerve.AlignHeading;
+import frc.robot.commands.swerve.GoalCentricCommandRequest;
 import frc.robot.generated.TunerConstants;
+import frc.robot.lib.Controller.ControllerLimiter;
+import frc.robot.lib.CustomWidgets.SwerveRequestConfigWidget;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.lib.StateMachine.StateVariables.SwerveRequests;
+import frc.robot.lib.SwerveRequests.GoalCentricRequest;
 
 /**
  * Class that extends the Phoenix SwerveDrivetrain class and implements
@@ -45,11 +52,16 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     private boolean currentLimitsActivated = false;
     StateHandler stateHandler = StateHandler.getInstance();
 
+    private SwerveRequestConfigWidget goalCentricTuning = new SwerveRequestConfigWidget(SwerveRequests.GOAL_CENTRIC); 
+
+
     private final SwerveRequest.ApplyChassisSpeeds AutoRequest = new SwerveRequest.ApplyChassisSpeeds();
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency,
             SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
+  
+
         if (!Utils.isSimulation()){
             setSwerveDriveCustomCurrentLimits();
             if(!currentLimitsActivated) {
@@ -88,6 +100,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     }
 
     public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
+
         SmartDashboard.putString("Request is being run", requestSupplier.get().toString());
         return run(() -> this.setControl(requestSupplier.get()));
     }
@@ -228,6 +241,8 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         
         // SmartDashboard.putNumber("Heading (Gyro)",getGyroYaw().getDegrees());
         // SmartDashboard.putNumber("Heading (odo)",this.m_odometry.getEstimatedPosition().getRotation().getDegrees());
+
+        
 
     }
 }

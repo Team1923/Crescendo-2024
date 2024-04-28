@@ -1,6 +1,22 @@
 package frc.robot.lib.StateMachine;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest.FieldCentric;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest.FieldCentricFacingAngle;
+import com.ctre.phoenix6.mechanisms.swerve.utility.PhoenixPIDController;
+import com.pathplanner.lib.path.PathPlannerTrajectory.State;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import frc.robot.Constants.SwerveConstants;
+import frc.robot.lib.SwerveRequests.GoalCentricRequest;
+
 public class StateVariables {
+
+    StateHandler stateHandler = StateHandler.getInstance();
+
     /**
      * TODO: need to change
      */
@@ -171,6 +187,46 @@ public class StateVariables {
         public PercentOutputValue getPercentOutputValue() {
             return percentOutputValue;
         }
+    }
+
+    public static enum SwerveRequests{
+        FIELD_CENTRIC(new SwerveRequest.FieldCentric()
+            .withDeadband(SwerveConstants.maxSpeed * 0.1)
+            .withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
+        )
+        ,
+
+        ROBOT_CENTRIC(new SwerveRequest.RobotCentric()
+            .withDeadband(SwerveConstants.maxSpeed * 0.1)
+            .withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
+        )
+        ,
+        GOAL_CENTRIC(applyPID(new SwerveRequest.FieldCentricFacingAngle(), new PhoenixPIDController(SwerveConstants.headingKP, SwerveConstants.headingKI, SwerveConstants.headingKD))
+            .withDeadband(SwerveConstants.maxSpeed * 0.1)
+        )
+        ,
+        FACING_AMP(applyPID(new SwerveRequest.FieldCentricFacingAngle(), new PhoenixPIDController(SwerveConstants.headingKP, SwerveConstants.headingKI, SwerveConstants.headingKD))
+            .withDeadband(SwerveConstants.maxSpeed * 0.1)
+        )
+        ;
+
+        public SwerveRequest request;
+
+        private SwerveRequests(SwerveRequest r){
+            request = r;
+
+        }
+
+        
+
+
+    }
+
+    public static SwerveRequest.FieldCentricFacingAngle applyPID(SwerveRequest.FieldCentricFacingAngle r, PhoenixPIDController p){
+
+        r.HeadingController = p;
+
+        return r;
     }
 
 }

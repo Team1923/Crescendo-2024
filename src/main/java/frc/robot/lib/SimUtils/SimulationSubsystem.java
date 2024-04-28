@@ -28,6 +28,9 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SuppliedValueWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -94,7 +97,9 @@ public class SimulationSubsystem extends SubsystemBase {
 
   private List<Integer> filteredIDs = Arrays.asList(list);
 
+  public ShuffleboardTab driverDashboard = Shuffleboard.getTab("Driver Dashboard");
 
+  private double notesScored = 0;
 
 
   private Pose2d currentPose;
@@ -107,6 +112,8 @@ public class SimulationSubsystem extends SubsystemBase {
   //       return simSub;
   //   }
 
+  private SuppliedValueWidget<Double> notes = driverDashboard.addNumber("NOTES SCORED", () -> notesScored).withPosition(4, 4);
+  ;
 
   /** Creates a new SimulationSubsystem. */
   public SimulationSubsystem() {
@@ -125,6 +132,8 @@ public class SimulationSubsystem extends SubsystemBase {
    stateHandler.setBBTwoCovered(true);
 
    stateHandler.setBBThreeCovered(true);
+
+
 
   }
 
@@ -305,6 +314,7 @@ public class SimulationSubsystem extends SubsystemBase {
 
         if (shootTimer.get() > ShootTimes.bb4OffTime){
           stateHandler.setBBFourCovered(false);
+          // notesScored++;
         }
       }
       else{
@@ -326,6 +336,8 @@ public class SimulationSubsystem extends SubsystemBase {
 
     
     SmartDashboard.putBoolean("IS IN SOURCE", isInSource());
+
+    // System.out.println(notesScored);
   }
 }
 

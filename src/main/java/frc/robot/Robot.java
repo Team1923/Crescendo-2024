@@ -40,6 +40,7 @@ import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.SimUtils.SimulationSubsystem;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.subsystems.PIDWidgetSubsystem;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
 
   private DigitalInput outsideButton = new DigitalInput(ButtonConstants.outsideButton);
   private DigitalInput insideButton = new DigitalInput(ButtonConstants.insideButton);
+
 
 
 
@@ -113,6 +115,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    m_robotContainer.armSubsystem.updateMotorConfig();
   }
 
   @Override

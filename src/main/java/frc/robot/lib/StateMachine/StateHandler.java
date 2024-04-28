@@ -1,6 +1,8 @@
 package frc.robot.lib.StateMachine;
 
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import frc.robot.lib.StateMachine.StateVariables.ArmStates;
@@ -8,6 +10,7 @@ import frc.robot.lib.StateMachine.StateVariables.FeederSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeRollerSpeeds;
 import frc.robot.lib.StateMachine.StateVariables.IntakeStates;
 import frc.robot.lib.StateMachine.StateVariables.ShooterSpeeds;
+import frc.robot.lib.StateMachine.StateVariables.SwerveRequests;
 
 public class StateHandler {
     private static StateHandler stateHandler;
@@ -81,6 +84,15 @@ public class StateHandler {
     private Pose3d currentTagPose = new Pose3d();
     private double currentRobotHeading = 0;
 
+    private SwerveRequests currentSwerveRequest = SwerveRequests.FIELD_CENTRIC;
+
+    public SwerveRequests getCurrentSwerveRequest() {
+        return currentSwerveRequest;
+    }
+
+    public void setCurrentSwerveRequest(SwerveRequests req) {
+        this.currentSwerveRequest = req;
+    }
 
     public double getCurrentRobotHeading(){
         return currentRobotHeading;

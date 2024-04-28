@@ -7,12 +7,15 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.LimeLightConstants;
+import frc.robot.lib.CustomWidgets.MotorConfigWidget;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -33,6 +36,10 @@ public class ArmSubsystem extends SubsystemBase {
 
   /* Motion Magic Voltage Object - Used to command the arm's position. */
   private MotionMagicVoltage motionMagicVoltage;
+
+  private TalonFXConfiguration currentConfig;
+
+  private MotorConfigWidget motorConfigWidget;
 
   /* Constructor of ArmSubsystem. Used for setting up motors & configurations. */
   public ArmSubsystem() {
@@ -65,34 +72,30 @@ public class ArmSubsystem extends SubsystemBase {
     motionMagicConfigs.MotionMagicAcceleration = ArmConstants.maxArmAccel;
     motionMagicConfigs.MotionMagicJerk = ArmConstants.maxArmJerk;
 
+
+
     /* Apply the generated configuration to the motors. */
     armPrimary.getConfigurator().apply(armConfigs);
     armFollower.getConfigurator().apply(armConfigs);
 
+    currentConfig = armConfigs;
+
     /* Set the motor to follow the primary motor & oppose its direction. */
     armFollower.setControl(new Follower(ArmConstants.armMotorPrimaryID, true));
+
+    motorConfigWidget = new MotorConfigWidget("ARM", armConfigs);
+
+
 
     /* Finally, zero the arm so that its STOW position = 0 rads. */
     zeroArm();
   }
-  
-  /**
-   * Limits the stator current for the intake motors as necessary. 
-   */
-   public void configCurrentLimit(){
-    var customCurrentConfig = new CurrentLimitsConfigs();
 
-  
-    armPrimary.getConfigurator().refresh(customCurrentConfig);
-    armFollower.getConfigurator().refresh(customCurrentConfig);
-
-    customCurrentConfig.StatorCurrentLimit = CurrentConstants.kStatorCurrentLimit;
-    customCurrentConfig.StatorCurrentLimitEnable = CurrentConstants.kStatorCurrentLimitEnable;
-
-
-    armFollower.getConfigurator().apply(customCurrentConfig);
-    armPrimary.getConfigurator().apply(customCurrentConfig);
+  public void updateMotorConfig(){
+    armPrimary.getConfigurator().apply(motorConfigWidget.updatedConfig());
+    armFollower.getConfigurator().apply(motorConfigWidget.updatedConfig());
   }
+
 
   /**
    * Method to zero the arm. All that we do is override the
@@ -267,6 +270,7 @@ public class ArmSubsystem extends SubsystemBase {
     //   minArmAngle = 1000;
     //   maxArmAngle =-1000;
     // }
+
 
 
 

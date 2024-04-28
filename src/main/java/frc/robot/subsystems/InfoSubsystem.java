@@ -3,11 +3,13 @@ package frc.robot.subsystems;
 import java.util.ArrayList;
 import java.util.Map;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.shuffleboard.SuppliedValueWidget;
@@ -31,6 +33,7 @@ public class InfoSubsystem extends SubsystemBase {
   private CommandXboxController xboxController;
   private CommandPS4Controller ps4Controller;
 
+
   
   public InfoSubsystem(CommandXboxController x, CommandPS4Controller p){
     this.xboxController = x;
@@ -44,7 +47,11 @@ public class InfoSubsystem extends SubsystemBase {
       .getEntry();
 
     }
+
+
   }
+
+
 
 	private GenericEntry ampPos = driverDashboard.add("AMP", false)
 			.withSize(3, 1)
@@ -138,7 +145,7 @@ public class InfoSubsystem extends SubsystemBase {
       ps4Controller.getHID().setRumble(RumbleType.kBothRumble, 0);
     }
 
-    
+    SmartDashboard.putString("CURRENT SWERVE REQUEST", stateHandler.getCurrentSwerveRequest().toString());
 
     /* DEBUG PRINTOUTS - TODO: DISABLE WHEN IN MATCH! */
     /* BEAM BREAK VALUES */
@@ -172,8 +179,6 @@ public class InfoSubsystem extends SubsystemBase {
 
     SmartDashboard.putBoolean("AUTO OVERRIDE", stateHandler.getAutoOverride());
 
-    
-    
 // 
 
   }

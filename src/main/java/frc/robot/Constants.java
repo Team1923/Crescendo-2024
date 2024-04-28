@@ -32,7 +32,10 @@ public final class Constants {
 
         public static final double headingOffsetThreshold = 2;
 
-        public static final double headingKP = 0.003;
+        // public static final double headingKP = 0.003;
+        // public static final double headingKI = 0.000000;
+        // public static final double headingKD = 0.00025;
+        public static final double headingKP = 10;
         public static final double headingKI = 0.000000;
         public static final double headingKD = 0.00025;
 
@@ -70,7 +73,7 @@ public final class Constants {
 
     public static final class ControllerConstants {
 
-        static final class Driver{
+        public static final class Driver{
             public static final int yButton = 4;
             public static final int aButton = 1;
             public static final int xButton = 3;
@@ -78,9 +81,11 @@ public final class Constants {
 
             public static final int driverLeftBumper = 5;
             public static final int driverRightBumper = 6;
+
+            public static final double deadband = 0.1;
         }
 
-        static final class Operator{
+        public static final class Operator{
             public static final int triangleButton = 4;
             public static final int squareButton = 1; //1 for PS5, 3 for PS4
             public static final int circleButton = 3; //3 for PS5, 2 for PS4

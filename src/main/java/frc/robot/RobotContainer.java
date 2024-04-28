@@ -23,6 +23,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -56,6 +58,7 @@ import frc.robot.commands.swerve.AlignHeading;
 import frc.robot.commands.swerve.FaceAndAlignToAmp;
 import frc.robot.commands.swerve.GoalCentricCommand;
 import frc.robot.commands.swerve.LockHeadingToTrap;
+import frc.robot.commands.swerve.ManageRequests;
 import frc.robot.generated.Telemetry;
 import frc.robot.generated.TunerConstants;
 import frc.robot.lib.Autonomous.AutoChooser;
@@ -63,6 +66,7 @@ import frc.robot.lib.Autonomous.AutoInstantiator;
 import frc.robot.lib.Controller.ControllerLimiter;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.lib.StateMachine.StateVariables.SwerveRequests;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.FeederSubsystem;
@@ -70,6 +74,7 @@ import frc.robot.subsystems.InfoSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.PIDWidgetSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
@@ -79,9 +84,8 @@ public class RobotContainer {
 
   /* Subsystem Instantiations */
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain;
-  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-      .withDeadband(SwerveConstants.maxSpeed * 0.1).withRotationalDeadband(SwerveConstants.maxAngularRate * 0.1)
-      .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
+  private final SwerveRequests defaultRequest = SwerveRequests.FIELD_CENTRIC;
+
   public final ArmSubsystem armSubsystem = new ArmSubsystem();
   private final FeederSubsystem feederSubsystem = new FeederSubsystem();
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -93,6 +97,7 @@ public class RobotContainer {
   public final AutoInstantiator autoInstantiator = new AutoInstantiator();
   public final PositionRPMData positionRPMData = new PositionRPMData();
   private final InfoSubsystem infoSubsystem = new InfoSubsystem(driverXboxController, operatorPS4Controller);
+  // private final PIDWidgetSubsystem test = new PIDWidgetSubsystem();
   //TODO: Add InfoSubsystem!
 
   /* Simulation telemetry utility - makes simulating swerve easier. */
@@ -104,19 +109,46 @@ public class RobotContainer {
 
   /* Separate method to configure all the button bindings. */
   private void configureBindings() {
+
+
+    StateHandler.getInstance().setCurrentSwerveRequest(defaultRequest);
     /* Default Swerve Drive Command */
-    drivetrain.setDefaultCommand(
-        drivetrain.applyRequest(() -> drive.withVelocityX(getSwerveJoystickInput()[0] 
-          * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
-          .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
-          .withRotationalRate(getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()*0.6) * SwerveConstants.maxAngularRate)));
-    //getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate
+    // drivetrain.setDefaultCommand(
+    //     drivetrain.applyRequest(() -> defaultRequest
+    //     .withVelocityX(getSwerveJoystickInput()[0] * driverXboxController.getLeftY() * SwerveConstants.maxSpeed)
+    //       .withVelocityY(getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed)
+    //       .withRotationalRate(getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()*0.6) * SwerveConstants.maxAngularRate))
+    // );
+
+    // drivetrain.setDefaultCommand(
+    //   drivetrain.applyRequest(() -> StateHandler.getInstance().getSwerveRequest())
+    // );
+
+    drivetrain.setDefaultCommand(new ManageRequests(drivetrain, 
+    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
+      () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
+      () -> getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX())));
+
+    // drivetrain.setDefaultCommand(new ManageRequests(drivetrain, 
+    // () -> 0.2,
+    //   () -> 0.2,
+    //   () -> 0.2));
+    
+
+    // drivetrain.setDefaultCommand(drivetrain.applyCustomRequest(
+    //   () -> StateHandler.getInstance().getSwerveRequest(), 
+    //   () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY() * SwerveConstants.maxSpeed, 
+    //   () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX() * SwerveConstants.maxSpeed, 
+    //   () -> getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX()) * SwerveConstants.maxAngularRate));
 
     /* Zero the Gyro when pressing Y on the XBOX Controller */
     driverXboxController.button(ControllerConstants.Driver.yButton).onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
     // driverXboxController.rightStick().whileTrue(new Align90(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
-    driverXboxController.rightStick().whileTrue(new AlignHeading(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
+    // driverXboxController.rightStick().whileTrue(new AlignHeading(drivetrain, () -> getSwerveJoystickInput()[0]*driverXboxController.getLeftY(), () -> getSwerveJoystickInput()[1]*driverXboxController.getLeftX()));
+    driverXboxController.rightStick().whileTrue(new InstantCommand(()-> StateHandler.getInstance().setCurrentSwerveRequest(SwerveRequests.FACING_AMP)))
+    .onFalse(new InstantCommand(() -> StateHandler.getInstance().setCurrentSwerveRequest(SwerveRequests.FIELD_CENTRIC)));
+    
 
     /* Simulation tool for Swerve */
     if (Utils.isSimulation()) {
@@ -127,11 +159,12 @@ public class RobotContainer {
     /* Driver Button Bindings */
     //TODO: add "ScoreCommandGroup" here!
     // driverXboxController.rightTrigger().whileTrue(new ScoreGamePiece());
-   driverXboxController.leftTrigger().whileTrue(new GCScoreCommandGroup(drivetrain,
-    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
-    () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
-    () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
-
+  //  driverXboxController.leftTrigger().whileTrue(new GCScoreCommandGroup(drivetrain,
+  //   () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
+  //   () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
+  //   () -> getSwerveJoystickInput()[2] * driverXboxController.getRightX()));
+    driverXboxController.leftTrigger().whileTrue(new InstantCommand(() -> StateHandler.getInstance().setCurrentSwerveRequest(SwerveRequests.GOAL_CENTRIC)))
+      .onFalse(new InstantCommand(() -> StateHandler.getInstance().setCurrentSwerveRequest(SwerveRequests.FIELD_CENTRIC)));
 
 
     driverXboxController.rightTrigger().whileTrue(new ScoreGamePieceNoRanged());
@@ -142,6 +175,7 @@ public class RobotContainer {
 
     // driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.0025));
     // driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.0025));
+
 
 
 
