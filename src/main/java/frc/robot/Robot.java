@@ -58,6 +58,7 @@ public class Robot extends TimedRobot {
   private DigitalInput outsideButton = new DigitalInput(ButtonConstants.outsideButton);
   private DigitalInput insideButton = new DigitalInput(ButtonConstants.insideButton);
 
+  // private DigitalInput beamBreakTest = new DigitalInput(0);
 
 
 
@@ -106,6 +107,8 @@ public class Robot extends TimedRobot {
     if (Utils.isSimulation()){
           sim.updatePose(m_robotContainer.drivetrain.getState().Pose);
     }
+
+    // System.out.println(beamBreakTest.get());
 
 
     

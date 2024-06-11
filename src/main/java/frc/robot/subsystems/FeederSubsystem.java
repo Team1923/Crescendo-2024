@@ -147,6 +147,7 @@ public class FeederSubsystem extends SubsystemBase {
     else if (stateHandler.getCurrentArmState() == ArmStates.PUNT_HIGH &&
         stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.PUNT_SHOT_HIGH) {
       desiredFeederSpeed = FeederSpeeds.INWARD;
+      // System.out.println("HERE!");
     }
 
     else if(stateHandler.getCurrentArmState() == ArmStates.PUNT_LOW &&

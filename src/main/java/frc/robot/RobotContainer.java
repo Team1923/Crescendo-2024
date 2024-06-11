@@ -170,7 +170,7 @@ public class RobotContainer {
     operatorPS4Controller.button(ControllerConstants.Operator.littleLeftButton).whileTrue(new FullEjectCommand());
     operatorPS4Controller.povLeft().whileTrue(new BabyBird());
     operatorPS4Controller.povRight().onTrue(new SetArmToUnguardable());
-    operatorPS4Controller.povDown().onTrue(new ArmToDefense());
+    operatorPS4Controller.povDown().whileTrue(new ArmToDefense());
 
   }
 
