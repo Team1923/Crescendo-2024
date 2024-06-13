@@ -191,11 +191,13 @@ public class LimelightSubsystem extends SubsystemBase {
       remainder += 360;
     }
 
-    if(remainder >= -120 && remainder < 0){
-      return -60;
-    } else if(remainder >= 0 && remainder < 120){
+     if(remainder >= 0 && remainder < 120){
       return 60;
-    } else {
+    }
+    else if(remainder >= -120 && remainder < 0){
+      return -60;
+    }
+    else{
       return 180;
     }
   }

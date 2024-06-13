@@ -68,14 +68,15 @@ public class AlignHeading extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (stateHandler.getWantFrontAmp() || stateHandler.getScoreInAmp()) {
+    if(stateHandler.getManuallyClimbing()){
+      desiredHeading = LimelightSubsystem.roundToClosestClimbHeading(stateHandler.getCurrentRobotHeading());
+    }
+    else if (stateHandler.getWantFrontAmp() || stateHandler.getScoreInAmp()) {
         desiredHeading = DriverStation.getAlliance().get() == Alliance.Blue ? -90 : 90;
     } else if (stateHandler.getScoreInTrap()) {
         desiredHeading = LimelightSubsystem.roundToClosestTrapHeading(stateHandler.getCurrentRobotHeading());
         //desiredHeading = LimelightSubsystem.roundToClosestHeading2(stateHandler.getCurrentRobotHeading());
-    } else if(stateHandler.getManuallyClimbing()){
-      desiredHeading = LimelightSubsystem.roundToClosestClimbHeading(stateHandler.getCurrentRobotHeading());
-    }
+    } 
    
   }
 
@@ -84,7 +85,7 @@ public class AlignHeading extends Command {
   public void execute() {
     double translationValue = Math.abs(translationSup.getAsDouble()) > 0.1 ? translationSup.getAsDouble() : 0;
     double strafeValue = Math.abs(strafeSup.getAsDouble()) > 0.1 ? strafeSup.getAsDouble() : 0;
-    double rotValue = (desiredHeading == -1) ?  0 : rotationController.calculate(swerve.getGyroYaw().getDegrees(), desiredHeading);
+    double rotValue = (desiredHeading == -1) ?  0 : rotationController.calculate(stateHandler.getCurrentRobotHeading(), desiredHeading);
 
     ChassisSpeeds chassisSpeeds = DriverStation.getAlliance().get() == Alliance.Blue ? ChassisSpeeds.fromFieldRelativeSpeeds(translationValue * SwerveConstants.maxSpeed, 
     strafeValue  * SwerveConstants.maxSpeed, 

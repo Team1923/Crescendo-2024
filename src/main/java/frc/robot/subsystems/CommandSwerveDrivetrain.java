@@ -173,7 +173,12 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     //getting from the pigeon used to generate CommandSwerveDriveTrain
     public Rotation2d getGyroYaw(){
         // return Rotation2d.fromDegrees(Math.IEEEremainder(this.getPigeon2().getYaw().getValueAsDouble(),360));
-        return Rotation2d.fromDegrees(Math.IEEEremainder(((DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) ? 180 : 0) +this.m_odometry.getEstimatedPosition().getRotation().getDegrees(),360));
+        // return Rotation2d.fromDegrees(Math.IEEEremainder(((DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) ? 180 : 0) +this.m_yawGetter.getValueAsDouble(),360));
+        return Rotation2d.fromDegrees( (DriverStation.getAlliance().isPresent() == true && DriverStation.getAlliance().get() == Alliance.Blue) 
+                            ? Math.IEEEremainder(this.m_yawGetter.getValueAsDouble() + stateHandler.getAutoHeadingOffset(),360) 
+                            : Math.IEEEremainder(this.m_yawGetter.getValueAsDouble() - stateHandler.getAutoHeadingOffset(),360)
+                            );
+
     }
 
     private void startSimThread() {
@@ -214,7 +219,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     }
     //getting from the pigeon used to generate CommandSwerveDriveTrain
     public void zeroGyro(){
-        this.getPigeon2().setYaw(0);
+        this.getPigeon2().setYaw(stateHandler.getAutoHeadingOffset());
 
     }
 
@@ -226,8 +231,9 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         stateHandler.setCurrentRobotHeading(getGyroYaw().getDegrees());
 
         
-        // SmartDashboard.putNumber("Heading (Gyro)",getGyroYaw().getDegrees());
+        SmartDashboard.putNumber("Heading (Gyro)",getGyroYaw().getDegrees());
         // SmartDashboard.putNumber("Heading (odo)",this.m_odometry.getEstimatedPosition().getRotation().getDegrees());
-
+        SmartDashboard.putNumber("Raw Bounded heading", Math.IEEEremainder(this.m_yawGetter.getValueAsDouble(), 360));
+        SmartDashboard.putNumber("OFFSET", stateHandler.getAutoHeadingOffset());
     }
 }

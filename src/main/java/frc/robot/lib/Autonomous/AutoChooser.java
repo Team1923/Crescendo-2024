@@ -5,8 +5,12 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.lib.StateMachine.StateHandler;
 
 public class AutoChooser {
+
+	StateHandler stateHandler = StateHandler.getInstance();
+
     public enum AutoMode {
 		STRAIGHT_4_METERS_AUTO,
 		FOUR_AMP,
@@ -97,16 +101,22 @@ public class AutoChooser {
 			case SOURCE_4_AND_5:
 				return autoInstantiator.getThreeSource4and5();
 			case SOURCE_5_AND_3_SUB:
-				return autoInstantiator.getThreeSourceSub5and3();
+				stateHandler.setAutoHeadingOffset(-60);
+				return autoInstantiator.getThreeSourceSub5and3();	
 			case SOURCE_5_AND_4_SUB:
+				stateHandler.setAutoHeadingOffset(-60);
 				return autoInstantiator.getThreeSourceSub5and4();
 			case SOURCE_3_AND_4_SUB:
+				stateHandler.setAutoHeadingOffset(-60);
 				return autoInstantiator.getThreeSourceSub3and4();
 			case SOURCE_3_AND_5_SUB:
+				stateHandler.setAutoHeadingOffset(-60);
 				return autoInstantiator.getThreeSourceSub3and5();
 			case SOURCE_4_AND_3_SUB:
+				stateHandler.setAutoHeadingOffset(-60);
 				return autoInstantiator.getThreeSourceSub4and3();
 			case SOURCE_4_AND_5_SUB:
+				stateHandler.setAutoHeadingOffset(-60);
 				return autoInstantiator.getThreeSourceSub4and5();
 			default:
 				return null;

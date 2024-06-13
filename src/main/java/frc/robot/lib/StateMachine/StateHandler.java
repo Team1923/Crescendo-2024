@@ -70,12 +70,24 @@ public class StateHandler {
     private boolean bbThreeCovered = false;
     private boolean bbFourCovered = false;
 
+    /* AUTO */
+
+    private boolean autoOverride = false;
+    private double autoHeadingOffset = 0; // In the case that we have an auto that starts with the robot facing offset (i.e. side sub auto), this holds the offset for zeroing and getting gyro reasons.
+
     /* Misc */
     
+    public double getAutoHeadingOffset() {
+        return autoHeadingOffset;
+    }
+
+    public void setAutoHeadingOffset(double autoHeadingOffset) {
+        this.autoHeadingOffset = autoHeadingOffset;
+    }
+
     private boolean manuallyClimbing = false;
     private boolean fullEject = false;
     private boolean operatorInputTimingGood = false;
-    private boolean autoOverride = false;
     private boolean pooPooPeePeeBB1Died = false;
     private Pose2d robotPose = new Pose2d();
     private Pose3d currentTagPose = new Pose3d();
