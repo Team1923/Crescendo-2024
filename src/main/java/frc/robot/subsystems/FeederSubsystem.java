@@ -186,7 +186,7 @@ public class FeederSubsystem extends SubsystemBase {
     else if (!stateHandler.getScoreInAmp() &&
         stateHandler.getCurrentArmState() != ArmStates.SPEAKER
         && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
-        && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
+        && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) { //INTAKE HERE
       if (stateHandler.getBBFourCovered()) {
         desiredFeederSpeed = FeederSpeeds.BACKING;
       } 
@@ -201,7 +201,7 @@ public class FeederSubsystem extends SubsystemBase {
     else if (stateHandler.getScoreInAmp() &&
         stateHandler.getCurrentArmState() != ArmStates.AMP
         && stateHandler.getDesiredShootingSpeed() != ShooterSpeeds.SHOOT
-        && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) {
+        && stateHandler.getDesiredIntakeState() != IntakeStates.DEPLOYED) { //INTAKE HERE
       if (!stateHandler.getBBFourCovered() && stateHandler.getBBThreeCovered()) {
         desiredFeederSpeed = FeederSpeeds.FORWARD;
       } else if ((stateHandler.getBBFourCovered()

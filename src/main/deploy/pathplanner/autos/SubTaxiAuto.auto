@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6728331469085296,
-      "y": 4.472500444557234
+      "x": 0.6874015522653936,
+      "y": 6.592203423980939
     },
-    "rotation": -60.0
+    "rotation": 60.0
   },
   "command": {
     "type": "sequential",
@@ -26,7 +26,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Taxi"
+            "pathName": "TaxiAmp"
           }
         }
       ]

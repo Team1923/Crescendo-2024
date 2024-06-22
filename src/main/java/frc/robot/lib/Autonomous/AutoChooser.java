@@ -104,7 +104,9 @@ public class AutoChooser {
 			case STRAIGHT_4_METERS_AUTO:
 				return autoInstantiator.getStraight4MetersAuto();
 			case SUB_TAXI:
-				stateHandler.setAutoHeadingOffset(-60);
+				// stateHandler.setAutoHeadingOffset(-60);
+				stateHandler.setAutoHeadingOffset(60);
+
 				return autoInstantiator.getSubTaxi();
 			case CENTER4_MLR:
 				return autoInstantiator.getFourCenterMLR();
