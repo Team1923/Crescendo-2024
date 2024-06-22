@@ -52,7 +52,7 @@ public class StateVariables {
         UNGUARDABLE_SHOT(new RPMValue(1905)),
         TRAP(new RPMValue(1000)),
         // PUNT_SHOT_HIGH(new RPMValue(1)), // this is a percent out
-        PUNT_SHOT_HIGH(new RPMValue(3100)),
+        PUNT_SHOT_HIGH(new RPMValue(2100)), //tuned in lab to 3100
         PUNT_SHOT_LOW(new RPMValue(1)), // this is a percent output value
         SHOOT(new RPMValue(2000));//THIS IS A DEFAULT VALUE FOR A SUBWOOFER SHOT (2000)
         

@@ -31,6 +31,8 @@ public class AutoInstantiator {
 
 	public PathPlannerAuto fourAmpTrap;
 
+	public PathPlannerAuto subTaxi;
+
 	/*
 	 * Different 4 Center Note Autos
 	 */
@@ -66,6 +68,9 @@ public class AutoInstantiator {
 
 
 
+
+
+
 	public static synchronized AutoInstantiator getInstance() {
 		if (autoInstantiator == null) {
 			autoInstantiator = new AutoInstantiator();
@@ -87,8 +92,12 @@ public class AutoInstantiator {
 		fourSource = new PathPlannerAuto("4SourceSide");
 
 		fourAmpSide = new PathPlannerAuto("4AmpSide");
-		midLineShove = new PathPlannerAuto("MidLineShove");
 		fourAmpTrap = new PathPlannerAuto("AmpTrap");
+
+		midLineShove = new PathPlannerAuto("MidLineShove");
+
+		subTaxi = new PathPlannerAuto("SubTaxiAuto");
+
 
 		/*
 		 * Center Autos
@@ -119,6 +128,9 @@ public class AutoInstantiator {
 	threeSourceSub4and5 = new PathPlannerAuto("SourceSideSub4and5");
 	threeSourceSub3and4 = new PathPlannerAuto("SourceSideSub3and4");
 	threeSourceSub3and5 = new PathPlannerAuto("SourceSideSub3and5");
+		
+
+
 
 	}
 
@@ -256,6 +268,13 @@ public class AutoInstantiator {
 	// public PathPlannerAuto getMidThree(){
 	// 	return threeMid;
 	// }
+
+	public PathPlannerAuto getSubTaxi(){
+		return subTaxi;
+	}
+
+
+
 
 
 

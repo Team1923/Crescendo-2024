@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.AutoCommand.AutoIntake;
 import frc.robot.lib.StateMachine.StateHandler;
 
 public class AutoChooser {
@@ -14,8 +15,14 @@ public class AutoChooser {
     public enum AutoMode {
 		STRAIGHT_4_METERS_AUTO,
 		FOUR_AMP,
+		MIDLINE_SHOVE,
+		SUB_TAXI,
 		CENTER4_MLR,
 		CENTER4_MRL,
+		CENTER4_RML,
+		CENTER4_LMR,
+		CENTER4_RLM,
+		CENTER4_LRM,
 		SOURCE_5_AND_4,
 		SOURCE_5_AND_3,
 		SOURCE_4_AND_3,
@@ -50,6 +57,18 @@ public class AutoChooser {
 		 */
 		chooser.addOption("Center4 Mid Left Right", AutoMode.CENTER4_MLR);
 		chooser.addOption("Center4 Mid Right Left", AutoMode.CENTER4_MRL);
+		chooser.addOption("Center4 Right Mid Left", AutoMode.CENTER4_RML);
+		chooser.addOption("Center4 Left Mid Right", AutoMode.CENTER4_LMR);
+		chooser.addOption("Center4 Left Right Mid", AutoMode.CENTER4_LRM);
+		chooser.addOption("Center4 Right Left Mid", AutoMode.CENTER4_RLM);
+
+		chooser.addOption("Mid Line Shove", AutoMode.MIDLINE_SHOVE);
+
+		chooser.addOption("Sub Taxi", AutoMode.SUB_TAXI);
+
+
+
+
 
 		/*
 		 * Source Autos
@@ -84,22 +103,35 @@ public class AutoChooser {
 				return autoInstantiator.getFourAmpSide();
 			case STRAIGHT_4_METERS_AUTO:
 				return autoInstantiator.getStraight4MetersAuto();
+			case SUB_TAXI:
+				stateHandler.setAutoHeadingOffset(-60);
+				return autoInstantiator.getSubTaxi();
 			case CENTER4_MLR:
 				return autoInstantiator.getFourCenterMLR();
 			case CENTER4_MRL:
 				return autoInstantiator.getFourCenterMRL();
-			case SOURCE_5_AND_4:
-				return autoInstantiator.getThreeSource5and4();
-			case SOURCE_5_AND_3:
-				return autoInstantiator.getThreeSource5and3();
-			case SOURCE_3_AND_4:
-				return autoInstantiator.getThreeSource3and4();
-			case SOURCE_3_AND_5:
-				return autoInstantiator.getThreeSource3and5();
-			case SOURCE_4_AND_3:
-				return autoInstantiator.getThreeSource4and3();
-			case SOURCE_4_AND_5:
-				return autoInstantiator.getThreeSource4and5();
+			case CENTER4_RLM:
+				return autoInstantiator.getFourCenterRLM();
+			case CENTER4_LRM:
+				return autoInstantiator.getFourCenterLRM();
+			case CENTER4_LMR:
+				return autoInstantiator.getFourCenterLMR();
+			case CENTER4_RML:
+				return autoInstantiator.getFourCenterRML();
+			case MIDLINE_SHOVE:
+				return autoInstantiator.getMidLineShove();
+			// case SOURCE_5_AND_4:
+			// 	return autoInstantiator.getThreeSource5and4();
+			// case SOURCE_5_AND_3:
+			// 	return autoInstantiator.getThreeSource5and3();
+			// case SOURCE_3_AND_4:
+			// 	return autoInstantiator.getThreeSource3and4();
+			// case SOURCE_3_AND_5:
+			// 	return autoInstantiator.getThreeSource3and5();
+			// case SOURCE_4_AND_3:
+			// 	return autoInstantiator.getThreeSource4and3();
+			// case SOURCE_4_AND_5:
+			// 	return autoInstantiator.getThreeSource4and5();
 			case SOURCE_5_AND_3_SUB:
 				stateHandler.setAutoHeadingOffset(-60);
 				return autoInstantiator.getThreeSourceSub5and3();	

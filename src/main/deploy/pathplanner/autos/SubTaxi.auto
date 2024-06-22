@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7092541603006896,
+      "y": 4.341384796345459
+    },
+    "rotation": -58.861027563021125
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "wantSubwoofer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Straight4Meters"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "OtherAutos",
+  "choreoAuto": false
+}

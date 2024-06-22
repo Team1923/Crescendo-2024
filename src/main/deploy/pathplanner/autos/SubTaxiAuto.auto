@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6728331469085296,
+      "y": 4.472500444557234
+    },
+    "rotation": -60.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "wantSubwoofer"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreGamePiece"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Taxi"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "SmallerPaths",
+  "choreoAuto": false
+}
