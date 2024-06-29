@@ -142,8 +142,8 @@ public class RobotContainer {
     // operatorPS4Controller.povUp().whileTrue(new ChangeRPMOffset(25));
     // operatorPS4Controller.povDown().whileTrue(new ChangeRPMOffset(-25));
 
-    // driverXboxController.povUp().whileTrue(new ChangePositionOffset(0.0025));
-    // driverXboxController.povDown().whileTrue(new ChangePositionOffset(-0.0025));
+    driverXboxController.povUp().whileTrue(new ChangeRPMOffset(250));
+    driverXboxController.povDown().whileTrue(new ChangeRPMOffset(-250));
 
 
 
