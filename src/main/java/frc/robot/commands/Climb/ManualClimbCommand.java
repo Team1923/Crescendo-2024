@@ -17,7 +17,7 @@ public class ManualClimbCommand extends Command {
   ArmSubsystem armSubsystem;
   DoubleSupplier input;
   StateHandler stateHandler = StateHandler.getInstance();
-  double armPosition = ArmStates.CLIMB.getArmPosition().getAngularSetpoint();
+  double armPosition;
 
   /** Creates a new ManualClimbCommand. */
   public ManualClimbCommand(ArmSubsystem arm, DoubleSupplier input) {
@@ -31,7 +31,9 @@ public class ManualClimbCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    armPosition = ArmStates.CLIMB.getArmPosition().getAngularSetpoint();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
