@@ -62,6 +62,12 @@ public class AutoScoreCommand extends Command {
       inputTimer.start();
     }
 
+    if (!stateHandler.getBBFourCovered() && stateHandler.getScoreInSubwoofer()){
+      stateHandler.setDesiredShootingSpeed(ShooterSpeeds.SHOOT);
+      stateHandler.setDesiredArmState(ArmStates.SPEAKER);
+      inputTimer.start();
+    }
+
     
     if (inputTimer.get() > Constants.ArmConstants.armSettleTime) {
       stateHandler.setOperatorInputTimingGood(true);

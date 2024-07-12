@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -165,7 +166,8 @@ public class FeederSubsystem extends SubsystemBase {
     /* Case #7: Subwoofer shot. */
     else if (stateHandler.getCurrentArmState() == ArmStates.SPEAKER
         && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.SHOOT
-        && (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer())) {
+        && (stateHandler.getScoreInSubwoofer() || stateHandler.getScoreInReverseSubwoofer())
+        && (!DriverStation.isAutonomous() || stateHandler.getOperatorInputTimingGood())) {
       desiredFeederSpeed = FeederSpeeds.INWARD;
     }
 
