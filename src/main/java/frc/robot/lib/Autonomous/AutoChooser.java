@@ -55,12 +55,12 @@ public class AutoChooser {
 		/*
 		 * Center Line Autos
 		 */
-		chooser.addOption("Center4 Mid Left Right", AutoMode.CENTER4_MLR);
-		chooser.addOption("Center4 Mid Right Left", AutoMode.CENTER4_MRL);
-		chooser.addOption("Center4 Right Mid Left", AutoMode.CENTER4_RML);
-		chooser.addOption("Center4 Left Mid Right", AutoMode.CENTER4_LMR);
-		chooser.addOption("Center4 Left Right Mid", AutoMode.CENTER4_LRM);
-		chooser.addOption("Center4 Right Left Mid", AutoMode.CENTER4_RLM);
+		chooser.addOption("Center4 Mid Amp Podium", AutoMode.CENTER4_MLR);
+		chooser.addOption("Center4 Mid Podium Amp", AutoMode.CENTER4_MRL);
+		chooser.addOption("Center4 Podium Mid Amp", AutoMode.CENTER4_RML);
+		chooser.addOption("Center4 Amp Mid Podium", AutoMode.CENTER4_LMR);
+		chooser.addOption("Center4 Amp Podium Mid", AutoMode.CENTER4_LRM);
+		chooser.addOption("Center4 Podium Amp Mid", AutoMode.CENTER4_RLM);
 
 		chooser.addOption("Mid Line Shove", AutoMode.MIDLINE_SHOVE);
 
