@@ -240,6 +240,10 @@ public class ArmSubsystem extends SubsystemBase {
     }
     /* CASE #3: pre-raising arm when having a gamepiece */
 
+
+    //DO ARM GLOBAL OFFSET HERE
+
+    armSetpoint += -0.01;
    
     /* Set the arm condition - NOTE: do not do this when manually climbing! */
     if (!stateHandler.getManuallyClimbing()) {
