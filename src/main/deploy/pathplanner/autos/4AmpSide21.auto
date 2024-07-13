@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.490257266228818,
+      "y": 7.393954787909576
+    },
+    "rotation": 0.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASPreloadToBetween2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASOneToTwo"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASBetweenToOne"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ASTwoToThree"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreCommandGroup"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "AmpAutos",
+  "choreoAuto": false
+}

@@ -27,6 +27,9 @@ public class AutoInstantiator {
 	public PathPlannerAuto fourTest;
 
 	public PathPlannerAuto fourAmpSide;
+	public PathPlannerAuto fourAmpSide21;
+
+
 	public PathPlannerAuto midLineShove;
 
 	public PathPlannerAuto fourAmpTrap;
@@ -43,6 +46,13 @@ public class AutoInstantiator {
 	 public PathPlannerAuto fourCenterMLR;
 	 public PathPlannerAuto fourCenterRLM;
 	 public PathPlannerAuto fourCenterRML;
+
+	 public PathPlannerAuto fourCenterPodMid;
+	 
+
+
+
+	public PathPlannerAuto fourCenterMidPod;
 
 	 /*
 	  * Different 3 Note Source Side
@@ -92,6 +102,7 @@ public class AutoInstantiator {
 		fourSource = new PathPlannerAuto("4SourceSide");
 
 		fourAmpSide = new PathPlannerAuto("4AmpSide");
+		fourAmpSide21 = new PathPlannerAuto("4AmpSide21");
 		fourAmpTrap = new PathPlannerAuto("AmpTrap");
 
 		midLineShove = new PathPlannerAuto("MidLineShove");
@@ -108,6 +119,10 @@ public class AutoInstantiator {
 	 fourCenterMLR = new PathPlannerAuto("MLR");
 	 fourCenterRLM = new PathPlannerAuto("RLM");
 	 fourCenterRML = new PathPlannerAuto("RML");
+
+	 fourCenterMidPod = new PathPlannerAuto("MidPodiumPodium");
+	 fourCenterPodMid = new PathPlannerAuto("PodiumMidPodium");
+
 
 		/*
 		 * Source Autos
@@ -132,6 +147,10 @@ public class AutoInstantiator {
 
 
 
+	}
+
+	public PathPlannerAuto getFourAmpSide21() {
+		return fourAmpSide21;
 	}
 
 	public PathPlannerAuto getThreeSourceSub5and4() {
@@ -273,6 +292,14 @@ public class AutoInstantiator {
 		return subTaxi;
 	}
 
+
+	public PathPlannerAuto getFourCenterPodMid() {
+		return fourCenterPodMid;
+	}
+
+	public PathPlannerAuto getFourCenterMidPod() {
+		return fourCenterMidPod;
+	}
 
 
 

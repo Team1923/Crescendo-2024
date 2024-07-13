@@ -15,6 +15,7 @@ public class AutoChooser {
     public enum AutoMode {
 		STRAIGHT_4_METERS_AUTO,
 		FOUR_AMP,
+		FOUR_AMP21,
 		MIDLINE_SHOVE,
 		SUB_TAXI,
 		CENTER4_MLR,
@@ -23,6 +24,8 @@ public class AutoChooser {
 		CENTER4_LMR,
 		CENTER4_RLM,
 		CENTER4_LRM,
+		CENTER4_MP,
+		CENTER4_PM,
 		SOURCE_5_AND_4,
 		SOURCE_5_AND_3,
 		SOURCE_4_AND_3,
@@ -51,6 +54,7 @@ public class AutoChooser {
 		chooser.addOption("Straight 4 Meter Auto", AutoMode.STRAIGHT_4_METERS_AUTO);
 
 		chooser.addOption("4 Gamepiece from Amp Side", AutoMode.FOUR_AMP);
+		chooser.addOption("4 Gamepiece from Amp side Order: 2, 1", AutoMode.FOUR_AMP21);
 
 		/*
 		 * Center Line Autos
@@ -61,6 +65,10 @@ public class AutoChooser {
 		chooser.addOption("Center4 Amp Mid Podium", AutoMode.CENTER4_LMR);
 		chooser.addOption("Center4 Amp Podium Mid", AutoMode.CENTER4_LRM);
 		chooser.addOption("Center4 Podium Amp Mid", AutoMode.CENTER4_RLM);
+
+		chooser.addOption("Center4 Podium Mid (Podium end)", AutoMode.CENTER4_PM);
+		chooser.addOption("Center4 Mid Podium (Podium end)", AutoMode.CENTER4_MP);
+
 
 		chooser.addOption("Mid Line Shove", AutoMode.MIDLINE_SHOVE);
 
@@ -101,6 +109,8 @@ public class AutoChooser {
 		switch(mode){
 			case FOUR_AMP:
 				return autoInstantiator.getFourAmpSide();
+			case FOUR_AMP21:
+				return autoInstantiator.getFourAmpSide21();
 			case STRAIGHT_4_METERS_AUTO:
 				return autoInstantiator.getStraight4MetersAuto();
 			case SUB_TAXI:
@@ -120,6 +130,10 @@ public class AutoChooser {
 				return autoInstantiator.getFourCenterLMR();
 			case CENTER4_RML:
 				return autoInstantiator.getFourCenterRML();
+			case CENTER4_MP:
+				return autoInstantiator.getFourCenterMidPod();
+			case CENTER4_PM:
+				return autoInstantiator.getFourCenterPodMid();
 			case MIDLINE_SHOVE:
 				return autoInstantiator.getMidLineShove();
 			// case SOURCE_5_AND_4:
