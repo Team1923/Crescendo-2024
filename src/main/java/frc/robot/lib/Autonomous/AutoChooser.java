@@ -37,7 +37,8 @@ public class AutoChooser {
 		SOURCE_4_AND_3_SUB,
 		SOURCE_4_AND_5_SUB,
 		SOURCE_3_AND_4_SUB,
-		SOURCE_3_AND_5_SUB;
+		SOURCE_3_AND_5_SUB,
+		SOURCE_5_SUB;
 	}
 
 	private SendableChooser<AutoMode> chooser;
@@ -97,6 +98,8 @@ public class AutoChooser {
 		chooser.addOption("3 Source from Sub 4 and 5", AutoMode.SOURCE_4_AND_5_SUB);
 		chooser.addOption("3 Source from Sub 3 and 4", AutoMode.SOURCE_3_AND_4_SUB);
 		chooser.addOption("3 Source from Sub 3 and 5", AutoMode.SOURCE_3_AND_5_SUB);
+
+		chooser.addOption("2 Source from Sub 5 shoot sub", AutoMode.SOURCE_5_SUB);
 
 
 
@@ -166,6 +169,9 @@ public class AutoChooser {
 			case SOURCE_4_AND_5_SUB:
 				stateHandler.setAutoHeadingOffset(-60);
 				return autoInstantiator.getThreeSourceSub4and5();
+			case SOURCE_5_SUB:
+				stateHandler.setAutoHeadingOffset(-60);
+				return autoInstantiator.getTwoSourceSub5();
 			default:
 				return null;
 		}

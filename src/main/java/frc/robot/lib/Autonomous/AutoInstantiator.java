@@ -64,6 +64,7 @@ public class AutoInstantiator {
 	  public PathPlannerAuto threeSource4and5;
 	  public PathPlannerAuto threeSource3and4;
 	  public PathPlannerAuto threeSource3and5;
+	  
 
 	  /*
 	   * Different 3 Note Source Side from Sub
@@ -75,6 +76,7 @@ public class AutoInstantiator {
 	  public PathPlannerAuto threeSourceSub3and4;
 	  public PathPlannerAuto threeSourceSub3and5;
 
+	  public PathPlannerAuto twoSourceSub5;
 
 
 
@@ -143,10 +145,16 @@ public class AutoInstantiator {
 	threeSourceSub4and5 = new PathPlannerAuto("SourceSideSub4and5");
 	threeSourceSub3and4 = new PathPlannerAuto("SourceSideSub3and4");
 	threeSourceSub3and5 = new PathPlannerAuto("SourceSideSub3and5");
+
+	twoSourceSub5 = new PathPlannerAuto("SourceSideSub5");
 		
 
 
 
+	}
+
+	public PathPlannerAuto getTwoSourceSub5() {
+		return twoSourceSub5;
 	}
 
 	public PathPlannerAuto getFourAmpSide21() {
@@ -176,6 +184,8 @@ public class AutoInstantiator {
 	public PathPlannerAuto getThreeSourceSub5and3() {
 		return threeSourceSub5and3;
 	}
+
+	
 
 	public PathPlannerAuto getThreeSource5and4() {
 		return threeSource5and4;
