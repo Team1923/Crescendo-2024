@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
+import frc.robot.Constants.ControllerConstants.Driver;
 import frc.robot.lib.Controller.ControllerLimiter;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.SwerveRequests;
@@ -24,6 +25,7 @@ import frc.robot.lib.SwerveRequests.GoalCentricRequest;
 public class ManageRequests extends Command {
 
   private CommandSwerveDrivetrain swerve;
+
 
   StateHandler stateHandler = StateHandler.getInstance();
 
@@ -55,31 +57,34 @@ public class ManageRequests extends Command {
   public void execute() {
     SwerveRequests currentRequest = stateHandler.getCurrentSwerveRequest();
 
-    SwerveRequest requestObj = currentRequest.request;
+    //default
+    SwerveRequest requestObj = SwerveRequests.FIELD_CENTRIC.request;
 
+    double translation = translationSupplier.getAsDouble() * sideInversions()[0];
+    double strafe = strafeSupplier.getAsDouble() * sideInversions()[1];
+    double rotation = rotationSupplier.getAsDouble() * sideInversions()[2];
 
+        if (currentRequest == SwerveRequests.AUTO && !DriverStation.isAutonomous()){
+          System.out.println("SWERVE STILL THINKS IN AUTO");
+          currentRequest = SwerveRequests.FIELD_CENTRIC;
+        }
         
-
         if (currentRequest == SwerveRequests.FIELD_CENTRIC){
 
           requestObj = ((SwerveRequest.FieldCentric)SwerveRequests.FIELD_CENTRIC.request)
-            .withVelocityX(translationSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            .withVelocityY(strafeSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            .withRotationalRate(rotationSupplier.getAsDouble() * SwerveConstants.maxAngularRate);
-            // .withDeadband(ControllerConstants.Driver.deadband*SwerveConstants.maxSpeed)
-            // .withRotationalDeadband(ControllerConstants.Driver.deadband * SwerveConstants.maxAngularRate);
-          
+            .withVelocityX(translation * SwerveConstants.maxSpeed)
+            .withVelocityY(strafe * SwerveConstants.maxSpeed)
+            .withRotationalRate(rotation * SwerveConstants.maxAngularRate);
+        
 
         }
         else if (currentRequest == SwerveRequests.GOAL_CENTRIC){
 
             requestObj = ((SwerveRequest.FieldCentricFacingAngle)SwerveRequests.GOAL_CENTRIC.request)
-            .withVelocityX(translationSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            .withVelocityY(strafeSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            // .withDeadband(ControllerConstants.Driver.deadband * SwerveConstants.maxSpeed)
+            .withVelocityX(translation * SwerveConstants.maxSpeed)
+            .withVelocityY(strafe * SwerveConstants.maxSpeed)
             .withTargetDirection(Rotation2d.fromDegrees(swerve.getGyroYaw().getDegrees()-stateHandler.getxAngleOffset()));
   
-     
             
 
            
@@ -88,22 +93,28 @@ public class ManageRequests extends Command {
         else if (currentRequest == SwerveRequests.FACING_AMP){
 
           requestObj =((SwerveRequest.FieldCentricFacingAngle)SwerveRequests.FACING_AMP.request)
-            .withVelocityX(translationSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            .withVelocityY(strafeSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            // .withDeadband(ControllerConstants.Driver.deadband * SwerveConstants.maxSpeed)
+            .withVelocityX(translation * SwerveConstants.maxSpeed)
+            .withVelocityY(strafe * SwerveConstants.maxSpeed)
             .withTargetDirection(Rotation2d.fromDegrees((DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : -90));
             
         }
+        else if (currentRequest == SwerveRequests.NOTE_SEARCHING){
+           requestObj =((SwerveRequest.FieldCentricFacingAngle)SwerveRequests.NOTE_SEARCHING.request)
+            .withVelocityX(0.5 * sideInversions()[0] * SwerveConstants.maxSpeed)
+            .withVelocityY(0.5 * sideInversions()[1] * SwerveConstants.maxSpeed)
+            .withTargetDirection(Rotation2d.fromDegrees((DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue) ? -90 : -90));
+
+            System.out.println("HERER TOO");
+        }
+
         else if (currentRequest == SwerveRequests.ROBOT_CENTRIC){
           requestObj =((SwerveRequest.RobotCentric)SwerveRequests.ROBOT_CENTRIC.request)
-            .withVelocityX(translationSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            .withVelocityY(strafeSupplier.getAsDouble() * SwerveConstants.maxSpeed)
-            // .withRotationalRate(ControllerLimiter.quadratic(rotationSupplier.getAsDouble()*0.6) * SwerveConstants.maxAngularRate)
-            // .withDeadband(ControllerConstants.Driver.deadband * SwerveConstants.maxSpeed)
+            .withVelocityX(translation * SwerveConstants.maxSpeed)
+            .withVelocityY(strafe * SwerveConstants.maxSpeed)
             .withRotationalDeadband(ControllerConstants.Driver.deadband * SwerveConstants.maxAngularRate);
             
         }
-
+        
 
         swerve.setControl(requestObj);
   }
@@ -116,5 +127,11 @@ public class ManageRequests extends Command {
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+
+  public static int[] sideInversions(){
+    return (DriverStation.getAlliance().get() == Alliance.Blue) ? new int[]{1,1,1}
+                                                                : new int[]{-1,-1, 1};
   }
 }

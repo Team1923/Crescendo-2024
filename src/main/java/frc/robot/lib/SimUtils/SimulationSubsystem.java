@@ -144,11 +144,11 @@ public class SimulationSubsystem extends SubsystemBase {
     notePoses.add(new Translation2d(2.89, 5.56)); //midLoc
     notePoses.add(new Translation2d(2.89, 7.00)); //ampLoc
 
-    notePoses.add(new Translation2d(8.28, 7.45)); //1Loc
-    notePoses.add(new Translation2d(8.28, 5.78)); //2Loc
+    // notePoses.add(new Translation2d(8.28, 7.45)); //1Loc
+    // notePoses.add(new Translation2d(8.28, 5.78)); //2Loc
     notePoses.add(new Translation2d(8.28, 4.09)); //3Loc
-    notePoses.add(new Translation2d(8.28, 2.44)); //4Loc
-    // notePoses.add(new Translation2d(8.28,0.76)); //5Loc
+    // notePoses.add(new Translation2d(8.28, 2.44)); //4Loc
+    notePoses.add(new Translation2d(8.28,0.76)); //5Loc
 
 
   }
@@ -233,8 +233,7 @@ public class SimulationSubsystem extends SubsystemBase {
 
 
       //Intaking
-      if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.INTAKE){
-        if (isCollecting){
+      if (isCollecting){
           if (collectionTimer.get()==0){
           collectionTimer.start();
           stateHandler.setBBOneCovered(true);
@@ -250,10 +249,16 @@ public class SimulationSubsystem extends SubsystemBase {
 
           if (collectionTimer.get()>IntakeTimes.bb3OnTime){
             stateHandler.setBBThreeCovered(true);
+            collectionTimer.stop();
+            collectionTimer.reset();
+            isCollecting = false;
+        
           }
-        }
-
-        else{
+          
+      }
+    
+      else if (stateHandler.getCurrentIntakeState() == IntakeStates.DEPLOYED && stateHandler.getCurrentIntakeRollerSpeed() == IntakeRollerSpeeds.INTAKE){
+        
           for (int i = notePoses.size()-1; i >=0; i--){
             Translation2d notePos = notePoses.get(i);
             if (notePos.getDistance(currentPose.getTranslation())< collectionDist){
@@ -263,14 +268,8 @@ public class SimulationSubsystem extends SubsystemBase {
               notePoses.remove(i);
             }
           }
-        }
-
       }
-      else{
-          collectionTimer.stop();
-          collectionTimer.reset();
-          isCollecting = false;
-        }
+      
       //Source Intaking
       if (stateHandler.getCurrentArmState() == ArmStates.BABY_BIRD 
       && stateHandler.getCurrentShootingSpeed() == ShooterSpeeds.BABY_BIRD 

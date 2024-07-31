@@ -1,0 +1,25 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.4427878623199115,
+      "y": 4.156048097427144
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StartToShoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "NoteFindingAutos",
+  "choreoAuto": false
+}

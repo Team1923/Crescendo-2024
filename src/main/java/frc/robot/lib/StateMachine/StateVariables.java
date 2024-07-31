@@ -207,7 +207,10 @@ public class StateVariables {
         ,
         FACING_AMP(applyPID(new SwerveRequest.FieldCentricFacingAngle(), new PhoenixPIDController(SwerveConstants.headingKP, SwerveConstants.headingKI, SwerveConstants.headingKD))
             .withDeadband(SwerveConstants.maxSpeed * 0.1)
-        )
+        ),
+        NOTE_SEARCHING(configedFacingAngleRequest()
+        ),
+        AUTO(null)
         ;
 
         public SwerveRequest request;
@@ -225,6 +228,15 @@ public class StateVariables {
     public static SwerveRequest.FieldCentricFacingAngle applyPID(SwerveRequest.FieldCentricFacingAngle r, PhoenixPIDController p){
 
         r.HeadingController = p;
+
+        return r;
+    }
+
+    public static SwerveRequest.FieldCentricFacingAngle configedFacingAngleRequest(){
+        SwerveRequest.FieldCentricFacingAngle r = new SwerveRequest.FieldCentricFacingAngle()
+        .withDeadband(SwerveConstants.maxSpeed * 0.1);
+
+        r.HeadingController = new PhoenixPIDController(SwerveConstants.headingKP, SwerveConstants.headingKI, SwerveConstants.headingKD);
 
         return r;
     }

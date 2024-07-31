@@ -40,6 +40,7 @@ import frc.robot.lib.Autonomous.AutoChooser;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.SimUtils.SimulationSubsystem;
 import frc.robot.lib.StateMachine.StateHandler;
+import frc.robot.lib.StateMachine.StateVariables.SwerveRequests;
 import frc.robot.subsystems.PIDWidgetSubsystem;
 
 public class Robot extends TimedRobot {
@@ -160,11 +161,13 @@ public class Robot extends TimedRobot {
       stateHandler.setBBTwoCovered(true);
     }
 
+    stateHandler.setCurrentSwerveRequest(SwerveRequests.AUTO);
 
   }
 
   @Override
   public void autonomousPeriodic() {
+    
   }
 
   @Override
@@ -179,6 +182,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
         StateHandler.getInstance().setAutoOverride(false);
+    
+    stateHandler.setCurrentSwerveRequest(SwerveRequests.FIELD_CENTRIC);
 
   }
 

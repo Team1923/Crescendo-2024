@@ -38,6 +38,9 @@ public class GoalCentricCommand extends Command {
   private DoubleSupplier strafeSup;
   private DoubleSupplier rotationSup;
 
+   public static final double headingKP = 0.003;
+        public static final double headingKI = 0.000000;
+        public static final double headingKD = 0.00025;
   /* PID Things */
   private PIDController rotationController;
 
@@ -48,7 +51,7 @@ public class GoalCentricCommand extends Command {
     this.strafeSup = s;
     this.rotationSup = r;
 
-    rotationController = new PIDController(Constants.SwerveConstants.headingKP, Constants.SwerveConstants.headingKI, Constants.SwerveConstants.headingKD);
+    rotationController = new PIDController(headingKP, headingKI,headingKD);
     addRequirements(this.swerve);
   }
 

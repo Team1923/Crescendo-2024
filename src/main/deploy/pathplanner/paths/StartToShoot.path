@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.4427878623199115,
+        "y": 4.156048097427144
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.2211290254423093,
+        "y": 3.803591721673606
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.3946100092557976,
+        "y": 3.260221475720233
+      },
+      "prevControl": {
+        "x": 2.968725221886938,
+        "y": 3.304278522689425
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "NoteSearchShoot"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -17.744671625056984,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "NoteFindingPaths",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

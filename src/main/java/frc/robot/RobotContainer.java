@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.SwerveConstants;
+import frc.robot.commands.AutoRoutines.SourceSideAuto;
 import frc.robot.commands.Climb.ClimbCommandGroup;
 import frc.robot.commands.Defense.ArmToDefense;
 import frc.robot.commands.ManualHashTuningCommands.ChangePositionOffset;
@@ -104,8 +105,7 @@ public class RobotContainer {
   private final Telemetry logger = new Telemetry(SwerveConstants.maxSpeed);
 
   /* Swerve Controller Inversion Arrays */
-  public static final int[] blueJoystickValues = {-1, -1, -1};
-  public static final int[] redJoystickValues = {1, 1, -1};
+  public static final int[] joystickInversionValues = {-1, -1, -1};
 
   /* Separate method to configure all the button bindings. */
   private void configureBindings() {
@@ -125,9 +125,9 @@ public class RobotContainer {
     // );
 
     drivetrain.setDefaultCommand(new ManageRequests(drivetrain, 
-    () -> getSwerveJoystickInput()[0] * driverXboxController.getLeftY(), 
-      () -> getSwerveJoystickInput()[1] * driverXboxController.getLeftX(), 
-      () -> getSwerveJoystickInput()[2] * ControllerLimiter.quadratic(driverXboxController.getRightX())));
+    () -> joystickInversionValues[0] * driverXboxController.getLeftY(), 
+      () -> joystickInversionValues[1] * driverXboxController.getLeftX(), 
+      () -> joystickInversionValues[2] * ControllerLimiter.quadratic(driverXboxController.getRightX())));
 
     // drivetrain.setDefaultCommand(new ManageRequests(drivetrain, 
     // () -> 0.2,
@@ -208,19 +208,7 @@ public class RobotContainer {
 
   }
 
-  /* Helper method that does some inversion based on the alliance color. */
-  public static int[] getSwerveJoystickInput() {
-    /* 
-     * Index 0: driverXboxController.getLeftY();
-     * Index 1: driverXboxController.getLeftX();
-     * Index 2: driverXboxController.getRightX();
-     */
-    if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
-      return redJoystickValues;
-    } else {
-      return blueJoystickValues;
-    }
-  }
+
 
   public RobotContainer() {
     configureBindings();
@@ -232,6 +220,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command initializeAuto(AutoChooser selector) {
-    return selector.startMode();
+    return new SourceSideAuto(drivetrain);
+    // return selector.startMode();
   }
 }

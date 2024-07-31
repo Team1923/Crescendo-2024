@@ -6,6 +6,7 @@ package frc.robot.commands.AutoCommand;
 
 
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.swerve.GoalCentricCommand;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -13,12 +14,12 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoScoreCommandGroup extends ParallelRaceGroup {
+public class AutoScoreCommandGroup extends SequentialCommandGroup {
   private StateHandler stateHandler = StateHandler.getInstance();
 
   public AutoScoreCommandGroup(CommandSwerveDrivetrain swerve) {
     addCommands(
-        new GoalCentricCommand(swerve, () -> 0, () -> 0, () -> 0),
+        new GoalCentricCommand(swerve, () -> 0, () -> 0, () -> 0).onlyWhile(() -> (stateHandler.getxAngleOffset() > 3)),
         new AutoScoreCommand());
   }
 }
