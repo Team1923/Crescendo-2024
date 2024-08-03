@@ -75,7 +75,6 @@ import frc.robot.subsystems.InfoSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.PIDWidgetSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {

@@ -17,7 +17,9 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/Pose": "Field2d",
+      "/Shuffleboard/ARM MOTORS/UPDATE": "Command",
       "/Shuffleboard/Driver Dashboard/Auto Mode/SendableChooser[0]": "String Chooser",
+      "/Shuffleboard/PID/GOAL_CENTRIC Heading Controller": "PIDController",
       "/SmartDashboard/Module 0": "Mechanism2d",
       "/SmartDashboard/Module 1": "Mechanism2d",
       "/SmartDashboard/Module 2": "Mechanism2d",

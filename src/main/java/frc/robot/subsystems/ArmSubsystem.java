@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.CurrentConstants;
 import frc.robot.Constants.LimeLightConstants;
-import frc.robot.lib.CustomWidgets.MotorConfigWidget;
+import frc.robot.lib.CustomWidgets.PIDWidget;
 import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.ShooterArmUtils.PositionRPMData;
 import frc.robot.lib.StateMachine.StateHandler;
@@ -39,7 +39,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   private TalonFXConfiguration currentConfig;
 
-  private MotorConfigWidget motorConfigWidget;
+  PIDWidget PID; 
 
   /* Constructor of ArmSubsystem. Used for setting up motors & configurations. */
   public ArmSubsystem() {
@@ -83,18 +83,13 @@ public class ArmSubsystem extends SubsystemBase {
     /* Set the motor to follow the primary motor & oppose its direction. */
     armFollower.setControl(new Follower(ArmConstants.armMotorPrimaryID, true));
 
-    motorConfigWidget = new MotorConfigWidget("ARM", armConfigs);
 
-
+    PID = new PIDWidget("ARM MOTORS", currentConfig, ArmConstants.armGearRatio * ArmConstants.armRotsToRads, 0, armPrimary, armFollower);
 
     /* Finally, zero the arm so that its STOW position = 0 rads. */
     zeroArm();
   }
 
-  public void updateMotorConfig(){
-    armPrimary.getConfigurator().apply(motorConfigWidget.updatedConfig());
-    armFollower.getConfigurator().apply(motorConfigWidget.updatedConfig());
-  }
 
 
   /**

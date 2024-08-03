@@ -41,7 +41,6 @@ import frc.robot.lib.Limelight.LimelightInterface;
 import frc.robot.lib.SimUtils.SimulationSubsystem;
 import frc.robot.lib.StateMachine.StateHandler;
 import frc.robot.lib.StateMachine.StateVariables.SwerveRequests;
-import frc.robot.subsystems.PIDWidgetSubsystem;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -116,7 +115,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    m_robotContainer.armSubsystem.updateMotorConfig();
   }
 
   @Override
